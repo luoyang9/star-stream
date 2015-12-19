@@ -16,18 +16,18 @@ public class EnemyLaser extends Entity
 		
 		switch(colour)
 		{
-		case 1: textureAtlas = new TextureAtlas(Gdx.files.internal("laserO.atlas"));
+		case 1: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserO.atlas", TextureAtlas.class);
 		break;
-		case 2: textureAtlas = new TextureAtlas(Gdx.files.internal("laserG.atlas"));
+		case 2: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserG.atlas", TextureAtlas.class);
 		break;
-		case 3: textureAtlas = new TextureAtlas(Gdx.files.internal("laserR.atlas"));
+		case 3: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserR.atlas", TextureAtlas.class);
 		break;
-		default: textureAtlas = new TextureAtlas(Gdx.files.internal("laserO.atlas"));
+		default: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserO.atlas", TextureAtlas.class);
 		}
 		
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(10, 10);
+		sprite.setSize(8, 8);
 
 	}
 

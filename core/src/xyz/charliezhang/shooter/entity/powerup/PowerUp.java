@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
+import xyz.charliezhang.shooter.entity.Player;
 
 public class PowerUp extends Entity
 {
-    protected int duration;
 
     public PowerUp() {
         super();
@@ -36,6 +37,4 @@ public class PowerUp extends Entity
         sprite.setRegion(animation.getKeyFrame(animationTime));
         super.render(sb);
     }
-
-    public int getDuration(){return duration;}
 }

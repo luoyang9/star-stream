@@ -28,7 +28,6 @@ public abstract class Entity
 
 	public void dispose()
 	{
-		textureAtlas.dispose();
 	}
 
 	public void render(SpriteBatch sb)

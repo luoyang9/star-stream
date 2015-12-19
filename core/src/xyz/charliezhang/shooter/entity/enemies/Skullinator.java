@@ -1,11 +1,11 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.TextureManager;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Skullinator extends Enemy
@@ -15,12 +15,12 @@ public class Skullinator extends Enemy
 	public Skullinator(EntityManager manager) {
 		super();
 
-		textureAtlas = new TextureAtlas(Gdx.files.internal("skullinator.atlas"));
+		textureAtlas = manager.getGame().manager.get("data/textures/skullinator.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(120, 120);
 		
-		health = maxHealth = 500;
+		health = maxHealth = 80;
 		damage = 2;
 		this.manager = manager;
 		entered = false;
@@ -145,8 +145,8 @@ public class Skullinator extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(TextureManager.HEALTH, sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(TextureManager.HEALTHFILL, sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

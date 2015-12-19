@@ -1,11 +1,11 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
-import com.badlogic.gdx.Gdx;
+
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.TextureManager;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Battleship extends Enemy
@@ -14,13 +14,13 @@ public class Battleship extends Enemy
 	public Battleship(EntityManager manager, int stop) {
 		super();
 		
-		textureAtlas = new TextureAtlas(Gdx.files.internal("battleship.atlas"));
+		textureAtlas = manager.getGame().manager.get("data/textures/battleship.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(60, 60);
+		sprite.setSize(45, 45);
 		
 		//set enemy data
-		health = maxHealth = 20;
+		health = maxHealth = 15;
 		damage = 1;
 		this.manager = manager;
 		this.stop = stop;
@@ -30,7 +30,7 @@ public class Battleship extends Enemy
 	public void update() {
 		if(sprite.getY() <= MainGame.HEIGHT - stop && direction.y < 0)
 		{
-			modifyDirection(0, 0.05f);
+			setDirection(0, 0);
 		}
 
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
@@ -60,8 +60,8 @@ public class Battleship extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(TextureManager.HEALTH, sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(TextureManager.HEALTHFILL, sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

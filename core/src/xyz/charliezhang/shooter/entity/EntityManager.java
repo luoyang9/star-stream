@@ -1,74 +1,49 @@
 package xyz.charliezhang.shooter.entity;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import xyz.charliezhang.shooter.audio.AudioPlayer;
+import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
 import xyz.charliezhang.shooter.entity.enemies.EnemyLaser;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
+import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 
 public class EntityManager 
 {
 	private final Array<Enemy> enemies = new Array<Enemy>();
-	private final Array<Laser> lasers = new Array<Laser>();
+	private final Array<PlayerLaser> lasers = new Array<PlayerLaser>();
 	private final Array<EnemyLaser> enemyLasers = new Array<EnemyLaser>();
 	private final Array<PowerUp> powerups = new Array<PowerUp>();
+	private final Array<Explosion> explosions = new Array<Explosion>();
 	private Player player;
 	private OrthographicCamera camera;
-	private boolean playerSpawned;
+	private Background background;
+
+	private MainGame game;
 	
-	public EntityManager(OrthographicCamera camera)
+	public EntityManager(OrthographicCamera camera, MainGame game, Background background)
 	{
+		this.game = game;
 		this.camera = camera;
+		this.background = background;
 
 		player = new Player(this, camera);
-		player.setControllable(false);
-		player.setPosition(200 - player.getSprite().getWidth() / 2, -500);
-		player.setDirection(0 , 3);
-
-		AudioPlayer.load("explosion.wav", "explosion", 1);
-		playerSpawned = true;
 	}
 	
 	public void update()
 	{
-		//new player move into place
-		if(player.getPosition().y > 300 && playerSpawned)
-		{
-			playerSpawned = false;
-			player.setDirection(0, 0);
-			player.setControllable(true);
-		}
-
-		//check death
-		if(player.getHealth() <= 0)
-		{
-			player.modifyLives(-1);
-			if(player.getLives() <= 0)
-			{
-				AudioPlayer.stop("level1-1", 2);
-				//game over
-			}
-			else //moar lives
-			{
-				player.setPosition(230,  -400);
-				player.setDirection(0, 4);
-				player.modifyHealth(player.getMaxHealth());
-				player.setControllable(false);
-				playerSpawned = true;
-			}
-		}
-		
 		//update entities
 		player.update();
 		for(Enemy e : enemies)
 		{
 			e.update();
 		}
-		for(Laser l : lasers)
+		for(PlayerLaser l : lasers)
 		{
 			l.update();
 		}
@@ -80,9 +55,15 @@ public class EntityManager
 		{
 			p.update();
 		}
+		for(Explosion e : explosions)
+		{
+			e.update();
+			if(e.isDone()) explosions.removeValue(e, false);
+		}
+
 
 		//remove lasers
-		for(Laser l : lasers)
+		for(PlayerLaser l : lasers)
 		{
 			if(l.checkEnd())
 			{
@@ -104,9 +85,15 @@ public class EntityManager
 			if (e.getHealth() <= 0) {
 				e.dispose();
 				enemies.removeValue(e, false);
-				AudioPlayer.play("explosion", 1);
-				if (MathUtils.random() <= 0.1) {
-					AttackPowerUp a = new AttackPowerUp();
+				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+				if(MathUtils.random() <= 1) {
+					MissilePowerUp a = new MissilePowerUp(game);
+					a.setPosition(e.getPosition().x, e.getPosition().y);
+					a.setDirection(-2, -2);
+					spawnPowerUp(a);
+				}
+				if (MathUtils.random() <= 1) {
+					AttackPowerUp a = new AttackPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(2, 2);
 					spawnPowerUp(a);
@@ -140,7 +127,12 @@ public class EntityManager
 			e.render(sb);
 		}
 		//render lasers
-		for(Laser e : lasers)
+		for(PlayerLaser e : lasers)
+		{
+			e.render(sb);
+		}
+
+		for(Explosion e : explosions)
 		{
 			e.render(sb);
 		}
@@ -152,10 +144,13 @@ public class EntityManager
 		for(Enemy e : enemies)
 		{
 			//check laser-enemy collision
-			for(Laser m : lasers)
+			for(PlayerLaser m : lasers)
 			{
 				if(e.getBounds().overlaps(m.getBounds()))
 				{
+					Explosion exp = new Explosion(game);
+					exp.setPosition(m.getPosition().x, m.getPosition().y);
+					spawnExplosion(exp);
 					e.modifyHealth(-player.getDamage());
 					lasers.removeValue(m, false);
 				}
@@ -202,15 +197,16 @@ public class EntityManager
 	}
 
 	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}
-	public void spawnLaser(Laser l) {lasers.add(l);}
+	public void spawnLaser(PlayerLaser l) {lasers.add(l);}
 	public void spawnEnemyLaser(EnemyLaser el) {enemyLasers.add(el);}
 	public void spawnPowerUp(PowerUp p) {powerups.add(p);}
+	public void spawnExplosion(Explosion e) {explosions.add(e);}
 	
 	public Array<Enemy> getEnemies() {
 		return enemies;
 	}
-	
-	private Array<Laser> getLasers() {
+
+	private Array<PlayerLaser> getLasers() {
 		return lasers;
 	}
 	private Array<PowerUp> getPowerUps()
@@ -222,4 +218,7 @@ public class EntityManager
 	}
 	
 	public Player getPlayer() {return player;}
+	public MainGame getGame() {return game;}
+	public Background getBackground() {return background;}
 }
+

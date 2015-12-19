@@ -3,7 +3,7 @@ package xyz.charliezhang.shooter.background;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import xyz.charliezhang.shooter.TextureManager;
+import xyz.charliezhang.shooter.MainGame;
 
 public class Background 
 {
@@ -13,22 +13,15 @@ public class Background
 	private float dx;
 	private float dy;
 	
-	public Background()
+	public Background(MainGame game)
 	{
-		image = TextureManager.BACKGROUND;
+		image = game.manager.get("data/textures/background.png", Texture.class);
 		sprite1 = new Sprite(image);
 		sprite2 = new Sprite(image);
-	}
-	public void setSize(float width, float height)
-	{
-		sprite1.setSize(width, height);
-		sprite2.setSize(width, height);
-	}
-
-	public void setPosition(float x, float y)
-	{
-		sprite1.setPosition(x, y);
-		sprite2.setPosition(x, y + sprite2.getHeight());
+		sprite1.setSize(MainGame.WIDTH + 100, (MainGame.WIDTH+100)/(float)image.getWidth()*image.getHeight());
+		sprite2.setSize(MainGame.WIDTH + 100, (MainGame.WIDTH+100)/(float)image.getWidth()*image.getHeight());
+		sprite1.setPosition(-50, 0);
+		sprite2.setPosition(-50, sprite1.getHeight());
 	}
 	
 	public void setVector(float dx, float dy)
@@ -36,6 +29,15 @@ public class Background
 		this.dx = dx;
 		this.dy = dy;
 	}
+
+	public void translate(float xdir)
+	{
+		if(xdir < 0 && sprite1.getX() >= -100) sprite1.translateX(xdir / 10);
+		if(xdir > 0 && sprite1.getX() <= 0) sprite1.translateX(xdir / 10);
+		if(xdir < 0 && sprite2.getX() >= -100) sprite2.translateX(xdir / 10);
+		if(xdir > 0 && sprite2.getX() <= 0) sprite2.translateX(xdir / 10);
+	}
+
 	public void update()
 	{
 		sprite1.setPosition(sprite1.getX() + dx, sprite1.getY() + dy);
@@ -48,11 +50,11 @@ public class Background
 		sprite2.draw(sb);
 		if(sprite1.getY() < -sprite1.getHeight())
 		{
-			sprite1.setPosition(0, sprite1.getHeight());
+			sprite1.setPosition(-50, sprite2.getY()+sprite2.getHeight());
 		}
 		if(sprite2.getY() < -sprite2.getHeight())
 		{
-			sprite2.setPosition(0, sprite2.getHeight());
+			sprite2.setPosition(-50, sprite1.getY() + sprite1.getHeight());
 		}
 	}
 }

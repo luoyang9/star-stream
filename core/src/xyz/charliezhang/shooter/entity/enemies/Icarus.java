@@ -1,42 +1,54 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.TextureManager;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Icarus extends Enemy
 {
 	private int stop;
+	private boolean intro;
 	public Icarus(EntityManager manager, int stop) {
 		super();
 		
-		textureAtlas = new TextureAtlas(Gdx.files.internal("icarus.atlas"));
+		textureAtlas = manager.getGame().manager.get("data/textures/icarus.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(60, 60);
+		sprite.setSize(100, 100);
 		
-		health = maxHealth = 100;
+		health = maxHealth = 30;
 		damage = 2;
 		this.manager = manager;
 		this.stop = stop;
+
+		intro = true;
 	}
 
 	@Override
 	public void update() {
-		if(sprite.getY() <= MainGame.HEIGHT - stop && direction.y < 0)
+		if(intro && sprite.getY() <= MainGame.HEIGHT - stop)
 		{
-			modifyDirection(0, 0.05f);
+			setDirection(2, -2);
+			intro = false;
+		}
+
+		if(!intro)
+		{
+			if (sprite.getY() < MainGame.HEIGHT - stop) direction.y += 0.04f;
+			if (sprite.getY() >= MainGame.HEIGHT - stop) direction.y -= 0.04f;
+			if (sprite.getX() >= MainGame.WIDTH / 2) direction.x -= 0.01f;
+			if (sprite.getX() < MainGame.WIDTH / 2) direction.x += 0.01f;
 		}
 		
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
 		if(sprite.getY() < MainGame.HEIGHT)
 		{
-			if(System.currentTimeMillis() - lastFire >= 2000)
+			if(System.currentTimeMillis() - lastFire >= 2500)
 			{
 				EnemyLaser o1 = new EnemyLaser(this, 1);
 				EnemyLaser o2 = new EnemyLaser(this, 1);
@@ -57,23 +69,23 @@ public class Icarus extends Enemy
 				o4.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g5.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				
-				g1.setDirection(0,  -4.8f);
+				g1.setDirection(0,  -2.3f);
 				manager.spawnEnemyLaser(g1);
-				o1.setDirection(0.5f, -4.7f);
+				o1.setDirection(0.5f, -2.1f);
 				manager.spawnEnemyLaser(o1);
-				o2.setDirection(-0.5f, -4.7f);
+				o2.setDirection(-0.5f, -2.1f);
 				manager.spawnEnemyLaser(o2);
-				g2.setDirection(1, -4.3f);
+				g2.setDirection(1f, -1.8f);
 				manager.spawnEnemyLaser(g2);
-				g3.setDirection(-1, -4.3f);
+				g3.setDirection(-1f, -1.8f);
 				manager.spawnEnemyLaser(g3);
-				o3.setDirection(1.5f, -3.5f);
+				o3.setDirection(1.5f, -1.2f);
 				manager.spawnEnemyLaser(o3);
-				o4.setDirection(-1.5f, -3.5f);
+				o4.setDirection(-1.5f, -1.2f);
 				manager.spawnEnemyLaser(o4);
-				g4.setDirection(2, -2.2f);
+				g4.setDirection(2f, -0.1f);
 				manager.spawnEnemyLaser(g4);
-				g5.setDirection(-2, -2.2f);
+				g5.setDirection(-2f, -0.1f);
 				manager.spawnEnemyLaser(g5);
 				lastFire = System.currentTimeMillis();
 			}
@@ -84,8 +96,8 @@ public class Icarus extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(TextureManager.HEALTH, sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(TextureManager.HEALTHFILL, sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

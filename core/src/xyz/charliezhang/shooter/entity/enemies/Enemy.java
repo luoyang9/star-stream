@@ -29,4 +29,6 @@ public abstract class Enemy extends Entity
 
 	public int getDamage() {return damage;}
 
+	public EntityManager getManager() {return manager;}
+
 }

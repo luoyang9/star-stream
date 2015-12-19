@@ -15,19 +15,18 @@ public class Wave
     private Array<WaveEnemy> enemies;
     private int delay;
 
-    public Wave(int[] enemyCodes, Vector2[] enemyPositions, Vector2[] enemyDirections, int delay)
+    public Wave()
+    {
+    }
+
+    public void setEnemies(Array<WaveEnemy> enemies)
+    {
+        this.enemies = enemies;
+    }
+
+    public void setDelay(int delay)
     {
         this.delay = delay;
-        enemies = new Array<WaveEnemy>();
-        for(int i = 0; i < enemyCodes.length; i++)
-        {
-            enemies.add(new WaveEnemy());
-            enemies.get(i).enemyCode = enemyCodes[i];
-            enemies.get(i).x = enemyPositions[i].x;
-            enemies.get(i).y = enemyPositions[i].y;
-            enemies.get(i).dx = enemyDirections[i].x;
-            enemies.get(i).dy = enemyDirections[i].y;
-        }
     }
 
     public int getDelay(){return delay;}

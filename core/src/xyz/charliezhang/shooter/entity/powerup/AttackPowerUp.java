@@ -6,19 +6,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
+import xyz.charliezhang.shooter.entity.Player;
 
 public class AttackPowerUp extends PowerUp
 {
 	
-	public AttackPowerUp() {
+	public AttackPowerUp(MainGame game) {
 		super();
 		
-		textureAtlas = new TextureAtlas(Gdx.files.internal("attpowerup.atlas"));
+		textureAtlas = game.manager.get("data/textures/attpowerup.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
-		sprite.setSize(50, 50);
-
-		duration = 1000;
+		sprite.setSize(20, 20);
 	}
 
 	@Override
@@ -31,4 +31,5 @@ public class AttackPowerUp extends PowerUp
 	{
 		super.render(sb);
 	}
+
 }
