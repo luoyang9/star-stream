@@ -68,29 +68,46 @@ public class LoadScreen implements Screen
         stage.addActor(loadingFrame);
         stage.addActor(logo);
 
-        //load game assets
+        //LOAD GAME ASSETS
+
+        //game background
         game.manager.load("data/textures/background.png", Texture.class);
+        //menu background
         game.manager.load("data/ui/background.png", Texture.class);
+        //health
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);
+        //ui skin
         game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
+        //powerup icons
         game.manager.load("data/textures/misicon.png", Texture.class);
+        game.manager.load("data/textures/shieldicon.png", Texture.class);
+        //powerup effects
+        game.manager.load("data/textures/shield.png", Texture.class);
+        game.manager.load("data/textures/missile.atlas", TextureAtlas.class);
+        //powerup drops
         game.manager.load("data/textures/attpowerup.atlas", TextureAtlas.class);
         game.manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/shieldpowerup.atlas", TextureAtlas.class);
+        //enemies
         game.manager.load("data/textures/attackheli.atlas", TextureAtlas.class);
         game.manager.load("data/textures/icarus.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laser.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/missile.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserG.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserO.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserR.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
         game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
+        //explosions
+        game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
+        //lasers
+        game.manager.load("data/textures/laser.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/laserF.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/laserO.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/laserR.atlas", TextureAtlas.class);
+        //player
+        game.manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
+        //music
         game.manager.load("data/music/background.mp3", Music.class);
         game.manager.load("data/music/menu.mp3", Music.class);
+        //sound effects
         game.manager.load("data/sounds/playershoot.wav", Sound.class);
         game.manager.load("data/sounds/explosion.wav", Sound.class);
 

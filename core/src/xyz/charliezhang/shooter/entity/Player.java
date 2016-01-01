@@ -3,7 +3,9 @@ package xyz.charliezhang.shooter.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -41,9 +43,10 @@ public class Player extends Entity
 	private boolean dead;
 
 	//powerup tasks
-	private Array<Task> powerupTasks;
 	private Task missileTask;
-	private Task shieldTask;
+	private boolean shieldOn;
+
+	private Sprite shield;
 
 	//timers
 	private long lastFire, flinchTimer, shootDelay;
@@ -101,15 +104,9 @@ public class Player extends Entity
 			}
 		};
 
-		shieldTask = new Timer.Task(){
-			@Override
-			public void run() {
-			}
-		};
-
-		powerupTasks = new Array<Timer.Task>();
-		powerupTasks.add(missileTask);
-		powerupTasks.add(shieldTask);
+		shieldOn = false;
+		shield = new Sprite(manager.getGame().manager.get("data/textures/shield.png", Texture.class));
+		shield.setSize(100, 100);
 	}
 
 	@Override
@@ -139,6 +136,9 @@ public class Player extends Entity
 		
 		//add direction to position
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+
+		//update shield
+		shield.setPosition(sprite.getX()-(shield.getWidth()-sprite.getWidth())/2, sprite.getY()-(shield.getHeight()-sprite.getHeight())/2);
 	}
 
 	private void checkDeath()
@@ -158,10 +158,10 @@ public class Player extends Entity
 				setDirection(0, 3);
 				health = maxHealth;
 				attLevel = 1;
-				for(Timer.Task task : powerupTasks)
-				{
-					task.cancel();
-				}
+
+				//cancel powerups
+				missileTask.cancel();
+
 				controllable = false;
 				justSpawned = true;
 			}
@@ -287,6 +287,8 @@ public class Player extends Entity
 		
 		//render player
 		super.render(sb);
+
+		if(shieldOn) shield.draw(sb);
 	}
 	
 	public void setFlinching(boolean b) 
@@ -300,6 +302,7 @@ public class Player extends Entity
 	{
 		if(powerUp instanceof AttackPowerUp) activateAttackPowerUp((AttackPowerUp)powerUp);
 		if(powerUp instanceof MissilePowerUp) activateMissilePowerUp((MissilePowerUp)powerUp);
+		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp((ShieldPowerUp) powerUp);
 	}
 	public void activateAttackPowerUp(AttackPowerUp powerUp)
 	{
@@ -317,10 +320,8 @@ public class Player extends Entity
 		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
 	}
 
-	public void activateShieldPowerUp(ShieldPowerUp powerUp)
-	{
-		shieldTask.cancel();
-		Timer.schedule(shieldTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
+	public void activateShieldPowerUp(ShieldPowerUp powerUp) {
+		shieldOn = true;
 	}
 
 	public void modifyHealth(int h) {health += h;} //modify health
@@ -339,6 +340,6 @@ public class Player extends Entity
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?
 	public Timer.Task getMissileTask() {return missileTask;}
-	public Timer.Task getShieldTask() {return shieldTask;}
-
+	public boolean isShieldOn() {return shieldOn;}
+	public void setShield(boolean b) {shieldOn = b;}
 }

@@ -14,10 +14,6 @@ public class ShieldPowerUp extends PowerUp
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(20, 20);
-
-        delay = 0;
-        interval = 1;
-        numRepeats = 10;
     }
 
     @Override

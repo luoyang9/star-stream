@@ -16,9 +16,9 @@ public class Striker extends Enemy
 		super();
 
 		textureAtlas = manager.getGame().manager.get("data/textures/striker.atlas", TextureAtlas.class);
-		animation = new Animation(1/15f, textureAtlas.getRegions());
+		animation = new Animation(1/20f, textureAtlas.getRegions());
 		
-		sprite.setSize(40, 40);
+		sprite.setSize(50, 58);
 		
 		health = maxHealth = 5;
 		damage = 2;
@@ -54,13 +54,9 @@ public class Striker extends Enemy
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{
 				EnemyLaser g1 = new EnemyLaser(this, 2);
-				EnemyLaser g2 = new EnemyLaser(this, 2);
 				g1.setDirection(0, -7);
-				g2.setDirection(0, -7);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + 5);
 				manager.spawnEnemyLaser(g1);
-				g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 10, sprite.getY() + 5);
-				manager.spawnEnemyLaser(g2);
 				lastFire = System.currentTimeMillis();
 			}
 		}

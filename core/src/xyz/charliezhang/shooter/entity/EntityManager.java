@@ -12,6 +12,7 @@ import xyz.charliezhang.shooter.entity.enemies.EnemyLaser;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
+import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 
 public class EntityManager 
 {
@@ -124,6 +125,12 @@ public class EntityManager
 					a.setDirection(2, 2);
 					spawnPowerUp(a);
 				}
+				if (MathUtils.random() <= 0.5) {
+					ShieldPowerUp a = new ShieldPowerUp(game);
+					a.setPosition(e.getPosition().x, e.getPosition().y);
+					a.setDirection(-2, 2);
+					spawnPowerUp(a);
+				}
 			}
 		}
 		
@@ -190,8 +197,14 @@ public class EntityManager
 				{
 					if(!player.isFlinching())
 					{
-						player.modifyHealth(-e.getDamage());
-						player.setFlinching(true);
+						if(!player.isShieldOn()) {
+							player.modifyHealth(-e.getDamage());
+							player.setFlinching(true);
+						}
+						else
+						{
+							player.setShield(false);
+						}
 
 					}
 				}
@@ -201,14 +214,19 @@ public class EntityManager
 		{
 			for(EnemyLaser el : enemyLasers) //check enemy laser-player collision
 			{
-				//check player-enemy laser collision
 				if(player.getBounds().overlaps(el.getBounds()))
 				{
 					if(!player.isFlinching())
 					{
-						player.modifyHealth(-el.getEnemy().getDamage());
-						player.setFlinching(true);
 						enemyLasers.removeValue(el, false);
+						if(!player.isShieldOn()) {
+							player.modifyHealth(-el.getEnemy().getDamage());
+							player.setFlinching(true);
+						}
+						else
+						{
+							player.setShield(false);
+						}
 					}
 				}
 			}

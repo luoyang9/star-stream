@@ -144,13 +144,13 @@ public class GameScreen implements Screen
 			Enemy e = new AttackHeli(manager, 100);
 			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
 			{
-				case WaveManager.BATTLESHIP : e = new AttackHeli(manager, (int)(Math.random()*100+50));
+				case WaveManager.BATTLESHIP : e = new AttackHeli(manager, (int)(Math.random()*100+100));
 					break;
 				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*100+100));
 					break;
 				case WaveManager.SKULLINATOR: e = new Skullinator(manager);
 					break;
-				case WaveManager.STRIKER: e = new Striker(manager, (int)(Math.random()*100+50));
+				case WaveManager.STRIKER: e = new Striker(manager, (int)(Math.random()*100+100));
 					break;
 			}
 			e.setPosition(currentWave.getEnemy(enemyCount).getX()*MainGame.WIDTH, MainGame.HEIGHT + currentWave.getEnemy(enemyCount).getY());

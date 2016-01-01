@@ -30,11 +30,13 @@ public class HUD
     private Stage stage;
     private Table table;
     private Table deathTable;
+    private HorizontalGroup iconGroup;
     private Stack stack;
     private Stack masterStack;
     private Image healthBar;
     private Image healthFill;
     private Image missileIcon;
+    private Image shieldIcon;
 
 
     private TextButton btnMenu;
@@ -53,10 +55,13 @@ public class HUD
         healthBar = new Image(manager.getGame().manager.get("data/textures/health.png", Texture.class));
         healthFill = new Image(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class));
 
-        missileIcon = new Image(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class));
+        iconGroup = new HorizontalGroup();
+        missileIcon = new Image(manager.getGame().manager.get("data/textures/misicon.png", Texture.class));
         missileIcon.setWidth(20);
         missileIcon.setVisible(false);
-        //TODO change icon
+        shieldIcon = new Image(manager.getGame().manager.get("data/textures/shieldicon.png", Texture.class));
+        shieldIcon.setWidth(20);
+        shieldIcon.setVisible(false);
 
         table = new Table();
         stack = new Stack();
@@ -65,9 +70,6 @@ public class HUD
         masterStack = new Stack();
         masterStack.setFillParent(true);
         stage.addActor(masterStack);
-        System.out.println(masterStack.getWidth());
-        System.out.println(table.getWidth());
-        System.out.println(deathTable.getWidth());
 
         style = new Label.LabelStyle();
         style.font = manager.getGame().manager.get("hud.ttf");
@@ -98,7 +100,9 @@ public class HUD
         table.add(lblScore).padLeft(5).expandX().left();
         table.add(lblLives).width(50).padRight(5).right();
         table.row();
-        table.add(missileIcon).height(20).expandY().left().bottom();
+        iconGroup.addActor(missileIcon);
+        iconGroup.addActor(shieldIcon);
+        table.add(iconGroup).fillX().expandY().left().bottom();
         table.row();
         stack.add(healthFill);
         stack.add(healthBar);
@@ -134,6 +138,14 @@ public class HUD
             missileIcon.setVisible(false);
         }
 
+        if(manager.getPlayer().isShieldOn())
+        {
+            shieldIcon.setVisible(true);
+        }
+        else
+        {
+            shieldIcon.setVisible(false);
+        }
         stage.act(delta);
     }
 
@@ -152,7 +164,6 @@ public class HUD
     public void death()
     {
         deathTable.setVisible(true);
-        System.out.println(deathTable.getWidth());
         Gdx.input.setInputProcessor(stage);
     }
 }
