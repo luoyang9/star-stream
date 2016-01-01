@@ -1,11 +1,6 @@
 package xyz.charliezhang.shooter.entity;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import xyz.charliezhang.shooter.entity.enemies.Battleship;
-import xyz.charliezhang.shooter.entity.enemies.Enemy;
-
-import java.util.HashMap;
 
 /**
  * Created by Charlie on 2015-11-24.

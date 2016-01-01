@@ -11,6 +11,9 @@ import xyz.charliezhang.shooter.entity.Player;
 
 public class PowerUp extends Entity
 {
+    protected float delay;
+    protected float interval;
+    protected int numRepeats;
 
     public PowerUp() {
         super();
@@ -37,4 +40,8 @@ public class PowerUp extends Entity
         sprite.setRegion(animation.getKeyFrame(animationTime));
         super.render(sb);
     }
+
+    public float getDelay() {return delay;}
+    public float getInterval(){return interval;}
+    public int getNumRepeats(){return numRepeats;}
 }

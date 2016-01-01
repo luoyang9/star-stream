@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -66,13 +70,17 @@ public class LoadScreen implements Screen
 
         //load game assets
         game.manager.load("data/textures/background.png", Texture.class);
+        game.manager.load("data/ui/background.png", Texture.class);
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);
+        game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/misicon.png", Texture.class);
         game.manager.load("data/textures/attpowerup.atlas", TextureAtlas.class);
         game.manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/battleship.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/attackheli.atlas", TextureAtlas.class);
         game.manager.load("data/textures/icarus.atlas", TextureAtlas.class);
         game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
         game.manager.load("data/textures/laser.atlas", TextureAtlas.class);
         game.manager.load("data/textures/missile.atlas", TextureAtlas.class);
         game.manager.load("data/textures/laserG.atlas", TextureAtlas.class);
@@ -81,9 +89,23 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
         game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
-        game.manager.load("data/music/background.wav", Music.class);
+        game.manager.load("data/music/background.mp3", Music.class);
+        game.manager.load("data/music/menu.mp3", Music.class);
         game.manager.load("data/sounds/playershoot.wav", Sound.class);
         game.manager.load("data/sounds/explosion.wav", Sound.class);
+
+        //game fonts
+        FreetypeFontLoader.FreeTypeFontLoaderParameter params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        params.fontFileName = "data/goodtimes.ttf";
+        params.fontParameters.size = 50;
+        params.fontParameters.color = Color.BLACK;
+        game.manager.load("menu.ttf", BitmapFont.class, params);
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        params2.fontFileName = "data/goodtimes.ttf";
+        params2.fontParameters.size = 25;
+        params2.fontParameters.color = Color.BLACK;
+        game.manager.load("hud.ttf", BitmapFont.class, params2);
     }
 
     @Override
@@ -93,7 +115,7 @@ public class LoadScreen implements Screen
         if(game.manager.update())
         {
             if(Gdx.input.isTouched())
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MenuScreen(game));
         }
 
         percent = Interpolation.linear.apply(percent, game.manager.getProgress(), 0.1f);

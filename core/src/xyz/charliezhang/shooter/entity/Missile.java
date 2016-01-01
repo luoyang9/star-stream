@@ -14,7 +14,7 @@ public class Missile extends PlayerLaser
         textureAtlas = game.manager.get("data/textures/missile.atlas", TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
-        sprite.setSize(5, 10);
+        sprite.setSize(12, 24);
 
         accel = 0.5f;
         direction.x = 0;
@@ -24,6 +24,7 @@ public class Missile extends PlayerLaser
     @Override
     public void update() {
         direction.y += accel;
+        if(direction.y > 20) direction.y = 20;
         sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
     }
 }

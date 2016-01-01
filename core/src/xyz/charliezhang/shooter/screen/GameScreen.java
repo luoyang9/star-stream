@@ -1,25 +1,24 @@
 package xyz.charliezhang.shooter.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Screen;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
-import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.Player;
-import xyz.charliezhang.shooter.entity.Wave;
-import xyz.charliezhang.shooter.entity.WaveManager;
+import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.enemies.*;
 
 public class GameScreen implements Screen
 {
-	protected OrthographicCamera camera;
-	protected Viewport viewport;
-	protected EntityManager manager;
-	protected WaveManager wmanager;
-	protected Background background;
+	private OrthographicCamera camera;
+	private Viewport viewport;
+	private EntityManager manager;
+	private WaveManager wmanager;
+	private Background background;
 
 	private MainGame game;
 	private Music backgroundMusic;
@@ -58,16 +57,16 @@ public class GameScreen implements Screen
 		enemyWave = 0;
 		notSpawned = false;
 
-		backgroundMusic = game.manager.get("data/music/background.wav", Music.class);
+		backgroundMusic = game.manager.get("data/music/background.mp3", Music.class);
 		backgroundMusic.setLooping(true);
 		backgroundMusic.play();
 	}
 
-	public void update() {
+	public void update(float delta) {
 
 		camera.update();
 		background.update();
-		manager.update();
+		manager.update(delta);
 
 		if(manager.getPlayer().isDead())
 		{
@@ -90,15 +89,14 @@ public class GameScreen implements Screen
 	
 	@Override
 	public void render(float delta) {
-		update();
+		update(delta);
+
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		background.render(game.batch);
 		manager.render(game.batch);
-
-		game.font.draw(game.batch, "Max HP: " + player.getMaxHealth() + " Dmg: " + player.getDamage(), 10, 10);
-		game.font.draw(game.batch, "Lives: " + player.getLives() + " Wave: " + enemyWave, 10, MainGame.HEIGHT-10);
 		game.batch.end();
 	}
 
@@ -143,10 +141,10 @@ public class GameScreen implements Screen
 		{
 			//spawn next enemy
 			start = System.nanoTime();
-			Enemy e = new Battleship(manager, 100);
+			Enemy e = new AttackHeli(manager, 100);
 			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
 			{
-				case WaveManager.BATTLESHIP : e = new Battleship(manager, (int)(Math.random()*100+50));
+				case WaveManager.BATTLESHIP : e = new AttackHeli(manager, (int)(Math.random()*100+50));
 					break;
 				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*100+100));
 					break;

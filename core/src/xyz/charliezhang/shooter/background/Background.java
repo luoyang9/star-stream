@@ -32,6 +32,8 @@ public class Background
 
 	public void translate(float xdir)
 	{
+		if(xdir > 10) xdir = 10;
+		if(xdir < -10) xdir = -10;
 		if(xdir < 0 && sprite1.getX() >= -100) sprite1.translateX(xdir / 10);
 		if(xdir > 0 && sprite1.getX() <= 0) sprite1.translateX(xdir / 10);
 		if(xdir < 0 && sprite2.getX() >= -100) sprite2.translateX(xdir / 10);

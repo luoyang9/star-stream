@@ -23,6 +23,11 @@ public class EntityManager
 	private Player player;
 	private OrthographicCamera camera;
 	private Background background;
+	private HUD hud;
+
+	private boolean deathProcedure;
+
+	private long score;
 
 	private MainGame game;
 	
@@ -33,15 +38,30 @@ public class EntityManager
 		this.background = background;
 
 		player = new Player(this, camera);
+		hud = new HUD(this);
+
+		score = 0;
+		deathProcedure = false;
 	}
 	
-	public void update()
+	public void update(float delta)
 	{
+		hud.update(delta);
+
 		//update entities
 		player.update();
 		for(Enemy e : enemies)
 		{
 			e.update();
+			if(player.isDead() && !deathProcedure)
+			{
+				deathProcedure = true;
+				hud.death();
+				Explosion explosion = new Explosion(game, 2);
+				explosion.setPosition(player.getPosition().x + player.getSprite().getWidth()/2, player.getPosition().y + player.getSprite().getHeight()/2);
+				spawnExplosion(explosion);
+				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+			}
 		}
 		for(PlayerLaser l : lasers)
 		{
@@ -83,16 +103,22 @@ public class EntityManager
 		//remove enemies
 		for(Enemy e : enemies) {
 			if (e.getHealth() <= 0) {
+				score += e.getScore();
+
+				Explosion exp = new Explosion(game, 2);
+				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
+				spawnExplosion(exp);
+
 				e.dispose();
 				enemies.removeValue(e, false);
 				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
-				if(MathUtils.random() <= 1) {
+				if(MathUtils.random() <= 0.3) {
 					MissilePowerUp a = new MissilePowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, -2);
 					spawnPowerUp(a);
 				}
-				if (MathUtils.random() <= 1) {
+				if (MathUtils.random() >= 0.7) {
 					AttackPowerUp a = new AttackPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(2, 2);
@@ -119,7 +145,7 @@ public class EntityManager
 		}
 
 		//render player
-		player.render(sb);
+		if(!player.isDead()) player.render(sb);
 
 		//render enemy lasers
 		for(EnemyLaser e : enemyLasers)
@@ -136,7 +162,8 @@ public class EntityManager
 		{
 			e.render(sb);
 		}
-		
+
+		hud.render(sb, game.font);
 	}
 	
 	private void checkCollisions()
@@ -148,7 +175,7 @@ public class EntityManager
 			{
 				if(e.getBounds().overlaps(m.getBounds()))
 				{
-					Explosion exp = new Explosion(game);
+					Explosion exp = new Explosion(game, 1);
 					exp.setPosition(m.getPosition().x, m.getPosition().y);
 					spawnExplosion(exp);
 					e.modifyHealth(-player.getDamage());
@@ -220,5 +247,6 @@ public class EntityManager
 	public Player getPlayer() {return player;}
 	public MainGame getGame() {return game;}
 	public Background getBackground() {return background;}
+	public long getScore() {return score;}
 }
 

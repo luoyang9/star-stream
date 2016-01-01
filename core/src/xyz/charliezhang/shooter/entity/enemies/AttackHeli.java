@@ -8,20 +8,21 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
-public class Battleship extends Enemy
+public class AttackHeli extends Enemy
 {
 	private int stop;
-	public Battleship(EntityManager manager, int stop) {
+	public AttackHeli(EntityManager manager, int stop) {
 		super();
 		
-		textureAtlas = manager.getGame().manager.get("data/textures/battleship.atlas", TextureAtlas.class);
-		animation = new Animation(1/15f, textureAtlas.getRegions());
+		textureAtlas = manager.getGame().manager.get("data/textures/attackheli.atlas", TextureAtlas.class);
+		animation = new Animation(1/30f, textureAtlas.getRegions());
 		
-		sprite.setSize(45, 45);
+		sprite.setSize(75, 75);
 		
 		//set enemy data
 		health = maxHealth = 15;
 		damage = 1;
+		score = 100;
 		this.manager = manager;
 		this.stop = stop;
 	}
@@ -44,11 +45,11 @@ public class Battleship extends Enemy
 				l.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l);
 				EnemyLaser l2 = new EnemyLaser(this, 1);
-				l2.setDirection((float)Math.random()+1.5f, -3);
+				l2.setDirection(1.5f, -3);
 				l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l2);
 				EnemyLaser l3 = new EnemyLaser(this, 1);
-				l3.setDirection(-((float)Math.random()+1.5f), -3);
+				l3.setDirection(-1.5f, -3);
 				l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l3);
 				lastFire = System.currentTimeMillis();

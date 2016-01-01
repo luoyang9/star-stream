@@ -22,6 +22,7 @@ public class Icarus extends Enemy
 		
 		health = maxHealth = 30;
 		damage = 2;
+		score = 150;
 		this.manager = manager;
 		this.stop = stop;
 
@@ -50,42 +51,26 @@ public class Icarus extends Enemy
 		{
 			if(System.currentTimeMillis() - lastFire >= 2500)
 			{
-				EnemyLaser o1 = new EnemyLaser(this, 1);
-				EnemyLaser o2 = new EnemyLaser(this, 1);
-				EnemyLaser o3 = new EnemyLaser(this, 1);
-				EnemyLaser o4 = new EnemyLaser(this, 1);
 				EnemyLaser g1 = new EnemyLaser(this, 2);
 				EnemyLaser g2 = new EnemyLaser(this, 2);
 				EnemyLaser g3 = new EnemyLaser(this, 2);
 				EnemyLaser g4 = new EnemyLaser(this, 2);
 				EnemyLaser g5 = new EnemyLaser(this, 2);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
-				o1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
-				o2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
-				o3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g4.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
-				o4.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g5.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				
 				g1.setDirection(0,  -2.3f);
 				manager.spawnEnemyLaser(g1);
-				o1.setDirection(0.5f, -2.1f);
-				manager.spawnEnemyLaser(o1);
-				o2.setDirection(-0.5f, -2.1f);
-				manager.spawnEnemyLaser(o2);
 				g2.setDirection(1f, -1.8f);
 				manager.spawnEnemyLaser(g2);
 				g3.setDirection(-1f, -1.8f);
 				manager.spawnEnemyLaser(g3);
-				o3.setDirection(1.5f, -1.2f);
-				manager.spawnEnemyLaser(o3);
-				o4.setDirection(-1.5f, -1.2f);
-				manager.spawnEnemyLaser(o4);
-				g4.setDirection(2f, -0.1f);
+				g4.setDirection(2f, -0.2f);
 				manager.spawnEnemyLaser(g4);
-				g5.setDirection(-2f, -0.1f);
+				g5.setDirection(-2f, -0.2f);
 				manager.spawnEnemyLaser(g5);
 				lastFire = System.currentTimeMillis();
 			}

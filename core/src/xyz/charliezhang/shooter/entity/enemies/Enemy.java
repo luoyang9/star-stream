@@ -6,7 +6,7 @@ import xyz.charliezhang.shooter.entity.Entity;
 public abstract class Enemy extends Entity
 {
 	//enemy data
-	protected int health, maxHealth, damage;
+	protected int health, maxHealth, damage, score;
 	protected long lastFire;
 	
 	//manager
@@ -28,6 +28,8 @@ public abstract class Enemy extends Entity
 	public int getHealth() {return health;}
 
 	public int getDamage() {return damage;}
+
+	public int getScore() {return score;}
 
 	public EntityManager getManager() {return manager;}
 

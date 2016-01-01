@@ -27,7 +27,7 @@ public class EnemyLaser extends Entity
 		
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(8, 8);
+		sprite.setSize(12, 12);
 
 	}
 

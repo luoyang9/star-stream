@@ -3,19 +3,19 @@ package xyz.charliezhang.shooter.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
+import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 
 public class Player extends Entity
 {
@@ -41,16 +41,18 @@ public class Player extends Entity
 	private boolean dead;
 
 	//powerup tasks
-	private Array<Timer.Task> powerupTasks;
+	private Array<Task> powerupTasks;
+	private Task missileTask;
+	private Task shieldTask;
 
 	//timers
-	private long lastFire, flinchTimer;
+	private long lastFire, flinchTimer, shootDelay;
 	
 	//manager and camera
 	private final EntityManager manager;
 	private final OrthographicCamera camera;
 	
-
+	//TODO: different planes with different shooting patterns
 	public Player(EntityManager manager, OrthographicCamera camera) {
 		//manager
 		this.manager = manager;
@@ -63,11 +65,12 @@ public class Player extends Entity
 		shootSound = manager.getGame().manager.get("data/sounds/playershoot.wav", Sound.class);
 		
 		//set sprite size
-		sprite.setSize(25, 50);
+		sprite.setSize(93, 74);
 		
 		//set player starting data
+		shootDelay = 100;
 		attLevel = 1;
-		numLives = maxLives = 3;
+		numLives = maxLives = 1;
 		flinching = false;
 		controllable = false;
 		justControllable = false;
@@ -77,11 +80,36 @@ public class Player extends Entity
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
 
-				powerupTasks = new Array<Timer.Task>();
-		
+		initializePowerups();
+
 		//read player stats
 		health = maxHealth = 10;
 		damage = 1;
+	}
+
+	private void initializePowerups()
+	{
+		missileTask = new Timer.Task() {
+			@Override
+			public void run() {
+				Missile m1 = new Missile(manager.getGame());
+				Missile m2 = new Missile(manager.getGame());
+				m1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+				m2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
+				manager.spawnLaser(m1);
+				manager.spawnLaser(m2);
+			}
+		};
+
+		shieldTask = new Timer.Task(){
+			@Override
+			public void run() {
+			}
+		};
+
+		powerupTasks = new Array<Timer.Task>();
+		powerupTasks.add(missileTask);
+		powerupTasks.add(shieldTask);
 	}
 
 	@Override
@@ -95,137 +123,154 @@ public class Player extends Entity
 			justSpawned = false;
 		}
 
+
 		//if controllable
 		if(controllable)
 		{
 			//check death
-			if(health <= 0)
-			{
-				numLives--;
-				if(numLives <= 0)
-				{
-					dead = true;
-					//game over
-				}
-				else //moar lives
-				{
-					setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
-					setDirection(0, 3);
-					health = maxHealth;
-					attLevel = 1;
-					for(Timer.Task task : powerupTasks)
-					{
-						task.cancel();
-					}
-					controllable = false;
-					justSpawned = true;
-					return;
-				}
-			}
-
+			checkDeath();
 
 			//movement
-			xdir = 0;
-			ydir = 0;
-
-			Vector2 touch = new Vector2(Gdx.input.getX(), -Gdx.input.getY());
-			Vector3 unprojected = camera.unproject(new Vector3(touch.x, -touch.y, 0));
-
-			//check if just touched
-			if(Gdx.input.justTouched() || justControllable)
-			{
-				iniTouch.set(unprojected.x, unprojected.y);
-				syncPos.set(iniTouch.x - getPosition().x, iniTouch.y - getPosition().y);
-				justControllable = false;
-			}
-			else if(Gdx.input.isTouched())
-			{
-				//calculate drag, set direction to drag
-				Vector2 newTouch = new Vector2(unprojected.x, unprojected.y);
-				Vector2 drag = newTouch.cpy().sub(iniTouch);
-				xdir = drag.x;
-				ydir = drag.y;
-				iniTouch = newTouch;
-
-				//translate background
-				manager.getBackground().translate(drag.x);
-
-				//sync player with finger
-				if(Math.abs(xdir) < 0.01f && Math.abs(ydir) < 0.01f)
-				{
-					xdir = (newTouch.x - getPosition().x) - syncPos.x;
-					ydir = (newTouch.y - getPosition().y) - syncPos.y;
-				}
-			}
-
-			//limit movements to screen
-			if(sprite.getX() + xdir >= MainGame.WIDTH-25 || sprite.getX() + xdir <= 0)
-				xdir = 0;
-			else if(sprite.getY() + ydir > MainGame.HEIGHT-50 || sprite.getY() + ydir < 0)
-				ydir = 0;
-
-			//set direction
-			direction.set(xdir, ydir);
+			move();
 			
 			//fire lasers
-			if(Gdx.input.isTouched()) //if touching
-			{
-				if(System.currentTimeMillis() - lastFire >= 200) //if its time to shoot
-				{
-					shootSound.play(); //play pew
-					Laser l1 = new Laser(manager.getGame());
-					Laser l2 = new Laser(manager.getGame());
-					Laser l3 = new Laser(manager.getGame());
-					switch(attLevel) //depending on att level
-					{
-					case 1:
-							l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight()); 
-							l1.setDirection(0, 10);
-							manager.spawnLaser(l1);
-							break;
-					case 2:
-							l1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
-							l1.setDirection(0, 10);
-							manager.spawnLaser(l1);
-							l2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
-							l2.setDirection(0, 10);
-							manager.spawnLaser(l2);
-							break;
-					case 3: l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-							l1.setDirection(0, 10);
-							manager.spawnLaser(l1);
-							l2.setPosition(sprite.getX() - 2, sprite.getY() + sprite.getHeight());
-							l2.setDirection(0, 10);
-							manager.spawnLaser(l2);
-							l3.setPosition(sprite.getX() + sprite.getWidth() + 2, sprite.getY() + sprite.getHeight());
-							l3.setDirection(0, 10);
-							manager.spawnLaser(l3);
-							break;
-					default:l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-							l1.setDirection(0, 10);
-							manager.spawnLaser(l1);
-					}
-					lastFire = System.currentTimeMillis(); //set new last fire
-				}
-			}
+			shoot();
 		}
 		
 		//add direction to position
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 	}
-	
+
+	private void checkDeath()
+	{
+		if(health <= 0)
+		{
+			numLives--;
+			if(numLives <= 0)
+			{
+				dead = true;
+				controllable = false;
+				//game over
+			}
+			else //moar lives
+			{
+				setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
+				setDirection(0, 3);
+				health = maxHealth;
+				attLevel = 1;
+				for(Timer.Task task : powerupTasks)
+				{
+					task.cancel();
+				}
+				controllable = false;
+				justSpawned = true;
+			}
+		}
+	}
+
+	private void move()
+	{
+		xdir = 0;
+		ydir = 0;
+
+		Vector2 touch = new Vector2(Gdx.input.getX(), -Gdx.input.getY());
+		Vector3 unprojected = camera.unproject(new Vector3(touch.x, -touch.y, 0));
+
+		//check if just touched
+		if(Gdx.input.justTouched() || justControllable)
+		{
+			iniTouch.set(unprojected.x, unprojected.y);
+			syncPos.set(iniTouch.x - getPosition().x, iniTouch.y - getPosition().y);
+			justControllable = false;
+		}
+		else if(Gdx.input.isTouched())
+		{
+			//calculate drag, set direction to drag
+			Vector2 newTouch = new Vector2(unprojected.x, unprojected.y);
+			Vector2 drag = newTouch.cpy().sub(iniTouch);
+			xdir = drag.x;
+			ydir = drag.y;
+			iniTouch = newTouch;
+
+			//translate background
+			manager.getBackground().translate(drag.x);
+
+			//sync player with finger
+			if(Math.abs(xdir) < 0.01f && Math.abs(ydir) < 0.01f)
+			{
+				xdir = (newTouch.x - getPosition().x) - syncPos.x;
+				ydir = (newTouch.y - getPosition().y) - syncPos.y;
+			}
+		}
+
+		//limit movements to screen
+		if(sprite.getX() + xdir >= MainGame.WIDTH-25 || sprite.getX() + xdir <= 0)
+			xdir = 0;
+		else if(sprite.getY() + ydir > MainGame.HEIGHT-50 || sprite.getY() + ydir < 0)
+			ydir = 0;
+
+		//set direction
+		direction.set(xdir, ydir);
+	}
+
+	private void shoot()
+	{
+		if(Gdx.input.isTouched()) //if touching
+		{
+			if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
+			{
+				shootSound.play(); //play pew
+				Laser l1 = new Laser(manager.getGame());
+				Laser l2 = new Laser(manager.getGame());
+				Laser l3 = new Laser(manager.getGame());
+				Laser l4 = new Laser(manager.getGame());
+				Laser l5 = new Laser(manager.getGame());
+				switch(attLevel) //depending on att level
+				{
+					case 1:
+						l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l1.setDirection(0, 15);
+						manager.spawnLaser(l1);
+						break;
+					case 2:
+						l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l1.setDirection(-2, 15);
+						manager.spawnLaser(l1);
+						l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l2.setDirection(2, 15);
+						manager.spawnLaser(l2);
+						l3.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l3.setDirection(0, 15);
+						manager.spawnLaser(l3);
+						break;
+					case 3: l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l1.setDirection(-2, 15);
+						manager.spawnLaser(l1);
+						l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l2.setDirection(2, 15);
+						manager.spawnLaser(l2);
+						l3.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l3.setDirection(0, 15);
+						manager.spawnLaser(l3);
+						l4.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l4.setDirection(4, 15);
+						manager.spawnLaser(l4);
+						l5.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l5.setDirection(-4, 15);
+						manager.spawnLaser(l5);
+						break;
+					default:l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+						l1.setDirection(0, 15);
+						manager.spawnLaser(l1);
+				}
+				lastFire = System.currentTimeMillis(); //set new last fire
+			}
+		}
+	}
+
 	@Override
 	public void render(SpriteBatch sb)
 	{
-		//draw health bar
-		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), 50, 50, 15*maxHealth, 10);
-		//draw points of health
-		for(int i = 0; i < health; i++)
-		{
-			sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class),50+i*15, 49, 14, 9);
-		}
-		
-        
         //if flinching
 		if(flinching)
 		{
@@ -260,22 +305,22 @@ public class Player extends Entity
 	{
 		if (attLevel < 3) //if att lvl < 3
 			attLevel++; //increase att lvl
+		else
+		{
+			//TODO super awesome attack powerup
+		}
 	}
 
 	public void activateMissilePowerUp(MissilePowerUp powerUp)
 	{
-		powerupTasks.add(
-			Timer.schedule(new Timer.Task() {
-				@Override
-				public void run() {
-					Missile m1 = new Missile(manager.getGame());
-					Missile m2 = new Missile(manager.getGame());
-					m1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
-					m2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
-					manager.spawnLaser(m1);
-					manager.spawnLaser(m2);
-				}
-			}, 0, 2, 6));
+		missileTask.cancel();
+		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
+	}
+
+	public void activateShieldPowerUp(ShieldPowerUp powerUp)
+	{
+		shieldTask.cancel();
+		Timer.schedule(shieldTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
 	}
 
 	public void modifyHealth(int h) {health += h;} //modify health
@@ -293,5 +338,7 @@ public class Player extends Entity
 	public boolean isFlinching() {return flinching; } //is flinching?
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?
+	public Timer.Task getMissileTask() {return missileTask;}
+	public Timer.Task getShieldTask() {return shieldTask;}
 
 }

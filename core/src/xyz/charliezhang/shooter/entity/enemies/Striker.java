@@ -22,6 +22,7 @@ public class Striker extends Enemy
 		
 		health = maxHealth = 5;
 		damage = 2;
+		score = 75;
 		this.manager = manager;
 		stop = s;
 		intro = true;

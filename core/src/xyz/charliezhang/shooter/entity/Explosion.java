@@ -10,12 +10,18 @@ import xyz.charliezhang.shooter.MainGame;
  */
 public class Explosion extends Entity
 {
-    public Explosion(MainGame game)
+    public Explosion(MainGame game, int type)
     {
-        textureAtlas = game.manager.get("data/textures/explosion.atlas", TextureAtlas.class);
-        animation = new Animation(1/15f, textureAtlas.getRegions()) ;
-
-        sprite.setSize(15, 15);
+        switch(type){
+            case 1:textureAtlas = game.manager.get("data/textures/explosion.atlas", TextureAtlas.class);
+                sprite.setSize(15, 15);
+                break;
+            case 2:textureAtlas = game.manager.get("data/textures/bigExplosion.atlas", TextureAtlas.class);
+                sprite.setSize(60, 60);
+                break;
+            default:
+        }
+        animation = new Animation(1/20f, textureAtlas.getRegions()) ;
     }
 
     @Override

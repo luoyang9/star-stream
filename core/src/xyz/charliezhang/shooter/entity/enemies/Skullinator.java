@@ -22,6 +22,7 @@ public class Skullinator extends Enemy
 		
 		health = maxHealth = 80;
 		damage = 2;
+		score = 300;
 		this.manager = manager;
 		entered = false;
 		lastSpecial1 = lastSpecial2 = System.currentTimeMillis();
