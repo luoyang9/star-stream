@@ -94,6 +94,7 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/icarus.atlas", TextureAtlas.class);
         game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);
         //explosions
         game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
         game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);

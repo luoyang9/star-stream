@@ -8,20 +8,24 @@ public abstract class Enemy extends Entity
 	//enemy data
 	protected int health, maxHealth, damage, score;
 	protected long lastFire;
+	protected boolean dead, suicide;
+	protected int stop;
 	
 	//manager
 	protected EntityManager manager;
 
 	public Enemy() {
 		super();
-		// TODO Auto-generated constructor stub
+		dead = false;
+		suicide = false;
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		if(health <= 0) dead = true;
 	}
+
+	public void setStop(int stop) { this.stop = stop;}
 	
 	public void modifyHealth(int h) {health += h;}
 	
@@ -30,6 +34,10 @@ public abstract class Enemy extends Entity
 	public int getDamage() {return damage;}
 
 	public int getScore() {return score;}
+
+	public boolean isDead() {return dead;}
+
+	public boolean suicide() {return suicide;}
 
 	public EntityManager getManager() {return manager;}
 

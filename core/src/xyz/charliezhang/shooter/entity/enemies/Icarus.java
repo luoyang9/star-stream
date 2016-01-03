@@ -10,9 +10,8 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Icarus extends Enemy
 {
-	private int stop;
 	private boolean intro;
-	public Icarus(EntityManager manager, int stop) {
+	public Icarus(EntityManager manager) {
 		super();
 		
 		textureAtlas = manager.getGame().manager.get("data/textures/icarus.atlas", TextureAtlas.class);
@@ -24,13 +23,14 @@ public class Icarus extends Enemy
 		damage = 2;
 		score = 150;
 		this.manager = manager;
-		this.stop = stop;
 
 		intro = true;
 	}
 
 	@Override
 	public void update() {
+		super.update();
+
 		if(intro && sprite.getY() <= MainGame.HEIGHT - stop)
 		{
 			setDirection(2, -2);

@@ -20,7 +20,7 @@ public class Skullinator extends Enemy
 		
 		sprite.setSize(120, 120);
 		
-		health = maxHealth = 80;
+		health = maxHealth = 200;
 		damage = 2;
 		score = 300;
 		this.manager = manager;
@@ -30,8 +30,9 @@ public class Skullinator extends Enemy
 
 	@Override
 	public void update() {
-	
-		if(sprite.getY() <= MainGame.HEIGHT - sprite.getHeight() && !entered)
+		super.update();
+
+		if(sprite.getY() <= MainGame.HEIGHT - stop && !entered)
 		{
 			direction.set(2, 0);
 			entered = true;

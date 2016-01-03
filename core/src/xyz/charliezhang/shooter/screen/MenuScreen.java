@@ -63,13 +63,13 @@ public class MenuScreen implements Screen {
         btnSurvival = new TextButton("Survival", skin);
         btnOptions = new TextButton("Options", skin);
 
-        btnSurvival.addListener(new ClickListener() {
+        btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 backgroundMusic.stop();
                 dispose();
                 System.out.println("START GAMESCREEN");
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, 1));
                 event.stop();
             }
         });

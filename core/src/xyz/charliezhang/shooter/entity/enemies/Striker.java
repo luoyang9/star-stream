@@ -10,9 +10,8 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Striker extends Enemy
 {
-	private int stop;
 	private boolean intro;
-	public Striker(EntityManager manager, int s) {
+	public Striker(EntityManager manager) {
 		super();
 
 		textureAtlas = manager.getGame().manager.get("data/textures/striker.atlas", TextureAtlas.class);
@@ -20,16 +19,16 @@ public class Striker extends Enemy
 		
 		sprite.setSize(50, 58);
 		
-		health = maxHealth = 5;
+		health = maxHealth = 10;
 		damage = 2;
 		score = 75;
 		this.manager = manager;
-		stop = s;
 		intro = true;
 	}
 
 	@Override
 	public void update() {
+		super.update();
 
 		if(sprite.getY() <= MainGame.HEIGHT - stop && intro)
 		{

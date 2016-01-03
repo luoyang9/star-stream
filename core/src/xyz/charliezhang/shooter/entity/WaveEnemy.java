@@ -10,6 +10,7 @@ public class WaveEnemy
     private float y;
     private float dx;
     private float dy;
+    private int stop;
 
     public WaveEnemy()
     {
@@ -21,10 +22,12 @@ public class WaveEnemy
     public void setY(float y) {this.y = y;}
     public void setDx(float dx) {this.dx = dx;}
     public void setDy(float dy) {this.dy = dy;}
+    public void setStop(int stop) {this.stop = stop;}
 
     public int getEnemyCode(){return enemyCode;}
     public float getX(){return x;}
     public float getY(){return y;}
     public float getDx(){return dx;}
     public float getDy(){return dy;}
+    public int getStop(){return stop;}
 }

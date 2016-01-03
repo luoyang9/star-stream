@@ -103,7 +103,7 @@ public class EntityManager
 		}
 		//remove enemies
 		for(Enemy e : enemies) {
-			if (e.getHealth() <= 0) {
+			if (e.isDead()) {
 				score += e.getScore();
 
 				Explosion exp = new Explosion(game, 2);
@@ -113,24 +113,31 @@ public class EntityManager
 				e.dispose();
 				enemies.removeValue(e, false);
 				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
-				if(MathUtils.random() <= 0.3) {
+
+				float chance = MathUtils.random()*100;
+				if(chance <= 5) {
 					MissilePowerUp a = new MissilePowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, -2);
 					spawnPowerUp(a);
 				}
-				if (MathUtils.random() >= 0.7) {
+				if (chance >= 95) {
 					AttackPowerUp a = new AttackPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(2, 2);
 					spawnPowerUp(a);
 				}
-				if (MathUtils.random() <= 0.5) {
+				if (chance <= 10 && chance > 5) {
 					ShieldPowerUp a = new ShieldPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, 2);
 					spawnPowerUp(a);
 				}
+			}
+			if(e.suicide())
+			{
+				e.dispose();
+				enemies.removeValue(e, false);
 			}
 		}
 		
@@ -182,10 +189,15 @@ public class EntityManager
 			{
 				if(e.getBounds().overlaps(m.getBounds()))
 				{
+					//explosion
 					Explosion exp = new Explosion(game, 1);
 					exp.setPosition(m.getPosition().x, m.getPosition().y);
 					spawnExplosion(exp);
-					e.modifyHealth(-player.getDamage());
+
+					//do damage
+					if(m instanceof Missile) e.modifyHealth(-player.getDamage()*4);
+					else e.modifyHealth(-player.getDamage());
+
 					lasers.removeValue(m, false);
 				}
 			}

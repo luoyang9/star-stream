@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.sun.org.apache.regexp.internal.RE;
+import org.w3c.dom.css.Rect;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
@@ -342,4 +345,15 @@ public class Player extends Entity
 	public Timer.Task getMissileTask() {return missileTask;}
 	public boolean isShieldOn() {return shieldOn;}
 	public void setShield(boolean b) {shieldOn = b;}
+
+	@Override
+	public Rectangle getBounds()
+	{
+		Rectangle bounds = new Rectangle();
+		bounds.x = sprite.getX() + sprite.getWidth() * 0.2f;
+		bounds.y = sprite.getY() + sprite.getHeight() * 0.2f;
+		bounds.width = sprite.getWidth() * 0.6f;
+		bounds.height = sprite.getHeight() * 0.6f;
+		return bounds;
+	}
 }

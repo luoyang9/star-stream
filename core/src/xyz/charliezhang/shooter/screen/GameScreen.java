@@ -19,6 +19,7 @@ public class GameScreen implements Screen
 	private EntityManager manager;
 	private WaveManager wmanager;
 	private Background background;
+	private int level;
 
 	private MainGame game;
 	private Music backgroundMusic;
@@ -32,9 +33,10 @@ public class GameScreen implements Screen
 	private int enemyCount = 0;
 	private int spawnDelay;
 
-	public GameScreen(MainGame game)
+	public GameScreen(MainGame game, int level)
 	{
 		this.game = game;
+		this.level = level;
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class GameScreen implements Screen
 		manager = new EntityManager(camera, game, background);
 		player = manager.getPlayer();
 
-		wmanager = new WaveManager();
+		wmanager = new WaveManager(level);
 
 		enemyWave = 0;
 		notSpawned = false;
@@ -141,20 +143,24 @@ public class GameScreen implements Screen
 		{
 			//spawn next enemy
 			start = System.nanoTime();
-			Enemy e = new AttackHeli(manager, 100);
+			Enemy e;
 			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
 			{
-				case WaveManager.BATTLESHIP : e = new AttackHeli(manager, (int)(Math.random()*100+100));
+				case WaveManager.ATTACKHELI : e = new AttackHeli(manager);
 					break;
-				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*100+100));
+				case WaveManager.ICARUS : e = new Icarus(manager);
 					break;
 				case WaveManager.SKULLINATOR: e = new Skullinator(manager);
 					break;
-				case WaveManager.STRIKER: e = new Striker(manager, (int)(Math.random()*100+100));
+				case WaveManager.STRIKER: e = new Striker(manager);
 					break;
+				case WaveManager.KAMIKAZE: e = new Kamikaze(manager);
+					break;
+				default: e = new AttackHeli(manager);
 			}
 			e.setPosition(currentWave.getEnemy(enemyCount).getX()*MainGame.WIDTH, MainGame.HEIGHT + currentWave.getEnemy(enemyCount).getY());
 			e.setDirection(currentWave.getEnemy(enemyCount).getDx(), currentWave.getEnemy(enemyCount).getDy());
+			e.setStop(currentWave.getEnemy(enemyCount).getStop());
 			manager.spawnEnemy(e);
 			enemyCount++;
 		}

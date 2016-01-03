@@ -10,8 +10,7 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class AttackHeli extends Enemy
 {
-	private int stop;
-	public AttackHeli(EntityManager manager, int stop) {
+	public AttackHeli(EntityManager manager) {
 		super();
 		
 		textureAtlas = manager.getGame().manager.get("data/textures/attackheli.atlas", TextureAtlas.class);
@@ -24,17 +23,17 @@ public class AttackHeli extends Enemy
 		damage = 1;
 		score = 100;
 		this.manager = manager;
-		this.stop = stop;
 	}
 
 	@Override
 	public void update() {
+		super.update();
+
 		if(sprite.getY() <= MainGame.HEIGHT - stop && direction.y < 0)
 		{
 			setDirection(0, 0);
 		}
 
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
 		if(sprite.getY() < MainGame.HEIGHT)
 		{
@@ -55,6 +54,8 @@ public class AttackHeli extends Enemy
 				lastFire = System.currentTimeMillis();
 			}
 		}
+
+		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 	}
 
 	@Override 
