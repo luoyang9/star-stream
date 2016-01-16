@@ -48,6 +48,9 @@ public class Player extends Entity
 	//powerup tasks
 	private Task missileTask;
 	private boolean shieldOn;
+	private boolean superAttOn;
+	private long superAttTimer;
+	private long superAttDuration;
 
 	private Sprite shield;
 
@@ -76,12 +79,12 @@ public class Player extends Entity
 		//set player starting data
 		shootDelay = 100;
 		attLevel = 1;
-		numLives = maxLives = 1;
+		numLives = maxLives = 3;
 		flinching = false;
 		controllable = false;
 		justControllable = false;
 		justSpawned = true;
-		setDirection(0, 3);
+		setDirection(0, 4);
 		setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
@@ -110,6 +113,9 @@ public class Player extends Entity
 		shieldOn = false;
 		shield = new Sprite(manager.getGame().manager.get("data/textures/shield.png", Texture.class));
 		shield.setSize(100, 100);
+
+		superAttOn = false;
+		superAttDuration = 3000;
 	}
 
 	@Override
@@ -127,14 +133,14 @@ public class Player extends Entity
 		//if controllable
 		if(controllable)
 		{
-			//check death
-			checkDeath();
-
 			//movement
 			move();
 			
 			//fire lasers
 			shoot();
+
+			//check death
+			checkDeath();
 		}
 		
 		//add direction to position
@@ -149,6 +155,10 @@ public class Player extends Entity
 		if(health <= 0)
 		{
 			numLives--;
+			Explosion explosion = new Explosion(manager.getGame(), 2);
+			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
+			manager.spawnExplosion(explosion);
+			manager.getGame().manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
 			if(numLives <= 0)
 			{
 				dead = true;
@@ -158,12 +168,13 @@ public class Player extends Entity
 			else //moar lives
 			{
 				setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
-				setDirection(0, 3);
+				setDirection(0, 4);
 				health = maxHealth;
 				attLevel = 1;
 
 				//cancel powerups
 				missileTask.cancel();
+				shieldOn = false;
 
 				controllable = false;
 				justSpawned = true;
@@ -228,44 +239,55 @@ public class Player extends Entity
 				Laser l3 = new Laser(manager.getGame());
 				Laser l4 = new Laser(manager.getGame());
 				Laser l5 = new Laser(manager.getGame());
-				switch(attLevel) //depending on att level
-				{
-					case 1:
-						l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l1.setDirection(0, 15);
-						manager.spawnLaser(l1);
-						break;
-					case 2:
-						l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l1.setDirection(-2, 15);
-						manager.spawnLaser(l1);
-						l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l2.setDirection(2, 15);
-						manager.spawnLaser(l2);
-						l3.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l3.setDirection(0, 15);
-						manager.spawnLaser(l3);
-						break;
-					case 3: l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l1.setDirection(-2, 15);
-						manager.spawnLaser(l1);
-						l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l2.setDirection(2, 15);
-						manager.spawnLaser(l2);
-						l3.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l3.setDirection(0, 15);
-						manager.spawnLaser(l3);
-						l4.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l4.setDirection(4, 15);
-						manager.spawnLaser(l4);
-						l5.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l5.setDirection(-4, 15);
-						manager.spawnLaser(l5);
-						break;
-					default:l1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-						l1.setDirection(0, 15);
-						manager.spawnLaser(l1);
+				Laser l6 = new Laser(manager.getGame());
+				Laser l7 = new Laser(manager.getGame());
+
+
+				if(attLevel == 2) {
+					l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
+					l1.setDirection(0, 15);
+					manager.spawnLaser(l1);
+					l2.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*0.5f, sprite.getY() + sprite.getHeight());
+					l2.setDirection(0, 15);
+					manager.spawnLaser(l2);
 				}
+				else
+				{
+					l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+					l1.setDirection(0, 15);
+					manager.spawnLaser(l1);
+				}
+
+				if(attLevel >= 3) {
+					l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*2.5f, sprite.getY() + sprite.getHeight());
+					l2.setDirection(0, 15);
+					manager.spawnLaser(l2);
+					l3.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
+					l3.setDirection(0, 15);
+					manager.spawnLaser(l3);
+				}
+
+				if(attLevel >= 4) {
+					l4.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+					l4.setDirection(-2f, 15);
+					manager.spawnLaser(l4);
+					l5.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+					l5.setDirection(2f, 15);
+					manager.spawnLaser(l5);
+				}
+
+				if(superAttOn)
+				{
+					long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
+					if(elapsed > superAttDuration) superAttOn = false;
+					l6.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+					l6.setDirection(-4f, 15);
+					manager.spawnLaser(l6);
+					l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+					l7.setDirection(4f, 15);
+					manager.spawnLaser(l7);
+				}
+
 				lastFire = System.currentTimeMillis(); //set new last fire
 			}
 		}
@@ -309,11 +331,12 @@ public class Player extends Entity
 	}
 	public void activateAttackPowerUp(AttackPowerUp powerUp)
 	{
-		if (attLevel < 3) //if att lvl < 3
+		if (attLevel < 4) //if att lvl < 3
 			attLevel++; //increase att lvl
 		else
 		{
-			//TODO super awesome attack powerup
+			superAttOn = true;
+			superAttTimer = System.nanoTime();
 		}
 	}
 

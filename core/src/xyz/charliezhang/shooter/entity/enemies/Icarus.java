@@ -19,7 +19,7 @@ public class Icarus extends Enemy
 		
 		sprite.setSize(100, 100);
 		
-		health = maxHealth = 30;
+		health = maxHealth = 60;
 		damage = 2;
 		score = 150;
 		this.manager = manager;

@@ -11,6 +11,7 @@ public class WaveEnemy
     private float dx;
     private float dy;
     private int stop;
+    private int delay;
 
     public WaveEnemy()
     {
@@ -23,6 +24,7 @@ public class WaveEnemy
     public void setDx(float dx) {this.dx = dx;}
     public void setDy(float dy) {this.dy = dy;}
     public void setStop(int stop) {this.stop = stop;}
+    public void setDelay(int delay) {this.delay = delay;}
 
     public int getEnemyCode(){return enemyCode;}
     public float getX(){return x;}
@@ -30,4 +32,5 @@ public class WaveEnemy
     public float getDx(){return dx;}
     public float getDy(){return dy;}
     public int getStop(){return stop;}
+    public int getDelay() {return delay;}
 }

@@ -19,7 +19,7 @@ public class AttackHeli extends Enemy
 		sprite.setSize(75, 75);
 		
 		//set enemy data
-		health = maxHealth = 15;
+		health = maxHealth = 30;
 		damage = 1;
 		score = 100;
 		this.manager = manager;

@@ -1,0 +1,48 @@
+
+attackheli.png
+size: 654, 124
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 109, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 218, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 327, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1
+0005
+  rotate: false
+  xy: 436, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1
+0006
+  rotate: false
+  xy: 545, 0
+  size: 109, 124
+  orig: 109, 124
+  offset: 0, 0
+  index: -1

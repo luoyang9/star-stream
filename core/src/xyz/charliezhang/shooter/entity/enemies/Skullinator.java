@@ -20,7 +20,7 @@ public class Skullinator extends Enemy
 		
 		sprite.setSize(120, 120);
 		
-		health = maxHealth = 200;
+		health = maxHealth = 600;
 		damage = 2;
 		score = 300;
 		this.manager = manager;

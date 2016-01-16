@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 
 /**
  * Created by Charlie on 2015-12-19.
@@ -26,7 +27,6 @@ public class MenuScreen implements Screen {
     private Table table;
 
     private Texture background;
-    private Music backgroundMusic;
 
     private TextButton btnPlay;
     private TextButton btnSurvival;
@@ -46,11 +46,9 @@ public class MenuScreen implements Screen {
         stage.addActor(table);
 
         background = game.manager.get("data/ui/background.png");
-        backgroundMusic = game.manager.get("data/music/menu.mp3");
-        backgroundMusic.setLooping(true);
-        backgroundMusic.play();
 
-
+        MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.mp3", Music.class));
+        MusicPlayer.loop("menu");
 
         skin = new Skin();
 
@@ -66,10 +64,9 @@ public class MenuScreen implements Screen {
         btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                backgroundMusic.stop();
                 dispose();
-                System.out.println("START GAMESCREEN");
-                game.setScreen(new GameScreen(game, 1));
+                System.out.println("START LEVELSELECTSCREEN");
+                game.setScreen(new LevelSelectScreen(game));
                 event.stop();
             }
         });

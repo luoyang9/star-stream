@@ -12,6 +12,7 @@ public class Wave
 
     public Wave()
     {
+        enemies = new Array<WaveEnemy>();
     }
 
     public void setEnemies(Array<WaveEnemy> enemies)

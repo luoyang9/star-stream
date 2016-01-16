@@ -25,9 +25,8 @@ public class WaveManager
 
     public Wave getWave(int enemyWave)
     {
-        //if(enemyWave > waves.size) return waves.get((int)(Math.random()*5+waves.size-5));
-        if(enemyWave > waves.size) return waves.get(waves.size - 1);
-        else return waves.get(enemyWave-1);
+        if(enemyWave <= waves.size) return waves.get(enemyWave-1);
+        else return new Wave();
     }
 
     private Wave getRandomWave(int enemyWave)
@@ -49,5 +48,10 @@ public class WaveManager
             Wave wave = json.fromJson(Wave.class, waveJson[i]);
             waves.add(wave);
         }
+    }
+
+    public boolean allWavesCleared(int enemyWave)
+    {
+        return enemyWave > waves.size;
     }
 }

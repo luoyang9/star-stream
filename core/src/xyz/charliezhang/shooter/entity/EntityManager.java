@@ -13,6 +13,7 @@ import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
+import xyz.charliezhang.shooter.screen.MenuScreen;
 
 public class EntityManager 
 {
@@ -26,9 +27,18 @@ public class EntityManager
 	private Background background;
 	private HUD hud;
 
+	private int nextATT;
+	private int currATT;
+	private int nextMIS;
+	private int currMIS;
+	private int nextSHD;
+	private int currSHD;
+
 	private boolean deathProcedure;
 
 	private long score;
+
+	private boolean win;
 
 	private MainGame game;
 	
@@ -43,26 +53,36 @@ public class EntityManager
 
 		score = 0;
 		deathProcedure = false;
+
+		nextATT = (int) (Math.random()*2) + 3;
+		nextMIS = (int) (Math.random()*2) + 4;
+		nextSHD = (int) (Math.random()*2) + 2;
+		currATT = 0;
+		currMIS = 0;
+		currSHD = 0;
+
+		win = false;
 	}
 	
 	public void update(float delta)
 	{
 		hud.update(delta);
 
+		if(win)
+		{
+			if(player.getPosition().y > MainGame.HEIGHT + 500) game.setScreen(new MenuScreen(game));
+		}
+
 		//update entities
 		player.update();
+		if(player.isDead() && !deathProcedure)
+		{
+			deathProcedure = true;
+			hud.death();
+		}
 		for(Enemy e : enemies)
 		{
 			e.update();
-			if(player.isDead() && !deathProcedure)
-			{
-				deathProcedure = true;
-				hud.death();
-				Explosion explosion = new Explosion(game, 2);
-				explosion.setPosition(player.getPosition().x + player.getSprite().getWidth()/2, player.getPosition().y + player.getSprite().getHeight()/2);
-				spawnExplosion(explosion);
-				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
-			}
 		}
 		for(PlayerLaser l : lasers)
 		{
@@ -114,24 +134,33 @@ public class EntityManager
 				enemies.removeValue(e, false);
 				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
 
-				float chance = MathUtils.random()*100;
-				if(chance <= 5) {
+				currATT++;
+				currSHD++;
+				currMIS++;
+				if(currMIS >= nextMIS) {
 					MissilePowerUp a = new MissilePowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, -2);
 					spawnPowerUp(a);
+					currMIS = 0;
+					nextMIS = (int)(Math.random()*3 + 6);
 				}
-				if (chance >= 95) {
+				if (currATT >= nextATT) {
 					AttackPowerUp a = new AttackPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(2, 2);
 					spawnPowerUp(a);
+					currATT = 0;
+					nextATT = (int)(Math.random()*5 + 8);
+
 				}
-				if (chance <= 10 && chance > 5) {
+				if (currSHD >= nextSHD) {
 					ShieldPowerUp a = new ShieldPowerUp(game);
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, 2);
 					spawnPowerUp(a);
+					currSHD = 0;
+					nextSHD = (int)(Math.random()*6 + 8);
 				}
 			}
 			if(e.suicide())
@@ -251,6 +280,13 @@ public class EntityManager
 				}
 			}
 		}
+	}
+
+	public void win()
+	{
+		player.setDirection(0, 4);
+		player.setControllable(false);
+		win = true;
 	}
 
 	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}

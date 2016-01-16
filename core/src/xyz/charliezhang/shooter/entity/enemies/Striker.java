@@ -19,7 +19,7 @@ public class Striker extends Enemy
 		
 		sprite.setSize(50, 58);
 		
-		health = maxHealth = 10;
+		health = maxHealth = 25;
 		damage = 2;
 		score = 75;
 		this.manager = manager;

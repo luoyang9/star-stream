@@ -1,0 +1,27 @@
+
+playerspritesheet.png
+size: 279,74
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 93, 74
+  orig: 93, 74
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 93, 0
+  size: 93, 74
+  orig: 93, 74
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 186, 0
+  size: 93, 74
+  orig: 93, 74
+  offset: 0, 0
+  index: -1

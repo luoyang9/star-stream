@@ -11,6 +11,7 @@ import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.enemies.*;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class GameScreen implements Screen
 {
@@ -22,21 +23,24 @@ public class GameScreen implements Screen
 	private int level;
 
 	private MainGame game;
-	private Music backgroundMusic;
 
 	private int enemyWave;
 	private boolean notSpawned;
 	private Player player;
 
 	private Wave currentWave;
-	private long start;
-	private int enemyCount = 0;
+	private int enemyCount;
 	private int spawnDelay;
+	private long start;
+
+	private boolean win;
 
 	public GameScreen(MainGame game, int level)
 	{
 		this.game = game;
 		this.level = level;
+
+		win = false;
 	}
 
 	@Override
@@ -57,11 +61,11 @@ public class GameScreen implements Screen
 		wmanager = new WaveManager(level);
 
 		enemyWave = 0;
+		enemyCount = 0;
 		notSpawned = false;
 
-		backgroundMusic = game.manager.get("data/music/background.mp3", Music.class);
-		backgroundMusic.setLooping(true);
-		backgroundMusic.play();
+		MusicPlayer.loadMusic("game", game.manager.get("data/music/background.mp3", Music.class));
+		MusicPlayer.loop("game");
 	}
 
 	public void update(float delta) {
@@ -70,20 +74,23 @@ public class GameScreen implements Screen
 		background.update();
 		manager.update(delta);
 
-		if(manager.getPlayer().isDead())
-		{
-			backgroundMusic.stop();
-			//gameover screen?
-		}
 		if(manager.getEnemies().size <= 0) //wave is done
 		{
-			notSpawned = true;
 			enemyWave++;
-			currentWave = wmanager.getWave(enemyWave);
-			spawnDelay = currentWave.getDelay();
-			start = 0;
+			notSpawned = true;
+			//check player won
+			if(wmanager.allWavesCleared(enemyWave))
+			{
+				manager.win();
+				win = true;
+			}
+			else
+			{
+				currentWave = wmanager.getWave(enemyWave);
+				start = 0;
+			}
 		}
-		if(notSpawned)
+		if(notSpawned && !win)
 		{
 			spawnWave();
 		}
@@ -132,13 +139,15 @@ public class GameScreen implements Screen
 
 	private void spawnWave()
 	{
-		if(enemyCount >= currentWave.getNumEnemies())
+		if(enemyCount >= currentWave.getNumEnemies()) //all enemies spawned
 		{
 			notSpawned = false;
 			enemyCount=0;
+			return;
 		}
 
 		long elapsed = (System.nanoTime() - start) / 1000000;
+		spawnDelay = currentWave.getEnemy(enemyCount).getDelay();
 		if(elapsed >= spawnDelay)
 		{
 			//spawn next enemy
