@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -47,8 +48,12 @@ public class MenuScreen implements Screen {
 
         background = game.manager.get("data/ui/background.png");
 
-        MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.mp3", Music.class));
-        MusicPlayer.loop("menu");
+        if(!MusicPlayer.loaded("menu")) {
+            MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.mp3", Music.class));
+        }
+        if(!MusicPlayer.isPlaying("menu")) {
+            MusicPlayer.loop("menu");
+        }
 
         skin = new Skin();
 
@@ -64,9 +69,9 @@ public class MenuScreen implements Screen {
         btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                dispose();
                 System.out.println("START LEVELSELECTSCREEN");
                 game.setScreen(new LevelSelectScreen(game));
+                dispose();
                 event.stop();
             }
         });

@@ -1,5 +1,6 @@
 package xyz.charliezhang.shooter.entity;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +14,7 @@ import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 public class EntityManager 
@@ -77,7 +79,9 @@ public class EntityManager
 		player.update();
 		if(player.isDead() && !deathProcedure)
 		{
+			MusicPlayer.stop("game");
 			deathProcedure = true;
+			spawnExplosion(new Explosion(game, 2));
 			hud.death();
 		}
 		for(Enemy e : enemies)

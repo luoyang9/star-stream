@@ -22,6 +22,16 @@ public class MusicPlayer {
         musicMap.put(name, music);
     }
 
+    public static boolean loaded(String name)
+    {
+        return musicMap.containsKey(name);
+    }
+
+    public static boolean isPlaying(String name)
+    {
+        return musicMap.get(name).isPlaying();
+    }
+
     public static void play(String name)
     {
         stop(name);

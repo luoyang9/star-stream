@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -132,8 +133,13 @@ public class LoadScreen implements Screen
 
         if(game.manager.update())
         {
-            if(Gdx.input.isTouched())
-            game.setScreen(new MenuScreen(game));
+            stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    game.setScreen(new MenuScreen(game));
+                    dispose();
+                }
+            })));
         }
 
         percent = Interpolation.linear.apply(percent, game.manager.getProgress(), 0.1f);

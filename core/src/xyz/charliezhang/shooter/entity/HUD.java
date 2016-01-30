@@ -3,21 +3,16 @@ package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.screen.GameScreen;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 /**
@@ -113,7 +108,7 @@ public class HUD
         deathTable.row();
         deathTable.add(btnMenu);
         deathTable.setBackground(backDraw);
-        deathTable.setVisible(false);
+        deathTable.addAction(Actions.alpha(0));
 
         masterStack.add(table);
         masterStack.add(deathTable);
@@ -163,7 +158,7 @@ public class HUD
 
     public void death()
     {
-        deathTable.setVisible(true);
+        deathTable.addAction(Actions.delay(2, Actions.fadeIn(1)));
         Gdx.input.setInputProcessor(stage);
     }
 }
