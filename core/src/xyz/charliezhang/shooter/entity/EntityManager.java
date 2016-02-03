@@ -16,6 +16,7 @@ import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuScreen;
+import xyz.charliezhang.shooter.screen.WinScreen;
 
 public class EntityManager 
 {
@@ -39,6 +40,7 @@ public class EntityManager
 	private boolean deathProcedure;
 
 	private long score;
+	private long time;
 
 	private boolean win;
 
@@ -54,6 +56,7 @@ public class EntityManager
 		hud = new HUD(this);
 
 		score = 0;
+		time = System.nanoTime();
 		deathProcedure = false;
 
 		nextATT = (int) (Math.random()*2) + 3;
@@ -72,7 +75,10 @@ public class EntityManager
 
 		if(win)
 		{
-			if(player.getPosition().y > MainGame.HEIGHT + 500) game.setScreen(new MenuScreen(game));
+			if(player.getPosition().y > MainGame.HEIGHT + 500)
+			{
+				game.setScreen(new WinScreen(game, score, player.getLives(), (int)((System.nanoTime() - time) / 1000000000)));
+			}
 		}
 
 		//update entities

@@ -74,7 +74,7 @@ public class Player extends Entity
 		shootSound = manager.getGame().manager.get("data/sounds/playershoot.wav", Sound.class);
 		
 		//set sprite size
-		sprite.setSize(93, 74);
+		sprite.setSize(75, 50);
 		
 		//set player starting data
 		shootDelay = 100;

@@ -3,6 +3,7 @@ package xyz.charliezhang.shooter.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -49,7 +50,7 @@ public class MenuScreen implements Screen {
         background = game.manager.get("data/ui/background.png");
 
         if(!MusicPlayer.loaded("menu")) {
-            MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.mp3", Music.class));
+            MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.ogg", Music.class));
         }
         if(!MusicPlayer.isPlaying("menu")) {
             MusicPlayer.loop("menu");
@@ -57,7 +58,7 @@ public class MenuScreen implements Screen {
 
         skin = new Skin();
 
-        skin.addRegions((TextureAtlas) game.manager.get("data/ui/uiskin.atlas"));
+        skin.addRegions((TextureAtlas) game.manager.get("data/ui/futureui.atlas"));
         skin.add("default-font", game.manager.get("menu.ttf"));
 
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
@@ -70,6 +71,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("START LEVELSELECTSCREEN");
+                game.manager.get("data/sounds/button.mp3", Sound.class).play();
                 game.setScreen(new LevelSelectScreen(game));
                 dispose();
                 event.stop();
@@ -83,7 +85,7 @@ public class MenuScreen implements Screen {
         table.row();
         table.add(btnOptions).minSize(400, 150);
 
-        table.setDebug(true);
+       // table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }

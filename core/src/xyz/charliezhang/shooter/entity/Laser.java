@@ -11,11 +11,11 @@ public class Laser extends PlayerLaser
 	public Laser(MainGame game) {
 		super();
 		
-		textureAtlas = game.manager.get("data/textures/laser.atlas", TextureAtlas.class);
+		textureAtlas = game.manager.get("data/textures/laserB.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(8, 16);
-		sprite.setOrigin(4, 8);
+		sprite.setSize(6, 28);
+		sprite.setOrigin(3, 14);
 		currentRotation = 0;
 	}
 

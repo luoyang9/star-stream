@@ -1,0 +1,13 @@
+
+futureui1.png
+size: 820, 280
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+default
+  rotate: false
+  xy: 0, 0
+  size: 820, 280
+  orig: 820, 280
+  offset: 0, 0
+  index: -1

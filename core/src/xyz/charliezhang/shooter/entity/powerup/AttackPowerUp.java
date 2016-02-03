@@ -18,7 +18,7 @@ public class AttackPowerUp extends PowerUp
 		textureAtlas = game.manager.get("data/textures/attpowerup.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
-		sprite.setSize(20, 20);
+		sprite.setSize(16, 24);
 	}
 
 	@Override

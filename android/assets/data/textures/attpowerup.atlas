@@ -1,13 +1,13 @@
 
 attpowerup.png
-size: 64,64
+size: 19, 30
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 attpowerup
   rotate: false
-  xy: 2, 2
-  size: 30, 30
-  orig: 30, 30
+  xy: 0, 0
+  size: 19, 30
+  orig: 19, 30
   offset: 0, 0
   index: -1

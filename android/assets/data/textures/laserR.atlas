@@ -1,13 +1,13 @@
 
 laserR.png
-size: 16,16
+size: 13, 37
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 laserR
   rotate: false
-  xy: 2, 2
-  size: 10, 10
-  orig: 10, 10
+  xy: 0, 0
+  size: 13, 37
+  orig: 13, 37
   offset: 0, 0
   index: -1

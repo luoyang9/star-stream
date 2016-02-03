@@ -79,7 +79,7 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);
         //ui skin
-        game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
+        game.manager.load("data/ui/futureui.atlas", TextureAtlas.class);
         //powerup icons
         game.manager.load("data/textures/misicon.png", Texture.class);
         game.manager.load("data/textures/shieldicon.png", Texture.class);
@@ -91,7 +91,10 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
         game.manager.load("data/textures/shieldpowerup.atlas", TextureAtlas.class);
         //enemies
-        game.manager.load("data/textures/attackheli.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/ufoB.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/ufoG.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/ufoR.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/ufoY.atlas", TextureAtlas.class);
         game.manager.load("data/textures/icarus.atlas", TextureAtlas.class);
         game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
@@ -100,30 +103,32 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
         game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
         //lasers
-        game.manager.load("data/textures/laser.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/laserB.atlas", TextureAtlas.class);
         game.manager.load("data/textures/laserF.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserO.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/laserG.atlas", TextureAtlas.class);
         game.manager.load("data/textures/laserR.atlas", TextureAtlas.class);
         //player
         game.manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
         //music
-        game.manager.load("data/music/background.mp3", Music.class);
-        game.manager.load("data/music/menu.mp3", Music.class);
+        game.manager.load("data/music/background.ogg", Music.class);
+        game.manager.load("data/music/menu.ogg", Music.class);
+        game.manager.load("data/music/win.mp3", Music.class);
         //sound effects
         game.manager.load("data/sounds/playershoot.wav", Sound.class);
+        game.manager.load("data/sounds/button.mp3", Sound.class);
         game.manager.load("data/sounds/explosion.wav", Sound.class);
 
         //game fonts
         FreetypeFontLoader.FreeTypeFontLoaderParameter params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params.fontFileName = "data/goodtimes.ttf";
-        params.fontParameters.size = 50;
-        params.fontParameters.color = Color.BLACK;
+        params.fontParameters.size = 100;
+        params.fontParameters.color = Color.WHITE;
         game.manager.load("menu.ttf", BitmapFont.class, params);
 
         FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params2.fontFileName = "data/goodtimes.ttf";
         params2.fontParameters.size = 25;
-        params2.fontParameters.color = Color.BLACK;
+        params2.fontParameters.color = Color.WHITE;
         game.manager.load("hud.ttf", BitmapFont.class, params2);
     }
 

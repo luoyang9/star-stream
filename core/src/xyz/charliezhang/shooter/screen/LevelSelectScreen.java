@@ -2,6 +2,7 @@ package xyz.charliezhang.shooter.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -51,7 +52,7 @@ public class LevelSelectScreen implements Screen {
 
         skin = new Skin();
 
-        skin.addRegions((TextureAtlas) game.manager.get("data/ui/uiskin.atlas"));
+        skin.addRegions((TextureAtlas) game.manager.get("data/ui/futureui.atlas"));
         skin.add("default-font", game.manager.get("menu.ttf"));
 
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
@@ -61,6 +62,7 @@ public class LevelSelectScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+                game.manager.get("data/sounds/button.mp3", Sound.class).play();
                 game.setScreen(new MenuScreen(game));
                 dispose();
                 event.stop();
@@ -76,6 +78,7 @@ public class LevelSelectScreen implements Screen {
                 @Override
                 public void clicked(InputEvent event, float x, float y){
                     MusicPlayer.stop("menu");
+                    game.manager.get("data/sounds/button.mp3", Sound.class).play();
                     game.setScreen(new GameScreen(game, level+1));
                     System.out.println("START GAMESCREEN");
                     dispose();
@@ -87,7 +90,7 @@ public class LevelSelectScreen implements Screen {
             if(count % 3 == 0) lvlTable.row();
         }
 
-        table.setDebug(true);
+       // table.setDebug(true);
         table.add(btnBack);
         table.row();
         table.add(lvlTable);

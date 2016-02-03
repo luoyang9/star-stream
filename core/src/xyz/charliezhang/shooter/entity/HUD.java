@@ -25,6 +25,7 @@ public class HUD
     private Stage stage;
     private Table table;
     private Table deathTable;
+    private Table deathHUDTable;
     private HorizontalGroup iconGroup;
     private Stack stack;
     private Stack masterStack;
@@ -61,6 +62,7 @@ public class HUD
         table = new Table();
         stack = new Stack();
         deathTable = new Table();
+        deathHUDTable = new Table();
 
         masterStack = new Stack();
         masterStack.setFillParent(true);
@@ -68,7 +70,7 @@ public class HUD
 
         style = new Label.LabelStyle();
         style.font = manager.getGame().manager.get("hud.ttf");
-        style.fontColor = Color.BLACK;
+        style.fontColor = Color.WHITE;
         lblScore = new Label("" + manager.getScore(), style);
         lblLives = new Label("L: " + manager.getPlayer().getLives(), style);
         lblGameOver = new Label("Game Over", style);
@@ -76,8 +78,8 @@ public class HUD
 
         Skin skin = new Skin();
 
-        skin.addRegions((TextureAtlas) manager.getGame().manager.get("data/ui/uiskin.atlas"));
-        skin.add("default-font", manager.getGame().manager.get("menu.ttf"));
+        skin.addRegions((TextureAtlas) manager.getGame().manager.get("data/ui/futureui.atlas"));
+        skin.add("default-font", manager.getGame().manager.get("hud.ttf"));
 
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
         btnMenu = new TextButton("Back to Menu", skin);
@@ -103,11 +105,12 @@ public class HUD
         stack.add(healthBar);
         table.add(stack).height(30).fillX().left().bottom();
 
-        TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(manager.getGame().manager.get("data/ui/background.png", Texture.class)));
-        deathTable.add(lblGameOver).padBottom(30);
-        deathTable.row();
-        deathTable.add(btnMenu);
-        deathTable.setBackground(backDraw);
+        //TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(manager.getGame().manager.get("data/ui/background.png", Texture.class)));
+        deathHUDTable.add(lblGameOver).padBottom(30);
+        deathHUDTable.row();
+        deathHUDTable.add(btnMenu).width(350).height(125);
+        //deathHUDTable.setBackground(backDraw);
+        deathTable.add(deathHUDTable).expandX().height(400);
         deathTable.addAction(Actions.alpha(0));
 
         masterStack.add(table);

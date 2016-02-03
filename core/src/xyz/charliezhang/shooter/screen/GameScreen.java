@@ -64,7 +64,8 @@ public class GameScreen implements Screen
 		enemyCount = 0;
 		notSpawned = false;
 
-		MusicPlayer.loadMusic("game", game.manager.get("data/music/background.mp3", Music.class));
+		MusicPlayer.loadMusic("game", game.manager.get("data/music/background.ogg", Music.class));
+		MusicPlayer.loadMusic("win", game.manager.get("data/music/win.mp3", Music.class));
 		MusicPlayer.loop("game");
 	}
 
@@ -81,6 +82,8 @@ public class GameScreen implements Screen
 			//check player won
 			if(wmanager.allWavesCleared(enemyWave))
 			{
+				MusicPlayer.stop("game");
+				MusicPlayer.loop("win");
 				manager.win();
 				win = true;
 			}
@@ -155,7 +158,7 @@ public class GameScreen implements Screen
 			Enemy e;
 			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
 			{
-				case WaveManager.ATTACKHELI : e = new AttackHeli(manager);
+				case WaveManager.ATTACKHELI : e = new UFO(manager, (int)(Math.random()*4 + 1));
 					break;
 				case WaveManager.ICARUS : e = new Icarus(manager);
 					break;
@@ -165,7 +168,7 @@ public class GameScreen implements Screen
 					break;
 				case WaveManager.KAMIKAZE: e = new Kamikaze(manager);
 					break;
-				default: e = new AttackHeli(manager);
+				default: e = new UFO(manager, (int)(Math.random()*4 + 1));
 			}
 			e.setPosition(currentWave.getEnemy(enemyCount).getX()*MainGame.WIDTH, MainGame.HEIGHT + currentWave.getEnemy(enemyCount).getY());
 			e.setDirection(currentWave.getEnemy(enemyCount).getDx(), currentWave.getEnemy(enemyCount).getDy());
