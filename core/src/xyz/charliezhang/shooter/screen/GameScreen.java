@@ -55,7 +55,7 @@ public class GameScreen implements Screen
 		background = new Background(game);
 		background.setVector(0, -0.5f);
 
-		manager = new EntityManager(camera, game, background);
+		manager = new EntityManager(camera, game, background, level);
 		player = manager.getPlayer();
 
 		wmanager = new WaveManager(level);

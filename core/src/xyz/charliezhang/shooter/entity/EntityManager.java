@@ -29,6 +29,7 @@ public class EntityManager
 	private OrthographicCamera camera;
 	private Background background;
 	private HUD hud;
+	private int level;
 
 	private int nextATT;
 	private int currATT;
@@ -39,18 +40,19 @@ public class EntityManager
 
 	private boolean deathProcedure;
 
-	private long score;
+	private int score;
 	private long time;
 
 	private boolean win;
 
 	private MainGame game;
 	
-	public EntityManager(OrthographicCamera camera, MainGame game, Background background)
+	public EntityManager(OrthographicCamera camera, MainGame game, Background background, int level)
 	{
 		this.game = game;
 		this.camera = camera;
 		this.background = background;
+		this.level = level;
 
 		player = new Player(this, camera);
 		hud = new HUD(this);
@@ -77,7 +79,7 @@ public class EntityManager
 		{
 			if(player.getPosition().y > MainGame.HEIGHT + 500)
 			{
-				game.setScreen(new WinScreen(game, score, player.getLives(), (int)((System.nanoTime() - time) / 1000000000)));
+				game.setScreen(new WinScreen(game, score, player.getLives(), (int)((System.nanoTime() - time) / 1000000000), level));
 			}
 		}
 

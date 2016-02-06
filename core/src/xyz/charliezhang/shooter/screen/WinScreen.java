@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import xyz.charliezhang.shooter.FileHandler;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -26,7 +27,7 @@ public class WinScreen implements Screen {
     private Stage stage;
     private Table table;
 
-    private long score;
+    private int score;
     private int lives;
     private int time;
 
@@ -45,12 +46,15 @@ public class WinScreen implements Screen {
     private Skin skin;
     private TextButton btnMenu;
 
-    public WinScreen(MainGame game, long score, int lives, int time)
+    private int level;
+
+    public WinScreen(MainGame game, int score, int lives, int time, int level)
     {
         this.game = game;
         this.score = score;
         this.lives = lives;
         this.time = time;
+        this.level = level;
         System.out.println(time);
     }
 
@@ -87,7 +91,9 @@ public class WinScreen implements Screen {
         String timeMod = (1-time > 0) ? "+" : "";
         int timeScore = (1-time)*10;
         int livesScore = lives*500;
-        long total = score + timeScore + livesScore;
+        int total = score + timeScore + livesScore;
+
+        FileHandler.updateScore(level, total);
 
         lblScore = new Label("Score: ", skin);
         lblTime = new Label("Time ( " + time/60 + " min. " + time%60 + " sec.): ", skin);

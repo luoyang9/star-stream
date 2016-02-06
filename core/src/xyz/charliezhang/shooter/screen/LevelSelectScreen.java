@@ -3,17 +3,17 @@ package xyz.charliezhang.shooter.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import xyz.charliezhang.shooter.FileHandler;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -27,13 +27,14 @@ public class LevelSelectScreen implements Screen {
     private Stage stage;
     private Table table;
     private Table lvlTable;
+    private Table[] scoreTables;
 
     private Texture background;
 
     private Skin skin;
     private TextButton btnBack;
-
-    private final int NUM_LEVELS = 9;
+    private Label[] lblScore;
+    private Label.LabelStyle style;
 
     public LevelSelectScreen(MainGame game){this.game = game;}
 
@@ -47,6 +48,17 @@ public class LevelSelectScreen implements Screen {
         stage.addActor(table);
 
         lvlTable = new Table();
+
+        scoreTables = new Table[MainGame.NUM_LEVELS];
+        lblScore = new Label[MainGame.NUM_LEVELS];
+        style = new Label.LabelStyle();
+        style.font = game.manager.get("hud.ttf");
+        style.fontColor = Color.WHITE;
+        for(int i = 0; i < scoreTables.length; i++)
+        {
+            scoreTables[i] = new Table();
+            lblScore[i] = new Label("BEST: " + FileHandler.getScore(i+1), style);
+        }
 
         background = game.manager.get("data/ui/background.png");
 
@@ -70,7 +82,7 @@ public class LevelSelectScreen implements Screen {
         });
 
         int count = 0;
-        for(int i = 0; i < NUM_LEVELS; i++)
+        for(int i = 0; i < MainGame.NUM_LEVELS; i++)
         {
             final int level = i;
             TextButton btnTemp = new TextButton("" + (i + 1), skin);
@@ -85,13 +97,16 @@ public class LevelSelectScreen implements Screen {
                     event.stop();
                 }
             });
-            lvlTable.add(btnTemp).width(200).height(200).pad(20);
+            scoreTables[i].add(btnTemp).width(200).height(200);
+            scoreTables[i].row();
+            scoreTables[i].add(lblScore[i]).width(200).height(75);
+            lvlTable.add(scoreTables[i]).width(200).height(275).pad(20);
             count++;
             if(count % 3 == 0) lvlTable.row();
         }
 
        // table.setDebug(true);
-        table.add(btnBack);
+        table.add(btnBack).pad(20);
         table.row();
         table.add(lvlTable);
 

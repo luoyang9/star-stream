@@ -16,7 +16,8 @@ import xyz.charliezhang.shooter.screen.LoadScreen;
 
 public class MainGame extends Game {
 	
-	public static int WIDTH = 480, HEIGHT = 800;
+	public static final int WIDTH = 480, HEIGHT = 800;
+	public static final int NUM_LEVELS = 9;
 
 	public SpriteBatch batch;
 	public BitmapFont font;
@@ -35,6 +36,7 @@ public class MainGame extends Game {
 
 		this.setScreen(new LoadScreen(this));
 		MusicPlayer.init();
+		FileHandler.init();
 	}
 
 	@Override
