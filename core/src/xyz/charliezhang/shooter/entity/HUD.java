@@ -33,6 +33,7 @@ public class HUD
     private Image healthFill;
     private Image missileIcon;
     private Image shieldIcon;
+    private Image attIcon;
 
 
     private TextButton btnMenu;
@@ -58,6 +59,9 @@ public class HUD
         shieldIcon = new Image(manager.getGame().manager.get("data/textures/shieldicon.png", Texture.class));
         shieldIcon.setWidth(20);
         shieldIcon.setVisible(false);
+        attIcon = new Image(manager.getGame().manager.get("data/textures/atticon.png", Texture.class));
+        attIcon.setWidth(20);
+        attIcon.setVisible(false);
 
         table = new Table();
         stack = new Stack();
@@ -143,6 +147,15 @@ public class HUD
         else
         {
             shieldIcon.setVisible(false);
+        }
+
+        if(manager.getPlayer().isSuperAttOn())
+        {
+            attIcon.setVisible(true);
+        }
+        else
+        {
+            attIcon.setVisible(false);
         }
         stage.act(delta);
     }

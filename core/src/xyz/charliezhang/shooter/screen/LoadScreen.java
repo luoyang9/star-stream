@@ -83,6 +83,7 @@ public class LoadScreen implements Screen
         //powerup icons
         game.manager.load("data/textures/misicon.png", Texture.class);
         game.manager.load("data/textures/shieldicon.png", Texture.class);
+        game.manager.load("data/textures/atticon.png", Texture.class);
         //powerup effects
         game.manager.load("data/textures/shield.png", Texture.class);
         game.manager.load("data/textures/missile.atlas", TextureAtlas.class);
@@ -95,7 +96,9 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/ufoG.atlas", TextureAtlas.class);
         game.manager.load("data/textures/ufoR.atlas", TextureAtlas.class);
         game.manager.load("data/textures/ufoY.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/icarus.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/icarusB.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/icarusG.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/icarusR.atlas", TextureAtlas.class);
         game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
         game.manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);

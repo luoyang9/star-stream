@@ -160,7 +160,7 @@ public class GameScreen implements Screen
 			{
 				case WaveManager.ATTACKHELI : e = new UFO(manager, (int)(Math.random()*4 + 1));
 					break;
-				case WaveManager.ICARUS : e = new Icarus(manager);
+				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*3 + 1));
 					break;
 				case WaveManager.SKULLINATOR: e = new Skullinator(manager);
 					break;

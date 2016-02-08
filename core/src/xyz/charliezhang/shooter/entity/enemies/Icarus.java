@@ -11,13 +11,28 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 public class Icarus extends Enemy
 {
 	private boolean intro;
-	public Icarus(EntityManager manager) {
+	public Icarus(EntityManager manager, int color) {
 		super();
-		
-		textureAtlas = manager.getGame().manager.get("data/textures/icarus.atlas", TextureAtlas.class);
+
+		switch(color)
+		{
+			case 1:
+				textureAtlas = manager.getGame().manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
+				break;
+			case 2:
+				textureAtlas = manager.getGame().manager.get("data/textures/icarusG.atlas", TextureAtlas.class);
+				break;
+			case 3:
+				textureAtlas = manager.getGame().manager.get("data/textures/icarusR.atlas", TextureAtlas.class);
+				break;
+			case 4:
+				textureAtlas = manager.getGame().manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
+				break;
+			default:
+		}
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(100, 100);
+		sprite.setSize(93, 84);
 		
 		health = maxHealth = 60;
 		damage = 2;

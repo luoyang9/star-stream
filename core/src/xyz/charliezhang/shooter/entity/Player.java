@@ -367,6 +367,7 @@ public class Player extends Entity
 	public boolean isDead() {return dead;} //is dead?
 	public Timer.Task getMissileTask() {return missileTask;}
 	public boolean isShieldOn() {return shieldOn;}
+	public boolean isSuperAttOn() {return superAttOn;}
 	public void setShield(boolean b) {shieldOn = b;}
 
 	@Override
