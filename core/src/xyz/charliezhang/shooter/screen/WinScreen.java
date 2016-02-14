@@ -93,7 +93,9 @@ public class WinScreen implements Screen {
         int livesScore = lives*500;
         int total = score + timeScore + livesScore;
 
-        FileHandler.updateScore(level, total);
+        if(total > FileHandler.getScore(level)) {
+            FileHandler.updateScore(level, total);
+        }
 
         lblScore = new Label("Score: ", skin);
         lblTime = new Label("Time ( " + time/60 + " min. " + time%60 + " sec.): ", skin);

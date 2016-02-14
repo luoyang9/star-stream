@@ -13,7 +13,7 @@ public class Explosion extends Entity
     public Explosion(MainGame game, int type)
     {
         switch(type){
-            case 1:textureAtlas = game.manager.get("data/textures/explosion.atlas", TextureAtlas.class);
+            case 1:textureAtlas = game.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
                 sprite.setSize(15, 15);
                 break;
             case 2:textureAtlas = game.manager.get("data/textures/bigExplosion.atlas", TextureAtlas.class);

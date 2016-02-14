@@ -78,6 +78,7 @@ public class LoadScreen implements Screen
         //health
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);
+        game.manager.load("data/textures/livesIcon.png", Texture.class);
         //ui skin
         game.manager.load("data/ui/futureui.atlas", TextureAtlas.class);
         //powerup icons
@@ -103,7 +104,7 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
         game.manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);
         //explosions
-        game.manager.load("data/textures/explosion.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/playerExplosion.atlas", TextureAtlas.class);
         game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
         //lasers
         game.manager.load("data/textures/laserB.atlas", TextureAtlas.class);
@@ -117,7 +118,9 @@ public class LoadScreen implements Screen
         game.manager.load("data/music/menu.ogg", Music.class);
         game.manager.load("data/music/win.mp3", Music.class);
         //sound effects
-        game.manager.load("data/sounds/playershoot.wav", Sound.class);
+        game.manager.load("data/sounds/playershoot.ogg", Sound.class);
+        game.manager.load("data/sounds/shieldDown.ogg", Sound.class);
+        game.manager.load("data/sounds/shieldUp.ogg", Sound.class);
         game.manager.load("data/sounds/button.mp3", Sound.class);
         game.manager.load("data/sounds/explosion.wav", Sound.class);
 

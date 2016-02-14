@@ -33,6 +33,8 @@ public class Player extends Entity
 
 	//player assets
 	private Sound shootSound;
+	private Sound shieldUpSound;
+	private Sound shieldDownSound;
 
 	//player data
 	private int health, maxHealth;
@@ -71,7 +73,9 @@ public class Player extends Entity
 		textureAtlas = manager.getGame().manager.get("data/textures/playerspritesheet.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
-		shootSound = manager.getGame().manager.get("data/sounds/playershoot.wav", Sound.class);
+		shootSound = manager.getGame().manager.get("data/sounds/playershoot.ogg", Sound.class);
+		shieldUpSound = manager.getGame().manager.get("data/sounds/shieldUp.ogg", Sound.class);
+		shieldDownSound = manager.getGame().manager.get("data/sounds/shieldDown.ogg", Sound.class);
 		
 		//set sprite size
 		sprite.setSize(75, 50);
@@ -347,6 +351,7 @@ public class Player extends Entity
 	}
 
 	public void activateShieldPowerUp(ShieldPowerUp powerUp) {
+		shieldUpSound.play();
 		shieldOn = true;
 	}
 
@@ -359,6 +364,7 @@ public class Player extends Entity
 	public int getHealth() { return health; } //get health
 	public int getMaxHealth() { return maxHealth; } //get max health
 	public int getDamage() {return damage;} //get damage
+	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
 	public int getAttLevel() {return attLevel;}
 	public void setAttLevel(int l) {attLevel = 1;}
@@ -368,7 +374,17 @@ public class Player extends Entity
 	public Timer.Task getMissileTask() {return missileTask;}
 	public boolean isShieldOn() {return shieldOn;}
 	public boolean isSuperAttOn() {return superAttOn;}
-	public void setShield(boolean b) {shieldOn = b;}
+	public void setShield(boolean b) {
+		shieldOn = b;
+		if(b)
+		{
+			shieldUpSound.play();
+		}
+		else
+		{
+			shieldDownSound.play();
+		}
+	}
 
 	@Override
 	public Rectangle getBounds()

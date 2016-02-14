@@ -26,7 +26,8 @@ public class HUD
     private Table table;
     private Table deathTable;
     private Table deathHUDTable;
-    private HorizontalGroup iconGroup;
+    private HorizontalGroup iconGroup;;
+    private HorizontalGroup livesGroup;
     private Stack stack;
     private Stack masterStack;
     private Image healthBar;
@@ -34,13 +35,13 @@ public class HUD
     private Image missileIcon;
     private Image shieldIcon;
     private Image attIcon;
+    private Image[] livesIcons;
 
 
     private TextButton btnMenu;
     private Label.LabelStyle style;
     private Label lblGameOver;
     private Label lblScore;
-    private Label lblLives;
 
 
     public HUD(final EntityManager manager)
@@ -51,6 +52,14 @@ public class HUD
 
         healthBar = new Image(manager.getGame().manager.get("data/textures/health.png", Texture.class));
         healthFill = new Image(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class));
+
+        livesGroup = new HorizontalGroup();
+        livesIcons = new Image[manager.getPlayer().getMaxLives()];
+        for(int i = 0; i < livesIcons.length; i++)
+        {
+            livesIcons[i] = new Image(manager.getGame().manager.get("data/textures/livesIcon.png", Texture.class));
+            livesGroup.addActor(livesIcons[i]);
+        }
 
         iconGroup = new HorizontalGroup();
         missileIcon = new Image(manager.getGame().manager.get("data/textures/misicon.png", Texture.class));
@@ -76,7 +85,6 @@ public class HUD
         style.font = manager.getGame().manager.get("hud.ttf");
         style.fontColor = Color.WHITE;
         lblScore = new Label("" + manager.getScore(), style);
-        lblLives = new Label("L: " + manager.getPlayer().getLives(), style);
         lblGameOver = new Label("Game Over", style);
 
 
@@ -99,10 +107,11 @@ public class HUD
 
         table.top().left();
         table.add(lblScore).padLeft(5).expandX().left();
-        table.add(lblLives).width(50).padRight(5).right();
+        table.add(livesGroup).padRight(5).right();
         table.row();
         iconGroup.addActor(missileIcon);
         iconGroup.addActor(shieldIcon);
+        iconGroup.addActor(attIcon);
         table.add(iconGroup).fillX().expandY().left().bottom();
         table.row();
         stack.add(healthFill);
@@ -127,7 +136,10 @@ public class HUD
     public void update(float delta)
     {
         lblScore.setText("" + manager.getScore());
-        lblLives.setText("L: " + manager.getPlayer().getLives());
+        if(manager.getPlayer().getLives() != livesGroup.getChildren().size)
+        {
+            livesGroup.removeActor(livesIcons[livesGroup.getChildren().size-1]);
+        }
 
         healthFill.setWidth((manager.getPlayer().getHealth() + 0.0f)/manager.getPlayer().getMaxHealth()*healthBar.getWidth());
 
