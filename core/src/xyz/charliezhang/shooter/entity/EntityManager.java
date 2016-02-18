@@ -2,10 +2,10 @@ package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
@@ -26,9 +26,10 @@ public class EntityManager
 	private final Array<PowerUp> powerups = new Array<PowerUp>();
 	private final Array<Explosion> explosions = new Array<Explosion>();
 	private Player player;
-	private OrthographicCamera camera;
+
 	private Background background;
 	private HUD hud;
+	private Viewport viewport;
 	private int level;
 
 	private int nextATT;
@@ -47,14 +48,14 @@ public class EntityManager
 
 	private MainGame game;
 	
-	public EntityManager(OrthographicCamera camera, MainGame game, Background background, int level)
+	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
 	{
 		this.game = game;
-		this.camera = camera;
 		this.background = background;
+		this.viewport = viewport;
 		this.level = level;
 
-		player = new Player(this, camera);
+		player = new Player(this);
 		hud = new HUD(this);
 
 		score = 0;
@@ -70,6 +71,11 @@ public class EntityManager
 
 		win = false;
 	}
+
+	public void updateViewport(Viewport viewport)
+	{
+		this.viewport = viewport;
+	}
 	
 	public void update(float delta)
 	{
@@ -77,7 +83,7 @@ public class EntityManager
 
 		if(win)
 		{
-			if(player.getPosition().y > MainGame.HEIGHT + 500)
+			if(player.getPosition().y > viewport.getWorldHeight() + 500)
 			{
 				game.setScreen(new WinScreen(game, score, player.getLives(), (int)((System.nanoTime() - time) / 1000000000), level));
 			}
@@ -326,5 +332,6 @@ public class EntityManager
 	public MainGame getGame() {return game;}
 	public Background getBackground() {return background;}
 	public long getScore() {return score;}
+	public Viewport getViewport() {return viewport;}
 }
 

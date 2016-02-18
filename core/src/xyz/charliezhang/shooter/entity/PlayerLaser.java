@@ -10,8 +10,11 @@ import xyz.charliezhang.shooter.MainGame;
  */
 public class PlayerLaser extends Entity{
 
-    public PlayerLaser() {
+    private EntityManager manager;
+
+    public PlayerLaser(EntityManager manager) {
         super();
+        this.manager = manager;
     }
 
     @Override
@@ -28,6 +31,6 @@ public class PlayerLaser extends Entity{
 
     public boolean checkEnd()
     {
-        return sprite.getY() >= MainGame.HEIGHT;
+        return sprite.getY() >= manager.getViewport().getWorldHeight();
     }
 }

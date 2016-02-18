@@ -10,9 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import xyz.charliezhang.shooter.MainGame;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 /**
@@ -39,7 +37,7 @@ public class HUD
 
 
     private TextButton btnMenu;
-    private Label.LabelStyle style;
+    private Skin skin;
     private Label lblGameOver;
     private Label lblScore;
 
@@ -48,7 +46,13 @@ public class HUD
     {
         this.manager = manager;
 
-        stage = new Stage(new StretchViewport(MainGame.WIDTH, MainGame.HEIGHT));
+        stage = new Stage(new ScreenViewport());
+
+        skin = new Skin();
+        skin.addRegions(manager.getGame().manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+        skin.add("default-font", manager.getGame().manager.get("hud.ttf"));
+        skin.add("small-font", manager.getGame().manager.get("levelSelect.ttf"));
+        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         healthBar = new Image(manager.getGame().manager.get("data/textures/health.png", Texture.class));
         healthFill = new Image(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class));
@@ -81,19 +85,10 @@ public class HUD
         masterStack.setFillParent(true);
         stage.addActor(masterStack);
 
-        style = new Label.LabelStyle();
-        style.font = manager.getGame().manager.get("hud.ttf");
-        style.fontColor = Color.WHITE;
-        lblScore = new Label("" + manager.getScore(), style);
-        lblGameOver = new Label("Game Over", style);
+        lblScore = new Label("" + manager.getScore(), skin);
+        lblGameOver = new Label("Game Over", skin);
 
 
-        Skin skin = new Skin();
-
-        skin.addRegions((TextureAtlas) manager.getGame().manager.get("data/ui/futureui.atlas"));
-        skin.add("default-font", manager.getGame().manager.get("hud.ttf"));
-
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
         btnMenu = new TextButton("Back to Menu", skin);
         btnMenu.addListener(new ClickListener() {
             @Override
@@ -116,7 +111,7 @@ public class HUD
         table.row();
         stack.add(healthFill);
         stack.add(healthBar);
-        table.add(stack).height(30).fillX().left().bottom();
+        table.add(stack).height(30).expandX().left().bottom();
 
         //TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(manager.getGame().manager.get("data/ui/background.png", Texture.class)));
         deathHUDTable.add(lblGameOver).padBottom(30);

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Screen;
 import xyz.charliezhang.shooter.MainGame;
@@ -46,16 +46,15 @@ public class GameScreen implements Screen
 	@Override
 	public void show() {
 		camera = new OrthographicCamera(MainGame.WIDTH, MainGame.HEIGHT);
-		viewport = new StretchViewport(MainGame.WIDTH, MainGame.HEIGHT, camera);
-		viewport.apply();
-		//viewport.update(480,  800);
+		viewport = new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT, camera);
+		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		camera.update();
 
-		background = new Background(game);
-		background.setVector(0, -0.5f);
+		background = new Background(game, viewport);
+		background.setVector(0, -5f);
 
-		manager = new EntityManager(camera, game, background, level);
+		manager = new EntityManager(viewport, game, background, level);
 		player = manager.getPlayer();
 
 		wmanager = new WaveManager(level);
@@ -116,8 +115,9 @@ public class GameScreen implements Screen
 	@Override
 	public void resize(int width, int height)
 	{
-		viewport.update(width, height);
-		camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+		viewport.update(width, height, true);
+		background.setSize(viewport.getWorldWidth());
+		manager.updateViewport(viewport);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class GameScreen implements Screen
 					break;
 				default: e = new UFO(manager, (int)(Math.random()*4 + 1));
 			}
-			e.setPosition(currentWave.getEnemy(enemyCount).getX()*MainGame.WIDTH, MainGame.HEIGHT + currentWave.getEnemy(enemyCount).getY());
+			e.setPosition(currentWave.getEnemy(enemyCount).getX()*viewport.getWorldWidth(), viewport.getWorldHeight() + currentWave.getEnemy(enemyCount).getY());
 			e.setDirection(currentWave.getEnemy(enemyCount).getDx(), currentWave.getEnemy(enemyCount).getDy());
 			e.setStop(currentWave.getEnemy(enemyCount).getStop());
 			manager.spawnEnemy(e);

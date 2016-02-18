@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Icarus extends Enemy
@@ -46,7 +45,7 @@ public class Icarus extends Enemy
 	public void update() {
 		super.update();
 
-		if(intro && sprite.getY() <= MainGame.HEIGHT - stop)
+		if(intro && sprite.getY() <= manager.getViewport().getWorldHeight() - stop)
 		{
 			setDirection(2, -2);
 			intro = false;
@@ -54,15 +53,15 @@ public class Icarus extends Enemy
 
 		if(!intro)
 		{
-			if (sprite.getY() < MainGame.HEIGHT - stop) direction.y += 0.04f;
-			if (sprite.getY() >= MainGame.HEIGHT - stop) direction.y -= 0.04f;
-			if (sprite.getX() >= MainGame.WIDTH / 2) direction.x -= 0.01f;
-			if (sprite.getX() < MainGame.WIDTH / 2) direction.x += 0.01f;
+			if (sprite.getY() < manager.getViewport().getWorldHeight() - stop) direction.y += 0.04f;
+			if (sprite.getY() >= manager.getViewport().getWorldHeight() - stop) direction.y -= 0.04f;
+			if (sprite.getX() >= manager.getViewport().getWorldWidth() / 2) direction.x -= 0.01f;
+			if (sprite.getX() < manager.getViewport().getWorldWidth() / 2) direction.x += 0.01f;
 		}
 		
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
-		if(sprite.getY() < MainGame.HEIGHT)
+		if(sprite.getY() < manager.getViewport().getWorldHeight())
 		{
 			if(System.currentTimeMillis() - lastFire >= 2500)
 			{

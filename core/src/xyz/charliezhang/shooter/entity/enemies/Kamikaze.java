@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Kamikaze extends Enemy
@@ -27,7 +26,7 @@ public class Kamikaze extends Enemy
     public void update() {
         super.update();
 
-        if(sprite.getY() <= MainGame.HEIGHT - stop)
+        if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop)
         {
             if(direction.x <= 0) direction.x += 0.05;
             else direction.x -= 0.05;

@@ -1,8 +1,10 @@
 package xyz.charliezhang.shooter.background;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.MainGame;
 
 public class Background 
@@ -13,14 +15,19 @@ public class Background
 	private float dx;
 	private float dy;
 	
-	public Background(MainGame game)
+	public Background(MainGame game, Viewport viewport)
 	{
 		image = game.manager.get("data/textures/background.png", Texture.class);
 		sprite1 = new Sprite(image);
 		sprite2 = new Sprite(image);
-		sprite1.setSize(MainGame.WIDTH + 100, (MainGame.WIDTH+100)/(float)image.getWidth()*image.getHeight());
-		sprite2.setSize(MainGame.WIDTH + 100, (MainGame.WIDTH+100)/(float)image.getWidth()*image.getHeight());
 		sprite1.setPosition(-50, 0);
+		sprite2.setPosition(-50, sprite1.getHeight());
+	}
+
+	public void setSize(float worldWidth)
+	{
+		sprite1.setSize(worldWidth + 100, (worldWidth + 100)/(float)image.getWidth()*image.getHeight());
+		sprite2.setSize(worldWidth + 100, (worldWidth + 100)/(float)image.getWidth()*image.getHeight());
 		sprite2.setPosition(-50, sprite1.getHeight());
 	}
 	

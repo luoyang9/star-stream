@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Skullinator extends Enemy
@@ -32,7 +31,7 @@ public class Skullinator extends Enemy
 	public void update() {
 		super.update();
 
-		if(sprite.getY() <= MainGame.HEIGHT - stop && !entered)
+		if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop && !entered)
 		{
 			direction.set(2, 0);
 			entered = true;
@@ -44,14 +43,14 @@ public class Skullinator extends Enemy
 			{
 				direction.set(2, 0);
 			}
-			else if(sprite.getX() >= MainGame.WIDTH - sprite.getWidth())
+			else if(sprite.getX() >= manager.getViewport().getWorldWidth() - sprite.getWidth())
 			{
 				direction.set(-2, 0);
 			}
 		}
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
-		if(sprite.getY() < MainGame.HEIGHT)
+		if(sprite.getY() < manager.getViewport().getWorldHeight())
 		{
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{

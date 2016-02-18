@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
@@ -41,11 +41,18 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
         stage = new Stage();
-        stage.setViewport(new ScreenViewport());
+        stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
+
+        skin = new Skin();
+        skin.addRegions(game.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+        skin.add("default-font", game.manager.get("menu.ttf"));
+        skin.add("small-font", game.manager.get("levelSelect.ttf"));
+        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         background = game.manager.get("data/ui/background.png");
 
@@ -55,13 +62,6 @@ public class MenuScreen implements Screen {
         if(!MusicPlayer.isPlaying("menu")) {
             MusicPlayer.loop("menu");
         }
-
-        skin = new Skin();
-
-        skin.addRegions((TextureAtlas) game.manager.get("data/ui/futureui.atlas"));
-        skin.add("default-font", game.manager.get("menu.ttf"));
-
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         btnPlay = new TextButton("Play", skin);
         btnSurvival = new TextButton("Survival", skin);
@@ -79,13 +79,13 @@ public class MenuScreen implements Screen {
         });
 
 
-        table.add(btnPlay).padBottom(20).minSize(400, 150);
+        table.add(btnPlay).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
         table.row();
-        table.add(btnSurvival).padBottom(20).minSize(400, 150);
+        table.add(btnSurvival).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
         table.row();
-        table.add(btnOptions).minSize(400, 150);
+        table.add(btnOptions).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
 
-       // table.setDebug(true);
+        table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }

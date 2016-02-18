@@ -55,7 +55,6 @@ public class WinScreen implements Screen {
         this.lives = lives;
         this.time = time;
         this.level = level;
-        System.out.println(time);
     }
 
     @Override

@@ -8,10 +8,10 @@ import xyz.charliezhang.shooter.MainGame;
 public class Laser extends PlayerLaser
 {
 	private float currentRotation;
-	public Laser(MainGame game) {
-		super();
+	public Laser(EntityManager manager) {
+		super(manager);
 		
-		textureAtlas = game.manager.get("data/textures/laserB.atlas", TextureAtlas.class);
+		textureAtlas = manager.getGame().manager.get("data/textures/laserB.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(6, 28);

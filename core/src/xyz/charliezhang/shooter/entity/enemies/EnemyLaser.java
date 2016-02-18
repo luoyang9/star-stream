@@ -23,8 +23,8 @@ public class EnemyLaser extends Entity
 				sprite.setOrigin(3, 9);
 				break;
 		case 2: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserF.atlas", TextureAtlas.class);
-				sprite.setSize(10, 34);
-				sprite.setOrigin(5, 17);
+				sprite.setSize(7, 38);
+				sprite.setOrigin(3.5f, 19);
 				break;
 		case 3: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserR.atlas", TextureAtlas.class);
 				sprite.setSize(6, 18);

@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import xyz.charliezhang.shooter.MainGame;
@@ -52,7 +54,7 @@ public class LoadScreen implements Screen
         game.manager.finishLoading();
 
         stage = new Stage();
-        stage.setViewport(new ScreenViewport());
+        stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         TextureAtlas loadingAtlas = game.manager.get("data/ui/loading.pack", TextureAtlas.class);
 
         logo = new Image(loadingAtlas.findRegion("libgdx-logo"));
@@ -75,12 +77,12 @@ public class LoadScreen implements Screen
         game.manager.load("data/textures/background.png", Texture.class);
         //menu background
         game.manager.load("data/ui/background.png", Texture.class);
+        //ui
+        game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
         //health
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);
         game.manager.load("data/textures/livesIcon.png", Texture.class);
-        //ui skin
-        game.manager.load("data/ui/futureui.atlas", TextureAtlas.class);
         //powerup icons
         game.manager.load("data/textures/misicon.png", Texture.class);
         game.manager.load("data/textures/shieldicon.png", Texture.class);
@@ -127,15 +129,21 @@ public class LoadScreen implements Screen
         //game fonts
         FreetypeFontLoader.FreeTypeFontLoaderParameter params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params.fontFileName = "data/goodtimes.ttf";
-        params.fontParameters.size = 100;
+        params.fontParameters.size = 50;
         params.fontParameters.color = Color.WHITE;
         game.manager.load("menu.ttf", BitmapFont.class, params);
 
         FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params2.fontFileName = "data/goodtimes.ttf";
-        params2.fontParameters.size = 25;
+        params2.fontParameters.size = 30;
         params2.fontParameters.color = Color.WHITE;
         game.manager.load("hud.ttf", BitmapFont.class, params2);
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter params3 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        params3.fontFileName = "data/goodtimes.ttf";
+        params3.fontParameters.size = 20;
+        params3.fontParameters.color = Color.WHITE;
+        game.manager.load("levelSelect.ttf", BitmapFont.class, params3);
     }
 
     @Override

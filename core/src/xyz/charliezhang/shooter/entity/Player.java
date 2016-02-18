@@ -11,12 +11,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.sun.org.apache.regexp.internal.RE;
-import org.w3c.dom.css.Rect;
-import xyz.charliezhang.shooter.MainGame;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
@@ -64,10 +61,10 @@ public class Player extends Entity
 	private final OrthographicCamera camera;
 	
 	//TODO: different planes with different shooting patterns
-	public Player(EntityManager manager, OrthographicCamera camera) {
+	public Player(EntityManager manager) {
 		//manager
 		this.manager = manager;
-		this.camera = camera;
+		this.camera = (OrthographicCamera)manager.getViewport().getCamera();
 		
 		//set texture atlas and animation to player
 		textureAtlas = manager.getGame().manager.get("data/textures/playerspritesheet.atlas", TextureAtlas.class);
@@ -89,7 +86,7 @@ public class Player extends Entity
 		justControllable = false;
 		justSpawned = true;
 		setDirection(0, 4);
-		setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
+		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
 
@@ -105,8 +102,8 @@ public class Player extends Entity
 		missileTask = new Timer.Task() {
 			@Override
 			public void run() {
-				Missile m1 = new Missile(manager.getGame());
-				Missile m2 = new Missile(manager.getGame());
+				Missile m1 = new Missile(manager);
+				Missile m2 = new Missile(manager);
 				m1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
 				m2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
 				manager.spawnLaser(m1);
@@ -171,7 +168,7 @@ public class Player extends Entity
 			}
 			else //moar lives
 			{
-				setPosition(MainGame.WIDTH/2 - sprite.getWidth() / 2, -500);
+				setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
 				setDirection(0, 4);
 				health = maxHealth;
 				attLevel = 1;
@@ -222,9 +219,9 @@ public class Player extends Entity
 		}
 
 		//limit movements to screen
-		if(sprite.getX() + xdir >= MainGame.WIDTH-25 || sprite.getX() + xdir <= 0)
+		if(sprite.getX() + xdir >= manager.getViewport().getWorldWidth()-sprite.getWidth() || sprite.getX() + xdir <= 0)
 			xdir = 0;
-		else if(sprite.getY() + ydir > MainGame.HEIGHT-50 || sprite.getY() + ydir < 0)
+		else if(sprite.getY() + ydir > manager.getViewport().getWorldHeight()-sprite.getHeight() || sprite.getY() + ydir < 0)
 			ydir = 0;
 
 		//set direction
@@ -238,13 +235,13 @@ public class Player extends Entity
 			if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
 			{
 				shootSound.play(); //play pew
-				Laser l1 = new Laser(manager.getGame());
-				Laser l2 = new Laser(manager.getGame());
-				Laser l3 = new Laser(manager.getGame());
-				Laser l4 = new Laser(manager.getGame());
-				Laser l5 = new Laser(manager.getGame());
-				Laser l6 = new Laser(manager.getGame());
-				Laser l7 = new Laser(manager.getGame());
+				Laser l1 = new Laser(manager);
+				Laser l2 = new Laser(manager);
+				Laser l3 = new Laser(manager);
+				Laser l4 = new Laser(manager);
+				Laser l5 = new Laser(manager);
+				Laser l6 = new Laser(manager);
+				Laser l7 = new Laser(manager);
 
 
 				if(attLevel == 2) {

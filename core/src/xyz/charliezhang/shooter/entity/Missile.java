@@ -8,13 +8,13 @@ public class Missile extends PlayerLaser
 {
     private float accel;
 
-    public Missile(MainGame game) {
-        super();
+    public Missile(EntityManager manager) {
+        super(manager);
 
-        textureAtlas = game.manager.get("data/textures/missile.atlas", TextureAtlas.class);
+        textureAtlas = manager.getGame().manager.get("data/textures/missile.atlas", TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
-        sprite.setSize(12, 24);
+        sprite.setSize(9, 38);
 
         accel = 0.5f;
         direction.x = 0;
