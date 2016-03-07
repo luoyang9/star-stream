@@ -1,7 +1,7 @@
 # Shooter
 Shooter game made with LibGDX. Uses AssetManager, Scene2D ui, and other libGDX stuff. 
 
-ALL ASSETS ARE TEMPORARY, THEY WILL BE REPLACED. PLEASE DON'T SUE ME, I'M JUST TERRIBLE AT PIXEL ART.
+Most assets are from <a href="http://kenney.nl/assets">Kenney Game Assets</a>
 
 Screenshot:
 
