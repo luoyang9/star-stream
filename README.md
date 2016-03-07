@@ -7,6 +7,5 @@ Screenshot:
 
 <img src="https://github.com/luoyang9/Shooter/blob/master/screenshot.png" height="500px" />
 
-If you want to try it out (may not be the latest version): https://drive.google.com/file/d/0B0qN6w1Cq-ssMVlCcnB6NFVobEE/view?usp=sharing
 
 
