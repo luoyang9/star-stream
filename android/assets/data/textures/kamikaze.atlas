@@ -1,20 +1,13 @@
 
 kamikaze.png
-size: 68, 32
+size: 97, 84
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 34, 32
-  orig: 34, 32
-  offset: 0, 0
-  index: -1
-0002
-  rotate: false
-  xy: 34, 0
-  size: 34, 32
-  orig: 34, 32
+  size: 97, 84
+  orig: 97, 84
   offset: 0, 0
   index: -1

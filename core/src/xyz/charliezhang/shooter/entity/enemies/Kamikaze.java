@@ -14,7 +14,7 @@ public class Kamikaze extends Enemy
         textureAtlas = manager.getGame().manager.get("data/textures/kamikaze.atlas", TextureAtlas.class);
         animation = new Animation(1/20f, textureAtlas.getRegions());
 
-        sprite.setSize(50, 58);
+        sprite.setSize(50, 45);
 
         health = maxHealth = 10;
         damage = 1;

@@ -70,8 +70,9 @@ public class WinScreen implements Screen {
 
         skin = new Skin();
 
-        skin.addRegions((TextureAtlas) game.manager.get("data/ui/futureui.atlas"));
+        skin.addRegions((TextureAtlas) game.manager.get("data/ui/uiskin.atlas"));
         skin.add("default-font", game.manager.get("hud.ttf"));
+        skin.add("small-font", game.manager.get("levelSelect.ttf"));
 
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 

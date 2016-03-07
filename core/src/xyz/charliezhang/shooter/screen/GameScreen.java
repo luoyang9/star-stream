@@ -52,7 +52,7 @@ public class GameScreen implements Screen
 		camera.update();
 
 		background = new Background(game, viewport);
-		background.setVector(0, -5f);
+		background.setVector(0, -2f);
 
 		manager = new EntityManager(viewport, game, background, level);
 		player = manager.getPlayer();
@@ -79,7 +79,7 @@ public class GameScreen implements Screen
 			enemyWave++;
 			notSpawned = true;
 			//check player won
-			if(wmanager.allWavesCleared(enemyWave))
+			if(wmanager.allWavesCleared(enemyWave) && !win)
 			{
 				MusicPlayer.stop("game");
 				MusicPlayer.loop("win");
