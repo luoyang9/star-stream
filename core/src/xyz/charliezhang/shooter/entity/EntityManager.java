@@ -181,11 +181,6 @@ public class EntityManager
 					nextSHD = (int)(Math.random()*6 + 8);
 				}
 			}
-			if(e.suicide())
-			{
-				e.dispose();
-				enemies.removeValue(e, false);
-			}
 		}
 		
 		//check collisions

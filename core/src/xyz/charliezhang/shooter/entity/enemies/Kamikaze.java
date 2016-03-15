@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Kamikaze extends Enemy
@@ -37,7 +38,9 @@ public class Kamikaze extends Enemy
 
         if(sprite.getY() < -sprite.getHeight())
         {
-            suicide = true;
+            float newX = MathUtils.random()*manager.getViewport().getWorldWidth();
+            sprite.setPosition(newX, manager.getViewport().getWorldHeight() + 200);
+            direction.x = (-newX+manager.getViewport().getWorldWidth()/2)*0.001f;
         }
     }
 

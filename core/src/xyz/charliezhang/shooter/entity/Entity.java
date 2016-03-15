@@ -17,7 +17,7 @@ public abstract class Entity
 	protected Sprite sprite;
 	protected Vector2 direction;
 	
-	public Entity()
+	protected Entity()
 	{
 		sprite = new Sprite();	
 		direction = new Vector2();
