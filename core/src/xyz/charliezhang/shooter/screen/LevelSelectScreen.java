@@ -100,10 +100,11 @@ public class LevelSelectScreen implements Screen {
             if(count % 3 == 0) lvlTable.row();
         }
 
-        table.setDebug(true);
         table.add(btnBack).width(450).height(200);
         table.row();
         table.add(lvlTable);
+
+        //table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }

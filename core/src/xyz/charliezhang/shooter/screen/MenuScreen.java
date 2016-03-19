@@ -85,7 +85,7 @@ public class MenuScreen implements Screen {
         table.row();
         table.add(btnOptions).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
 
-        table.setDebug(true);
+        //table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }

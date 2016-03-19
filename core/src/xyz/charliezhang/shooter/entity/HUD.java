@@ -113,19 +113,17 @@ public class HUD
         stack.add(healthBar);
         table.add(stack).height(30).expandX().left().bottom();
 
-        //TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(Assets.manager.get("data/ui/background.png", Texture.class)));
         deathHUDTable.add(lblGameOver).padBottom(30);
         deathHUDTable.row();
         deathHUDTable.add(btnMenu).width(350).height(125);
-        //deathHUDTable.setBackground(backDraw);
         deathTable.add(deathHUDTable).expandX().height(400);
         deathTable.addAction(Actions.alpha(0));
 
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        table.debug();
-        deathTable.debug();
+        //table.debug();
+        //deathTable.debug();
     }
 
     public void update(float delta)
