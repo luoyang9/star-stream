@@ -10,7 +10,7 @@ public abstract class Enemy extends Entity
 	protected long lastFire;
 	protected boolean dead;
 	protected int stop;
-	
+
 	//manager
 	protected EntityManager manager;
 
@@ -27,8 +27,6 @@ public abstract class Enemy extends Entity
 	public void setStop(int stop) { this.stop = stop;}
 	
 	public void modifyHealth(int h) {health += h;}
-	
-	public int getHealth() {return health;}
 
 	public int getDamage() {return damage;}
 

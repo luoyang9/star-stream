@@ -1,21 +1,17 @@
 package xyz.charliezhang.shooter.entity.powerup;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.entity.Entity;
-import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.Player;
+import xyz.charliezhang.shooter.Assets;
 
 public class AttackPowerUp extends PowerUp
 {
 	
-	public AttackPowerUp(MainGame game) {
+	public AttackPowerUp() {
 		super();
 		
-		textureAtlas = game.manager.get("data/textures/attpowerup.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get("data/textures/attpowerup.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
 		sprite.setSize(16, 24);

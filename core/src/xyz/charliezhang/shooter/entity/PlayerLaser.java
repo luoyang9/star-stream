@@ -1,9 +1,6 @@
 package xyz.charliezhang.shooter.entity;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import xyz.charliezhang.shooter.MainGame;
 
 /**
  * Created by Charlie on 2015-12-03.

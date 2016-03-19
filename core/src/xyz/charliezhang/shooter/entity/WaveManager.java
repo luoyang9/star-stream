@@ -2,10 +2,8 @@ package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
 
 public class WaveManager
 {
@@ -43,9 +41,8 @@ public class WaveManager
         Json json = new Json();
         json.setElementType(Wave.class, "enemies", WaveEnemy.class);
 
-        for(int i = 0; i < waveJson.length; i++)
-        {
-            Wave wave = json.fromJson(Wave.class, waveJson[i]);
+        for (String aWaveJson : waveJson) {
+            Wave wave = json.fromJson(Wave.class, aWaveJson);
             waves.add(wave);
         }
     }

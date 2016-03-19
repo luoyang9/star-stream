@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
@@ -59,20 +59,19 @@ public class Player extends Entity
 	//manager and camera
 	private final EntityManager manager;
 	private final OrthographicCamera camera;
-	
-	//TODO: different planes with different shooting patterns
+
 	public Player(EntityManager manager) {
 		//manager
 		this.manager = manager;
 		this.camera = (OrthographicCamera)manager.getViewport().getCamera();
 		
 		//set texture atlas and animation to player
-		textureAtlas = manager.getGame().manager.get("data/textures/playerspritesheet.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get("data/textures/playerspritesheet.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
-		shootSound = manager.getGame().manager.get("data/sounds/playershoot.ogg", Sound.class);
-		shieldUpSound = manager.getGame().manager.get("data/sounds/shieldUp.ogg", Sound.class);
-		shieldDownSound = manager.getGame().manager.get("data/sounds/shieldDown.ogg", Sound.class);
+		shootSound = Assets.manager.get("data/sounds/playershoot.ogg", Sound.class);
+		shieldUpSound = Assets.manager.get("data/sounds/shieldUp.ogg", Sound.class);
+		shieldDownSound = Assets.manager.get("data/sounds/shieldDown.ogg", Sound.class);
 		
 		//set sprite size
 		sprite.setSize(75, 50);
@@ -112,7 +111,7 @@ public class Player extends Entity
 		};
 
 		shieldOn = false;
-		shield = new Sprite(manager.getGame().manager.get("data/textures/shield.png", Texture.class));
+		shield = new Sprite(Assets.manager.get("data/textures/shield.png", Texture.class));
 		shield.setSize(100, 100);
 
 		superAttOn = false;
@@ -156,10 +155,10 @@ public class Player extends Entity
 		if(health <= 0)
 		{
 			numLives--;
-			Explosion explosion = new Explosion(manager.getGame(), 2);
+			Explosion explosion = new Explosion(2);
 			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
 			manager.spawnExplosion(explosion);
-			manager.getGame().manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+			Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
 			if(numLives <= 0)
 			{
 				dead = true;
@@ -363,8 +362,6 @@ public class Player extends Entity
 	public int getDamage() {return damage;} //get damage
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
-	public int getAttLevel() {return attLevel;}
-	public void setAttLevel(int l) {attLevel = 1;}
 	public boolean isFlinching() {return flinching; } //is flinching?
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?

@@ -1,11 +1,10 @@
 package xyz.charliezhang.shooter.entity;
 
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
@@ -15,7 +14,6 @@ import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
-import xyz.charliezhang.shooter.screen.MenuScreen;
 import xyz.charliezhang.shooter.screen.WinScreen;
 
 public class EntityManager 
@@ -95,7 +93,7 @@ public class EntityManager
 		{
 			MusicPlayer.stop("game");
 			deathProcedure = true;
-			spawnExplosion(new Explosion(game, 2));
+			spawnExplosion(new Explosion(2));
 			hud.death();
 		}
 		for(Enemy e : enemies)
@@ -144,19 +142,19 @@ public class EntityManager
 			if (e.isDead()) {
 				score += e.getScore();
 
-				Explosion exp = new Explosion(game, 2);
+				Explosion exp = new Explosion(2);
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
 
 				e.dispose();
 				enemies.removeValue(e, false);
-				game.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+				Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
 
 				currATT++;
 				currSHD++;
 				currMIS++;
 				if(currMIS >= nextMIS) {
-					MissilePowerUp a = new MissilePowerUp(game);
+					MissilePowerUp a = new MissilePowerUp();
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, -2);
 					spawnPowerUp(a);
@@ -164,7 +162,7 @@ public class EntityManager
 					nextMIS = (int)(Math.random()*3 + 6);
 				}
 				if (currATT >= nextATT) {
-					AttackPowerUp a = new AttackPowerUp(game);
+					AttackPowerUp a = new AttackPowerUp();
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(2, 2);
 					spawnPowerUp(a);
@@ -173,7 +171,7 @@ public class EntityManager
 
 				}
 				if (currSHD >= nextSHD) {
-					ShieldPowerUp a = new ShieldPowerUp(game);
+					ShieldPowerUp a = new ShieldPowerUp();
 					a.setPosition(e.getPosition().x, e.getPosition().y);
 					a.setDirection(-2, 2);
 					spawnPowerUp(a);
@@ -219,7 +217,7 @@ public class EntityManager
 			e.render(sb);
 		}
 
-		hud.render(sb, game.font);
+		hud.render(sb);
 	}
 	
 	private void checkCollisions()
@@ -232,7 +230,7 @@ public class EntityManager
 				if(e.getBounds().overlaps(m.getBounds()))
 				{
 					//explosion
-					Explosion exp = new Explosion(game, 1);
+					Explosion exp = new Explosion(1);
 					exp.setPosition(m.getPosition().x, m.getPosition().y);
 					spawnExplosion(exp);
 
@@ -310,17 +308,6 @@ public class EntityManager
 	
 	public Array<Enemy> getEnemies() {
 		return enemies;
-	}
-
-	private Array<PlayerLaser> getLasers() {
-		return lasers;
-	}
-	private Array<PowerUp> getPowerUps()
-	{
-		return powerups;
-	}
-	private Array<EnemyLaser> getEnemyLasers() {
-		return enemyLasers;
 	}
 	
 	public Player getPlayer() {return player;}

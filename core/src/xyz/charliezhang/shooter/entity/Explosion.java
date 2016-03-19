@@ -3,6 +3,7 @@ package xyz.charliezhang.shooter.entity;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
 /**
@@ -10,13 +11,13 @@ import xyz.charliezhang.shooter.MainGame;
  */
 public class Explosion extends Entity
 {
-    public Explosion(MainGame game, int type)
+    public Explosion(int type)
     {
         switch(type){
-            case 1:textureAtlas = game.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
+            case 1:textureAtlas = Assets.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
                 sprite.setSize(15, 15);
                 break;
-            case 2:textureAtlas = game.manager.get("data/textures/bigExplosion.atlas", TextureAtlas.class);
+            case 2:textureAtlas = Assets.manager.get("data/textures/bigExplosion.atlas", TextureAtlas.class);
                 sprite.setSize(60, 60);
                 break;
             default:
