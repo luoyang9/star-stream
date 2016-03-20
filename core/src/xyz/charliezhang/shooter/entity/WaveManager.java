@@ -14,6 +14,7 @@ public class WaveManager
     public static final int SKULLINATOR = 3;
     public static final int STRIKER = 4;
     public static final int KAMIKAZE = 5;
+    public static final int ASTEROID = 6;
 
     public WaveManager(int level)
     {

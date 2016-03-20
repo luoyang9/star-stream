@@ -167,6 +167,8 @@ public class GameScreen implements Screen
 					break;
 				case WaveManager.KAMIKAZE: e = new Kamikaze(manager);
 					break;
+				case WaveManager.ASTEROID: e = new Asteroid(manager);
+					break;
 				default: e = new UFO(manager, (int)(Math.random()*4 + 1));
 			}
 			e.setPosition(currentWave.getEnemy(enemyCount).getX()*viewport.getWorldWidth() - e.getSprite().getWidth()/2, viewport.getWorldHeight() + currentWave.getEnemy(enemyCount).getY());

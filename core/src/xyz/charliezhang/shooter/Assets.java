@@ -61,6 +61,10 @@ public class Assets
         manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         manager.load("data/textures/striker.atlas", TextureAtlas.class);
         manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);
+        manager.load("data/textures/asteroid1.png", Texture.class);
+        manager.load("data/textures/asteroid2.png", Texture.class);
+        manager.load("data/textures/asteroid3.png", Texture.class);
+        manager.load("data/textures/asteroid4.png", Texture.class);
         //explosions
         manager.load("data/textures/playerExplosion.atlas", TextureAtlas.class);
         manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
