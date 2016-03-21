@@ -75,6 +75,7 @@ public class LoadScreen implements Screen
         game.manager.load("data/ui/background.png", Texture.class);
         //ui
         game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
+        game.manager.load("data/textures/pause.png", Texture.class);
         //health
         game.manager.load("data/textures/health.png", Texture.class);
         game.manager.load("data/textures/healthFill.png", Texture.class);

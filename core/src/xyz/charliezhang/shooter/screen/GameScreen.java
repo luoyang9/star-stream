@@ -153,12 +153,13 @@ public class GameScreen implements Screen
 		spawnDelay = currentWave.getEnemy(enemyCount).getDelay();
 		if(elapsed >= spawnDelay)
 		{
+			System.out.println(elapsed + " ms delay to spawn " + currentWave.getEnemy(enemyCount).getEnemyCode());
 			//spawn next enemy
 			start = System.nanoTime();
 			Enemy e;
 			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
 			{
-				case WaveManager.ATTACKHELI : e = new UFO(manager, (int)(Math.random()*4 + 1));
+				case WaveManager.UFO  : e = new UFO(manager, (int)(Math.random()*4 + 1));
 					break;
 				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*3 + 1));
 					break;

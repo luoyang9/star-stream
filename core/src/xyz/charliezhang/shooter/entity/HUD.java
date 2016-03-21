@@ -33,9 +33,11 @@ public class HUD
     private Image shieldIcon;
     private Image attIcon;
     private Image[] livesIcons;
+    private Image pauseIcon;
 
 
     private TextButton btnMenu;
+    private ImageButton btnPause;
     private Skin skin;
     private Label lblGameOver;
     private Label lblScore;
@@ -99,6 +101,9 @@ public class HUD
             }
         });
 
+        pauseIcon = new Image(manager.getGame().manager.get("data/textures/pause.png", Texture.class));
+        btnPause = new ImageButton(pauseIcon.getDrawable());
+
         table.top().left();
         table.add(lblScore).padLeft(5).expandX().left();
         table.add(livesGroup).padRight(5).right();
@@ -111,6 +116,7 @@ public class HUD
         stack.add(healthFill);
         stack.add(healthBar);
         table.add(stack).height(30).expandX().left().bottom();
+        table.add(btnPause).height(30).right().bottom();
 
         //TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(manager.getGame().manager.get("data/ui/background.png", Texture.class)));
         deathHUDTable.add(lblGameOver).padBottom(30);
@@ -124,7 +130,6 @@ public class HUD
         masterStack.add(deathTable);
 
         table.debug();
-        deathTable.debug();
     }
 
     public void update(float delta)
