@@ -3,18 +3,15 @@ package xyz.charliezhang.shooter.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.FileHandler;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
@@ -50,9 +47,9 @@ public class LevelSelectScreen implements Screen {
         stage.addActor(table);
 
         skin = new Skin();
-        skin.addRegions(game.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", game.manager.get("menu.ttf"));
-        skin.add("small-font", game.manager.get("levelSelect.ttf"));
+        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+        skin.add("default-font", Assets.manager.get("menu.ttf"));
+        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         lvlTable = new Table();
@@ -65,14 +62,14 @@ public class LevelSelectScreen implements Screen {
             lblScore[i] = new Label("BEST: " + FileHandler.getScore(i+1), skin, "small");
         }
 
-        background = game.manager.get("data/ui/background.png");
+        background = Assets.manager.get("data/ui/background.png");
 
         btnBack = new TextButton("BACK", skin);
         btnBack.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
                 game.setScreen(new MenuScreen(game));
                 dispose();
                 event.stop();
@@ -88,7 +85,7 @@ public class LevelSelectScreen implements Screen {
                 @Override
                 public void clicked(InputEvent event, float x, float y){
                     MusicPlayer.stop("menu");
-                    game.manager.get("data/sounds/button.mp3", Sound.class).play();
+                    Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
                     game.setScreen(new GameScreen(game, level+1));
                     System.out.println("START GAMESCREEN");
                     dispose();
@@ -103,10 +100,11 @@ public class LevelSelectScreen implements Screen {
             if(count % 3 == 0) lvlTable.row();
         }
 
-        table.setDebug(true);
         table.add(btnBack).width(450).height(200);
         table.row();
         table.add(lvlTable);
+
+        //table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }

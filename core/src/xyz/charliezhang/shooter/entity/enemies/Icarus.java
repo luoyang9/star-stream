@@ -1,10 +1,10 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Icarus extends Enemy
@@ -16,16 +16,16 @@ public class Icarus extends Enemy
 		switch(color)
 		{
 			case 1:
-				textureAtlas = manager.getGame().manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
 				break;
 			case 2:
-				textureAtlas = manager.getGame().manager.get("data/textures/icarusG.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/icarusG.atlas", TextureAtlas.class);
 				break;
 			case 3:
-				textureAtlas = manager.getGame().manager.get("data/textures/icarusR.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/icarusR.atlas", TextureAtlas.class);
 				break;
 			case 4:
-				textureAtlas = manager.getGame().manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
 				break;
 			default:
 		}
@@ -95,8 +95,8 @@ public class Icarus extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

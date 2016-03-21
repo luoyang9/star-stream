@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
 /**
@@ -46,12 +47,12 @@ public class LoadScreen implements Screen
     public void show() {
 
         //load loading ui
-        game.manager.load("data/ui/loading.pack", TextureAtlas.class);
-        game.manager.finishLoading();
+        Assets.manager.load("data/ui/loading.pack", TextureAtlas.class);
+        Assets.manager.finishLoading();
 
         stage = new Stage();
         stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
-        TextureAtlas loadingAtlas = game.manager.get("data/ui/loading.pack", TextureAtlas.class);
+        TextureAtlas loadingAtlas = Assets.manager.get("data/ui/loading.pack", TextureAtlas.class);
 
         logo = new Image(loadingAtlas.findRegion("libgdx-logo"));
         loadingFrame = new Image(loadingAtlas.findRegion("loading-frame"));
@@ -67,87 +68,14 @@ public class LoadScreen implements Screen
         stage.addActor(loadingFrame);
         stage.addActor(logo);
 
-        //LOAD GAME ASSETS
-
-        //game background
-        game.manager.load("data/textures/background.png", Texture.class);
-        //menu background
-        game.manager.load("data/ui/background.png", Texture.class);
-        //ui
-        game.manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/pause.png", Texture.class);
-        //health
-        game.manager.load("data/textures/health.png", Texture.class);
-        game.manager.load("data/textures/healthFill.png", Texture.class);
-        game.manager.load("data/textures/livesIcon.png", Texture.class);
-        //powerup icons
-        game.manager.load("data/textures/misicon.png", Texture.class);
-        game.manager.load("data/textures/shieldicon.png", Texture.class);
-        game.manager.load("data/textures/atticon.png", Texture.class);
-        //powerup effects
-        game.manager.load("data/textures/shield.png", Texture.class);
-        game.manager.load("data/textures/missile.atlas", TextureAtlas.class);
-        //powerup drops
-        game.manager.load("data/textures/attpowerup.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/shieldpowerup.atlas", TextureAtlas.class);
-        //enemies
-        game.manager.load("data/textures/ufoB.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/ufoG.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/ufoR.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/ufoY.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/icarusB.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/icarusG.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/icarusR.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/striker.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);
-        //explosions
-        game.manager.load("data/textures/playerExplosion.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
-        //lasers
-        game.manager.load("data/textures/laserB.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserF.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserG.atlas", TextureAtlas.class);
-        game.manager.load("data/textures/laserR.atlas", TextureAtlas.class);
-        //player
-        game.manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
-        //music
-        game.manager.load("data/music/background.ogg", Music.class);
-        game.manager.load("data/music/menu.ogg", Music.class);
-        game.manager.load("data/music/win.mp3", Music.class);
-        //sound effects
-        game.manager.load("data/sounds/playershoot.ogg", Sound.class);
-        game.manager.load("data/sounds/shieldDown.ogg", Sound.class);
-        game.manager.load("data/sounds/shieldUp.ogg", Sound.class);
-        game.manager.load("data/sounds/button.mp3", Sound.class);
-        game.manager.load("data/sounds/explosion.wav", Sound.class);
-
-        //game fonts
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        params.fontFileName = "data/goodtimes.ttf";
-        params.fontParameters.size = 50;
-        params.fontParameters.color = Color.WHITE;
-        game.manager.load("menu.ttf", BitmapFont.class, params);
-
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        params2.fontFileName = "data/goodtimes.ttf";
-        params2.fontParameters.size = 30;
-        params2.fontParameters.color = Color.WHITE;
-        game.manager.load("hud.ttf", BitmapFont.class, params2);
-
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params3 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        params3.fontFileName = "data/goodtimes.ttf";
-        params3.fontParameters.size = 20;
-        params3.fontParameters.color = Color.WHITE;
-        game.manager.load("levelSelect.ttf", BitmapFont.class, params3);
+        Assets.load();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(game.manager.update())
+        if(Assets.manager.update())
         {
             stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
                 @Override
@@ -158,7 +86,7 @@ public class LoadScreen implements Screen
             })));
         }
 
-        percent = Interpolation.linear.apply(percent, game.manager.getProgress(), 0.1f);
+        percent = Interpolation.linear.apply(percent, Assets.manager.getProgress(), 0.1f);
 
         loadingBarHidden.setX(startX + endX * percent);
         loadingBg.setX(loadingBarHidden.getX() + 30);
@@ -169,7 +97,7 @@ public class LoadScreen implements Screen
         stage.draw();
 
         game.batch.begin();
-        game.font.draw(game.batch, game.manager.getProgress()*100 + "%", 100, 100);
+        game.font.draw(game.batch, Assets.manager.getProgress()*100 + "%", 100, 100);
         game.batch.end();
     }
 
@@ -212,7 +140,7 @@ public class LoadScreen implements Screen
 
     @Override
     public void hide() {
-        game.manager.unload("data/ui/loading.pack");
+        Assets.manager.unload("data/ui/loading.pack");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package xyz.charliezhang.shooter.music;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
@@ -30,12 +29,6 @@ public class MusicPlayer {
     public static boolean isPlaying(String name)
     {
         return musicMap.get(name).isPlaying();
-    }
-
-    public static void play(String name)
-    {
-        stop(name);
-        musicMap.get(name).play();
     }
 
     public static void loop(String name)

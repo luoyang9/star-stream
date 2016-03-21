@@ -3,6 +3,7 @@ package xyz.charliezhang.shooter.entity;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
 public class Laser extends PlayerLaser
@@ -11,7 +12,7 @@ public class Laser extends PlayerLaser
 	public Laser(EntityManager manager) {
 		super(manager);
 		
-		textureAtlas = manager.getGame().manager.get("data/textures/laserB.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get("data/textures/laserB.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(6, 28);

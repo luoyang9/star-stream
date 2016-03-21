@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 /**
@@ -50,30 +51,30 @@ public class HUD
         stage = new Stage(new ScreenViewport());
 
         skin = new Skin();
-        skin.addRegions(manager.getGame().manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", manager.getGame().manager.get("hud.ttf"));
-        skin.add("small-font", manager.getGame().manager.get("levelSelect.ttf"));
+        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+        skin.add("default-font", Assets.manager.get("hud.ttf"));
+        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
-        healthBar = new Image(manager.getGame().manager.get("data/textures/health.png", Texture.class));
-        healthFill = new Image(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class));
+        healthBar = new Image(Assets.manager.get("data/textures/health.png", Texture.class));
+        healthFill = new Image(Assets.manager.get("data/textures/healthFill.png", Texture.class));
 
         livesGroup = new HorizontalGroup();
         livesIcons = new Image[manager.getPlayer().getMaxLives()];
         for(int i = 0; i < livesIcons.length; i++)
         {
-            livesIcons[i] = new Image(manager.getGame().manager.get("data/textures/livesIcon.png", Texture.class));
+            livesIcons[i] = new Image(Assets.manager.get("data/textures/livesIcon.png", Texture.class));
             livesGroup.addActor(livesIcons[i]);
         }
 
         iconGroup = new HorizontalGroup();
-        missileIcon = new Image(manager.getGame().manager.get("data/textures/misicon.png", Texture.class));
+        missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
         missileIcon.setWidth(20);
         missileIcon.setVisible(false);
-        shieldIcon = new Image(manager.getGame().manager.get("data/textures/shieldicon.png", Texture.class));
+        shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
         shieldIcon.setWidth(20);
         shieldIcon.setVisible(false);
-        attIcon = new Image(manager.getGame().manager.get("data/textures/atticon.png", Texture.class));
+        attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
         attIcon.setWidth(20);
         attIcon.setVisible(false);
 
@@ -118,18 +119,17 @@ public class HUD
         table.add(stack).height(30).expandX().left().bottom();
         table.add(btnPause).height(30).right().bottom();
 
-        //TextureRegionDrawable backDraw = new TextureRegionDrawable(new TextureRegion(manager.getGame().manager.get("data/ui/background.png", Texture.class)));
         deathHUDTable.add(lblGameOver).padBottom(30);
         deathHUDTable.row();
         deathHUDTable.add(btnMenu).width(350).height(125);
-        //deathHUDTable.setBackground(backDraw);
         deathTable.add(deathHUDTable).expandX().height(400);
         deathTable.addAction(Actions.alpha(0));
 
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        table.debug();
+        //table.debug();
+        //deathTable.debug();
     }
 
     public void update(float delta)
@@ -171,7 +171,7 @@ public class HUD
         stage.act(delta);
     }
 
-    public void render(SpriteBatch batch, BitmapFont font)
+    public void render(SpriteBatch batch)
     {
         batch.end();
         stage.draw();

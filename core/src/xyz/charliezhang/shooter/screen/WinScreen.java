@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.FileHandler;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
@@ -66,13 +67,13 @@ public class WinScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        background = game.manager.get("data/ui/background.png");
+        background = Assets.manager.get("data/ui/background.png");
 
         skin = new Skin();
 
-        skin.addRegions((TextureAtlas) game.manager.get("data/ui/uiskin.atlas"));
-        skin.add("default-font", game.manager.get("hud.ttf"));
-        skin.add("small-font", game.manager.get("levelSelect.ttf"));
+        skin.addRegions((TextureAtlas) Assets.manager.get("data/ui/uiskin.atlas"));
+        skin.add("default-font", Assets.manager.get("hud.ttf"));
+        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
 
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 

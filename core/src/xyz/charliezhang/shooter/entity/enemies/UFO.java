@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class UFO extends Enemy
@@ -15,16 +16,16 @@ public class UFO extends Enemy
 		switch(color)
 		{
 			case 1:
-				textureAtlas = manager.getGame().manager.get("data/textures/ufoB.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/ufoB.atlas", TextureAtlas.class);
 				break;
 			case 2:
-				textureAtlas = manager.getGame().manager.get("data/textures/ufoG.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/ufoG.atlas", TextureAtlas.class);
 				break;
 			case 3:
-				textureAtlas = manager.getGame().manager.get("data/textures/ufoR.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/ufoR.atlas", TextureAtlas.class);
 				break;
 			case 4:
-				textureAtlas = manager.getGame().manager.get("data/textures/ufoY.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get("data/textures/ufoY.atlas", TextureAtlas.class);
 				break;
 			default:
 		}
@@ -76,8 +77,8 @@ public class UFO extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

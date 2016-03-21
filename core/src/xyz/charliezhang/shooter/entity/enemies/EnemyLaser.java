@@ -1,10 +1,10 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.Entity;
 
 public class EnemyLaser extends Entity
@@ -18,19 +18,19 @@ public class EnemyLaser extends Entity
 		
 		switch(colour)
 		{
-		case 1: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserG.atlas", TextureAtlas.class);
+		case 1: textureAtlas = Assets.manager.get("data/textures/laserG.atlas", TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 				break;
-		case 2: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserF.atlas", TextureAtlas.class);
+		case 2: textureAtlas = Assets.manager.get("data/textures/laserF.atlas", TextureAtlas.class);
 				sprite.setSize(7, 38);
 				sprite.setOrigin(3.5f, 19);
 				break;
-		case 3: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserR.atlas", TextureAtlas.class);
+		case 3: textureAtlas = Assets.manager.get("data/textures/laserR.atlas", TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 				break;
-		default: textureAtlas = enemy.getManager().getGame().manager.get("data/textures/laserG.atlas", TextureAtlas.class);
+		default: textureAtlas = Assets.manager.get("data/textures/laserG.atlas", TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 		}

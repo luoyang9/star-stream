@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Kamikaze extends Enemy
@@ -12,7 +13,7 @@ public class Kamikaze extends Enemy
     public Kamikaze(EntityManager manager) {
         super();
 
-        textureAtlas = manager.getGame().manager.get("data/textures/kamikaze.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get("data/textures/kamikaze.atlas", TextureAtlas.class);
         animation = new Animation(1/20f, textureAtlas.getRegions());
 
         sprite.setSize(50, 45);
@@ -48,8 +49,8 @@ public class Kamikaze extends Enemy
     public void render(SpriteBatch sb)
     {
         sprite.setRegion(animation.getKeyFrame(animationTime, true));
-        sb.draw(manager.getGame().manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-        sb.draw(manager.getGame().manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+        sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+        sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
         super.render(sb);
     }
 

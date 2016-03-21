@@ -2,6 +2,7 @@ package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
 public class Missile extends PlayerLaser
@@ -11,7 +12,7 @@ public class Missile extends PlayerLaser
     public Missile(EntityManager manager) {
         super(manager);
 
-        textureAtlas = manager.getGame().manager.get("data/textures/missile.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get("data/textures/missile.atlas", TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(9, 38);

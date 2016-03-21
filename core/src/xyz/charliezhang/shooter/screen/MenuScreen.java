@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -49,15 +49,15 @@ public class MenuScreen implements Screen {
         stage.addActor(table);
 
         skin = new Skin();
-        skin.addRegions(game.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", game.manager.get("menu.ttf"));
-        skin.add("small-font", game.manager.get("levelSelect.ttf"));
+        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+        skin.add("default-font", Assets.manager.get("menu.ttf"));
+        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
-        background = game.manager.get("data/ui/background.png");
+        background = Assets.manager.get("data/ui/background.png");
 
         if(!MusicPlayer.loaded("menu")) {
-            MusicPlayer.loadMusic("menu", game.manager.get("data/music/menu.ogg", Music.class));
+            MusicPlayer.loadMusic("menu", Assets.manager.get("data/music/menu.ogg", Music.class));
         }
         if(!MusicPlayer.isPlaying("menu")) {
             MusicPlayer.loop("menu");
@@ -71,7 +71,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("START LEVELSELECTSCREEN");
-                game.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
                 game.setScreen(new LevelSelectScreen(game));
                 dispose();
                 event.stop();
@@ -85,7 +85,7 @@ public class MenuScreen implements Screen {
         table.row();
         table.add(btnOptions).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
 
-        table.setDebug(true);
+        //table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);
     }
