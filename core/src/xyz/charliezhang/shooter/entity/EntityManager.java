@@ -1,5 +1,7 @@
 package xyz.charliezhang.shooter.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -43,6 +45,7 @@ public class EntityManager
 	private long time;
 
 	private boolean win;
+	private boolean pause;
 
 	private MainGame game;
 	
@@ -68,6 +71,12 @@ public class EntityManager
 		currSHD = 0;
 
 		win = false;
+		pause = false;
+
+		InputMultiplexer mult = new InputMultiplexer();
+		mult.addProcessor(hud.getStage());
+		mult.addProcessor(player.getInputProcessor());
+		Gdx.input.setInputProcessor(mult);
 	}
 
 	public void updateViewport(Viewport viewport)
@@ -78,6 +87,8 @@ public class EntityManager
 	public void update(float delta)
 	{
 		hud.update(delta);
+
+		if(pause) return;
 
 		if(win)
 		{
@@ -298,6 +309,18 @@ public class EntityManager
 		}
 	}
 
+	public void pause()
+	{
+		if(pause) {
+			pause = false;
+			hud.pause(false);
+		}
+		else {
+			hud.pause(true);
+			pause = true;
+		}
+	}
+
 	public void win()
 	{
 		player.setDirection(0, 4);
@@ -320,5 +343,6 @@ public class EntityManager
 	public Background getBackground() {return background;}
 	public long getScore() {return score;}
 	public Viewport getViewport() {return viewport;}
+	public boolean isPaused() {return pause;}
 }
 

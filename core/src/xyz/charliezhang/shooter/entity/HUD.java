@@ -104,6 +104,13 @@ public class HUD
 
         pauseIcon = new Image(Assets.manager.get("data/textures/pause.png", Texture.class));
         btnPause = new ImageButton(pauseIcon.getDrawable());
+        btnPause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                manager.pause();
+                event.stop();
+            }
+        });
 
         table.top().left();
         table.add(lblScore).padLeft(5).expandX().left();
@@ -119,6 +126,7 @@ public class HUD
         table.add(stack).height(30).expandX().left().bottom();
         table.add(btnPause).height(30).right().bottom();
 
+        lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
         deathHUDTable.row();
         deathHUDTable.add(btnMenu).width(350).height(125);
@@ -183,9 +191,23 @@ public class HUD
         stage.dispose();
     }
 
+    public void pause(boolean b)
+    {
+        if(b)
+        {
+            deathTable.addAction(Actions.fadeIn(0.1f));
+        }
+        else
+        {
+            deathTable.addAction(Actions.fadeOut(0.1f));
+        }
+    }
+
     public void death()
     {
+        lblGameOver.setVisible(true);
         deathTable.addAction(Actions.delay(2, Actions.fadeIn(1)));
-        Gdx.input.setInputProcessor(stage);
     }
+
+    public Stage getStage() {return stage;}
 }

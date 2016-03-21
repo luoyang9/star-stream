@@ -70,8 +70,11 @@ public class GameScreen implements Screen
 	public void update(float delta) {
 
 		camera.update();
-		background.update();
 		manager.update(delta);
+
+		if(manager.isPaused()) return;
+
+		background.update();
 
 		if(manager.getEnemies().size <= 0) //wave is done
 		{

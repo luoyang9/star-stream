@@ -1,6 +1,8 @@
 package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.GameInput;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
@@ -24,6 +27,8 @@ public class Player extends Entity
 	//initial touch
 	private Vector2 iniTouch = new Vector2();
 	private Vector2 syncPos = new Vector2();
+	private GameInput playerInput;
+	private boolean justTouched;
 
 	//directions
 	float xdir, ydir;
@@ -84,6 +89,7 @@ public class Player extends Entity
 		controllable = false;
 		justControllable = false;
 		justSpawned = true;
+		justTouched = false;
 		setDirection(0, 4);
 		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
 		syncPos.x = getPosition().x;
@@ -91,8 +97,10 @@ public class Player extends Entity
 
 		initializePowerups();
 
+		playerInput = new GameInput(this);
+
 		//read player stats
-		health = maxHealth = 10;
+		health = maxHealth = 3;
 		damage = 1;
 	}
 
@@ -187,17 +195,18 @@ public class Player extends Entity
 		xdir = 0;
 		ydir = 0;
 
-		Vector2 touch = new Vector2(Gdx.input.getX(), -Gdx.input.getY());
+		Vector2 touch = new Vector2(playerInput.getX(), -playerInput.getY());
 		Vector3 unprojected = camera.unproject(new Vector3(touch.x, -touch.y, 0));
 
 		//check if just touched
-		if(Gdx.input.justTouched() || justControllable)
+		if(justTouched || justControllable)
 		{
 			iniTouch.set(unprojected.x, unprojected.y);
 			syncPos.set(iniTouch.x - getPosition().x, iniTouch.y - getPosition().y);
 			justControllable = false;
+			justTouched = false;
 		}
-		else if(Gdx.input.isTouched())
+		else if(playerInput.isTouching())
 		{
 			//calculate drag, set direction to drag
 			Vector2 newTouch = new Vector2(unprojected.x, unprojected.y);
@@ -229,7 +238,7 @@ public class Player extends Entity
 
 	private void shoot()
 	{
-		if(Gdx.input.isTouched()) //if touching
+		if(playerInput.isTouching()) //if touching
 		{
 			if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
 			{
@@ -362,6 +371,7 @@ public class Player extends Entity
 	public int getDamage() {return damage;} //get damage
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
+	public InputProcessor getInputProcessor() {return playerInput;}
 	public boolean isFlinching() {return flinching; } //is flinching?
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?
@@ -379,6 +389,8 @@ public class Player extends Entity
 			shieldDownSound.play();
 		}
 	}
+
+	public void setJustTouched(boolean b) {justTouched = b;}
 
 	@Override
 	public Rectangle getBounds()
