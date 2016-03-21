@@ -102,7 +102,7 @@ public class HUD
             }
         });
 
-        pauseIcon = new Image(manager.getGame().manager.get("data/textures/pause.png", Texture.class));
+        pauseIcon = new Image(Assets.manager.get("data/textures/pause.png", Texture.class));
         btnPause = new ImageButton(pauseIcon.getDrawable());
 
         table.top().left();
