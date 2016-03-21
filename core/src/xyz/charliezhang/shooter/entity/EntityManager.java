@@ -14,7 +14,6 @@ import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
-import xyz.charliezhang.shooter.screen.WinScreen;
 
 public class EntityManager 
 {
@@ -42,8 +41,6 @@ public class EntityManager
 	private int score;
 	private long time;
 
-	private boolean win;
-
 	private MainGame game;
 	
 	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
@@ -66,8 +63,6 @@ public class EntityManager
 		currATT = 0;
 		currMIS = 0;
 		currSHD = 0;
-
-		win = false;
 	}
 
 	public void updateViewport(Viewport viewport)
@@ -78,14 +73,6 @@ public class EntityManager
 	public void update(float delta)
 	{
 		hud.update(delta);
-
-		if(win)
-		{
-			if(player.getPosition().y > viewport.getWorldHeight() + 500)
-			{
-				game.setScreen(new WinScreen(game, score, player.getLives(), (int)((System.nanoTime() - time) / 1000000000), level));
-			}
-		}
 
 		//update entities
 		player.update();
@@ -298,11 +285,36 @@ public class EntityManager
 		}
 	}
 
+	public void dispose()
+	{
+		player.dispose();
+		for(Enemy e : enemies)
+		{
+			e.dispose();
+		}
+		for(EnemyLaser e : enemyLasers)
+		{
+			e.dispose();
+		}
+		for(PlayerLaser e : lasers)
+		{
+			e.dispose();
+		}
+		for(PowerUp e : powerups)
+		{
+			e.dispose();
+		}
+		for(Explosion e : explosions)
+		{
+			e.dispose();
+		}
+		hud.dispose();
+	}
+
 	public void win()
 	{
 		player.setDirection(0, 4);
 		player.setControllable(false);
-		win = true;
 	}
 
 	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}
@@ -318,7 +330,8 @@ public class EntityManager
 	public Player getPlayer() {return player;}
 	public MainGame getGame() {return game;}
 	public Background getBackground() {return background;}
-	public long getScore() {return score;}
+	public int getScore() {return score;}
+	public long getTime() {return time;}
 	public Viewport getViewport() {return viewport;}
 }
 

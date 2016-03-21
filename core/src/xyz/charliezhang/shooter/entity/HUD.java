@@ -175,6 +175,7 @@ public class HUD
     public void dispose()
     {
         stage.dispose();
+        skin.dispose();
     }
 
     public void death()

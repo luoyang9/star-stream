@@ -52,7 +52,7 @@
 	        dx: -0.5,
 	        dy: -2,
 	        stop: 150,
-	        delay: 0
+	        delay: 100
 	    },
 	    {
 	        enemyCode: 6,
@@ -138,7 +138,7 @@
 	        enemyCode: 6,
 	        x: 1.2,
 	        y: 300,
-	        dx: -1,
+	        dx: -0.3,
 	        dy: -2,
 	        stop: 150,
 	        delay: 100
@@ -147,7 +147,7 @@
 	        enemyCode: 6,
 	        x: 0,
 	        y: 300,
-	        dx: 1.1,
+	        dx: 0.2,
 	        dy: -1,
 	        stop: 150,
 	        delay: 100
@@ -156,7 +156,7 @@
 	        enemyCode: 6,
 	        x: 0.8,
 	        y: 300,
-	        dx: -0.5,
+	        dx: -0.4,
 	        dy: -2,
 	        stop: 150,
 	        delay: 100
@@ -165,7 +165,7 @@
 	        enemyCode: 6,
 	        x: 0.2,
 	        y: 300,
-	        dx: 0.5,
+	        dx: 0.4,
 	        dy: -2,
 	        stop: 150,
 	        delay: 100
@@ -178,6 +178,24 @@
 
 {
 	enemies: [
+	    {
+	        enemyCode: 6,
+	        x: 0.3,
+	        y: 300,
+	        dx: 0,
+	        dy: -2,
+	        stop: 150,
+	        delay: 0
+	    },
+	    {
+	        enemyCode: 6,
+	        x: 0.7,
+	        y: 300,
+	        dx: -0.1,
+	        dy: -2,
+	        stop: 150,
+	        delay: 0
+	    },
 	    {
 	        enemyCode: 1,
 	        x: 0.3,
@@ -193,6 +211,15 @@
 	        y: 150,
 	        dx: 0,
 	        dy: -3,
+	        stop: 150,
+	        delay: 0
+	    },
+	    {
+	        enemyCode: 6,
+	        x: 0.3,
+	        y: 300,
+	        dx: 0.1,
+	        dy: -2,
 	        stop: 150,
 	        delay: 0
 	    },
@@ -240,7 +267,16 @@
 	        dy: -4,
 	        stop: 200,
 	        delay: 300
-	    }
+	    },
+	    {
+	        enemyCode: 6,
+	        x: 0.5,
+	        y: 300,
+	        dx: 0,
+	        dy: -2,
+	        stop: 150,
+	        delay: 0
+	    },
 	],
 	delay: 0
 }

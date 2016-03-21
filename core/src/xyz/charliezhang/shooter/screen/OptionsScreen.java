@@ -21,7 +21,7 @@ import xyz.charliezhang.shooter.music.MusicPlayer;
 /**
  * Created by Charlie on 2015-12-19.
  */
-public class MenuScreen implements Screen {
+public class OptionsScreen implements Screen {
 
     private MainGame game;
 
@@ -30,13 +30,9 @@ public class MenuScreen implements Screen {
 
     private Texture background;
 
-    private TextButton btnPlay;
-    private TextButton btnSurvival;
-    private TextButton btnOptions;
-
     private Skin skin;
 
-    public MenuScreen(MainGame game){this.game = game;}
+    public OptionsScreen(MainGame game){this.game = game;}
 
     @Override
     public void show() {
@@ -55,35 +51,6 @@ public class MenuScreen implements Screen {
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         background = Assets.manager.get("data/ui/background.png");
-
-        if(!MusicPlayer.loaded("menu")) {
-            MusicPlayer.loadMusic("menu", Assets.manager.get("data/music/menu.ogg", Music.class));
-        }
-        if(!MusicPlayer.isPlaying("menu")) {
-            MusicPlayer.loop("menu");
-        }
-
-        btnPlay = new TextButton("Play", skin);
-        btnSurvival = new TextButton("Survival", skin);
-        btnOptions = new TextButton("Options", skin);
-
-        btnPlay.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("START LEVELSELECTSCREEN");
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
-                game.setScreen(new LevelSelectScreen(game));
-                dispose();
-                event.stop();
-            }
-        });
-
-
-        table.add(btnPlay).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
-        table.row();
-        table.add(btnSurvival).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
-        table.row();
-        table.add(btnOptions).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
 
         //table.setDebug(true);
 

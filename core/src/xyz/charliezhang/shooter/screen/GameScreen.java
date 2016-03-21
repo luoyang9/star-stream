@@ -73,10 +73,17 @@ public class GameScreen implements Screen
 		background.update();
 		manager.update(delta);
 
+		if(win)
+		{
+			if(manager.getPlayer().getPosition().y > viewport.getWorldHeight() + 500)
+			{
+				game.setScreen(new WinScreen(game, manager.getScore(), manager.getPlayer().getLives(), (int)((System.nanoTime() - manager.getTime()) / 1000000000), level));
+				dispose();
+			}
+		}
+
 		if(manager.getEnemies().size <= 0) //wave is done
 		{
-			enemyWave++;
-			notSpawned = true;
 			//check player won
 			if(wmanager.allWavesCleared(enemyWave) && !win)
 			{
@@ -85,8 +92,10 @@ public class GameScreen implements Screen
 				manager.win();
 				win = true;
 			}
-			else
+			else if(!win)
 			{
+				enemyWave++;
+				notSpawned = true;
 				currentWave = wmanager.getWave(enemyWave);
 				start = 0;
 			}
@@ -121,7 +130,7 @@ public class GameScreen implements Screen
 
 	@Override
 	public void dispose() {
-
+		manager.dispose();
 	}
 
 	@Override
