@@ -2,6 +2,7 @@ package xyz.charliezhang.shooter.entity;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -34,9 +35,11 @@ public class HUD
     private Image shieldIcon;
     private Image attIcon;
     private Image[] livesIcons;
+    private Image pauseIcon;
 
 
     private TextButton btnMenu;
+    private ImageButton btnPause;
     private Skin skin;
     private Label lblGameOver;
     private Label lblScore;
@@ -95,7 +98,19 @@ public class HUD
             public void clicked(InputEvent event, float x, float y){
                 dispose();
                 System.out.println("START MENUSCREEN   ");
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
                 manager.getGame().setScreen(new MenuScreen(manager.getGame()));
+                event.stop();
+            }
+        });
+
+        pauseIcon = new Image(Assets.manager.get("data/textures/pause.png", Texture.class));
+        btnPause = new ImageButton(pauseIcon.getDrawable());
+        btnPause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                manager.pause();
                 event.stop();
             }
         });
@@ -112,7 +127,9 @@ public class HUD
         stack.add(healthFill);
         stack.add(healthBar);
         table.add(stack).height(30).expandX().left().bottom();
+        table.add(btnPause).height(30).right().bottom();
 
+        lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
         deathHUDTable.row();
         deathHUDTable.add(btnMenu).width(350).height(125);
@@ -175,12 +192,25 @@ public class HUD
     public void dispose()
     {
         stage.dispose();
-        skin.dispose();
+    }
+
+    public void pause(boolean b)
+    {
+        if(b)
+        {
+            deathTable.addAction(Actions.fadeIn(0.1f));
+        }
+        else
+        {
+            deathTable.addAction(Actions.fadeOut(0.1f));
+        }
     }
 
     public void death()
     {
+        lblGameOver.setVisible(true);
         deathTable.addAction(Actions.delay(2, Actions.fadeIn(1)));
-        Gdx.input.setInputProcessor(stage);
     }
+
+    public Stage getStage() {return stage;}
 }

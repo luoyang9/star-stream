@@ -35,6 +35,7 @@ public class Assets
         manager.load("data/ui/background.png", Texture.class);
         //ui
         manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
+        manager.load("data/textures/pause.png", Texture.class);
         //health
         manager.load("data/textures/health.png", Texture.class);
         manager.load("data/textures/healthFill.png", Texture.class);

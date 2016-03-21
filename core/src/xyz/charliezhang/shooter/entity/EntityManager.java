@@ -1,5 +1,7 @@
 package xyz.charliezhang.shooter.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -41,6 +43,8 @@ public class EntityManager
 	private int score;
 	private long time;
 
+	private boolean pause;
+
 	private MainGame game;
 	
 	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
@@ -63,6 +67,13 @@ public class EntityManager
 		currATT = 0;
 		currMIS = 0;
 		currSHD = 0;
+
+		pause = false;
+
+		InputMultiplexer mult = new InputMultiplexer();
+		mult.addProcessor(hud.getStage());
+		mult.addProcessor(player.getInputProcessor());
+		Gdx.input.setInputProcessor(mult);
 	}
 
 	public void updateViewport(Viewport viewport)
@@ -73,6 +84,8 @@ public class EntityManager
 	public void update(float delta)
 	{
 		hud.update(delta);
+
+		if(pause) return;
 
 		//update entities
 		player.update();
@@ -288,27 +301,36 @@ public class EntityManager
 	public void dispose()
 	{
 		player.dispose();
-		for(Enemy e : enemies)
-		{
+		for (Enemy e : enemies) {
 			e.dispose();
 		}
-		for(EnemyLaser e : enemyLasers)
-		{
+		for (EnemyLaser e : enemyLasers) {
 			e.dispose();
 		}
-		for(PlayerLaser e : lasers)
-		{
+		for (PlayerLaser e : lasers) {
 			e.dispose();
 		}
-		for(PowerUp e : powerups)
-		{
+		for (PowerUp e : powerups) {
 			e.dispose();
 		}
-		for(Explosion e : explosions)
-		{
+		for (Explosion e : explosions) {
 			e.dispose();
 		}
 		hud.dispose();
+	}
+
+	public void pause()
+	{
+		if(pause) {
+			pause = false;
+			hud.pause(false);
+			MusicPlayer.resume("game");
+		}
+		else {
+			hud.pause(true);
+			pause = true;
+			MusicPlayer.pause("game");
+		}
 	}
 
 	public void win()
@@ -333,5 +355,6 @@ public class EntityManager
 	public int getScore() {return score;}
 	public long getTime() {return time;}
 	public Viewport getViewport() {return viewport;}
+	public boolean isPaused() {return pause;}
 }
 

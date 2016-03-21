@@ -9,7 +9,7 @@ public class WaveManager
 {
     private Array<Wave> waves;
 
-    public static final int ATTACKHELI = 1;
+    public static final int UFO = 1;
     public static final int ICARUS = 2;
     public static final int SKULLINATOR = 3;
     public static final int STRIKER = 4;
