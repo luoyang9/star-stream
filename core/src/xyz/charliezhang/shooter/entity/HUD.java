@@ -115,19 +115,18 @@ public class HUD
             }
         });
 
-        table.top().left();
-        table.add(lblScore).padLeft(5).expandX().left();
-        table.add(livesGroup).padRight(5).right();
+        table.add(lblScore).expandX().fillX().padLeft(5).left();
+        table.add(livesGroup).width(150).padRight(5).right();
         table.row();
         iconGroup.addActor(missileIcon);
         iconGroup.addActor(shieldIcon);
         iconGroup.addActor(attIcon);
-        table.add(iconGroup).fillX().expandY().left().bottom();
+        table.add(iconGroup).expandY().left().bottom();
         table.row();
         stack.add(healthFill);
         stack.add(healthBar);
-        table.add(stack).height(30).expandX().left().bottom();
-        table.add(btnPause).height(30).right().bottom();
+        table.add(stack).height(30).expandX().fillX().padLeft(5);
+        table.add(btnPause).height(30).width(150).padRight(5);
 
         lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
@@ -139,7 +138,7 @@ public class HUD
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        //table.debug();
+        table.debug();
         //deathTable.debug();
     }
 
