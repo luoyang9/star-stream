@@ -10,8 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 /**
@@ -49,7 +51,8 @@ public class HUD
     {
         this.manager = manager;
 
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         skin = new Skin();
         skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
@@ -58,7 +61,9 @@ public class HUD
         skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
         healthBar = new Image(Assets.manager.get("data/textures/health.png", Texture.class));
+        healthBar.setHeight(40);
         healthFill = new Image(Assets.manager.get("data/textures/healthFill.png", Texture.class));
+        healthFill.setHeight(40);
 
         livesGroup = new HorizontalGroup();
         livesIcons = new Image[manager.getPlayer().getMaxLives()];
@@ -70,13 +75,16 @@ public class HUD
 
         iconGroup = new HorizontalGroup();
         missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
-        missileIcon.setWidth(30);
+        missileIcon.setWidth(50);
+        missileIcon.setHeight(50);
         missileIcon.setVisible(false);
         shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
-        shieldIcon.setWidth(30);
+        shieldIcon.setWidth(50);
+        missileIcon.setHeight(50);
         shieldIcon.setVisible(false);
         attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
-        attIcon.setWidth(30);
+        attIcon.setWidth(50);
+        missileIcon.setHeight(50);
         attIcon.setVisible(false);
 
         table = new Table();
@@ -115,8 +123,8 @@ public class HUD
             }
         });
 
-        table.add(lblScore).expandX().fillX().padLeft(5).left();
-        table.add(livesGroup).width(150).padRight(5).right();
+        table.add(lblScore).expandX().fillX().height(40).padLeft(5).left();
+        table.add(livesGroup).right().width(120).height(40);
         table.row();
         iconGroup.addActor(missileIcon);
         iconGroup.addActor(shieldIcon);
@@ -125,8 +133,8 @@ public class HUD
         table.row();
         stack.add(healthFill);
         stack.add(healthBar);
-        table.add(stack).height(30).expandX().fillX().padLeft(5);
-        table.add(btnPause).height(30).width(150).padRight(5);
+        table.add(stack).height(40).expandX().fillX().padLeft(5);
+        table.add(btnPause).height(40).width(120).padRight(5);
 
         lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
@@ -138,7 +146,7 @@ public class HUD
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        table.debug();
+        //table.debug();
         //deathTable.debug();
     }
 
