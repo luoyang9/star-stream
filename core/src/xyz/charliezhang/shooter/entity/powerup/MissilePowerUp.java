@@ -16,8 +16,8 @@ public class MissilePowerUp extends PowerUp
         sprite.setSize(20, 20);
 
         delay = 0;
-        interval = 1.5f;
-        numRepeats = 6;
+        interval = 1f;
+        numRepeats = 8;
     }
 
     @Override

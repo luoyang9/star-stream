@@ -70,13 +70,13 @@ public class HUD
 
         iconGroup = new HorizontalGroup();
         missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
-        missileIcon.setWidth(20);
+        missileIcon.setWidth(30);
         missileIcon.setVisible(false);
         shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
-        shieldIcon.setWidth(20);
+        shieldIcon.setWidth(30);
         shieldIcon.setVisible(false);
         attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
-        attIcon.setWidth(20);
+        attIcon.setWidth(30);
         attIcon.setVisible(false);
 
         table = new Table();
