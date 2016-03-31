@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Json;
 /**
  * Created by Charlie on 2016-02-05.
  */
-public class FileHandler {
+public class GameData {
     private static FileHandle userData;
     private static UserObject user;
     private static Json json;
