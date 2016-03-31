@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
@@ -77,6 +78,13 @@ public class LoadScreen implements Screen
 
         if(Assets.manager.update())
         {
+            Assets.skin = new Skin();
+            Assets.skin.add("big-font",  Assets.manager.get("big.ttf", BitmapFont.class));
+            Assets.skin.add("medium-font",  Assets.manager.get("medium.ttf", BitmapFont.class));
+            Assets.skin.add("small-font",  Assets.manager.get("small.ttf", BitmapFont.class));
+            Assets.skin.addRegions( Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+            Assets.skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+
             stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {

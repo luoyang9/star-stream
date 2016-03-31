@@ -1,7 +1,9 @@
 package xyz.charliezhang.shooter;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  * Created by Charlie on 2016-03-19.
@@ -19,6 +22,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 public class Assets
 {
     public static final AssetManager manager = new AssetManager();
+    public static Skin skin;
 
     public static void init()
     {
@@ -27,8 +31,7 @@ public class Assets
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
     }
 
-    public static void load()
-    {
+    public static void load() {
         //game background
         manager.load("data/textures/background.png", Texture.class);
         //menu background
@@ -92,20 +95,21 @@ public class Assets
         params.fontFileName = "data/goodtimes.ttf";
         params.fontParameters.size = 50;
         params.fontParameters.color = Color.WHITE;
-        manager.load("menu.ttf", BitmapFont.class, params);
+        manager.load("big.ttf", BitmapFont.class, params);
 
         FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params2.fontFileName = "data/goodtimes.ttf";
         params2.fontParameters.size = 30;
         params2.fontParameters.color = Color.WHITE;
-        manager.load("hud.ttf", BitmapFont.class, params2);
+        manager.load("medium.ttf", BitmapFont.class, params2);
 
         FreetypeFontLoader.FreeTypeFontLoaderParameter params3 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         params3.fontFileName = "data/goodtimes.ttf";
         params3.fontParameters.size = 20;
         params3.fontParameters.color = Color.WHITE;
-        manager.load("levelSelect.ttf", BitmapFont.class, params3);
+        manager.load("small.ttf", BitmapFont.class, params3);
     }
+
 
     public static void dispose()
     {

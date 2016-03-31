@@ -5,14 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.FileHandler;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -46,11 +45,7 @@ public class LevelSelectScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        skin = new Skin();
-        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", Assets.manager.get("menu.ttf"));
-        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+        skin = Assets.skin;
 
         lvlTable = new Table();
 
@@ -59,7 +54,7 @@ public class LevelSelectScreen implements Screen {
         for(int i = 0; i < scoreTables.length; i++)
         {
             scoreTables[i] = new Table();
-            lblScore[i] = new Label("BEST: " + FileHandler.getScore(i+1), skin, "small");
+            lblScore[i] = new Label("BEST: " + GameData.getScore(i+1), skin, "small");
         }
 
         background = Assets.manager.get("data/ui/background.png");

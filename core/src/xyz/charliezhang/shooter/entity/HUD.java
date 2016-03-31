@@ -54,11 +54,7 @@ public class HUD
         stage = new Stage(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        skin = new Skin();
-        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", Assets.manager.get("hud.ttf"));
-        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+        skin = Assets.skin;
 
         healthBar = new Image(Assets.manager.get("data/textures/health.png", Texture.class));
         healthBar.setHeight(40);
@@ -96,11 +92,11 @@ public class HUD
         masterStack.setFillParent(true);
         stage.addActor(masterStack);
 
-        lblScore = new Label("" + manager.getScore(), skin);
+        lblScore = new Label("" + manager.getScore(), skin, "medium");
         lblGameOver = new Label("Game Over", skin);
 
 
-        btnMenu = new TextButton("Back to Menu", skin);
+        btnMenu = new TextButton("Back to Menu", skin, "medium");
         btnMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){

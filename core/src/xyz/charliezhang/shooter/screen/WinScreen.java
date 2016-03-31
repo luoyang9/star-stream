@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.FileHandler;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -69,13 +68,7 @@ public class WinScreen implements Screen {
 
         background = Assets.manager.get("data/ui/background.png");
 
-        skin = new Skin();
-
-        skin.addRegions((TextureAtlas) Assets.manager.get("data/ui/uiskin.atlas"));
-        skin.add("default-font", Assets.manager.get("hud.ttf"));
-        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
-
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+        skin = Assets.skin;
 
         btnMenu = new TextButton("OK", skin);
         btnMenu.addListener(new ClickListener(){
@@ -94,8 +87,8 @@ public class WinScreen implements Screen {
         int livesScore = lives*500;
         int total = score + timeScore + livesScore;
 
-        if(total > FileHandler.getScore(level)) {
-            FileHandler.updateScore(level, total);
+        if(total > GameData.getScore(level)) {
+            GameData.updateScore(level, total);
         }
 
         lblScore = new Label("Score: ", skin);

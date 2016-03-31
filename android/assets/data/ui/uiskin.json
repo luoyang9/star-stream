@@ -6,18 +6,31 @@
 		default: { 
 			down: default-button, 
 			up: default-button, 
-			font: default-font, 
+			font: big-font, 
+			fontColor: white 
+		},
+		small: { 
+			down: default-button, 
+			up: default-button, 
+			font: small-font, 
+			fontColor: white 
+		},
+		medium: { 
+			down: default-button, 
+			up: default-button, 
+			font: medium-font, 
 			fontColor: white 
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		default: { 
-			font: default-font, 
-			fontColor: white 
+			font: big-font
 		},
 		small: {
-			font: small-font,
-			fontColor: white
+			font: small-font
+		},
+		medium: {
+			font: medium-font
 		}
 	}
 }

@@ -9,9 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
@@ -27,6 +25,10 @@ public class OptionsScreen implements Screen {
 
     private Stage stage;
     private Table table;
+
+    private CheckBox soundOn;
+    private TextButton btnBack;
+    private Label lblSound;
 
     private Texture background;
 
@@ -44,14 +46,25 @@ public class OptionsScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        skin = new Skin();
-        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", Assets.manager.get("menu.ttf"));
-        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+        skin = Assets.skin;
+
+        btnBack = new TextButton("Back", skin);
+        btnBack.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                game.setScreen(new MenuScreen(game));
+                dispose();
+                event.stop();
+            }
+        });
 
         background = Assets.manager.get("data/ui/background.png");
 
+
+        table.add(btnBack).width(450).height(200);
+        table.row();
         //table.setDebug(true);
 
         Gdx.input.setInputProcessor(stage);

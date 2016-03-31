@@ -31,7 +31,7 @@ public class MenuScreen implements Screen {
     private Texture background;
 
     private TextButton btnPlay;
-    private TextButton btnSurvival;
+    private TextButton btnShop;
     private TextButton btnOptions;
 
     private Skin skin;
@@ -48,11 +48,7 @@ public class MenuScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        skin = new Skin();
-        skin.addRegions(Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", Assets.manager.get("menu.ttf"));
-        skin.add("small-font", Assets.manager.get("levelSelect.ttf"));
-        skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+        skin = Assets.skin;
 
         background = Assets.manager.get("data/ui/background.png");
 
@@ -64,7 +60,7 @@ public class MenuScreen implements Screen {
         }
 
         btnPlay = new TextButton("Play", skin);
-        btnSurvival = new TextButton("Survival", skin);
+        btnShop = new TextButton("Shop", skin);
         btnOptions = new TextButton("Options", skin);
 
         btnPlay.addListener(new ClickListener() {
@@ -78,12 +74,23 @@ public class MenuScreen implements Screen {
             }
         });
 
+        btnOptions.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                System.out.println("START OPTIONSSCREEN");
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                game.setScreen(new OptionsScreen(game));
+                dispose();
+                event.stop();
+            }
+        });
 
-        table.add(btnPlay).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
+
+        table.add(btnPlay).pad(20).width(384).height(160);
         table.row();
-        table.add(btnSurvival).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
+        table.add(btnShop).pad(20).width(384).height(160);
         table.row();
-        table.add(btnOptions).pad(20).width(stage.getViewport().getWorldWidth()*0.8f).height(stage.getViewport().getWorldHeight()*0.2f);
+        table.add(btnOptions).pad(20).width(384).height(160);
 
         //table.setDebug(true);
 
