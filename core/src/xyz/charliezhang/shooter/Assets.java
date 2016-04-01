@@ -1,9 +1,7 @@
 package xyz.charliezhang.shooter;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -14,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
@@ -91,19 +90,19 @@ public class Assets
         manager.load("data/sounds/explosion.wav", Sound.class);
 
         //game fonts
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        FreeTypeFontLoaderParameter params = new FreeTypeFontLoaderParameter();
         params.fontFileName = "data/goodtimes.ttf";
         params.fontParameters.size = 50;
         params.fontParameters.color = Color.WHITE;
         manager.load("big.ttf", BitmapFont.class, params);
 
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        FreeTypeFontLoaderParameter params2 = new FreeTypeFontLoaderParameter();
         params2.fontFileName = "data/goodtimes.ttf";
         params2.fontParameters.size = 30;
         params2.fontParameters.color = Color.WHITE;
         manager.load("medium.ttf", BitmapFont.class, params2);
 
-        FreetypeFontLoader.FreeTypeFontLoaderParameter params3 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        FreeTypeFontLoaderParameter params3 = new FreeTypeFontLoaderParameter();
         params3.fontFileName = "data/goodtimes.ttf";
         params3.fontParameters.size = 20;
         params3.fontParameters.color = Color.WHITE;

@@ -48,6 +48,8 @@ public class OptionsScreen implements Screen {
 
         skin = Assets.skin;
 
+        soundOn = new CheckBox("Sound On: ", skin);
+
         btnBack = new TextButton("Back", skin);
         btnBack.addListener(new ClickListener(){
             @Override
@@ -64,6 +66,8 @@ public class OptionsScreen implements Screen {
 
 
         table.add(btnBack).width(450).height(200);
+        table.row();
+        table.add(soundOn);
         table.row();
         //table.setDebug(true);
 
