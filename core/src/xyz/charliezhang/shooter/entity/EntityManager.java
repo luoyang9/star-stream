@@ -148,7 +148,7 @@ public class EntityManager
 
 				e.dispose();
 				enemies.removeValue(e, false);
-				Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+				Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
 
 				currATT++;
 				currSHD++;
@@ -260,7 +260,7 @@ public class EntityManager
 						}
 						else
 						{
-							player.setShield(false);
+							player.removeShield();
 						}
 
 					}
@@ -282,7 +282,7 @@ public class EntityManager
 						}
 						else
 						{
-							player.setShield(false);
+							player.removeShield();
 						}
 					}
 				}

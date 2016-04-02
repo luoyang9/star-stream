@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
 /**
@@ -102,18 +104,19 @@ public class HUD
             public void clicked(InputEvent event, float x, float y){
                 dispose();
                 System.out.println("START MENUSCREEN   ");
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 manager.getGame().setScreen(new MenuScreen(manager.getGame()));
                 event.stop();
             }
         });
+        btnMenu.setTouchable(Touchable.disabled);
 
         pauseIcon = new Image(Assets.manager.get("data/textures/pause.png", Texture.class));
         btnPause = new ImageButton(pauseIcon.getDrawable());
         btnPause.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 manager.pause();
                 event.stop();
             }
@@ -202,10 +205,12 @@ public class HUD
         if(b)
         {
             deathTable.addAction(Actions.fadeIn(0.1f));
+            btnMenu.setTouchable(Touchable.enabled);
         }
         else
         {
             deathTable.addAction(Actions.fadeOut(0.1f));
+            btnMenu.setTouchable(Touchable.disabled);
         }
     }
 

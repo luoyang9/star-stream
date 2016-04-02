@@ -67,7 +67,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("START LEVELSELECTSCREEN");
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 game.setScreen(new LevelSelectScreen(game));
                 dispose();
                 event.stop();
@@ -78,7 +78,7 @@ public class MenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("START OPTIONSSCREEN");
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play();
+                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 game.setScreen(new OptionsScreen(game));
                 dispose();
                 event.stop();

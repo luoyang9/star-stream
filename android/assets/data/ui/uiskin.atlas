@@ -11,3 +11,17 @@ default-button
   orig: 820, 280
   offset: 0, 0
   index: -1
+check-on
+  rotate: false
+  xy: 820, 0
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+check-off
+  rotate: false
+  xy: 1020, 0
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1

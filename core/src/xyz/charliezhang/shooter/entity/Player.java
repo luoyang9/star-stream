@@ -1,7 +1,5 @@
 package xyz.charliezhang.shooter.entity;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -21,6 +19,7 @@ import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class Player extends Entity
 {
@@ -166,7 +165,7 @@ public class Player extends Entity
 			Explosion explosion = new Explosion(2);
 			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
 			manager.spawnExplosion(explosion);
-			Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(); //explosion
+			Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
 			if(numLives <= 0)
 			{
 				dead = true;
@@ -242,7 +241,7 @@ public class Player extends Entity
 		{
 			if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
 			{
-				shootSound.play(); //play pew
+				shootSound.play(MusicPlayer.VOLUME); //play pew
 				Laser l1 = new Laser(manager);
 				Laser l2 = new Laser(manager);
 				Laser l3 = new Laser(manager);
@@ -334,11 +333,11 @@ public class Player extends Entity
 	public void setDamage(int d){damage = d;} //set damage
 	public void activatePowerUp(PowerUp powerUp)
 	{
-		if(powerUp instanceof AttackPowerUp) activateAttackPowerUp((AttackPowerUp)powerUp);
+		if(powerUp instanceof AttackPowerUp) activateAttackPowerUp();
 		if(powerUp instanceof MissilePowerUp) activateMissilePowerUp((MissilePowerUp)powerUp);
-		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp((ShieldPowerUp) powerUp);
+		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp();
 	}
-	public void activateAttackPowerUp(AttackPowerUp powerUp)
+	public void activateAttackPowerUp()
 	{
 		if (attLevel < 4) //if att lvl < 3
 			attLevel++; //increase att lvl
@@ -355,8 +354,8 @@ public class Player extends Entity
 		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
 	}
 
-	public void activateShieldPowerUp(ShieldPowerUp powerUp) {
-		shieldUpSound.play();
+	public void activateShieldPowerUp() {
+		shieldUpSound.play(MusicPlayer.VOLUME);
 		shieldOn = true;
 	}
 
@@ -378,16 +377,9 @@ public class Player extends Entity
 	public Timer.Task getMissileTask() {return missileTask;}
 	public boolean isShieldOn() {return shieldOn;}
 	public boolean isSuperAttOn() {return superAttOn;}
-	public void setShield(boolean b) {
-		shieldOn = b;
-		if(b)
-		{
-			shieldUpSound.play();
-		}
-		else
-		{
-			shieldDownSound.play();
-		}
+	public void removeShield() {
+		shieldOn = false;
+		shieldDownSound.play(MusicPlayer.VOLUME);
 	}
 
 	public void setJustTouched(boolean b) {justTouched = b;}

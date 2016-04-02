@@ -1,6 +1,7 @@
 package xyz.charliezhang.shooter.music;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 import java.util.HashMap;
 
@@ -8,6 +9,8 @@ import java.util.HashMap;
  * Created by Charlie on 2016-01-09.
  */
 public class MusicPlayer {
+
+    public static float VOLUME = 1.0f;
 
     private static HashMap<String, Music> musicMap;
 
@@ -35,6 +38,7 @@ public class MusicPlayer {
     {
         stop(name);
         musicMap.get(name).setLooping(true);
+        musicMap.get(name).setVolume(VOLUME);
         musicMap.get(name).play();
     }
 
@@ -50,6 +54,22 @@ public class MusicPlayer {
 
     public static void resume(String name)
     {
+        musicMap.get(name).setVolume(VOLUME);
         musicMap.get(name).play();
+    }
+
+    public static void mute()
+    {
+        VOLUME = 0f;
+        for(HashMap.Entry<String, Music> entry : musicMap.entrySet())
+        {
+            stop(entry.getKey());
+        }
+    }
+
+    public static void unmute(String music)
+    {
+        VOLUME = 1.0f;
+        loop(music);
     }
 }
