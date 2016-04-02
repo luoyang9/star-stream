@@ -1,25 +1,19 @@
 {
-	com.badlogic.gdx.graphics.Color: {
-		white: { a: 1, b: 1, g: 1, r: 1 }
-	},
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		default: { 
 			down: default-button, 
 			up: default-button, 
-			font: big-font, 
-			fontColor: white 
+			font: big-font
 		},
 		small: { 
 			down: default-button, 
 			up: default-button, 
-			font: small-font, 
-			fontColor: white 
+			font: small-font
 		},
 		medium: { 
 			down: default-button, 
 			up: default-button, 
-			font: medium-font, 
-			fontColor: white 
+			font: medium-font
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
@@ -31,6 +25,14 @@
 		},
 		medium: {
 			font: medium-font
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+		default: {
+			checkboxOn: check-on, 
+			checkboxOff: check-off,
+			font: medium-font
+
 		}
 	}
 }
