@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -51,6 +52,7 @@ public class OptionsScreen implements Screen {
 
         soundOn = new CheckBox(" Sound On", skin);
         soundOn.getCells().get(0).size(50, 50);
+        soundOn.setChecked(!GameData.soundOn());
         soundOn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y)
@@ -58,10 +60,12 @@ public class OptionsScreen implements Screen {
                 if(soundOn.isChecked())
                 {
                     MusicPlayer.mute();
+                    GameData.updateSoundOn(false);
                 }
                 else
                 {
                     MusicPlayer.unmute("menu");
+                    GameData.updateSoundOn(true);
                 }
                 event.stop();
             }
