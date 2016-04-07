@@ -11,6 +11,7 @@ import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
 import xyz.charliezhang.shooter.entity.enemies.EnemyLaser;
+import xyz.charliezhang.shooter.entity.player.*;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
@@ -54,7 +55,7 @@ public class EntityManager
 		this.viewport = viewport;
 		this.level = level;
 
-		player = new Player(this);
+		player = new PlayerRed(this);
 		hud = new HUD(this);
 
 		score = 0;

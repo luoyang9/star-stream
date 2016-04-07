@@ -1,11 +1,13 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
 
 /**
  * Created by Charlie on 2015-12-03.
  */
-public class PlayerLaser extends Entity{
+public class PlayerLaser extends Entity {
 
     private EntityManager manager;
 

@@ -1,7 +1,7 @@
 package xyz.charliezhang.shooter;
 
 import com.badlogic.gdx.InputProcessor;
-import xyz.charliezhang.shooter.entity.Player;
+import xyz.charliezhang.shooter.entity.player.Player;
 
 /**
  * Created by Charlie on 2016-03-21.

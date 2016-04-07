@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.entity.player;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameInput;
+import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
@@ -26,22 +27,22 @@ public class Player extends Entity
 	//initial touch
 	private Vector2 iniTouch = new Vector2();
 	private Vector2 syncPos = new Vector2();
-	private GameInput playerInput;
+	protected GameInput playerInput;
 	private boolean justTouched;
 
 	//directions
-	float xdir, ydir;
+	private float xdir, ydir;
 
 	//player assets
-	private Sound shootSound;
+	protected Sound shootSound;
 	private Sound shieldUpSound;
 	private Sound shieldDownSound;
 
 	//player data
-	private int health, maxHealth;
+	protected int health, maxHealth;
 	private int numLives, maxLives;
-	private int damage;
-	private int attLevel;
+	protected int damage;
+	protected int attLevel;
 	private boolean flinching;
 	private boolean controllable;
 	private boolean justControllable;
@@ -51,37 +52,29 @@ public class Player extends Entity
 	//powerup tasks
 	private Task missileTask;
 	private boolean shieldOn;
-	private boolean superAttOn;
-	private long superAttTimer;
-	private long superAttDuration;
+	protected boolean superAttOn;
+	protected long superAttTimer;
+	protected long superAttDuration;
 
 	private Sprite shield;
 
 	//timers
-	private long lastFire, flinchTimer, shootDelay;
+	private long flinchTimer;
+	protected long shootDelay, lastFire;
 	
 	//manager and camera
-	private final EntityManager manager;
+	protected final EntityManager manager;
 	private final OrthographicCamera camera;
 
 	public Player(EntityManager manager) {
 		//manager
 		this.manager = manager;
 		this.camera = (OrthographicCamera)manager.getViewport().getCamera();
-		
-		//set texture atlas and animation to player
-		textureAtlas = Assets.manager.get("data/textures/playerspritesheet.atlas", TextureAtlas.class);
-		animation = new Animation(1/15f, textureAtlas.getRegions());
 
 		shootSound = Assets.manager.get("data/sounds/playershoot.ogg", Sound.class);
 		shieldUpSound = Assets.manager.get("data/sounds/shieldUp.ogg", Sound.class);
 		shieldDownSound = Assets.manager.get("data/sounds/shieldDown.ogg", Sound.class);
-		
-		//set sprite size
-		sprite.setSize(75, 50);
-		
-		//set player starting data
-		shootDelay = 100;
+
 		attLevel = 1;
 		numLives = maxLives = 3;
 		flinching = false;
@@ -97,10 +90,6 @@ public class Player extends Entity
 		initializePowerups();
 
 		playerInput = new GameInput(this);
-
-		//read player stats
-		health = maxHealth = 3;
-		damage = 1;
 	}
 
 	private void initializePowerups()
@@ -235,71 +224,7 @@ public class Player extends Entity
 		direction.set(xdir, ydir);
 	}
 
-	private void shoot()
-	{
-		if(playerInput.isTouching()) //if touching
-		{
-			if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
-			{
-				shootSound.play(MusicPlayer.VOLUME); //play pew
-				Laser l1 = new Laser(manager);
-				Laser l2 = new Laser(manager);
-				Laser l3 = new Laser(manager);
-				Laser l4 = new Laser(manager);
-				Laser l5 = new Laser(manager);
-				Laser l6 = new Laser(manager);
-				Laser l7 = new Laser(manager);
-
-
-				if(attLevel == 2) {
-					l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
-					l1.setDirection(0, 15);
-					manager.spawnLaser(l1);
-					l2.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*0.5f, sprite.getY() + sprite.getHeight());
-					l2.setDirection(0, 15);
-					manager.spawnLaser(l2);
-				}
-				else
-				{
-					l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-					l1.setDirection(0, 15);
-					manager.spawnLaser(l1);
-				}
-
-				if(attLevel >= 3) {
-					l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*2.5f, sprite.getY() + sprite.getHeight());
-					l2.setDirection(0, 15);
-					manager.spawnLaser(l2);
-					l3.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
-					l3.setDirection(0, 15);
-					manager.spawnLaser(l3);
-				}
-
-				if(attLevel >= 4) {
-					l4.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-					l4.setDirection(-2f, 15);
-					manager.spawnLaser(l4);
-					l5.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-					l5.setDirection(2f, 15);
-					manager.spawnLaser(l5);
-				}
-
-				if(superAttOn)
-				{
-					long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-					if(elapsed > superAttDuration) superAttOn = false;
-					l6.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-					l6.setDirection(-4f, 15);
-					manager.spawnLaser(l6);
-					l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-					l7.setDirection(4f, 15);
-					manager.spawnLaser(l7);
-				}
-
-				lastFire = System.currentTimeMillis(); //set new last fire
-			}
-		}
-	}
+	protected void shoot(){}
 
 	@Override
 	public void render(SpriteBatch sb)

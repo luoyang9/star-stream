@@ -12,6 +12,8 @@ import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.enemies.*;
+import xyz.charliezhang.shooter.entity.wave.Wave;
+import xyz.charliezhang.shooter.entity.wave.WaveManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class GameScreen implements Screen

@@ -1,0 +1,13 @@
+
+playerblue.png
+size: 112, 75
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 112, 75
+  orig: 112, 75
+  offset: 0, 0
+  index: -1

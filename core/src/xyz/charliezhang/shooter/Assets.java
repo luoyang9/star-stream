@@ -77,7 +77,8 @@ public class Assets
         manager.load("data/textures/laserG.atlas", TextureAtlas.class);
         manager.load("data/textures/laserR.atlas", TextureAtlas.class);
         //player
-        manager.load("data/textures/playerspritesheet.atlas", TextureAtlas.class);
+        manager.load("data/textures/playerblue.atlas", TextureAtlas.class);
+        manager.load("data/textures/playerred.atlas", TextureAtlas.class);
         //music
         manager.load("data/music/background.ogg", Music.class);
         manager.load("data/music/menu.ogg", Music.class);

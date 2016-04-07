@@ -1,9 +1,9 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Missile extends PlayerLaser
 {

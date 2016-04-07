@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.entity.wave;
 
 import com.badlogic.gdx.utils.Array;
 

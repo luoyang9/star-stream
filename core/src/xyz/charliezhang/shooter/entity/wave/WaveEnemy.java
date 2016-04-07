@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.entity.wave;
 
 /**
  * Created by Charlie on 2015-11-24.

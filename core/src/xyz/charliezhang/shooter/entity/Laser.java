@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.entity.player.PlayerLaser;
 
 public class Laser extends PlayerLaser
 {
