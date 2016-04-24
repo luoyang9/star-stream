@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class UFO extends Enemy
@@ -44,13 +45,13 @@ public class UFO extends Enemy
 	public void update() {
 		super.update();
 
-		if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop && direction.y < 0)
+		if(sprite.getY() <= MainGame.HEIGHT - stop && direction.y < 0)
 		{
 			setDirection(0, 0);
 		}
 
 
-		if(sprite.getY() < manager.getViewport().getWorldHeight())
+		if(sprite.getY() < MainGame.HEIGHT)
 		{
 			if(System.currentTimeMillis() - lastFire >= 2000)
 			{

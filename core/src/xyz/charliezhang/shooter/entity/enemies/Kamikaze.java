@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Kamikaze extends Enemy
@@ -28,7 +29,7 @@ public class Kamikaze extends Enemy
     public void update() {
         super.update();
 
-        if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop)
+        if(sprite.getY() <= MainGame.HEIGHT - stop)
         {
             if(direction.x <= 0) direction.x += 0.05;
             else direction.x -= 0.05;
@@ -39,9 +40,9 @@ public class Kamikaze extends Enemy
 
         if(sprite.getY() < -sprite.getHeight())
         {
-            float newX = MathUtils.random()*manager.getViewport().getWorldWidth();
-            sprite.setPosition(newX, manager.getViewport().getWorldHeight() + 200);
-            direction.x = (-newX+manager.getViewport().getWorldWidth()/2)*0.001f;
+            float newX = MathUtils.random()*MainGame.WIDTH;
+            sprite.setPosition(newX, MainGame.HEIGHT + 200);
+            direction.x = (-newX+MainGame.WIDTH/2)*0.001f; //TODO what does this do??
         }
     }
 

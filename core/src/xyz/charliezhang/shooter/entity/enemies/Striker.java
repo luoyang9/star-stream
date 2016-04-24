@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Striker extends Enemy
@@ -22,6 +23,7 @@ public class Striker extends Enemy
 		damage = 2;
 		score = 75;
 		this.manager = manager;
+
 		intro = true;
 	}
 
@@ -29,17 +31,17 @@ public class Striker extends Enemy
 	public void update() {
 		super.update();
 
-		if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop && intro)
+		if(intro && sprite.getY() <= MainGame.HEIGHT - stop)
 		{
-			setDirection(4, 0);
 			intro = false;
+			setDirection(4, 0);
 		}
 
 		if(sprite.getX() <= 0)
 		{
 			setDirection(4,  0);
 		}
-		else if(sprite.getX() >= manager.getViewport().getWorldWidth() - 50)
+		else if(sprite.getX() >= MainGame.WIDTH - sprite.getWidth())
 		{
 			setDirection(-4, 0);
 		}
@@ -47,7 +49,7 @@ public class Striker extends Enemy
 		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 		
 
-		if(sprite.getY() < manager.getViewport().getWorldHeight())
+		if(sprite.getY() < MainGame.HEIGHT)
 		{
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{

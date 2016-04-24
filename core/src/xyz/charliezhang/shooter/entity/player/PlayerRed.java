@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.Laser;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 /**
@@ -24,14 +23,13 @@ public class PlayerRed extends Player
         sprite.setSize(72, 62);
 
         //set player starting data
-        shootDelay = 100;
+        shootDelay = 500;
 
         //read player stats
         health = maxHealth = 3;
-        damage = 1;
+        damage = 3;
     }
 
-    @Override
     protected void shoot()
     {
         if(playerInput.isTouching()) //if touching
@@ -39,47 +37,45 @@ public class PlayerRed extends Player
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
             {
                 shootSound.play(MusicPlayer.VOLUME); //play pew
-                Laser l1 = new Laser(manager);
-                Laser l2 = new Laser(manager);
-                Laser l3 = new Laser(manager);
-                Laser l4 = new Laser(manager);
-                Laser l5 = new Laser(manager);
-                Laser l6 = new Laser(manager);
-                Laser l7 = new Laser(manager);
+                Laser l1 = new Laser(manager, Laser.ORANGE);
+                Laser l2 = new Laser(manager, Laser.ORANGE);
+                Laser l3 = new Laser(manager, Laser.ORANGE);
+                Laser l4 = new Laser(manager, Laser.ORANGE);
+                Laser l5 = new Laser(manager, Laser.ORANGE);
+                Laser l6 = new Laser(manager, Laser.ORANGE);
+                Laser l7 = new Laser(manager, Laser.ORANGE);
 
 
-                if(attLevel == 2) {
-                    l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
-                    l1.setDirection(0, 15);
-                    manager.spawnLaser(l1);
-                    l2.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*0.5f, sprite.getY() + sprite.getHeight());
-                    l2.setDirection(0, 15);
-                    manager.spawnLaser(l2);
-                }
-                else
-                {
-                    l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-                    l1.setDirection(0, 15);
-                    manager.spawnLaser(l1);
+
+                l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
+                l1.setDirection(0, 15);
+                manager.spawnLaser(l1);
+                l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+                l2.setDirection(2, 15);
+                manager.spawnLaser(l2);
+                l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - l3.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
+                l3.setDirection(-2, 15);
+                manager.spawnLaser(l3);
+
+
+                if(attLevel >= 2) {
+                    l4.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+                    l4.setDirection(3, 15);
+                    manager.spawnLaser(l4);
+                    l5.setPosition(sprite.getX() + sprite.getWidth() / 2 - l5.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
+                    l5.setDirection(-3, 15);
+                    manager.spawnLaser(l5);
                 }
 
                 if(attLevel >= 3) {
-                    l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()*2.5f, sprite.getY() + sprite.getHeight());
-                    l2.setDirection(0, 15);
-                    manager.spawnLaser(l2);
-                    l3.setPosition(sprite.getX() + sprite.getWidth() / 2 + l1.getSprite().getWidth()*1.5f, sprite.getY() + sprite.getHeight());
-                    l3.setDirection(0, 15);
-                    manager.spawnLaser(l3);
+                    l6.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
+                    l6.setDirection(4, 15);
+                    manager.spawnLaser(l6);
+                    l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l7.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
+                    l7.setDirection(-4, 15);
+                    manager.spawnLaser(l7);
                 }
-
-                if(attLevel >= 4) {
-                    l4.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-                    l4.setDirection(-2f, 15);
-                    manager.spawnLaser(l4);
-                    l5.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-                    l5.setDirection(2f, 15);
-                    manager.spawnLaser(l5);
-                }
+                /*
 
                 if(superAttOn)
                 {
@@ -91,7 +87,7 @@ public class PlayerRed extends Player
                     l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
                     l7.setDirection(4f, 15);
                     manager.spawnLaser(l7);
-                }
+                }*/
 
                 lastFire = System.currentTimeMillis(); //set new last fire
             }

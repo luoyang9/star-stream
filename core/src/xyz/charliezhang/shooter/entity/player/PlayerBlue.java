@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.Laser;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 /**
@@ -39,13 +38,13 @@ public class PlayerBlue extends Player
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
             {
                 shootSound.play(MusicPlayer.VOLUME); //play pew
-                Laser l1 = new Laser(manager);
-                Laser l2 = new Laser(manager);
-                Laser l3 = new Laser(manager);
-                Laser l4 = new Laser(manager);
-                Laser l5 = new Laser(manager);
-                Laser l6 = new Laser(manager);
-                Laser l7 = new Laser(manager);
+                Laser l1 = new Laser(manager, Laser.BLUE);
+                Laser l2 = new Laser(manager, Laser.BLUE);
+                Laser l3 = new Laser(manager, Laser.BLUE);
+                Laser l4 = new Laser(manager, Laser.BLUE);
+                Laser l5 = new Laser(manager, Laser.BLUE);
+                Laser l6 = new Laser(manager, Laser.BLUE);
+                Laser l7 = new Laser(manager, Laser.BLUE);
 
 
                 if(attLevel == 2) {
