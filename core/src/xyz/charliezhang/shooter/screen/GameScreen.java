@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Screen;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.*;
@@ -56,7 +57,7 @@ public class GameScreen implements Screen
 		background = new Background();
 		background.setVector(0, -2f);
 
-		manager = new EntityManager(viewport, game, background, level);
+		manager = new EntityManager(viewport, game, background, level, GameData.getPlayerType());
 
 		wmanager = new WaveManager(level);
 

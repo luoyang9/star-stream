@@ -32,7 +32,16 @@
 			checkboxOn: check-on, 
 			checkboxOff: check-off,
 			font: medium-font
-
+		},
+		player0: {
+			checkboxOn: player0-on, 
+			checkboxOff: player0-off,
+			font: medium-font
+		},
+		player1: {
+			checkboxOn: player1-on, 
+			checkboxOff: player1-off,
+			font: medium-font
 		}
 	}
 }

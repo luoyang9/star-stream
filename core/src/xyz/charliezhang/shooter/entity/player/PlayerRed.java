@@ -34,6 +34,16 @@ public class PlayerRed extends Player
     {
         if(playerInput.isTouching()) //if touching
         {
+            if(superAttOn)
+            {
+                shootDelay = 200;
+                long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
+                if(elapsed > superAttDuration)
+                {
+                    superAttOn = false;
+                    shootDelay = 500;
+                }
+            }
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
             {
                 shootSound.play(MusicPlayer.VOLUME); //play pew
@@ -51,10 +61,10 @@ public class PlayerRed extends Player
                 l1.setDirection(0, 15);
                 manager.spawnLaser(l1);
                 l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-                l2.setDirection(2, 15);
+                l2.setDirection(1.5f, 15);
                 manager.spawnLaser(l2);
                 l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - l3.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
-                l3.setDirection(-2, 15);
+                l3.setDirection(-1.5f, 15);
                 manager.spawnLaser(l3);
 
 
@@ -69,25 +79,12 @@ public class PlayerRed extends Player
 
                 if(attLevel >= 3) {
                     l6.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
-                    l6.setDirection(4, 15);
+                    l6.setDirection(4.5f, 15);
                     manager.spawnLaser(l6);
                     l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l7.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
-                    l7.setDirection(-4, 15);
+                    l7.setDirection(-4.5f, 15);
                     manager.spawnLaser(l7);
                 }
-                /*
-
-                if(superAttOn)
-                {
-                    long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-                    if(elapsed > superAttDuration) superAttOn = false;
-                    l6.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-                    l6.setDirection(-4f, 15);
-                    manager.spawnLaser(l6);
-                    l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
-                    l7.setDirection(4f, 15);
-                    manager.spawnLaser(l7);
-                }*/
 
                 lastFire = System.currentTimeMillis(); //set new last fire
             }
