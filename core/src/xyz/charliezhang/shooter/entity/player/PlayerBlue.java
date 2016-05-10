@@ -82,8 +82,6 @@ public class PlayerBlue extends Player
 
                 if(superAttOn)
                 {
-                    long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-                    if(elapsed > superAttDuration) superAttOn = false;
                     l6.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
                     l6.setDirection(-4f, 15);
                     manager.spawnLaser(l6);

@@ -55,7 +55,7 @@ public class EntityManager
 		this.viewport = viewport;
 		this.level = level;
 
-		player = new PlayerRed(this);
+		player = new PlayerBlue(this);
 		hud = new HUD(this);
 
 		score = 0;

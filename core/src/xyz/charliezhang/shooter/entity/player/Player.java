@@ -52,6 +52,9 @@ public class Player extends Entity
 	//powerup tasks
 	private Task missileTask;
 	private boolean shieldOn;
+	private boolean invincibleOn;
+	private long invincibleDuration;
+	private long invincibleTimer;
 	protected boolean superAttOn;
 	protected long superAttTimer;
 	protected long superAttDuration;
@@ -106,6 +109,9 @@ public class Player extends Entity
 			}
 		};
 
+		invincibleOn = false;
+		invincibleDuration = 3000;
+
 		shieldOn = false;
 		shield = new Sprite(Assets.manager.get("data/textures/shield.png", Texture.class));
 		shield.setSize(100, 100);
@@ -123,6 +129,7 @@ public class Player extends Entity
 			controllable = true;
 			justControllable = true;
 			justSpawned = false;
+			activateInvinciblePowerUp();
 		}
 
 
@@ -135,6 +142,9 @@ public class Player extends Entity
 			//fire lasers
 			shoot();
 
+			//check powerups
+			checkPowerUps();
+
 			//check death
 			checkDeath();
 		}
@@ -144,6 +154,22 @@ public class Player extends Entity
 
 		//update shield
 		shield.setPosition(sprite.getX()-(shield.getWidth()-sprite.getWidth())/2, sprite.getY()-(shield.getHeight()-sprite.getHeight())/2);
+	}
+
+	private void checkPowerUps()
+	{
+		long elapsed;
+		if(superAttOn)
+		{
+			elapsed = (System.nanoTime() - superAttTimer) / 1000000;
+			if(elapsed > superAttDuration) superAttOn = false;
+		}
+		if(invincibleOn)
+		{
+			System.out.println("invincible");
+			elapsed = (System.nanoTime() - invincibleTimer) / 1000000;
+			if(elapsed > invincibleDuration) invincibleOn = false;
+		}
 	}
 
 	private void checkDeath()
@@ -273,6 +299,12 @@ public class Player extends Entity
 		}
 	}
 
+	public void activateInvinciblePowerUp()
+	{
+		invincibleOn = true;
+		invincibleTimer = System.nanoTime();
+	}
+
 	public void activateMissilePowerUp(MissilePowerUp powerUp)
 	{
 		missileTask.cancel();
@@ -284,7 +316,13 @@ public class Player extends Entity
 		shieldOn = true;
 	}
 
-	public void modifyHealth(int h) {health += h;} //modify health
+	public void modifyHealth(int h)
+	{
+		if(h < 0 && invincibleOn) {
+			return;
+		}
+		health += h;
+	} //modify health
 	public void modifyLives(int l) //modify Lives
 	{
 		numLives += l;
