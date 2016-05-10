@@ -47,15 +47,40 @@ public class EntityManager
 	private boolean pause;
 
 	private MainGame game;
+
+	public static final int NUM_TYPES = 2;
+	public static final int PLAYER_BLUE = 0;
+	public static final int PLAYER_RED = 1;
+
+	public static String getShipName(int type)
+	{
+		switch(type)
+		{
+			case PLAYER_BLUE: return "Blue Fury";
+			case PLAYER_RED: return "Red Dragon";
+			default: return "Something went wrong...";
+		}
+	}
 	
-	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
+	public EntityManager(Viewport viewport, MainGame game, Background background, int level, int playerType)
 	{
 		this.game = game;
 		this.background = background;
 		this.viewport = viewport;
 		this.level = level;
 
-		player = new PlayerBlue(this);
+		switch (playerType)
+		{
+			case PLAYER_BLUE:
+				player = new PlayerBlue(this);
+				break;
+			case PLAYER_RED:
+				player = new PlayerRed(this);
+				break;
+			default:
+				player = new PlayerBlue(this);
+		}
+
 		hud = new HUD(this);
 
 		score = 0;

@@ -25,3 +25,31 @@ check-off
   orig: 200, 200
   offset: 0, 0
   index: -1
+player0-on
+  rotate: false
+  xy: 0, 280
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+player0-off
+  rotate: false
+  xy: 120, 280
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+player1-on
+  rotate: false
+  xy: 240, 280
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+player1-off
+  rotate: false
+  xy: 360, 280
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1

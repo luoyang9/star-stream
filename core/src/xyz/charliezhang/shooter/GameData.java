@@ -3,6 +3,8 @@ package xyz.charliezhang.shooter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 /**
@@ -45,9 +47,26 @@ public class GameData {
         userData.writeString(json.toJson(user), false);
     }
 
+    public static void setPlayerType(int type)
+    {
+        if(user.getAvailableTypes()[type])
+        {
+            user.setPlayerType(type);
+            userData.writeString(json.toJson(user), false);
+        }
+    }
+
     public static int getScore(int level)
     {
         return user.getScore(level-1);
+    }
+    public static int getPlayerType()
+    {
+        return user.getPlayerType();
+    }
+    public static boolean[] getAvailableTypes()
+    {
+        return user.getAvailableTypes();
     }
     public static boolean soundOn()
     {
@@ -57,16 +76,26 @@ public class GameData {
 
     private static class UserObject {
         private int[] score;
+        private boolean[] availableTypes;
+        private int playerType;
         private boolean soundOn;
 
         public UserObject()
         {
             score = new int[MainGame.NUM_LEVELS];
+            availableTypes = new boolean[EntityManager.NUM_TYPES];
             soundOn = true;
             for(int i = 0; i < MainGame.NUM_LEVELS; i++)
             {
                 score[i] = 0;
             }
+            for(int i = 0; i < EntityManager.NUM_TYPES; i++)
+            {
+                availableTypes[i] = true;
+            }
+            availableTypes[EntityManager.PLAYER_BLUE] = true;
+            availableTypes[EntityManager.PLAYER_RED] = true;
+            playerType = EntityManager.PLAYER_BLUE;
         }
 
         public void setScore(int index, int val)
@@ -74,11 +103,17 @@ public class GameData {
             score[index] = val;
         }
         public void setSoundOn(boolean b) {soundOn = b;}
+        public void setPlayerType(int type) {playerType = type;}
 
         public int getScore(int index)
         {
             return score[index];
         }
+        public int getPlayerType()
+        {
+            return playerType;
+        }
+        public boolean[] getAvailableTypes() {return availableTypes;}
         public boolean soundOn() {return soundOn;}
     }
 }
