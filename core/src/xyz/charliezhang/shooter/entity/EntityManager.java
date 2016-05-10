@@ -278,7 +278,7 @@ public class EntityManager
 			{
 				if(e.getBounds().overlaps(player.getBounds()))
 				{
-					if(!player.isFlinching())
+					if(!player.isFlinching() || player.isInvincible())
 					{
 						if(!player.isShieldOn()) {
 							player.modifyHealth(-e.getDamage());

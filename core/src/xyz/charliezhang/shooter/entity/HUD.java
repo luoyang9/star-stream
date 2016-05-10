@@ -217,6 +217,8 @@ public class HUD
     public void death()
     {
         lblGameOver.setVisible(true);
+        btnPause.setTouchable(Touchable.disabled);
+        btnMenu.setTouchable(Touchable.enabled);
         deathTable.addAction(Actions.delay(2, Actions.fadeIn(1)));
     }
 

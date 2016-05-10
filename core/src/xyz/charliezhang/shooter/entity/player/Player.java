@@ -78,7 +78,7 @@ public class Player extends Entity
 		shieldUpSound = Assets.manager.get("data/sounds/shieldUp.ogg", Sound.class);
 		shieldDownSound = Assets.manager.get("data/sounds/shieldDown.ogg", Sound.class);
 
-		attLevel = 1;
+		attLevel = 4;
 		numLives = maxLives = 3;
 		flinching = false;
 		controllable = false;
@@ -129,7 +129,7 @@ public class Player extends Entity
 			controllable = true;
 			justControllable = true;
 			justSpawned = false;
-			activateInvinciblePowerUp();
+			setFlinching(true);
 		}
 
 
@@ -316,13 +316,7 @@ public class Player extends Entity
 		shieldOn = true;
 	}
 
-	public void modifyHealth(int h)
-	{
-		if(h < 0 && invincibleOn) {
-			return;
-		}
-		health += h;
-	} //modify health
+	public void modifyHealth(int h){ health += h; } //modify health
 	public void modifyLives(int l) //modify Lives
 	{
 		numLives += l;
@@ -334,6 +328,7 @@ public class Player extends Entity
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
 	public InputProcessor getInputProcessor() {return playerInput;}
+	public boolean isInvincible() {return invincibleOn;}
 	public boolean isFlinching() {return flinching; } //is flinching?
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?

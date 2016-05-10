@@ -61,7 +61,7 @@ public class GameScreen implements Screen
 
 		wmanager = new WaveManager(level);
 
-		enemyWave = 0;
+		enemyWave = 7;
 		enemyCount = 0;
 		notSpawned = false;
 
