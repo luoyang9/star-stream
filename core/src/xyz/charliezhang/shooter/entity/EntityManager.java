@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
@@ -62,14 +63,14 @@ public class EntityManager
 		}
 	}
 	
-	public EntityManager(Viewport viewport, MainGame game, Background background, int level, int playerType)
+	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
 	{
 		this.game = game;
 		this.background = background;
 		this.viewport = viewport;
 		this.level = level;
 
-		switch (playerType)
+		switch (GameData.getPlayerType())
 		{
 			case PLAYER_BLUE:
 				player = new PlayerBlue(this);
