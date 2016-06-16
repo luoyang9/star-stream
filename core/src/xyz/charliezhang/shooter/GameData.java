@@ -1,6 +1,7 @@
 package xyz.charliezhang.shooter;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import xyz.charliezhang.shooter.entity.Entity;
@@ -15,6 +16,7 @@ public class GameData {
     private static UserObject user;
     private static Json json;
 
+    public static Preferences prefs = Gdx.app.getPreferences("My Preferences");
 
     public static void init()
     {
@@ -27,11 +29,6 @@ public class GameData {
             user = new UserObject();
             userData.writeString(json.toJson(user), false);
         }
-
-        if(!user.soundOn)
-        {
-            MusicPlayer.mute();
-        }
     }
 
 
@@ -43,7 +40,6 @@ public class GameData {
 
     public static void updateSoundOn(boolean b)
     {
-        user.setSoundOn(b);
         userData.writeString(json.toJson(user), false);
     }
 
@@ -68,23 +64,17 @@ public class GameData {
     {
         return user.getAvailableTypes();
     }
-    public static boolean soundOn()
-    {
-        return user.soundOn();
-    }
 
 
     private static class UserObject {
         private int[] score;
         private boolean[] availableTypes;
         private int playerType;
-        private boolean soundOn;
 
         public UserObject()
         {
             score = new int[MainGame.NUM_LEVELS];
             availableTypes = new boolean[EntityManager.NUM_TYPES];
-            soundOn = true;
             for(int i = 0; i < MainGame.NUM_LEVELS; i++)
             {
                 score[i] = 0;
@@ -102,7 +92,6 @@ public class GameData {
         {
             score[index] = val;
         }
-        public void setSoundOn(boolean b) {soundOn = b;}
         public void setPlayerType(int type) {playerType = type;}
 
         public int getScore(int index)
@@ -114,6 +103,5 @@ public class GameData {
             return playerType;
         }
         public boolean[] getAvailableTypes() {return availableTypes;}
-        public boolean soundOn() {return soundOn;}
     }
 }
