@@ -146,27 +146,27 @@ public class WinScreen implements Screen {
         //animation
         if(animScore < score)
         {
-            animScore+=5;
+            animScore+=10;
             lblScoreValue.setText(" " +animScore);
         }
         else if(animLivesScore < livesScore)
         {
-            animLivesScore+=5;
+            animLivesScore+=10;
             lblLivesValue.setText(" " + animLivesScore);
         }
         else if(animTimeScore < timeScore)
         {
-            animTimeScore+=5;
+            animTimeScore+=10;
             lblTimeValue.setText(timeMod + animTimeScore);
         }
         else if(animTimeScore > timeScore)
         {
-            animTimeScore-=5;
+            animTimeScore-=10;
             lblTimeValue.setText(timeMod + animTimeScore);
         }
         else if(animTotal < total)
         {
-            animTotal+=5;
+            animTotal+=10;
             lblTotalValue.setText(" " + animTotal);
         }
 

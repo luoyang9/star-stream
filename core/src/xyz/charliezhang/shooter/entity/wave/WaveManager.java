@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 public class WaveManager
 {
-    private Array<Wave> waves;
+    private Level level;
 
     public static final int UFO = 1;
     public static final int ICARUS = 2;
@@ -16,40 +18,38 @@ public class WaveManager
     public static final int KAMIKAZE = 5;
     public static final int ASTEROID = 6;
 
-    public WaveManager(int level)
+    public WaveManager(int levelNum)
     {
-        waves = new Array<Wave>();
-        createWaves(level);
+        level = new Level();
+        createWaves(levelNum);
     }
 
     public Wave getWave(int enemyWave)
     {
-        if(enemyWave <= waves.size) return waves.get(enemyWave-1);
+        if(enemyWave <= level.getNumWaves()) return level.getWave(enemyWave-1);
         else return new Wave();
     }
 
     private Wave getRandomWave(int enemyWave)
     { //todo generate random waves based on enemy wave number
-        int maxWaves = waves.size;
-        return waves.get(enemyWave);
+        int maxWaves = level.getNumWaves();
+        return level.getWave(enemyWave);
     }
 
-    private void createWaves(int level)
+    private void createWaves(int levelNum)
     {
-        FileHandle handle = Gdx.files.internal("data/waves/level" + level + ".wvs");
-        String temp = handle.readString();
-        String[] waveJson = temp.split(";");
-        Json json = new Json();
-        json.setElementType(Wave.class, "enemies", WaveEnemy.class);
+        FileHandle handle = Gdx.files.internal("data/waves/level" + levelNum + ".wvs");
+        String levelJson = handle.readString();
 
-        for (String aWaveJson : waveJson) {
-            Wave wave = json.fromJson(Wave.class, aWaveJson);
-            waves.add(wave);
-        }
+        Json json = new Json();
+        json.addClassTag("wave", Wave.class);
+        json.addClassTag("enemy", WaveEnemy.class);
+
+        level = json.fromJson(Level.class, levelJson);
     }
 
     public boolean allWavesCleared(int enemyWave)
     {
-        return enemyWave > waves.size;
+        return enemyWave > level.getNumWaves();
     }
 }

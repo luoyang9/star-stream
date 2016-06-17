@@ -60,9 +60,12 @@ public class GameScreen implements Screen
 
 		wmanager = new WaveManager(level);
 
-		enemyWave = 7;
+		enemyWave = 1;
 		enemyCount = 0;
-		notSpawned = false;
+		notSpawned = true;
+
+		currentWave = wmanager.getWave(enemyWave); //load wave 1
+		start = System.nanoTime(); //start timer
 
 		MusicPlayer.loadMusic("game", Assets.manager.get("data/music/background.ogg", Music.class));
 		MusicPlayer.loadMusic("win", Assets.manager.get("data/music/win.mp3", Music.class));
@@ -87,8 +90,10 @@ public class GameScreen implements Screen
 			}
 		}
 
-		if(manager.getEnemies().size <= 0) //wave is done
+		if(enemyCount >= currentWave.getNumEnemies() && manager.getEnemies().size <= 0) //all enemies cleared, wave is done
 		{
+			enemyWave++;
+
 			//check player won
 			if(wmanager.allWavesCleared(enemyWave) && !win)
 			{
@@ -97,12 +102,12 @@ public class GameScreen implements Screen
 				manager.win();
 				win = true;
 			}
-			else if(!win)
+			else if(!win) //player hasn't won yet, next wave spawn
 			{
-				enemyWave++;
+				enemyCount=0;
 				notSpawned = true;
 				currentWave = wmanager.getWave(enemyWave);
-				start = 0;
+				start = System.nanoTime();
 			}
 		}
 		if(notSpawned && !win)
@@ -155,10 +160,10 @@ public class GameScreen implements Screen
 
 	private void spawnWave()
 	{
+		System.out.println(enemyCount);
 		if(enemyCount >= currentWave.getNumEnemies()) //all enemies spawned
 		{
 			notSpawned = false;
-			enemyCount=0;
 			return;
 		}
 
@@ -166,11 +171,11 @@ public class GameScreen implements Screen
 		spawnDelay = currentWave.getEnemy(enemyCount).getDelay();
 		if(elapsed >= spawnDelay)
 		{
-			System.out.println(elapsed + " ms delay to spawn " + currentWave.getEnemy(enemyCount).getEnemyCode());
+			System.out.println("spawning " + currentWave.getEnemy(enemyCount).getId() + " after a delay of " + elapsed);
 			//spawn next enemy
 			start = System.nanoTime();
 			Enemy e;
-			switch(currentWave.getEnemy(enemyCount).getEnemyCode())
+			switch(currentWave.getEnemy(enemyCount).getId())
 			{
 				case WaveManager.UFO  : e = new UFO(manager, (int)(Math.random()*4 + 1));
 					break;
