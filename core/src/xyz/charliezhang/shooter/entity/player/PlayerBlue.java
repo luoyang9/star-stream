@@ -6,9 +6,6 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2016-04-06.
- */
 public class PlayerBlue extends Player
 {
     public PlayerBlue(EntityManager manager)
@@ -27,7 +24,7 @@ public class PlayerBlue extends Player
 
         //read player stats
         health = maxHealth = 3;
-        damage = 1;
+        damage = 10;
     }
 
     @Override

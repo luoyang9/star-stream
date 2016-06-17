@@ -11,8 +11,6 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.*;
-import xyz.charliezhang.shooter.entity.enemies.*;
-import xyz.charliezhang.shooter.entity.wave.Wave;
 import xyz.charliezhang.shooter.entity.wave.WaveManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
@@ -24,25 +22,14 @@ public class GameScreen implements Screen
 	private WaveManager wmanager;
 	private Background background;
 	private int level;
+	private boolean win;
 
 	private MainGame game;
-
-	private int enemyWave;
-	private boolean notSpawned;
-
-	private Wave currentWave;
-	private int enemyCount;
-	private int spawnDelay;
-	private long start;
-
-	private boolean win;
 
 	public GameScreen(MainGame game, int level)
 	{
 		this.game = game;
 		this.level = level;
-
-		win = false;
 	}
 
 	@Override
@@ -57,15 +44,10 @@ public class GameScreen implements Screen
 		background.setVector(0, -2f);
 
 		manager = new EntityManager(viewport, game, background, level);
+		wmanager = new WaveManager(level, manager);
+		wmanager.spawnNextWave();
 
-		wmanager = new WaveManager(level);
-
-		enemyWave = 1;
-		enemyCount = 0;
-		notSpawned = true;
-
-		currentWave = wmanager.getWave(enemyWave); //load wave 1
-		start = System.nanoTime(); //start timer
+		win = false;
 
 		MusicPlayer.loadMusic("game", Assets.manager.get("data/music/background.ogg", Music.class));
 		MusicPlayer.loadMusic("win", Assets.manager.get("data/music/win.mp3", Music.class));
@@ -76,7 +58,9 @@ public class GameScreen implements Screen
 
 		camera.update();
 		manager.update(delta);
+		wmanager.update();
 
+		//if game is paused
 		if(manager.isPaused()) return;
 
 		background.update();
@@ -90,29 +74,16 @@ public class GameScreen implements Screen
 			}
 		}
 
-		if(enemyCount >= currentWave.getNumEnemies() && manager.getEnemies().size <= 0) //all enemies cleared, wave is done
+		if(manager.getEnemies().size == 0 && !wmanager.isSpawning() && !win) //all enemies spawned and killed
 		{
-			enemyWave++;
-
-			//check player won
-			if(wmanager.allWavesCleared(enemyWave) && !win)
+			if(!wmanager.spawnNextWave()) //spawn next wave
 			{
+				//there is no more waves, you win
 				MusicPlayer.stop("game");
 				MusicPlayer.loop("win");
 				manager.win();
 				win = true;
 			}
-			else if(!win) //player hasn't won yet, next wave spawn
-			{
-				enemyCount=0;
-				notSpawned = true;
-				currentWave = wmanager.getWave(enemyWave);
-				start = System.nanoTime();
-			}
-		}
-		if(notSpawned && !win)
-		{
-			spawnWave();
 		}
 	}
 	
@@ -157,46 +128,4 @@ public class GameScreen implements Screen
 	public void hide() {
 
 	}
-
-	private void spawnWave()
-	{
-		System.out.println(enemyCount);
-		if(enemyCount >= currentWave.getNumEnemies()) //all enemies spawned
-		{
-			notSpawned = false;
-			return;
-		}
-
-		long elapsed = (System.nanoTime() - start) / 1000000;
-		spawnDelay = currentWave.getEnemy(enemyCount).getDelay();
-		if(elapsed >= spawnDelay)
-		{
-			System.out.println("spawning " + currentWave.getEnemy(enemyCount).getId() + " after a delay of " + elapsed);
-			//spawn next enemy
-			start = System.nanoTime();
-			Enemy e;
-			switch(currentWave.getEnemy(enemyCount).getId())
-			{
-				case WaveManager.UFO  : e = new UFO(manager, (int)(Math.random()*4 + 1));
-					break;
-				case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*3 + 1));
-					break;
-				case WaveManager.SKULLINATOR: e = new Skullinator(manager);
-					break;
-				case WaveManager.STRIKER: e = new Striker(manager);
-					break;
-				case WaveManager.KAMIKAZE: e = new Kamikaze(manager);
-					break;
-				case WaveManager.ASTEROID: e = new Asteroid(manager);
-					break;
-				default: e = new UFO(manager, (int)(Math.random()*4 + 1));
-			}
-			e.setPosition(currentWave.getEnemy(enemyCount).getX()*viewport.getWorldWidth() - e.getSprite().getWidth()/2, viewport.getWorldHeight() + currentWave.getEnemy(enemyCount).getY());
-			e.setDirection(currentWave.getEnemy(enemyCount).getDx(), currentWave.getEnemy(enemyCount).getDy());
-			e.setStop(currentWave.getEnemy(enemyCount).getStop());
-			manager.spawnEnemy(e);
-			enemyCount++;
-		}
-	}
-
 }
