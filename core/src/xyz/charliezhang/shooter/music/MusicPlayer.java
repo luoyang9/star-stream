@@ -1,7 +1,10 @@
 package xyz.charliezhang.shooter.music;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import xyz.charliezhang.shooter.GameData;
 
 import java.util.HashMap;
 
@@ -13,10 +16,12 @@ public class MusicPlayer {
     public static float VOLUME = 1.0f;
 
     private static HashMap<String, Music> musicMap;
-
     public static void init()
     {
         musicMap = new HashMap<String, Music>();
+        if(!GameData.prefs.getBoolean("soundOn", true)) {
+            mute();
+        }
     }
 
     public static void loadMusic(String name, Music music)
