@@ -19,10 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-11-29.
- */
 public class LoadScreen implements Screen
 {
     private MainGame game;
@@ -84,6 +82,9 @@ public class LoadScreen implements Screen
             Assets.skin.add("small-font",  Assets.manager.get("small.ttf", BitmapFont.class));
             Assets.skin.addRegions( Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
             Assets.skin.load(Gdx.files.internal("data/ui/uiskin.json"));
+
+            //music player
+            MusicPlayer.load();
 
             stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
                 @Override

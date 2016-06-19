@@ -14,10 +14,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2016-03-19.
- */
 public class Assets
 {
     public static final AssetManager manager = new AssetManager();

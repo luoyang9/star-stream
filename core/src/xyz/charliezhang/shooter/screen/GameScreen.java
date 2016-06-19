@@ -1,32 +1,30 @@
 package xyz.charliezhang.shooter.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Screen;
-import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.background.Background;
 import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.wave.WaveManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-public class GameScreen implements Screen
+class GameScreen implements Screen
 {
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private EntityManager manager;
-	private WaveManager wmanager;
+	private WaveManager waveManager;
 	private Background background;
 	private int level;
 	private boolean win;
 
 	private MainGame game;
 
-	public GameScreen(MainGame game, int level)
+	GameScreen(MainGame game, int level)
 	{
 		this.game = game;
 		this.level = level;
@@ -44,13 +42,11 @@ public class GameScreen implements Screen
 		background.setVector(0, -2f);
 
 		manager = new EntityManager(viewport, game, background, level);
-		wmanager = new WaveManager(level, manager);
-		wmanager.spawnNextWave();
+		waveManager = new WaveManager(level, manager);
+		waveManager.spawnNextWave();
 
 		win = false;
 
-		MusicPlayer.loadMusic("game", Assets.manager.get("data/music/background.ogg", Music.class));
-		MusicPlayer.loadMusic("win", Assets.manager.get("data/music/win.mp3", Music.class));
 		MusicPlayer.loop("game");
 	}
 
@@ -58,7 +54,7 @@ public class GameScreen implements Screen
 
 		camera.update();
 		manager.update(delta);
-		wmanager.update();
+		waveManager.update();
 
 		//if game is paused
 		if(manager.isPaused()) return;
@@ -69,17 +65,17 @@ public class GameScreen implements Screen
 		{
 			if(manager.getPlayer().getPosition().y > viewport.getWorldHeight() + 500)
 			{
-				game.setScreen(new WinScreen(game, manager.getScore(), manager.getPlayer().getLives(), (int)((System.nanoTime() - manager.getTime()) / 1000000000), level));
+				game.setScreen(new WinScreen(game, manager.getScore(), manager.getPlayer().getLives(), manager.getTime(), level));
 				dispose();
 			}
+			return;
 		}
 
-		if(manager.getEnemies().size == 0 && !wmanager.isSpawning() && !win) //all enemies spawned and killed
+		if(manager.getEnemies().size == 0 && !waveManager.isSpawning()) //all enemies spawned and killed
 		{
-			if(!wmanager.spawnNextWave()) //spawn next wave
+			if(!waveManager.spawnNextWave()) //spawn next wave
 			{
 				//there is no more waves, you win
-				MusicPlayer.stop("game");
 				MusicPlayer.loop("win");
 				manager.win();
 				win = true;

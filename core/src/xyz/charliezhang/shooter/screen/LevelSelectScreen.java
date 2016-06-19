@@ -15,10 +15,7 @@ import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
-public class LevelSelectScreen implements Screen {
+class LevelSelectScreen implements Screen {
 
     private MainGame game;
 
@@ -33,7 +30,7 @@ public class LevelSelectScreen implements Screen {
     private TextButton btnBack;
     private Label[] lblScore;
 
-    public LevelSelectScreen(MainGame game){this.game = game;}
+    LevelSelectScreen(MainGame game){this.game = game;}
 
     @Override
     public void show() {
@@ -79,10 +76,8 @@ public class LevelSelectScreen implements Screen {
             btnTemp.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y){
-                    MusicPlayer.stop("menu");
                     Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                     game.setScreen(new GameScreen(game, level+1));
-                    System.out.println("START GAMESCREEN");
                     dispose();
                     event.stop();
                 }

@@ -1,21 +1,17 @@
 package xyz.charliezhang.shooter.music;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
+import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 
 import java.util.HashMap;
 
-/**
- * Created by Charlie on 2016-01-09.
- */
 public class MusicPlayer {
 
     public static float VOLUME = 1.0f;
 
     private static HashMap<String, Music> musicMap;
+    private static String currentMusic;
     public static void init()
     {
         musicMap = new HashMap<String, Music>();
@@ -24,14 +20,15 @@ public class MusicPlayer {
         }
     }
 
-    public static void loadMusic(String name, Music music)
-    {
-        musicMap.put(name, music);
+    public static void load() {
+        musicMap.put("menu", Assets.manager.get("data/music/menu.ogg", Music.class));
+        musicMap.put("game", Assets.manager.get("data/music/background.ogg", Music.class));
+        musicMap.put("win", Assets.manager.get("data/music/win.mp3", Music.class));
     }
 
-    public static boolean loaded(String name)
+    private static void loadMusic(String name, Music music)
     {
-        return musicMap.containsKey(name);
+        musicMap.put(name, music);
     }
 
     public static boolean isPlaying(String name)
@@ -41,7 +38,10 @@ public class MusicPlayer {
 
     public static void loop(String name)
     {
-        stop(name);
+        if(currentMusic != null && !currentMusic.isEmpty()) {
+            stop(currentMusic);
+        }
+        currentMusic = name;
         musicMap.get(name).setLooping(true);
         musicMap.get(name).setVolume(VOLUME);
         musicMap.get(name).play();
@@ -50,6 +50,7 @@ public class MusicPlayer {
     public static void stop(String name)
     {
         musicMap.get(name).stop();
+        currentMusic = null;
     }
 
     public static void pause(String name)
@@ -66,9 +67,8 @@ public class MusicPlayer {
     public static void mute()
     {
         VOLUME = 0f;
-        for(HashMap.Entry<String, Music> entry : musicMap.entrySet())
-        {
-            stop(entry.getKey());
+        if(currentMusic != null && !currentMusic.isEmpty()) {
+            stop(currentMusic);
         }
     }
 

@@ -18,10 +18,7 @@ import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
-public class WinScreen implements Screen {
+class WinScreen implements Screen {
 
     private MainGame game;
 
@@ -59,7 +56,7 @@ public class WinScreen implements Screen {
 
     private int level;
 
-    public WinScreen(MainGame game, int score, int lives, int time, int level)
+    WinScreen(MainGame game, int score, int lives, int time, int level)
     {
         this.game = game;
         this.score = score;
@@ -87,7 +84,6 @@ public class WinScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                MusicPlayer.stop("win");
                 game.setScreen(new MenuScreen(game));
                 dispose();
                 event.stop();

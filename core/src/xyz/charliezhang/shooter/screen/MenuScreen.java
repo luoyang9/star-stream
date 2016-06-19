@@ -18,9 +18,6 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
 public class MenuScreen implements Screen {
 
     private MainGame game;
@@ -52,9 +49,6 @@ public class MenuScreen implements Screen {
 
         background = Assets.manager.get("data/ui/background.png");
 
-        if(!MusicPlayer.loaded("menu")) {
-            MusicPlayer.loadMusic("menu", Assets.manager.get("data/music/menu.ogg", Music.class));
-        }
         if(!MusicPlayer.isPlaying("menu")) {
             MusicPlayer.loop("menu");
         }
@@ -66,7 +60,6 @@ public class MenuScreen implements Screen {
         btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                System.out.println("START LEVELSELECTSCREEN");
                 Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 game.setScreen(new LevelSelectScreen(game));
                 dispose();
@@ -77,7 +70,6 @@ public class MenuScreen implements Screen {
         btnShop.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                System.out.println("START SHOPSCREEN");
                 Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 game.setScreen(new ShopScreen(game));
                 dispose();
@@ -88,7 +80,6 @@ public class MenuScreen implements Screen {
         btnOptions.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                System.out.println("START OPTIONSSCREEN");
                 Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
                 game.setScreen(new OptionsScreen(game));
                 dispose();

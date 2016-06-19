@@ -43,7 +43,7 @@ public class EntityManager
 	private boolean deathProcedure;
 
 	private int score;
-	private long time;
+	private long startTime;
 
 	private boolean pause;
 
@@ -85,7 +85,7 @@ public class EntityManager
 		hud = new HUD(this);
 
 		score = 0;
-		time = System.nanoTime();
+		startTime = System.nanoTime();
 		deathProcedure = false;
 
 		nextATT = (int) (Math.random()*2) + 3;
@@ -375,13 +375,13 @@ public class EntityManager
 	public Array<Enemy> getEnemies() {
 		return enemies;
 	}
+	public int getTime() { return (int)(System.nanoTime() - startTime / 1000000000); }
 	
-	public Player getPlayer() {return player;}
-	public MainGame getGame() {return game;}
-	public Background getBackground() {return background;}
-	public int getScore() {return score;}
-	public long getTime() {return time;}
-	public Viewport getViewport() {return viewport;}
-	public boolean isPaused() {return pause;}
+	public Player getPlayer() { return player; }
+	public MainGame getGame() { return game; }
+	public Background getBackground() { return background; }
+	public int getScore() { return score; }
+	public Viewport getViewport() { return viewport; }
+	public boolean isPaused() { return pause; }
 }
 
