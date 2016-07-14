@@ -31,7 +31,6 @@ public class EntityManager
 	private Background background;
 	private HUD hud;
 	private Viewport viewport;
-	private int level;
 
 	private int nextATT;
 	private int currATT;
@@ -50,8 +49,8 @@ public class EntityManager
 	private MainGame game;
 
 	public static final int NUM_TYPES = 2;
-	public static final int PLAYER_BLUE = 0;
-	public static final int PLAYER_RED = 1;
+	public static final int PLAYER_BLUE = 1;
+	public static final int PLAYER_RED = 2;
 
 	public static String getShipName(int type)
 	{
@@ -63,14 +62,13 @@ public class EntityManager
 		}
 	}
 	
-	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
+	public EntityManager(Viewport viewport, MainGame game, Background background)
 	{
 		this.game = game;
 		this.background = background;
 		this.viewport = viewport;
-		this.level = level;
 
-		switch (GameData.getPlayerType())
+		switch (GameData.prefs.getInteger("playerType"))
 		{
 			case PLAYER_BLUE:
 				player = new PlayerBlue(this);
@@ -369,7 +367,7 @@ public class EntityManager
 	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}
 	public void spawnLaser(PlayerLaser l) {lasers.add(l);}
 	public void spawnEnemyLaser(EnemyLaser el) {enemyLasers.add(el);}
-	public void spawnPowerUp(PowerUp p) {powerups.add(p);}
+	private void spawnPowerUp(PowerUp p) {powerups.add(p);}
 	public void spawnExplosion(Explosion e) {explosions.add(e);}
 	
 	public Array<Enemy> getEnemies() {

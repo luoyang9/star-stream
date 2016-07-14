@@ -8,100 +8,31 @@ import xyz.charliezhang.shooter.entity.Entity;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2016-02-05.
- */
 public class GameData {
-    private static FileHandle userData;
-    private static UserObject user;
-    private static Json json;
 
     public static Preferences prefs = Gdx.app.getPreferences("My Preferences");
 
-    public static void init()
+    static void init()
     {
-        json = new Json();
-        json.setUsePrototypes(false);
-        userData = Gdx.files.local("userData.json");
-        if (userData.exists()) {
-            user = json.fromJson(UserObject.class, userData.readString());
-        } else {
-            user = new UserObject();
-            userData.writeString(json.toJson(user), false);
+        if (!prefs.getBoolean("init")) {
+            initPrefs();
         }
     }
 
-
-    public static void updateScore(int level, int score)
-    {
-        user.setScore(level-1, score);
-        userData.writeString(json.toJson(user), false);
-    }
-
-    public static void updateSoundOn(boolean b)
-    {
-        userData.writeString(json.toJson(user), false);
-    }
-
-    public static void setPlayerType(int type)
-    {
-        if(user.getAvailableTypes()[type])
-        {
-            user.setPlayerType(type);
-            userData.writeString(json.toJson(user), false);
+    private static void initPrefs() {
+        prefs.putBoolean("init", true);
+        prefs.putBoolean("soundOn", true);
+        for(int i = 0; i < MainGame.NUM_LEVELS; i++) {
+            prefs.putInteger("level-" + (i+1), 0);
         }
-    }
-
-    public static int getScore(int level)
-    {
-        return user.getScore(level-1);
-    }
-    public static int getPlayerType()
-    {
-        return user.getPlayerType();
-    }
-    public static boolean[] getAvailableTypes()
-    {
-        return user.getAvailableTypes();
-    }
-
-
-    private static class UserObject {
-        private int[] score;
-        private boolean[] availableTypes;
-        private int playerType;
-
-        public UserObject()
-        {
-            score = new int[MainGame.NUM_LEVELS];
-            availableTypes = new boolean[EntityManager.NUM_TYPES];
-            for(int i = 0; i < MainGame.NUM_LEVELS; i++)
-            {
-                score[i] = 0;
-            }
-            for(int i = 0; i < EntityManager.NUM_TYPES; i++)
-            {
-                availableTypes[i] = true;
-            }
-            availableTypes[EntityManager.PLAYER_BLUE] = true;
-            availableTypes[EntityManager.PLAYER_RED] = true;
-            playerType = EntityManager.PLAYER_BLUE;
+        for(int i = 0; i < EntityManager.NUM_TYPES; i++) {
+            prefs.putBoolean("type-" + (i+1), false);
         }
+        prefs.putInteger("playerType", EntityManager.PLAYER_BLUE);
 
-        public void setScore(int index, int val)
-        {
-            score[index] = val;
-        }
-        public void setPlayerType(int type) {playerType = type;}
-
-        public int getScore(int index)
-        {
-            return score[index];
-        }
-        public int getPlayerType()
-        {
-            return playerType;
-        }
-        public boolean[] getAvailableTypes() {return availableTypes;}
+        //dev stuff, delete for live
+        prefs.putBoolean("type-" + EntityManager.PLAYER_BLUE, true);
+        prefs.putBoolean("type-" + EntityManager.PLAYER_RED, true);
     }
+
 }

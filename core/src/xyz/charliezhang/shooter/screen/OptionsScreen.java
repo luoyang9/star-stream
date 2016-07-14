@@ -19,10 +19,7 @@ import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
-public class OptionsScreen implements Screen {
+class OptionsScreen implements Screen {
 
     private MainGame game;
 
@@ -31,13 +28,12 @@ public class OptionsScreen implements Screen {
 
     private CheckBox soundOn;
     private TextButton btnBack;
-    private Label lblSound;
 
     private Texture background;
 
     private Skin skin;
 
-    public OptionsScreen(MainGame game){this.game = game;}
+    OptionsScreen(MainGame game){this.game = game;}
 
     @Override
     public void show() {
@@ -61,14 +57,12 @@ public class OptionsScreen implements Screen {
                 if(soundOn.isChecked())
                 {
                     MusicPlayer.mute();
-                    GameData.prefs.putBoolean("soundOn", false);
-                    GameData.prefs.flush();
+                    GameData.prefs.putBoolean("soundOn", false).flush();
                 }
                 else
                 {
                     MusicPlayer.unmute("menu");
-                    GameData.prefs.putBoolean("soundOn", true);
-                    GameData.prefs.flush();
+                    GameData.prefs.putBoolean("soundOn", true).flush();
                 }
                 event.stop();
             }

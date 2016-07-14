@@ -95,8 +95,8 @@ class WinScreen implements Screen {
         livesScore = lives*500;
         total = score + timeScore + livesScore;
 
-        if(total > GameData.getScore(level)) {
-            GameData.updateScore(level, total);
+        if(total > GameData.prefs.getInteger("level-" + level)) {
+            GameData.prefs.putInteger("level-" + level, total).flush();
         }
 
         //animation

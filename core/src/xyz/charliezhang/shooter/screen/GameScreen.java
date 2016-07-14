@@ -41,7 +41,7 @@ class GameScreen implements Screen
 		background = new Background();
 		background.setVector(0, -2f);
 
-		manager = new EntityManager(viewport, game, background, level);
+		manager = new EntityManager(viewport, game, background);
 		waveManager = new WaveManager(level, manager);
 		waveManager.spawnNextWave();
 

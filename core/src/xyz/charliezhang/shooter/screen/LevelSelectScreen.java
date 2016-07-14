@@ -51,7 +51,7 @@ class LevelSelectScreen implements Screen {
         for(int i = 0; i < scoreTables.length; i++)
         {
             scoreTables[i] = new Table();
-            lblScore[i] = new Label("BEST: " + GameData.getScore(i+1), skin, "small");
+            lblScore[i] = new Label("BEST: " + GameData.prefs.getInteger("level-" + (i+1)), skin, "small");
         }
 
         background = Assets.manager.get("data/ui/background.png");

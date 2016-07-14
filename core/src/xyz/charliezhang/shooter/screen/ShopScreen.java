@@ -19,10 +19,7 @@ import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
-public class ShopScreen implements Screen {
+class ShopScreen implements Screen {
 
     private MainGame game;
 
@@ -39,7 +36,7 @@ public class ShopScreen implements Screen {
 
     private Skin skin;
 
-    public ShopScreen(MainGame game){this.game = game;}
+    ShopScreen(MainGame game){this.game = game;}
 
     @Override
     public void show() {
@@ -61,11 +58,11 @@ public class ShopScreen implements Screen {
 
         for(int i = 0; i < EntityManager.NUM_TYPES; i++)
         {
-            final int currType = i;
-            btnPlayerTypes[i] = new CheckBox(EntityManager.getShipName(i), skin, "player" + i);
+            final int currType = i + 1;
+            btnPlayerTypes[i] = new CheckBox(EntityManager.getShipName(currType), skin, "player" + i);
             btnPlayerTypes[i].getCells().get(0).size(50, 50);
-            if(GameData.getAvailableTypes()[i]) {
-                if (GameData.getPlayerType() == i) btnPlayerTypes[i].setChecked(true);
+            if(GameData.prefs.getBoolean("type-" + currType)) {
+                if (GameData.prefs.getInteger("playerType") == currType) btnPlayerTypes[i].setChecked(true);
                 else btnPlayerTypes[i].setChecked(false);
             }
             else
@@ -77,7 +74,7 @@ public class ShopScreen implements Screen {
                 @Override
                 public void clicked(InputEvent event, float x, float y)
                 {
-                    GameData.setPlayerType(currType);
+                    GameData.prefs.putInteger("playerType", currType).flush();
                 }
             });
 
