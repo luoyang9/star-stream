@@ -3,17 +3,18 @@ package xyz.charliezhang.shooter.entity.player;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.player.PlayerLaser;
+import xyz.charliezhang.shooter.entity.Projectile;
 
-public class Laser extends PlayerLaser
+class Laser extends Projectile implements Pool.Poolable
 {
 	private float currentRotation;
-	public static final int BLUE = 0;
-	public static final int ORANGE = 1;
+	static final int BLUE = 0;
+	static final int ORANGE = 1;
 
-	public Laser(EntityManager manager, int color) {
+	Laser(EntityManager manager, int color) {
 		super(manager);
 
 		switch(color) {
@@ -35,13 +36,10 @@ public class Laser extends PlayerLaser
 				sprite.setSize(6, 28);
 				sprite.setOrigin(3, 14);
 		}
-		currentRotation = 0;
 	}
 
 	@Override
-	public void update() {
-		currentRotation = -MathUtils.radiansToDegrees*MathUtils.atan2(direction.x , direction.y);
-		if(sprite.getRotation() != currentRotation)sprite.rotate(currentRotation - sprite.getRotation());
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+	public void reset() {
+		//reset everything for next laser
 	}
 }

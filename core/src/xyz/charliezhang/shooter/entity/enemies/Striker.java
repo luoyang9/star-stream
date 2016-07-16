@@ -53,7 +53,7 @@ public class Striker extends Enemy
 		{
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{
-				EnemyLaser g1 = new EnemyLaser(this, 2);
+				EnemyLaser g1 = new EnemyLaser(manager, this, 2);
 				g1.setDirection(0, -7);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + 5);
 				manager.spawnEnemyLaser(g1);

@@ -4,15 +4,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
+import xyz.charliezhang.shooter.entity.Projectile;
 
-public class EnemyLaser extends Entity
+public class EnemyLaser extends Projectile implements Pool.Poolable
 {
-	private float currentRotation;
 	private Enemy enemy;
-	public EnemyLaser(Enemy enemy, int colour) {
-		super();
+	EnemyLaser(EntityManager manager, Enemy enemy, int colour) {
+		super(manager);
 
 		this.enemy = enemy;
 		
@@ -36,18 +38,8 @@ public class EnemyLaser extends Entity
 		}
 		
 		animation = new Animation(1/20f, textureAtlas.getRegions());
-
-		currentRotation = 0;
-
 	}
 
-	@Override
-	public void update() {
-		currentRotation = -MathUtils.radiansToDegrees*MathUtils.atan2(direction.x , direction.y);
-		if(sprite.getRotation() != currentRotation)sprite.rotate(currentRotation - sprite.getRotation());
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-	}
-	
 	@Override
 	public void render(SpriteBatch sb)
 	{
@@ -56,9 +48,9 @@ public class EnemyLaser extends Entity
 	}
 
 	public Enemy getEnemy(){return enemy;}
-	
-	public boolean checkEnd()
-	{
-		return sprite.getY() < 0;
+
+	@Override
+	public void reset() {
+		//reset everything
 	}
 }

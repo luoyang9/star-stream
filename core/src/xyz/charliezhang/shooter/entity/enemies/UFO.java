@@ -55,15 +55,15 @@ public class UFO extends Enemy
 		{
 			if(System.currentTimeMillis() - lastFire >= 2000)
 			{
-				EnemyLaser l = new EnemyLaser(this, 1);
+				EnemyLaser l = new EnemyLaser(manager, this, 1);
 				l.setDirection(0, -3);
 				l.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l);
-				EnemyLaser l2 = new EnemyLaser(this, 1);
+				EnemyLaser l2 = new EnemyLaser(manager, this, 1);
 				l2.setDirection(1.5f, -3);
 				l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l2);
-				EnemyLaser l3 = new EnemyLaser(this, 1);
+				EnemyLaser l3 = new EnemyLaser(manager, this, 1);
 				l3.setDirection(-1.5f, -3);
 				l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l3);

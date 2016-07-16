@@ -21,11 +21,11 @@ import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class EntityManager 
 {
-	private final Array<Enemy> enemies = new Array<Enemy>();
-	private final Array<PlayerLaser> lasers = new Array<PlayerLaser>();
-	private final Array<EnemyLaser> enemyLasers = new Array<EnemyLaser>();
-	private final Array<PowerUp> powerups = new Array<PowerUp>();
-	private final Array<Explosion> explosions = new Array<Explosion>();
+	private Array<Enemy> enemies = new Array<Enemy>();
+	private Array<Projectile> playerProjectiles = new Array<Projectile>();
+	private Array<Projectile> enemyProjectiles = new Array<Projectile>();
+	private Array<PowerUp> powerups = new Array<PowerUp>();
+	private Array<Explosion> explosions = new Array<Explosion>();
 	private Player player;
 
 	private Background background;
@@ -71,13 +71,13 @@ public class EntityManager
 		switch (GameData.prefs.getInteger("playerType"))
 		{
 			case PLAYER_BLUE:
-				player = new PlayerBlue(this);
+				player = new BlueFury(this);
 				break;
 			case PLAYER_RED:
-				player = new PlayerRed(this);
+				player = new RedDragon(this);
 				break;
 			default:
-				player = new PlayerBlue(this);
+				player = new BlueFury(this);
 		}
 
 		hud = new HUD(this);
@@ -125,13 +125,13 @@ public class EntityManager
 		{
 			e.update();
 		}
-		for(PlayerLaser l : lasers)
+		for(Projectile p : playerProjectiles)
 		{
-			l.update();
+			p.update();
 		}
-		for(EnemyLaser el : enemyLasers)
+		for(Projectile p : enemyProjectiles)
 		{
-			el.update();
+			p.update();
 		}
 		for(PowerUp p : powerups)
 		{
@@ -145,21 +145,21 @@ public class EntityManager
 
 
 		//remove lasers
-		for(PlayerLaser l : lasers)
+		for(Projectile p : playerProjectiles)
 		{
-			if(l.checkEnd())
+			if(p.checkEnd())
 			{
-				l.dispose();
-				lasers.removeValue(l, false);
+				p.dispose();
+				playerProjectiles.removeValue(p, false);
 			}
 		}
 		//remove enemy lasers
-		for(EnemyLaser el : enemyLasers)
+		for(Projectile p : enemyProjectiles)
 		{
-			if(el.checkEnd())
+			if(p.checkEnd())
 			{
-				el.dispose();
-				enemyLasers.removeValue(el, false);
+				p.dispose();
+				enemyProjectiles.removeValue(p, false);
 			}
 		}
 		//remove enemies
@@ -231,15 +231,15 @@ public class EntityManager
 		//render player
 		if(!player.isDead()) player.render(sb);
 
-		//render enemy lasers
-		for(EnemyLaser e : enemyLasers)
+		//render enemy projectiles
+		for(Projectile p : enemyProjectiles)
 		{
-			e.render(sb);
+			p.render(sb);
 		}
-		//render lasers
-		for(PlayerLaser e : lasers)
+		//render player projectiles
+		for(Projectile p : playerProjectiles)
 		{
-			e.render(sb);
+			p.render(sb);
 		}
 
 		for(Explosion e : explosions)
@@ -255,20 +255,20 @@ public class EntityManager
 		for(Enemy e : enemies)
 		{
 			//check laser-enemy collision
-			for(PlayerLaser m : lasers)
+			for(Projectile p : playerProjectiles)
 			{
-				if(e.getBounds().overlaps(m.getBounds()))
+				if(e.getBounds().overlaps(p.getBounds()))
 				{
 					//explosion
 					Explosion exp = new Explosion(1);
-					exp.setPosition(m.getPosition().x, m.getPosition().y);
+					exp.setPosition(p.getPosition().x, p.getPosition().y);
 					spawnExplosion(exp);
 
 					//do damage
-					if(m instanceof Missile) e.modifyHealth(-player.getDamage()*4);
+					if(p instanceof Missile) e.modifyHealth(-player.getDamage()*4);
 					else e.modifyHealth(-player.getDamage());
 
-					lasers.removeValue(m, false);
+					playerProjectiles.removeValue(p, false);
 				}
 			}
 
@@ -294,15 +294,15 @@ public class EntityManager
 		}
 		if(player.isControllable())
 		{
-			for(EnemyLaser el : enemyLasers) //check enemy laser-player collision
+			for(Projectile p : enemyProjectiles) //check enemy laser-player collision
 			{
-				if(player.getBounds().overlaps(el.getBounds()))
+				if(player.getBounds().overlaps(p.getBounds()))
 				{
 					if(!player.isFlinching())
 					{
-						enemyLasers.removeValue(el, false);
+						enemyProjectiles.removeValue(p, false);
 						if(!player.isShieldOn()) {
-							player.modifyHealth(-el.getEnemy().getDamage());
+							player.modifyHealth(-((EnemyLaser)p).getEnemy().getDamage());
 							player.setFlinching(true);
 						}
 						else
@@ -329,11 +329,11 @@ public class EntityManager
 		for (Enemy e : enemies) {
 			e.dispose();
 		}
-		for (EnemyLaser e : enemyLasers) {
-			e.dispose();
+		for (Projectile p : enemyProjectiles) {
+			p.dispose();
 		}
-		for (PlayerLaser e : lasers) {
-			e.dispose();
+		for (Projectile p : playerProjectiles) {
+			p.dispose();
 		}
 		for (PowerUp e : powerups) {
 			e.dispose();
@@ -365,8 +365,8 @@ public class EntityManager
 	}
 
 	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}
-	public void spawnLaser(PlayerLaser l) {lasers.add(l);}
-	public void spawnEnemyLaser(EnemyLaser el) {enemyLasers.add(el);}
+	public void spawnLaser(Projectile p) {playerProjectiles.add(p);}
+	public void spawnEnemyLaser(Projectile p) {enemyProjectiles.add(p);}
 	private void spawnPowerUp(PowerUp p) {powerups.add(p);}
 	public void spawnExplosion(Explosion e) {explosions.add(e);}
 	

@@ -54,9 +54,9 @@ public class Skullinator extends Enemy
 		{
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{
-				EnemyLaser r1 = new EnemyLaser(this, 3);
-				EnemyLaser r2 = new EnemyLaser(this, 3);
-				EnemyLaser r3 = new EnemyLaser(this, 3);
+				EnemyLaser r1 = new EnemyLaser(manager, this, 3);
+				EnemyLaser r2 = new EnemyLaser(manager, this, 3);
+				EnemyLaser r3 = new EnemyLaser(manager, this, 3);
 				r1.setDirection(0,  -5);
 				r2.setDirection(0,  -5);
 				r3.setDirection(0,  -5);
@@ -70,13 +70,13 @@ public class Skullinator extends Enemy
 			}
 			if(System.currentTimeMillis() - lastSpecial1 >= 5000)
 			{
-				EnemyLaser g1 = new EnemyLaser(this, 2);
-				EnemyLaser g2 = new EnemyLaser(this, 2);
-				EnemyLaser g3 = new EnemyLaser(this, 2);
-				EnemyLaser g4 = new EnemyLaser(this, 2);
-				EnemyLaser g5 = new EnemyLaser(this, 2);
-				EnemyLaser g6 = new EnemyLaser(this, 2);
-				EnemyLaser g7 = new EnemyLaser(this, 2);
+				EnemyLaser g1 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g2 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g3 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g4 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g5 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g6 = new EnemyLaser(manager, this, 2);
+				EnemyLaser g7 = new EnemyLaser(manager, this, 2);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
@@ -103,9 +103,9 @@ public class Skullinator extends Enemy
 			if(System.currentTimeMillis() - lastSpecial2 >= 13000)
 			{
 				lastSpecial2Active = true;
-				EnemyLaser o1 = new EnemyLaser(this, 1);
-				EnemyLaser o2 = new EnemyLaser(this, 1);
-				EnemyLaser o3 = new EnemyLaser(this, 1);
+				EnemyLaser o1 = new EnemyLaser(manager, this, 1);
+				EnemyLaser o2 = new EnemyLaser(manager, this, 1);
+				EnemyLaser o3 = new EnemyLaser(manager, this, 1);
 				o1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 				o2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 				o3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
@@ -124,9 +124,9 @@ public class Skullinator extends Enemy
 					lastSpecial2Active = false;
 				if(System.currentTimeMillis() - lastSpecial2Duration > 500)
 				{
-					EnemyLaser o1 = new EnemyLaser(this, 1);
-					EnemyLaser o2 = new EnemyLaser(this, 1);
-					EnemyLaser o3 = new EnemyLaser(this, 1);
+					EnemyLaser o1 = new EnemyLaser(manager, this, 1);
+					EnemyLaser o2 = new EnemyLaser(manager, this, 1);
+					EnemyLaser o3 = new EnemyLaser(manager, this, 1);
 					o1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 					o2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 					o3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);

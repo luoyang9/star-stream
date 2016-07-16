@@ -2,14 +2,16 @@ package xyz.charliezhang.shooter.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
+import xyz.charliezhang.shooter.entity.Projectile;
 
-public class Missile extends PlayerLaser
+public class Missile extends Projectile implements Pool.Poolable
 {
-    private float accel;
+    private float acceleration;
 
-    public Missile(EntityManager manager) {
+    Missile(EntityManager manager) {
         super(manager);
 
         textureAtlas = Assets.manager.get("data/textures/missile.atlas", TextureAtlas.class);
@@ -17,15 +19,19 @@ public class Missile extends PlayerLaser
 
         sprite.setSize(9, 38);
 
-        accel = 0.5f;
+        acceleration = 0.5f;
         direction.x = 0;
         direction.y = 0;
     }
 
     @Override
     public void update() {
-        direction.y += accel;
-        if(direction.y > 20) direction.y = 20;
-        sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+        if(direction.y <= 20) direction.y += acceleration;
+        super.update();
+    }
+
+    @Override
+    public void reset() {
+        //reset everything
     }
 }

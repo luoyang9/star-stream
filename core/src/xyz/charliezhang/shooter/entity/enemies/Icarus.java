@@ -65,11 +65,11 @@ public class Icarus extends Enemy
 		{
 			if(System.currentTimeMillis() - lastFire >= 2500)
 			{
-				EnemyLaser g1 = new EnemyLaser(this, 1);
-				EnemyLaser g2 = new EnemyLaser(this, 1);
-				EnemyLaser g3 = new EnemyLaser(this, 1);
-				EnemyLaser g4 = new EnemyLaser(this, 1);
-				EnemyLaser g5 = new EnemyLaser(this, 1);
+				EnemyLaser g1 = new EnemyLaser(manager, this, 1);
+				EnemyLaser g2 = new EnemyLaser(manager, this, 1);
+				EnemyLaser g3 = new EnemyLaser(manager, this, 1);
+				EnemyLaser g4 = new EnemyLaser(manager, this, 1);
+				EnemyLaser g5 = new EnemyLaser(manager, this, 1);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);

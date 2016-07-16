@@ -43,7 +43,9 @@ public abstract class Entity
 		return sprite.getBoundingRectangle();
 	}
 	
-	public abstract void update();
+	public void update() {
+
+	}
 	
 	public Vector2 getPosition() {return new Vector2(sprite.getX(), sprite.getY());}
 	
@@ -57,7 +59,7 @@ public abstract class Entity
 		direction.set(x, y);
 	}
 	
-	public void modifyDirection(float x, float y)
+	protected void modifyDirection(float x, float y)
 	{
 		direction.add(x, y);
 	}

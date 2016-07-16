@@ -6,12 +6,9 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-/**
- * Created by Charlie on 2016-04-06.
- */
-public class PlayerRed extends Player
+public class RedDragon extends Player
 {
-    public PlayerRed(EntityManager manager)
+    public RedDragon(EntityManager manager)
     {
         super(manager);
 

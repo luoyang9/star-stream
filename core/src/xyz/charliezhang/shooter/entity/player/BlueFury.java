@@ -6,9 +6,9 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-public class PlayerBlue extends Player
+public class BlueFury extends Player
 {
-    public PlayerBlue(EntityManager manager)
+    public BlueFury(EntityManager manager)
     {
         super(manager);
 
