@@ -26,43 +26,51 @@ public abstract class Entity
 		animationTime = 0;
 	}
 
-	public void dispose()
+	protected void reset() {
+		setDirection(0, 0);
+		setPosition(0, 0);
+		animationTime = 0;
+	}
+
+	protected void dispose()
 	{
 	}
 
-	public void render(SpriteBatch sb)
+	protected void render(SpriteBatch sb)
 	{
-		//add animation time
-        animationTime += Gdx.graphics.getDeltaTime();
-        
+		//set sprite to current animation region
+		sprite.setRegion(animation.getKeyFrame(animationTime, true));
 		sprite.draw(sb);
+
+		//add animation time
+		animationTime += Gdx.graphics.getDeltaTime();
 	}
-	
+
 	public Rectangle getBounds()
 	{
 		return sprite.getBoundingRectangle();
 	}
-	
-	public void update() {
 
+	protected void update() {
+		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 	}
-	
+
 	public Vector2 getPosition() {return new Vector2(sprite.getX(), sprite.getY());}
-	
+
 	public void setPosition(float x, float y)
 	{
 		sprite.setPosition(x, y);
 	}
-	
+
 	public void setDirection(float x, float y)
 	{
 		direction.set(x, y);
 	}
-	
+
 	protected void modifyDirection(float x, float y)
 	{
 		direction.add(x, y);
 	}
-	
+
 	public Sprite getSprite() {return sprite;}
 }

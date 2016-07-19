@@ -8,14 +8,17 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Projectile;
 
-class Laser extends Projectile implements Pool.Poolable
+public class Laser extends Projectile implements Pool.Poolable
 {
-	private float currentRotation;
 	static final int BLUE = 0;
 	static final int ORANGE = 1;
 
-	Laser(EntityManager manager, int color) {
-		super(manager);
+	public Laser() {
+		super();
+	}
+
+	public void init(EntityManager manager, int color) {
+		super.init(manager);
 
 		switch(color) {
 			case Laser.BLUE:
@@ -38,8 +41,7 @@ class Laser extends Projectile implements Pool.Poolable
 		}
 	}
 
-	@Override
 	public void reset() {
-		//reset everything for next laser
+		super.reset();
 	}
 }

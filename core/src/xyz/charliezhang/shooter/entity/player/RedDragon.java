@@ -44,40 +44,45 @@ public class RedDragon extends Player
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
             {
                 shootSound.play(MusicPlayer.VOLUME); //play pew
-                Laser l1 = new Laser(manager, Laser.ORANGE);
-                Laser l2 = new Laser(manager, Laser.ORANGE);
-                Laser l3 = new Laser(manager, Laser.ORANGE);
-                Laser l4 = new Laser(manager, Laser.ORANGE);
-                Laser l5 = new Laser(manager, Laser.ORANGE);
-                Laser l6 = new Laser(manager, Laser.ORANGE);
-                Laser l7 = new Laser(manager, Laser.ORANGE);
+                Laser l1 = manager.getLaserPool().obtain();
+                Laser l2 = manager.getLaserPool().obtain();
+                Laser l3 = manager.getLaserPool().obtain();
+                Laser l4 = manager.getLaserPool().obtain();
+                Laser l5 = manager.getLaserPool().obtain();
+                Laser l6 = manager.getLaserPool().obtain();
+                Laser l7 = manager.getLaserPool().obtain();
 
-
-
+                l1.init(manager, Laser.ORANGE);
                 l1.setPosition(sprite.getX() + sprite.getWidth() / 2 - l1.getSprite().getWidth()/2, sprite.getY() + sprite.getHeight());
                 l1.setDirection(0, 15);
                 manager.spawnLaser(l1);
+                l2.init(manager, Laser.ORANGE);
                 l2.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
                 l2.setDirection(1.5f, 15);
                 manager.spawnLaser(l2);
+                l3.init(manager, Laser.ORANGE);
                 l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - l3.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
                 l3.setDirection(-1.5f, 15);
                 manager.spawnLaser(l3);
 
 
                 if(attLevel >= 2) {
+                    l4.init(manager, Laser.ORANGE);
                     l4.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
                     l4.setDirection(3, 15);
                     manager.spawnLaser(l4);
+                    l5.init(manager, Laser.ORANGE);
                     l5.setPosition(sprite.getX() + sprite.getWidth() / 2 - l5.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
                     l5.setDirection(-3, 15);
                     manager.spawnLaser(l5);
                 }
 
                 if(attLevel >= 3) {
+                    l6.init(manager, Laser.ORANGE);
                     l6.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight());
                     l6.setDirection(4.5f, 15);
                     manager.spawnLaser(l6);
+                    l7.init(manager, Laser.ORANGE);
                     l7.setPosition(sprite.getX() + sprite.getWidth() / 2 - l7.getSprite().getWidth(), sprite.getY() + sprite.getHeight());
                     l7.setDirection(-4.5f, 15);
                     manager.spawnLaser(l7);

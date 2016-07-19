@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.Assets;
@@ -27,14 +28,14 @@ public class Player extends Entity
 	//initial touch
 	private Vector2 iniTouch = new Vector2();
 	private Vector2 syncPos = new Vector2();
-	protected GameInput playerInput;
+	GameInput playerInput;
 	private boolean justTouched;
 
 	//directions
 	private float xdir, ydir;
 
 	//player assets
-	protected Sound shootSound;
+	Sound shootSound;
 	private Sound shieldUpSound;
 	private Sound shieldDownSound;
 
@@ -42,7 +43,7 @@ public class Player extends Entity
 	protected int health, maxHealth;
 	private int numLives, maxLives;
 	protected int damage;
-	protected int attLevel;
+	int attLevel;
 	private boolean flinching;
 	private boolean controllable;
 	private boolean justControllable;
@@ -55,21 +56,21 @@ public class Player extends Entity
 	private boolean invincibleOn;
 	private long invincibleDuration;
 	private long invincibleTimer;
-	protected boolean superAttOn;
-	protected long superAttTimer;
-	protected long superAttDuration;
+	boolean superAttOn;
+	long superAttTimer;
+	long superAttDuration;
 
 	private Sprite shield;
 
 	//timers
 	private long flinchTimer;
-	protected long shootDelay, lastFire;
+	long shootDelay, lastFire;
 	
 	//manager and camera
 	protected final EntityManager manager;
 	private final OrthographicCamera camera;
 
-	public Player(EntityManager manager) {
+	Player(EntityManager manager) {
 		//manager
 		this.manager = manager;
 		this.camera = (OrthographicCamera)manager.getViewport().getCamera();
@@ -100,9 +101,13 @@ public class Player extends Entity
 		missileTask = new Timer.Task() {
 			@Override
 			public void run() {
-				Missile m1 = new Missile(manager);
-				Missile m2 = new Missile(manager);
+				Missile m1 = manager.getMissilePool().obtain();
+				Missile m2 = manager.getMissilePool().obtain();
+				m1.init(manager, 5);
+				m1.setDirection(0, 10);
 				m1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+				m2.init(manager, 5);
+				m2.setDirection(0, 10);
 				m2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
 				manager.spawnLaser(m1);
 				manager.spawnLaser(m2);
@@ -148,9 +153,9 @@ public class Player extends Entity
 			//check death
 			checkDeath();
 		}
-		
-		//add direction to position
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+
+		//update pos
+		super.update();
 
 		//update shield
 		shield.setPosition(sprite.getX()-(shield.getWidth()-sprite.getWidth())/2, sprite.getY()-(shield.getHeight()-sprite.getHeight())/2);
@@ -256,18 +261,14 @@ public class Player extends Entity
 	public void render(SpriteBatch sb)
 	{
         //if flinching
-		if(flinching)
-		{
+		if(flinching) {
 			long elapsed = System.currentTimeMillis() - flinchTimer;
-			if(elapsed % 200 <= 100) //every 0.5 seconds, blink
+			if (elapsed % 200 <= 100) //every 0.5 seconds, blink
 			{
 				return;
 			}
-			if(elapsed > 1500) flinching = false; //if 1 sec passed
+			if (elapsed > 1500) flinching = false; //if 1 sec passed
 		}
-		
-		//set sprite to current animation region
-		sprite.setRegion(animation.getKeyFrame(animationTime, true));
 		
 		//render player
 		super.render(sb);
@@ -288,7 +289,7 @@ public class Player extends Entity
 		if(powerUp instanceof MissilePowerUp) activateMissilePowerUp((MissilePowerUp)powerUp);
 		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp();
 	}
-	public void activateAttackPowerUp()
+	private void activateAttackPowerUp()
 	{
 		if (attLevel < 4) //if att lvl < 3
 			attLevel++; //increase att lvl
@@ -305,13 +306,13 @@ public class Player extends Entity
 		invincibleTimer = System.nanoTime();
 	}
 
-	public void activateMissilePowerUp(MissilePowerUp powerUp)
+	private void activateMissilePowerUp(MissilePowerUp powerUp)
 	{
 		missileTask.cancel();
 		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
 	}
 
-	public void activateShieldPowerUp() {
+	private void activateShieldPowerUp() {
 		shieldUpSound.play(MusicPlayer.VOLUME);
 		shieldOn = true;
 	}

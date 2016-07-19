@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.entity;
+package xyz.charliezhang.shooter.misc;
 
 
 import com.badlogic.gdx.Gdx;
@@ -15,12 +15,10 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuScreen;
 
-/**
- * Created by Charlie on 2015-12-19.
- */
 public class HUD
 {
 
@@ -29,7 +27,7 @@ public class HUD
     private Table table;
     private Table deathTable;
     private Table deathHUDTable;
-    private HorizontalGroup iconGroup;;
+    private HorizontalGroup iconGroup;
     private HorizontalGroup livesGroup;
     private Stack stack;
     private Stack masterStack;

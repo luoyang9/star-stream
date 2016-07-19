@@ -15,16 +15,4 @@ public class ShieldPowerUp extends PowerUp
 
         sprite.setSize(20, 20);
     }
-
-    @Override
-    public void update() {
-        super.update();
-    }
-
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        super.render(sb);
-    }
-
 }

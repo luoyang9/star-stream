@@ -16,16 +16,4 @@ public class AttackPowerUp extends PowerUp
 
 		sprite.setSize(16, 24);
 	}
-
-	@Override
-	public void update() {
-		super.update();
-	}
-
-	@Override
-	public void render(SpriteBatch sb)
-	{
-		super.render(sb);
-	}
-
 }

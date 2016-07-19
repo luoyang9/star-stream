@@ -1,9 +1,6 @@
-package xyz.charliezhang.shooter.entity.wave;
+package xyz.charliezhang.shooter.wave;
 
-/**
- * Created by Charlie on 2015-11-24.
- */
-public class WaveEnemy
+class WaveEnemy
 {
     private int id;
     private float x;
@@ -15,7 +12,7 @@ public class WaveEnemy
 
     public WaveEnemy() {}
 
-    public int getId(){return id;}
+    int getId(){return id;}
     public float getX(){return x;}
     public float getY(){return y;}
     public float getDx(){return dx;}

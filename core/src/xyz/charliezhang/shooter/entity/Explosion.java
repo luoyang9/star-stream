@@ -6,9 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
-/**
- * Created by Charlie on 2015-12-03.
- */
 public class Explosion extends Entity
 {
     public Explosion(int type)
@@ -29,14 +26,7 @@ public class Explosion extends Entity
     public void update() {
     }
 
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        sprite.setRegion(animation.getKeyFrame(animationTime));
-        super.render(sb);
-    }
-
-    public boolean isDone(){
+    boolean isDone(){
         return animation.isAnimationFinished(animationTime);
     }
 }

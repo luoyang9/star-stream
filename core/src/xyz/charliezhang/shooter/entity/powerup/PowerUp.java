@@ -1,16 +1,14 @@
 package xyz.charliezhang.shooter.entity.powerup;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.Entity;
 
 public class PowerUp extends Entity
 {
     protected float delay;
-    protected float interval;
-    protected int numRepeats;
+    float interval;
+    int numRepeats;
 
-    public PowerUp() {
+    PowerUp() {
         super();
     }
 
@@ -27,13 +25,6 @@ public class PowerUp extends Entity
             modifyDirection(0, 0.05f);
 
         sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-    }
-
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        sprite.setRegion(animation.getKeyFrame(animationTime));
-        super.render(sb);
     }
 
     public float getDelay() {return delay;}

@@ -19,16 +19,4 @@ public class MissilePowerUp extends PowerUp
         interval = 1f;
         numRepeats = 8;
     }
-
-    @Override
-    public void update() {
-        super.update();
-    }
-
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        super.render(sb);
-    }
-
 }

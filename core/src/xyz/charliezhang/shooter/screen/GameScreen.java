@@ -7,9 +7,9 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Screen;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.background.Background;
+import xyz.charliezhang.shooter.misc.Background;
 import xyz.charliezhang.shooter.entity.*;
-import xyz.charliezhang.shooter.entity.wave.WaveManager;
+import xyz.charliezhang.shooter.wave.WaveManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 class GameScreen implements Screen

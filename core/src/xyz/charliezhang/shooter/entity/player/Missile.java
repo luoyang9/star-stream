@@ -11,17 +11,20 @@ public class Missile extends Projectile implements Pool.Poolable
 {
     private float acceleration;
 
-    Missile(EntityManager manager) {
-        super(manager);
+    public Missile() {
+        super();
 
         textureAtlas = Assets.manager.get("data/textures/missile.atlas", TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(9, 38);
 
-        acceleration = 0.5f;
-        direction.x = 0;
-        direction.y = 0;
+        acceleration = 0;
+    }
+
+    public void init(EntityManager manager, float acceleration) {
+        super.init(manager);
+        this.acceleration = acceleration;
     }
 
     @Override
@@ -30,8 +33,8 @@ public class Missile extends Projectile implements Pool.Poolable
         super.update();
     }
 
-    @Override
     public void reset() {
-        //reset everything
+        acceleration = 0;
+        super.reset();
     }
 }

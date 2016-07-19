@@ -5,11 +5,12 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.background.Background;
+import xyz.charliezhang.shooter.misc.*;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
 import xyz.charliezhang.shooter.entity.enemies.EnemyLaser;
 import xyz.charliezhang.shooter.entity.player.*;
@@ -21,15 +22,21 @@ import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class EntityManager 
 {
-	private Array<Enemy> enemies = new Array<Enemy>();
-	private Array<Projectile> playerProjectiles = new Array<Projectile>();
-	private Array<Projectile> enemyProjectiles = new Array<Projectile>();
-	private Array<PowerUp> powerups = new Array<PowerUp>();
-	private Array<Explosion> explosions = new Array<Explosion>();
+	private Array<Enemy> enemies;
+	private Array<Projectile> playerProjectiles;
+	private Array<Projectile> enemyProjectiles;
+	private Array<PowerUp> powerups;
+	private Array<Explosion> explosions;
+
+	//pools
+	private Pool<EnemyLaser> enemyLaserPool;
+	private Pool<Missile> missilePool;
+	private Pool<Laser> laserPool;
+
 	private Player player;
 
 	private Background background;
-	private HUD hud;
+	private xyz.charliezhang.shooter.misc.HUD hud;
 	private Viewport viewport;
 
 	private int nextATT;
@@ -68,6 +75,33 @@ public class EntityManager
 		this.background = background;
 		this.viewport = viewport;
 
+		enemies = new Array<Enemy>();
+		playerProjectiles = new Array<Projectile>();
+		enemyProjectiles = new Array<Projectile>();
+		powerups = new Array<PowerUp>();
+		explosions = new Array<Explosion>();
+
+		enemyLaserPool = new Pool<EnemyLaser>() {
+			@Override
+			protected EnemyLaser newObject() {
+				return new EnemyLaser();
+			}
+		};
+
+		laserPool = new Pool<Laser>() {
+			@Override
+			protected Laser newObject() {
+				return new Laser();
+			}
+		};
+
+		missilePool = new Pool<Missile>() {
+			@Override
+			protected Missile newObject() {
+				return new Missile();
+			}
+		};
+
 		switch (GameData.prefs.getInteger("playerType"))
 		{
 			case PLAYER_BLUE:
@@ -80,7 +114,7 @@ public class EntityManager
 				player = new BlueFury(this);
 		}
 
-		hud = new HUD(this);
+		hud = new xyz.charliezhang.shooter.misc.HUD(this);
 
 		score = 0;
 		startTime = System.nanoTime();
@@ -374,6 +408,16 @@ public class EntityManager
 		return enemies;
 	}
 	public int getTime() { return (int)(System.nanoTime() - startTime / 1000000000); }
+
+	public Pool<EnemyLaser> getEnemyLaserPool() {
+		return enemyLaserPool;
+	}
+	public Pool<Laser> getLaserPool() {
+		return laserPool;
+	}
+	public Pool<Missile> getMissilePool() {
+		return missilePool;
+	}
 	
 	public Player getPlayer() { return player; }
 	public MainGame getGame() { return game; }

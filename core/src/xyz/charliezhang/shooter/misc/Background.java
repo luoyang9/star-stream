@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.background;
+package xyz.charliezhang.shooter.misc;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
