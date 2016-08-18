@@ -12,12 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
-import xyz.charliezhang.shooter.screen.MenuScreen;
+import xyz.charliezhang.shooter.screen.MenuTable;
+import xyz.charliezhang.shooter.screen.UIContainerScreen;
 
 public class HUD
 {
@@ -53,6 +53,8 @@ public class HUD
 
         stage = new Stage(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f)));
 
         skin = Assets.skin;
 
@@ -100,10 +102,9 @@ public class HUD
         btnMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                dispose();
-                System.out.println("START MENUSCREEN   ");
                 Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
-                manager.getGame().setScreen(new MenuScreen(manager.getGame()));
+                manager.getGame().setScreen(new UIContainerScreen(manager.getGame()));
+                manager.canDispose(true);
                 event.stop();
             }
         });

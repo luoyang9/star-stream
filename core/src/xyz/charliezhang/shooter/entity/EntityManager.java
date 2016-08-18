@@ -52,6 +52,7 @@ public class EntityManager
 	private long startTime;
 
 	private boolean pause;
+	private boolean canDispose;
 
 	private MainGame game;
 
@@ -74,6 +75,8 @@ public class EntityManager
 		this.game = game;
 		this.background = background;
 		this.viewport = viewport;
+
+		canDispose = false;
 
 		enemies = new Array<Enemy>();
 		playerProjectiles = new Array<Projectile>();
@@ -425,5 +428,7 @@ public class EntityManager
 	public int getScore() { return score; }
 	public Viewport getViewport() { return viewport; }
 	public boolean isPaused() { return pause; }
+	public boolean canDispose() {return canDispose; }
+	public void canDispose(boolean can) {canDispose = can; }
 }
 

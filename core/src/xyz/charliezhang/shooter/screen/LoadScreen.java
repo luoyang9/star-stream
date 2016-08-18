@@ -26,6 +26,7 @@ public class LoadScreen implements Screen
     private MainGame game;
 
     private Stage stage;
+    private boolean canDispose;
 
     private Image logo;
     private Image loadingFrame;
@@ -51,6 +52,8 @@ public class LoadScreen implements Screen
 
         stage = new Stage();
         stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
+        canDispose = false;
+
         TextureAtlas loadingAtlas = Assets.manager.get("data/ui/loading.pack", TextureAtlas.class);
 
         logo = new Image(loadingAtlas.findRegion("libgdx-logo"));
@@ -86,11 +89,11 @@ public class LoadScreen implements Screen
             //music player
             MusicPlayer.load();
 
-            stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+            stage.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    game.setScreen(new MenuScreen(game));
-                    dispose();
+                    game.setScreen(new UIContainerScreen(game));
+                    canDispose = true;
                 }
             })));
         }
@@ -108,6 +111,8 @@ public class LoadScreen implements Screen
         game.batch.begin();
         game.font.draw(game.batch, Assets.manager.getProgress()*100 + "%", 100, 100);
         game.batch.end();
+
+        if(canDispose) dispose();
     }
 
     @Override

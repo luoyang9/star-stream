@@ -1,6 +1,7 @@
 package xyz.charliezhang.shooter.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,11 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.music.MusicPlayer;
 
 class WinScreen implements Screen {
 
@@ -24,6 +23,7 @@ class WinScreen implements Screen {
 
     private Stage stage;
     private Table table;
+    private boolean canDispose;
 
     private int score;
     private int lives;
@@ -71,6 +71,8 @@ class WinScreen implements Screen {
         stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+        canDispose = false;
+
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -80,13 +82,11 @@ class WinScreen implements Screen {
         skin = Assets.skin;
 
         btnMenu = new TextButton("OK", skin);
-        btnMenu.addListener(new ClickListener(){
+        btnMenu.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-                game.setScreen(new MenuScreen(game));
-                dispose();
-                event.stop();
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new UIContainerScreen(game));
+                canDispose = true;
             }
         });
 
@@ -175,6 +175,8 @@ class WinScreen implements Screen {
         stage.getBatch().end();
 
         stage.draw();
+
+        if(canDispose) dispose();
     }
 
     @Override

@@ -24,6 +24,8 @@ class GameScreen implements Screen
 
 	private MainGame game;
 
+	private boolean canDispose;
+
 	GameScreen(MainGame game, int level)
 	{
 		this.game = game;
@@ -45,6 +47,7 @@ class GameScreen implements Screen
 		waveManager = new WaveManager(level, manager);
 		waveManager.spawnNextWave();
 
+		canDispose = false;
 		win = false;
 
 		MusicPlayer.loop("game");
@@ -66,7 +69,7 @@ class GameScreen implements Screen
 			if(manager.getPlayer().getPosition().y > viewport.getWorldHeight() + 500)
 			{
 				game.setScreen(new WinScreen(game, manager.getScore(), manager.getPlayer().getLives(), manager.getTime(), level));
-				dispose();
+				canDispose = true;
 			}
 			return;
 		}
@@ -94,6 +97,8 @@ class GameScreen implements Screen
 		background.render(game.batch);
 		manager.render(game.batch);
 		game.batch.end();
+
+		if(canDispose || manager.canDispose()) dispose();
 	}
 
 
@@ -122,6 +127,5 @@ class GameScreen implements Screen
 
 	@Override
 	public void hide() {
-
 	}
 }
