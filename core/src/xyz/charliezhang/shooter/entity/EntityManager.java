@@ -32,6 +32,7 @@ public class EntityManager
 	private Pool<EnemyLaser> enemyLaserPool;
 	private Pool<Missile> missilePool;
 	private Pool<Laser> laserPool;
+	private Pool<Explosion> explosionPool;
 
 	private Player player;
 
@@ -105,6 +106,13 @@ public class EntityManager
 			}
 		};
 
+		explosionPool = new Pool<Explosion>() {
+			@Override
+			protected Explosion newObject() {
+				return new Explosion();
+			}
+		};
+
 		switch (GameData.prefs.getInteger("playerType"))
 		{
 			case PLAYER_BLUE:
@@ -155,7 +163,6 @@ public class EntityManager
 		{
 			MusicPlayer.stop("game");
 			deathProcedure = true;
-			spawnExplosion(new Explosion(2));
 			hud.death();
 		}
 		for(Enemy e : enemies)
@@ -204,7 +211,8 @@ public class EntityManager
 			if (e.isDead()) {
 				score += e.getScore();
 
-				Explosion exp = new Explosion(2);
+				Explosion exp = explosionPool.obtain();
+				exp.init(2);
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
 
@@ -297,8 +305,9 @@ public class EntityManager
 				if(e.getBounds().overlaps(p.getBounds()))
 				{
 					//explosion
-					Explosion exp = new Explosion(1);
-					exp.setPosition(p.getPosition().x, p.getPosition().y);
+					Explosion exp = explosionPool.obtain();
+					exp.init(1);
+					exp.setPosition(p.getPosition().x + p.getSprite().getWidth()/2, p.getPosition().y + p.getSprite().getHeight()/2);
 					spawnExplosion(exp);
 
 					//do damage
@@ -421,6 +430,7 @@ public class EntityManager
 	public Pool<Missile> getMissilePool() {
 		return missilePool;
 	}
+	public Pool<Explosion> getExplosionPool() { return explosionPool; }
 	
 	public Player getPlayer() { return player; }
 	public MainGame getGame() { return game; }

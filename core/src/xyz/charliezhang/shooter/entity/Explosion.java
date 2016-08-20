@@ -3,12 +3,17 @@ package xyz.charliezhang.shooter.entity;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 
-public class Explosion extends Entity
+public class Explosion extends Entity implements Pool.Poolable
 {
-    public Explosion(int type)
+    public Explosion() {
+        super();
+    }
+
+    public void init(int type)
     {
         switch(type){
             case 1:textureAtlas = Assets.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
@@ -28,5 +33,10 @@ public class Explosion extends Entity
 
     boolean isDone(){
         return animation.isAnimationFinished(animationTime);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
     }
 }

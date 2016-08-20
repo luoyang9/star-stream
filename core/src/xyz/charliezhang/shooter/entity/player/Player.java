@@ -182,7 +182,8 @@ public class Player extends Entity
 		if(health <= 0)
 		{
 			numLives--;
-			Explosion explosion = new Explosion(2);
+			Explosion explosion = manager.getExplosionPool().obtain();
+			explosion.init(2);
 			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
 			manager.spawnExplosion(explosion);
 			Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
