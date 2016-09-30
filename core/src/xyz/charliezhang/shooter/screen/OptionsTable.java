@@ -17,7 +17,7 @@ class OptionsTable extends Table {
     OptionsTable(final UIContainerScreen container) {
 
         soundOn = new CheckBox(" Sound On", Assets.skin);
-        soundOn.getCells().get(0).size(50, 50);
+        soundOn.getCells().get(0).size(50, 50).padRight(5);
         soundOn.setChecked(!GameData.prefs.getBoolean("soundOn", true));
         soundOn.addListener(new ClickListener(){
             @Override

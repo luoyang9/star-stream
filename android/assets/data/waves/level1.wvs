@@ -6,32 +6,12 @@
         {
           class: enemy,
           id: 1,
-          x: 0.3,
-          y: 300,
-          dx: 0,
-          dy: -2,
-          stop: 150,
-          delay: 500
-        },
-        {
-          class: enemy,
-          id: 4,
           x: 0.5,
-          y: 400,
-          dx: 0,
-          dy: -2,
-          stop: 100,
-          delay: 500
-        },
-        {
-          class: enemy,
-          id: 1,
-          x: 0.7,
           y: 300,
           dx: 0,
           dy: -2,
           stop: 150,
-          delay: 500
+          delay: 0
         }
       ]
     },
@@ -41,242 +21,92 @@
         {
           class: enemy,
           id: 4,
-          x: 0.3,
+          x: 0.25,
           y: 300,
           dx: 0,
           dy: -2,
-          stop: 100,
-          delay: 300
+          stop: 125,
+          delay: 0
         },
         {
           class: enemy,
-          id: 2,
-          x: 0.5,
-          y: 200,
+          id: 4,
+          x: 0.75,
+          y: 300,
           dx: 0,
           dy: -2,
-          stop: 150,
-          delay: 300
+          stop: 125,
+          delay: 0
+        },
+      ]
+    },
+    {
+      class: wave,
+      enemies: [
+        {
+          class: enemy,
+          id: 1,
+          x: 0.5,
+          y: 150,
+          dx: 0,
+          dy: -3,
+          stop: 200,
+          delay: 0
+        },
+        {
+          class: enemy,
+          id: 4,
+          x: 0.3,
+          y: 150,
+          dx: 0,
+          dy: -3,
+          stop: 275,
+          delay: 200
         },
         {
           class: enemy,
           id: 4,
           x: 0.7,
-          y: 300,
+          y: 150,
           dx: 0,
-          dy: -2,
-          stop: 100,
+          dy: -3,
+          stop: 275,
+          delay: 0
+        }
+      ]
+    },
+    {
+      class: wave,
+      enemies: [
+        {
+          class: enemy,
+          id: 1,
+          x: 0.7,
+          y: 150,
+          dx: 0,
+          dy: -3,
+          stop: 200,
+          delay: 0
+        },
+        {
+          class: enemy,
+          id: 1,
+          x: 0.3,
+          y: 150,
+          dx: 0,
+          dy: -3,
+          stop: 200,
+          delay: 0
+        },
+        {
+          class: enemy,
+          id: 2,
+          x: 0.5,
+          y: 150,
+          dx: 0,
+          dy: -3,
+          stop: 200,
           delay: 2000
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.1,
-          y: 300,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.15,
-          y: 260,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.2,
-          y: 220,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.25,
-          y: 180,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        }
-      ]
-    },
-    {
-      class: wave,
-      enemies: [
-        {
-          class: enemy,
-          id: 1,
-          x: 0.3,
-          y: 150,
-          dx: 0,
-          dy: -3,
-          stop: 200,
-          delay: 0
-        },
-        {
-          class: enemy,
-          id: 4,
-          x: 0.6,
-          y: 150,
-          dx: 0,
-          dy: -3,
-          stop: 200,
-          delay: 3000
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.9,
-          y: 300,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.85,
-          y: 260,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.8,
-          y: 220,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.75,
-          y: 180,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        }
-      ]
-    },
-    {
-      class: wave,
-      enemies: [
-        {
-          class: enemy,
-          id: 2,
-          x: 0.3,
-          y: 150,
-          dx: 0,
-          dy: -3,
-          stop: 200,
-          delay: 0
-        },
-        {
-          class: enemy,
-          id: 1,
-          x: 0.6,
-          y: 150,
-          dx: 0,
-          dy: -3,
-          stop: 200,
-          delay: 3000
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.1,
-          y: 300,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.15,
-          y: 260,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.2,
-          y: 220,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.25,
-          y: 180,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 1000
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.9,
-          y: 300,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.85,
-          y: 260,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.8,
-          y: 220,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.75,
-          y: 180,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
         }
       ]
     },
@@ -322,16 +152,6 @@
           dy: -2,
           stop: 150,
           delay: 0
-        },
-        {
-          class: enemy,
-          id: 2,
-          x: 0.5,
-          y: 450,
-          dx: 0,
-          dy: -2,
-          stop: 300,
-          delay: 0
         }
       ]
     },
@@ -340,49 +160,9 @@
       enemies: [
         {
           class: enemy,
-          id: 4,
-          x: 0.25,
-          y: 300,
-          dx: 0,
-          dy: -2,
-          stop: 150,
-          delay: 300
-        },
-        {
-          class: enemy,
-          id: 4,
-          x: 0.5,
-          y: 300,
-          dx: 0,
-          dy: -2,
-          stop: 150,
-          delay: 300
-        },
-        {
-          class: enemy,
-          id: 4,
+          id: 5,
           x: 0.75,
-          y: 300,
-          dx: 0,
-          dy: -2,
-          stop: 150,
-          delay: 2000
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.9,
-          y: 300,
-          dx: -2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.85,
-          y: 260,
+          y: 180,
           dx: -2,
           dy: -4,
           stop: 200,
@@ -401,9 +181,29 @@
         {
           class: enemy,
           id: 5,
-          x: 0.75,
-          y: 180,
+          x: 0.85,
+          y: 260,
           dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.9,
+          y: 300,
+          dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.25,
+          y: 180,
+          dx: 2,
           dy: -4,
           stop: 200,
           delay: 1000
@@ -411,8 +211,8 @@
         {
           class: enemy,
           id: 5,
-          x: 0.1,
-          y: 300,
+          x: 0.2,
+          y: 220,
           dx: 2,
           dy: -4,
           stop: 200,
@@ -431,18 +231,8 @@
         {
           class: enemy,
           id: 5,
-          x: 0.2,
-          y: 220,
-          dx: 2,
-          dy: -4,
-          stop: 200,
-          delay: 100
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.25,
-          y: 180,
+          x: 0.1,
+          y: 300,
           dx: 2,
           dy: -4,
           stop: 200,
@@ -471,27 +261,7 @@
           dx: 0,
           dy: -2,
           stop: 150,
-          delay: 500
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.2,
-          y: 300,
-          dx: 2,
-          dy: -4,
-          stop: 150,
           delay: 0
-        },
-        {
-          class: enemy,
-          id: 5,
-          x: 0.8,
-          y: 300,
-          dx: 2,
-          dy: -4,
-          stop: 150,
-          delay: 500
         },
         {
           class: enemy,
@@ -508,15 +278,85 @@
     {
       class: wave,
       enemies: [
+         {
+          class: enemy,
+          id: 5,
+          x: 0.75,
+          y: 180,
+          dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
         {
           class: enemy,
-          id: 3,
-          x: 0.5,
+          id: 5,
+          x: 0.8,
+          y: 220,
+          dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.85,
+          y: 260,
+          dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.9,
           y: 300,
-          dx: 0,
-          dy: -2,
-          stop: 150,
-          delay: 500
+          dx: -2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.25,
+          y: 180,
+          dx: 2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.2,
+          y: 220,
+          dx: 2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.15,
+          y: 260,
+          dx: 2,
+          dy: -4,
+          stop: 200,
+          delay: 100
+        },
+        {
+          class: enemy,
+          id: 5,
+          x: 0.1,
+          y: 300,
+          dx: 2,
+          dy: -4,
+          stop: 200,
+          delay: 100
         }
       ]
     }

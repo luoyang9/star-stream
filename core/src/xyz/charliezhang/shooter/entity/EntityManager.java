@@ -306,7 +306,8 @@ public class EntityManager
 				{
 					//explosion
 					Explosion exp = explosionPool.obtain();
-					exp.init(1);
+					if(player instanceof BlueFury) exp.init(1);
+					else exp.init(3);
 					exp.setPosition(p.getPosition().x + p.getSprite().getWidth()/2, p.getPosition().y + p.getSprite().getHeight()/2);
 					spawnExplosion(exp);
 
@@ -419,7 +420,7 @@ public class EntityManager
 	public Array<Enemy> getEnemies() {
 		return enemies;
 	}
-	public int getTime() { return (int)(System.nanoTime() - startTime / 1000000000); }
+	public int getTime() { return (int)((System.nanoTime() - startTime) / 1000000000); }
 
 	public Pool<EnemyLaser> getEnemyLaserPool() {
 		return enemyLaserPool;

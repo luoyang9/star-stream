@@ -143,7 +143,7 @@ class WinScreen implements Screen {
         if(animScore < score)
         {
             animScore+=10;
-            lblScoreValue.setText(" " +animScore);
+            lblScoreValue.setText(" " + animScore);
         }
         else if(animLivesScore < livesScore)
         {

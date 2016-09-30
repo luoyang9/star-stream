@@ -24,7 +24,7 @@ public class BlueFury extends Player
 
         //read player stats
         health = maxHealth = 3;
-        damage = 10;
+        damage = 1;
     }
 
     @Override

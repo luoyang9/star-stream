@@ -7,8 +7,8 @@ import xyz.charliezhang.shooter.MainGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.height = 700;
-		config.width = 500;
+		config.height = 1400;
+		config.width = 1000;
 		new LwjglApplication(new MainGame(), config);
 	}
 }

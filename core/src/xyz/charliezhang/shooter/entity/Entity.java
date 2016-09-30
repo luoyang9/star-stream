@@ -39,11 +39,14 @@ public abstract class Entity
 	protected void render(SpriteBatch sb)
 	{
 		//set sprite to current animation region
-		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sprite.draw(sb);
+		if(animation != null) {
+			sprite.setRegion(animation.getKeyFrame(animationTime, true));
 
-		//add animation time
-		animationTime += Gdx.graphics.getDeltaTime();
+			//add animation time
+			animationTime += Gdx.graphics.getDeltaTime();
+		}
+
+		sprite.draw(sb);
 	}
 
 	public Rectangle getBounds()

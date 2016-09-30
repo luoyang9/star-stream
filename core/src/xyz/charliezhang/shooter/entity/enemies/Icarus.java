@@ -47,7 +47,8 @@ public class Icarus extends Enemy
 
 		if(intro && sprite.getY() <= manager.getViewport().getWorldHeight() - stop)
 		{
-			setDirection(2, -2);
+			if(Math.random() >= 0.5) setDirection(2, -2);
+			else setDirection(-2, 2);
 			intro = false;
 		}
 

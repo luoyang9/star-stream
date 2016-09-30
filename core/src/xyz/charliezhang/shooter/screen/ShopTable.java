@@ -37,7 +37,7 @@ class ShopTable extends Table {
         {
             final int currType = i + 1;
             btnPlayerTypes[i] = new CheckBox(EntityManager.getShipName(currType), skin, "player" + i);
-            btnPlayerTypes[i].getCells().get(0).size(50, 50);
+            btnPlayerTypes[i].getCells().get(0).size(50, 50).padRight(15);
             if(GameData.prefs.getBoolean("type-" + currType)) {
                 if (GameData.prefs.getInteger("playerType") == currType) btnPlayerTypes[i].setChecked(true);
                 else btnPlayerTypes[i].setChecked(false);

@@ -25,12 +25,13 @@ public class WaveManager
     private static final int STRIKER = 4;
     private static final int KAMIKAZE = 5;
     private static final int ASTEROID = 6;
+    private static final int VALKYRIE = 7;
 
     public WaveManager(int levelNum, EntityManager manager)
     {
         this.manager = manager;
         level = new Level();
-        waveIndex = 0;
+        waveIndex = 8;
         enemyIndex = 0;
         spawning = false;
         createWaves(levelNum);
@@ -55,17 +56,19 @@ public class WaveManager
                 Enemy e;
                 switch(currEnemy.getId())
                 {
-                    case WaveManager.UFO  : e = new UFO(manager, (int)(Math.random()*4 + 1));
+                    case UFO  : e = new UFO(manager, (int)(Math.random()*4 + 1));
                         break;
-                    case WaveManager.ICARUS : e = new Icarus(manager, (int)(Math.random()*3 + 1));
+                    case ICARUS : e = new Icarus(manager, (int)(Math.random()*3 + 1));
                         break;
-                    case WaveManager.SKULLINATOR: e = new Skullinator(manager);
+                    case SKULLINATOR : e = new Skullinator(manager);
                         break;
-                    case WaveManager.STRIKER: e = new Striker(manager);
+                    case STRIKER : e = new Striker(manager);
                         break;
-                    case WaveManager.KAMIKAZE: e = new Kamikaze(manager);
+                    case KAMIKAZE : e = new Kamikaze(manager);
                         break;
-                    case WaveManager.ASTEROID: e = new Asteroid(manager);
+                    case ASTEROID : e = new Asteroid(manager);
+                        break;
+                    case VALKYRIE : e = new Valkyrie(manager);
                         break;
                     default: e = new UFO(manager, (int)(Math.random()*4 + 1));
                 }
