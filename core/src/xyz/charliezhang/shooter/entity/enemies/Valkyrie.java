@@ -32,7 +32,6 @@ public class Valkyrie extends Enemy
     public void update() {
         super.update();
 
-        System.out.println(direction.y);
         if(intro)
         {
             if(sprite.getY() <= MainGame.HEIGHT - stop) {

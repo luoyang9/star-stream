@@ -26,6 +26,7 @@ public class WaveManager
     private static final int KAMIKAZE = 5;
     private static final int ASTEROID = 6;
     private static final int VALKYRIE = 7;
+    private static final int FALCON = 8;
 
     public WaveManager(int levelNum, EntityManager manager)
     {
@@ -69,6 +70,8 @@ public class WaveManager
                     case ASTEROID : e = new Asteroid(manager);
                         break;
                     case VALKYRIE : e = new Valkyrie(manager);
+                        break;
+                    case FALCON : e = new Falcon(manager);
                         break;
                     default: e = new UFO(manager, (int)(Math.random()*4 + 1));
                 }
