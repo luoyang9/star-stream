@@ -1,0 +1,59 @@
+<html>
+<head>
+	<script>
+		var level = "";
+		var wave = {
+			enemies: []
+		};
+
+		function createWave()
+		{
+			level += JSON.stringify(wave) + ";";
+			wave = {
+				enemies: []
+			};
+			document.getElementById("wave").innerHTML = JSON.stringify(wave);
+			document.getElementById("level").innerHTML = JSON.stringify(level);
+		}
+
+		function createEnemy()
+		{
+			var enemy = {};
+
+			enemy.enemyCode = parseInt(document.getElementById("enemyCode").value);
+			enemy.x = parseInt(document.getElementById("x").value);
+			enemy.y = parseInt(document.getElementById("y").value);
+			enemy.dx = parseInt(document.getElementById("dx").value);
+			enemy.dy = parseInt(document.getElementById("dy").value);
+			enemy.stop = parseInt(document.getElementById("stop").value);
+			enemy.delay = parseInt(document.getElementById("delay").value);
+			wave.enemies.push(enemy);
+			document.getElementById("wave").innerHTML = JSON.stringify(wave);
+		}
+
+
+	</script>
+</head>
+<body>
+	<select id="enemyCode">
+	  <option value="1">ufo</option>
+	  <option value="2">icarus</option>
+	  <option value="3">skullinator</option>
+	  <option value="4">striker</option>
+	  <option value="5">kamikaze</option>
+	  <option value="6">asteroid</option>
+	</select><br/>
+	x: <input type="text" id="x" /><br/>
+	y: <input type="text"  id="y" /><br/>
+	dx: <input type="text"  id="dx" /><br/>
+	dy: <input type="text" id="dy"  /><br/>
+	stop: <input type="text" id="stop"  /><br/>
+	delay: <input type="text" id="delay"  /><br/>
+	<button type="button" onclick="createEnemy()">Create Enemy</button>
+	<button type="button" onclick="createWave()">Create Wave</button>
+	<div id="wave">
+	</div>
+	<div id="level">
+	</div>
+</body>
+</html>
