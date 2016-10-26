@@ -1,15 +1,19 @@
 package xyz.charliezhang.shooter.entity.enemies;
 
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Entity;
 
-public abstract class Enemy extends Entity
+public abstract class Enemy extends Entity implements Json.Serializable
 {
-	//enemy data
+	//entity data
 	protected int health, maxHealth, damage, score;
-	protected long lastFire;
+	long lastFire;
 	protected boolean dead, suicide;
-	protected int stop;
+
+	//spawning data
+	private int spawnDelay;
 
 	//manager
 	protected EntityManager manager;
@@ -22,16 +26,33 @@ public abstract class Enemy extends Entity
 
 	@Override
 	public void update() {
+		super.update();
 		if(health <= 0) dead = true;
 	}
 
-	public void setStop(int stop) { this.stop = stop;}
+	//json write method
+	@Override
+	public void write(Json json) {
+
+	}
+
+	//json read method
+	@Override
+	public void read (Json json, JsonValue jsonMap) {
+		setPosition(jsonMap.getFloat("x"), jsonMap.getFloat("y"));
+		setDirection(jsonMap.getFloat("dx"), jsonMap.getFloat("dy"));
+		spawnDelay = jsonMap.getInt("delay");
+	}
+
+	public void setEntityManager(EntityManager manager) {this.manager = manager;}
 	
 	public void modifyHealth(int h) {health += h;}
 
 	public int getDamage() {return damage;}
 
 	public int getScore() {return score;}
+
+	public int getSpawnDelay() {return spawnDelay;}
 
 	public boolean isDead() {return dead;}
 

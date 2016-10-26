@@ -4,12 +4,16 @@ import com.badlogic.gdx.utils.Array;
 
 class Level {
     private Array<Wave> waves;
+    private int index;
 
     Level()
     {
         waves = new Array<Wave>();
+        index = 0;
     }
 
-    Wave getWave(int i){return waves.get(i);}
-    int getNumWaves() {return waves.size;}
+    Wave getNextWave(){
+        return waves.get(index++);
+    }
+    boolean hasMoreWaves() {return index < waves.size;}
 }

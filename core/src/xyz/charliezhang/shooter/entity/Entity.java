@@ -26,14 +26,11 @@ public abstract class Entity
 		animationTime = 0;
 	}
 
+	//reset method for projectile pooling
 	protected void reset() {
 		setDirection(0, 0);
 		setPosition(0, 0);
 		animationTime = 0;
-	}
-
-	protected void dispose()
-	{
 	}
 
 	protected void render(SpriteBatch sb)

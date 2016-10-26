@@ -5,16 +5,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class UFO extends Enemy
 {
-	public UFO(EntityManager manager, int color) {
+	private int stop;
+
+	public UFO() {
 		super();
 
-		switch(color)
+		switch(MathUtils.random(1, 4))
 		{
 			case 1:
 				textureAtlas = Assets.manager.get("data/textures/ufoB.atlas", TextureAtlas.class);
@@ -38,7 +43,13 @@ public class UFO extends Enemy
 		health = maxHealth = 30;
 		damage = 1;
 		score = 100;
-		this.manager = manager;
+	}
+
+	//json read method
+	@Override
+	public void read (Json json, JsonValue jsonMap) {
+		super.read(json, jsonMap);
+		stop = jsonMap.getInt("stop");
 	}
 
 	@Override

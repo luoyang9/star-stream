@@ -11,11 +11,11 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Asteroid extends Enemy
 {
-    public Asteroid(EntityManager manager) {
+    public Asteroid() {
         super();
 
-        int rand = MathUtils.random(1, 4);
-        switch(rand)
+        //random texture
+        switch(MathUtils.random(1, 4))
         {
             case 1:  sprite.setRegion(Assets.manager.get("data/textures/asteroid1.png", Texture.class)); break;
             case 2:  sprite.setRegion(Assets.manager.get("data/textures/asteroid2.png", Texture.class)); break;
@@ -28,14 +28,13 @@ public class Asteroid extends Enemy
         health = maxHealth = 3;
         damage = 1;
         score = 0;
-        this.manager = manager;
     }
 
     @Override
     public void update() {
-        super.update();
         sprite.rotate(1);
-        sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+
+        super.update();
 
         if(sprite.getY() < -sprite.getHeight())
         {

@@ -5,14 +5,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Falcon extends Enemy
 {
-    private boolean intro;
-    public Falcon(EntityManager manager) {
+    private int bound;
+
+    public Falcon() {
         super();
 
         textureAtlas = Assets.manager.get("data/textures/falcon.atlas", TextureAtlas.class);
@@ -23,33 +26,34 @@ public class Falcon extends Enemy
         health = maxHealth = 10;
         damage = 1;
         score = 15;
-        this.manager = manager;
-
-        intro = true;
     }
+
+    //json read method
+    @Override
+    public void read (Json json, JsonValue jsonMap) {
+        super.read(json, jsonMap);
+        bound = jsonMap.getInt("bound");
+    }
+
 
     @Override
     public void update() {
-        super.update();
 
-        if(sprite.getY() <= MainGame.HEIGHT - stop && intro)
+        if((sprite.getX() < bound && direction.x < 0) ||(sprite.getX() > MainGame.WIDTH - bound && direction.x > 0))
         {
-           direction.x *= -1;
-            intro = false;
+            direction.x *= -1; //reverse horizontal direction
         }
 
-        sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-
+        super.update();
 
         if(sprite.getY() < -sprite.getHeight())
         {
-            intro = true;
             if(MathUtils.random() >= 0.5f) {
-                sprite.setPosition(MainGame.WIDTH + 200, MainGame.HEIGHT + 100);
+                sprite.setPosition(MainGame.WIDTH - bound, MainGame.HEIGHT + 100);
                 direction.x = -6;
             }
             else {
-                sprite.setPosition(-200, MainGame.HEIGHT + 100);
+                sprite.setPosition(bound, MainGame.HEIGHT + 100);
                 direction.x = 6;
             }
         }

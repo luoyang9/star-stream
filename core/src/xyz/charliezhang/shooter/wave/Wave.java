@@ -1,18 +1,21 @@
 package xyz.charliezhang.shooter.wave;
 
 import com.badlogic.gdx.utils.Array;
+import xyz.charliezhang.shooter.entity.enemies.Enemy;
 
 class Wave
 {
-    private Array<WaveEnemy> enemies;
-    private int delay;
+    private Array<Enemy> enemies;
+    private int index;
 
     public Wave()
     {
-        enemies = new Array<WaveEnemy>();
+        enemies = new Array<Enemy>();
+        index = 0;
     }
 
-    public int getDelay(){return delay;}
-    WaveEnemy getEnemy(int i){return enemies.get(i);}
-    int getNumEnemies() {return enemies.size;}
+    Enemy getNextEnemy() {
+        return enemies.get(index++);
+    }
+    boolean hasMoreEnemies() { return index < enemies.size; }
 }

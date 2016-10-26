@@ -4,16 +4,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Icarus extends Enemy
 {
 	private boolean intro;
-	public Icarus(EntityManager manager, int color) {
+	private int stop;
+
+	public Icarus() {
 		super();
 
-		switch(color)
+		switch(MathUtils.random(1, 4))
 		{
 			case 1:
 				textureAtlas = Assets.manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
@@ -36,9 +41,15 @@ public class Icarus extends Enemy
 		health = maxHealth = 60;
 		damage = 2;
 		score = 150;
-		this.manager = manager;
 
 		intro = true;
+	}
+
+	//json read method
+	@Override
+	public void read (Json json, JsonValue jsonMap) {
+		super.read(json, jsonMap);
+		stop = jsonMap.getInt("stop");
 	}
 
 	@Override

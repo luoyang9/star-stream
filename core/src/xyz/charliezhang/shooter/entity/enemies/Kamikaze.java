@@ -5,13 +5,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
 public class Kamikaze extends Enemy
 {
-    public Kamikaze(EntityManager manager) {
+    private int stop;
+
+    public Kamikaze() {
         super();
 
         textureAtlas = Assets.manager.get("data/textures/kamikaze.atlas", TextureAtlas.class);
@@ -22,7 +26,13 @@ public class Kamikaze extends Enemy
         health = maxHealth = 10;
         damage = 1;
         score = 15;
-        this.manager = manager;
+    }
+
+    //json read method
+    @Override
+    public void read (Json json, JsonValue jsonMap) {
+        super.read(json, jsonMap);
+        stop = jsonMap.getInt("stop");
     }
 
     @Override
@@ -42,7 +52,7 @@ public class Kamikaze extends Enemy
         {
             float newX = MathUtils.random()*MainGame.WIDTH;
             sprite.setPosition(newX, MainGame.HEIGHT + 200);
-            direction.x = (-newX+MainGame.WIDTH/2)*0.001f; //TODO what does this do??
+            //direction.x = (-newX+MainGame.WIDTH/2)*0.001f;
         }
     }
 

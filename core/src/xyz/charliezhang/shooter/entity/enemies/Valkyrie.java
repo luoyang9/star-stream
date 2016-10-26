@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
@@ -12,7 +14,9 @@ public class Valkyrie extends Enemy
 {
     private boolean intro;
     private long moveTimer;
-    public Valkyrie(EntityManager manager) {
+    private int stop;
+
+    public Valkyrie() {
         super();
 
         textureAtlas = Assets.manager.get("data/textures/valkyrie.atlas", TextureAtlas.class);
@@ -23,9 +27,15 @@ public class Valkyrie extends Enemy
         health = maxHealth = 40;
         damage = 1;
         score = 100;
-        this.manager = manager;
 
         intro = true;
+    }
+
+    //json read method
+    @Override
+    public void read (Json json, JsonValue jsonMap) {
+        super.read(json, jsonMap);
+        stop = jsonMap.getInt("stop");
     }
 
     @Override

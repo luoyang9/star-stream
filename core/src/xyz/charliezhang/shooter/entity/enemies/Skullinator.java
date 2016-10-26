@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
@@ -11,7 +13,9 @@ public class Skullinator extends Enemy
 {
 	private boolean entered, lastSpecial2Active;
 	private long lastSpecial1, lastSpecial2, lastSpecial2Duration;
-	public Skullinator(EntityManager manager) {
+	private int stop;
+
+	public Skullinator() {
 		super();
 
 		textureAtlas = Assets.manager.get("data/textures/skullinator.atlas", TextureAtlas.class);
@@ -22,9 +26,15 @@ public class Skullinator extends Enemy
 		health = maxHealth = 600;
 		damage = 2;
 		score = 300;
-		this.manager = manager;
 		entered = false;
 		lastSpecial1 = lastSpecial2 = System.currentTimeMillis();
+	}
+
+	//json read method
+	@Override
+	public void read (Json json, JsonValue jsonMap) {
+		super.read(json, jsonMap);
+		stop = jsonMap.getInt("stop");
 	}
 
 	@Override

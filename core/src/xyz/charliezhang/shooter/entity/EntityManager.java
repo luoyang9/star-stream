@@ -193,7 +193,6 @@ public class EntityManager
 		{
 			if(p.checkEnd())
 			{
-				p.dispose();
 				playerProjectiles.removeValue(p, false);
 			}
 		}
@@ -202,7 +201,6 @@ public class EntityManager
 		{
 			if(p.checkEnd())
 			{
-				p.dispose();
 				enemyProjectiles.removeValue(p, false);
 			}
 		}
@@ -216,7 +214,6 @@ public class EntityManager
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
 
-				e.dispose();
 				enemies.removeValue(e, false);
 				Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
 
@@ -251,7 +248,6 @@ public class EntityManager
 			}
 			else if(e.isSuicide())
 			{
-				e.dispose();
 				enemies.removeValue(e, false);
 			}
 		}
@@ -372,22 +368,7 @@ public class EntityManager
 
 	public void dispose()
 	{
-		player.dispose();
-		for (Enemy e : enemies) {
-			e.dispose();
-		}
-		for (Projectile p : enemyProjectiles) {
-			p.dispose();
-		}
-		for (Projectile p : playerProjectiles) {
-			p.dispose();
-		}
-		for (PowerUp e : powerups) {
-			e.dispose();
-		}
-		for (Explosion e : explosions) {
-			e.dispose();
-		}
+		//dispose stage in hud
 		hud.dispose();
 	}
 
@@ -411,7 +392,10 @@ public class EntityManager
 		player.setControllable(false);
 	}
 
-	public void spawnEnemy(Enemy enemy) {enemies.add(enemy);}
+	public void spawnEnemy(Enemy enemy) {
+		enemy.setEntityManager(this);
+		enemies.add(enemy);
+	}
 	public void spawnLaser(Projectile p) {playerProjectiles.add(p);}
 	public void spawnEnemyLaser(Projectile p) {enemyProjectiles.add(p);}
 	private void spawnPowerUp(PowerUp p) {powerups.add(p);}

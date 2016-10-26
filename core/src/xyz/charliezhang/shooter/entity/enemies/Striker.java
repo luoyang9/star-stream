@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
@@ -11,7 +13,9 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 public class Striker extends Enemy
 {
 	private boolean intro;
-	public Striker(EntityManager manager) {
+	private int stop;
+
+	public Striker() {
 		super();
 
 		textureAtlas = Assets.manager.get("data/textures/striker.atlas", TextureAtlas.class);
@@ -22,9 +26,15 @@ public class Striker extends Enemy
 		health = maxHealth = 25;
 		damage = 2;
 		score = 75;
-		this.manager = manager;
 
 		intro = true;
+	}
+
+	//json read method
+	@Override
+	public void read (Json json, JsonValue jsonMap) {
+		super.read(json, jsonMap);
+		stop = jsonMap.getInt("stop");
 	}
 
 	@Override
