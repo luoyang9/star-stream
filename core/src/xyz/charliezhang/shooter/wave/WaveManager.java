@@ -65,6 +65,7 @@ public class WaveManager
         String levelJSON = handle.readString();
 
         Json json = new Json();
+        json.setElementType(Level.class, "waves", Wave.class);
         level = json.fromJson(Level.class, levelJSON);
     }
 

@@ -1,7 +1,6 @@
 {
   waves: [
     {
-      class: xyz.charliezhang.shooter.wave.Wave,
       enemies: [
         {
           class: xyz.charliezhang.shooter.entity.enemies.Asteroid,
@@ -30,7 +29,6 @@
       ]
     },
     {
-      class: xyz.charliezhang.shooter.wave.Wave,
       enemies: [
         {
           class: xyz.charliezhang.shooter.entity.enemies.Falcon,
@@ -62,7 +60,6 @@
       ]
     },
     {
-      class: xyz.charliezhang.shooter.wave.Wave,
       enemies: [
         {
           class: xyz.charliezhang.shooter.entity.enemies.UFO,
