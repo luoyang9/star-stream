@@ -34,12 +34,12 @@ public class Asteroid extends Enemy
     public void update() {
         sprite.rotate(1);
 
-        super.update();
-
         if(sprite.getY() < -sprite.getHeight())
         {
             suicide = true;
         }
+
+        super.update();
     }
 
     @Override

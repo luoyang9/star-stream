@@ -54,38 +54,36 @@ public class UFO extends Enemy
 
 	@Override
 	public void update() {
-		super.update();
-
 		if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop && direction.y < 0)
 		{
 			setDirection(0, 0);
 		}
 
 
-		if(sprite.getY() < manager.getViewport().getWorldHeight())
+		if(sprite.getY() < manager.getViewport().getWorldHeight() - stop)
 		{
 			if(System.currentTimeMillis() - lastFire >= 2000)
 			{
 				EnemyLaser l = manager.getEnemyLaserPool().obtain();
 				l.init(manager, this, 1);
-				l.setDirection(0, -3);
+				l.setDirection(0, -8);
 				l.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l);
 				EnemyLaser l2 = manager.getEnemyLaserPool().obtain();
 				l2.init(manager, this, 1);
-				l2.setDirection(1.5f, -3);
+				l2.setDirection(1.5f, -8);
 				l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l2);
 				EnemyLaser l3 = manager.getEnemyLaserPool().obtain();
 				l3.init(manager, this, 1);
-				l3.setDirection(-1.5f, -3);
+				l3.setDirection(-1.5f, -8);
 				l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				manager.spawnEnemyLaser(l3);
 				lastFire = System.currentTimeMillis();
 			}
 		}
 
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
+		super.update();
 	}
 
 	@Override 

@@ -44,8 +44,6 @@ public class Falcon extends Enemy
             direction.x *= -1; //reverse horizontal direction
         }
 
-        super.update();
-
         if(sprite.getY() < -sprite.getHeight())
         {
             if(MathUtils.random() >= 0.5f) {
@@ -57,6 +55,8 @@ public class Falcon extends Enemy
                 direction.x = 6;
             }
         }
+
+        super.update();
     }
 
     @Override

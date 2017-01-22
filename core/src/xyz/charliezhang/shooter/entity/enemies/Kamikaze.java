@@ -37,16 +37,11 @@ public class Kamikaze extends Enemy
 
     @Override
     public void update() {
-        super.update();
-
         if(sprite.getY() <= MainGame.HEIGHT - stop)
         {
             if(direction.x <= 0) direction.x += 0.05;
             else direction.x -= 0.05;
         }
-
-        sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-
 
         if(sprite.getY() < -sprite.getHeight())
         {
@@ -54,6 +49,8 @@ public class Kamikaze extends Enemy
             sprite.setPosition(newX, MainGame.HEIGHT + 200);
             //direction.x = (-newX+MainGame.WIDTH/2)*0.001f;
         }
+
+        super.update();
     }
 
     @Override

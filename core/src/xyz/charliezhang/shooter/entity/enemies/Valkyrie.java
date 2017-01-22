@@ -40,8 +40,6 @@ public class Valkyrie extends Enemy
 
     @Override
     public void update() {
-        super.update();
-
         if(intro)
         {
             if(sprite.getY() <= MainGame.HEIGHT - stop) {
@@ -70,9 +68,6 @@ public class Valkyrie extends Enemy
             }
         }
 
-        sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-
-
         if(sprite.getY() < MainGame.HEIGHT)
         {
             if(System.currentTimeMillis() - lastFire >= 800)
@@ -80,16 +75,17 @@ public class Valkyrie extends Enemy
                 EnemyLaser g1 = manager.getEnemyLaserPool().obtain();
                 EnemyLaser g2 = manager.getEnemyLaserPool().obtain();
                 g1.init(manager, this, 3);
-                g1.setDirection(0.1f, -5);
+                g1.setDirection(0.1f, -8);
                 g1.setPosition(sprite.getX() + sprite.getWidth() / 2 + 20, sprite.getY());
                 g2.init(manager, this, 3);
-                g2.setDirection(-0.1f, -5);
+                g2.setDirection(-0.1f, -8);
                 g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 20, sprite.getY());
                 manager.spawnEnemyLaser(g1);
                 manager.spawnEnemyLaser(g2);
                 lastFire = System.currentTimeMillis();
             }
         }
+        super.update();
     }
 
     @Override

@@ -54,7 +54,6 @@ public class Icarus extends Enemy
 
 	@Override
 	public void update() {
-		super.update();
 
 		if(intro && sprite.getY() <= manager.getViewport().getWorldHeight() - stop)
 		{
@@ -63,15 +62,12 @@ public class Icarus extends Enemy
 			intro = false;
 		}
 
-		if(!intro)
-		{
+		if(!intro) {
 			if (sprite.getY() < manager.getViewport().getWorldHeight() - stop) direction.y += 0.04f;
 			if (sprite.getY() >= manager.getViewport().getWorldHeight() - stop) direction.y -= 0.04f;
 			if (sprite.getX() >= manager.getViewport().getWorldWidth() / 2) direction.x -= 0.01f;
 			if (sprite.getX() < manager.getViewport().getWorldWidth() / 2) direction.x += 0.01f;
 		}
-		
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
 		if(sprite.getY() < manager.getViewport().getWorldHeight())
 		{
@@ -93,19 +89,21 @@ public class Icarus extends Enemy
 				g4.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g5.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				
-				g1.setDirection(0,  -2.3f);
+				g1.setDirection(0,  -8f);
 				manager.spawnEnemyLaser(g1);
-				g2.setDirection(1f, -1.8f);
+				g2.setDirection(1f, -7f);
 				manager.spawnEnemyLaser(g2);
-				g3.setDirection(-1f, -1.8f);
+				g3.setDirection(-1f, -7f);
 				manager.spawnEnemyLaser(g3);
-				g4.setDirection(2f, -0.2f);
+				g4.setDirection(2f, -5f);
 				manager.spawnEnemyLaser(g4);
-				g5.setDirection(-2f, -0.2f);
+				g5.setDirection(-2f, -5f);
 				manager.spawnEnemyLaser(g5);
 				lastFire = System.currentTimeMillis();
 			}
 		}
+
+		super.update();
 	}
 
 	@Override 

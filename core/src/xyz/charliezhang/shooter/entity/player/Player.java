@@ -86,7 +86,7 @@ public class Player extends Entity
 		justControllable = false;
 		justSpawned = true;
 		justTouched = false;
-		setDirection(0, 4);
+		setDirection(0, 8);
 		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
@@ -196,7 +196,7 @@ public class Player extends Entity
 			else //moar lives
 			{
 				setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
-				setDirection(0, 4);
+				setDirection(0, 8);
 				health = maxHealth;
 				attLevel = 1;
 

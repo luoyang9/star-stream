@@ -39,8 +39,6 @@ public class Striker extends Enemy
 
 	@Override
 	public void update() {
-		super.update();
-
 		if(intro && sprite.getY() <= MainGame.HEIGHT - stop)
 		{
 			intro = false;
@@ -55,9 +53,6 @@ public class Striker extends Enemy
 		{
 			setDirection(-4, 0);
 		}
-		
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
-		
 
 		if(sprite.getY() < MainGame.HEIGHT)
 		{
@@ -65,12 +60,13 @@ public class Striker extends Enemy
 			{
 				EnemyLaser g1 = manager.getEnemyLaserPool().obtain();
 				g1.init(manager, this, 2);
-				g1.setDirection(0, -7);
+				g1.setDirection(0, -10);
 				g1.setPosition(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + 5);
 				manager.spawnEnemyLaser(g1);
 				lastFire = System.currentTimeMillis();
 			}
 		}
+		super.update();
 	}
 	
 	@Override 

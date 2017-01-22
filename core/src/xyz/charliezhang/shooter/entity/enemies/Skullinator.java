@@ -39,8 +39,6 @@ public class Skullinator extends Enemy
 
 	@Override
 	public void update() {
-		super.update();
-
 		if(sprite.getY() <= manager.getViewport().getWorldHeight() - stop && !entered)
 		{
 			direction.set(2, 0);
@@ -58,7 +56,6 @@ public class Skullinator extends Enemy
 				direction.set(-2, 0);
 			}
 		}
-		sprite.setPosition(sprite.getX() + direction.x, sprite.getY() + direction.y);
 
 		if(sprite.getY() < manager.getViewport().getWorldHeight())
 		{
@@ -70,9 +67,9 @@ public class Skullinator extends Enemy
 				r1.init(manager, this, 3);
 				r2.init(manager, this, 3);
 				r3.init(manager, this, 3);
-				r1.setDirection(0,  -5);
-				r2.setDirection(0,  -5);
-				r3.setDirection(0,  -5);
+				r1.setDirection(0,  -8);
+				r2.setDirection(0,  -8);
+				r3.setDirection(0,  -8);
 				r1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() +  5);
 				manager.spawnEnemyLaser(r1);
 				r2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 55, sprite.getY() +  5);
@@ -104,19 +101,19 @@ public class Skullinator extends Enemy
 				g5.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g6.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
 				g7.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
-				g1.setDirection(0,  -5);
+				g1.setDirection(0,  -8);
 				manager.spawnEnemyLaser(g1);
-				g2.setDirection(1,  -4);
+				g2.setDirection(1,  -7);
 				manager.spawnEnemyLaser(g2);
-				g3.setDirection(-1,  -4);
+				g3.setDirection(-1,  -7);
 				manager.spawnEnemyLaser(g3);
-				g4.setDirection(2,  -3);
+				g4.setDirection(2,  -6);
 				manager.spawnEnemyLaser(g4);
-				g5.setDirection(-2,  -3);
+				g5.setDirection(-2,  -6);
 				manager.spawnEnemyLaser(g5);
-				g6.setDirection(3,  -2);
+				g6.setDirection(3,  -5);
 				manager.spawnEnemyLaser(g6);
-				g7.setDirection(-3,  -2);
+				g7.setDirection(-3,  -5);
 				manager.spawnEnemyLaser(g7);
 				lastSpecial1 = System.currentTimeMillis();
 			}
@@ -132,11 +129,11 @@ public class Skullinator extends Enemy
 				o1.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 				o2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
 				o3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + + 5);
-				o1.setDirection(0, -5);
+				o1.setDirection(0, -10);
 				manager.spawnEnemyLaser(o1);
-				o2.setDirection(1, -5);
+				o2.setDirection(1, -10);
 				manager.spawnEnemyLaser(o2);
-				o3.setDirection(-1, -5);
+				o3.setDirection(-1, -10);
 				manager.spawnEnemyLaser(o3);
 				lastSpecial2 = System.currentTimeMillis();
 				lastSpecial2Duration = System.currentTimeMillis();
@@ -166,6 +163,8 @@ public class Skullinator extends Enemy
 				}
 			}
 		}
+
+		super.update();
 	}
 	
 	@Override 
