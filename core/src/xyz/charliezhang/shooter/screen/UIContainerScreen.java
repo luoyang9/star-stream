@@ -25,7 +25,7 @@ public class UIContainerScreen implements Screen {
     private ShopTable shop;
     private LevelSelectTable levelSelect;
 
-    public static enum UITable { MENU, OPTIONS, SHOP, LEVELSELECT };
+    enum UITable { MENU, OPTIONS, SHOP, LEVELSELECT };
 
     private Texture background;
 
@@ -70,7 +70,7 @@ public class UIContainerScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void play(final int level) {
+    void play(final int level) {
         stage.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.run(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +80,7 @@ public class UIContainerScreen implements Screen {
         })));
     }
 
-    public void changeTable(UITable table) {
+    void changeTable(UITable table) {
         stage.getActors().first().remove();
         switch(table) {
             case MENU:
@@ -107,7 +107,7 @@ public class UIContainerScreen implements Screen {
 
         //background
         stage.getBatch().begin();
-        stage.getBatch().draw(background, 0, 0, stage.getHeight()/background.getHeight()*background.getWidth(), stage.getHeight());
+        stage.getBatch().draw(background, -(background.getWidth() - MainGame.WIDTH) / 2, -(background.getHeight() - MainGame.HEIGHT) / 2, background.getWidth(), background.getHeight());
         stage.getBatch().end();
 
         stage.draw();
