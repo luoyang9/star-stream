@@ -29,10 +29,9 @@ public class HUD
     private Table deathHUDTable;
     private HorizontalGroup iconGroup;
     private HorizontalGroup livesGroup;
-    private Stack stack;
     private Stack masterStack;
-    private Image healthBar;
-    private Image healthFill;
+    private Texture healthBar;
+    private Texture healthFill;
     private Image missileIcon;
     private Image shieldIcon;
     private Image attIcon;
@@ -58,10 +57,8 @@ public class HUD
 
         skin = Assets.skin;
 
-        healthBar = new Image(Assets.manager.get("data/textures/health.png", Texture.class));
-        healthBar.setHeight(40);
-        healthFill = new Image(Assets.manager.get("data/textures/healthFill.png", Texture.class));
-        healthFill.setHeight(40);
+        healthBar = Assets.manager.get("data/textures/health.png", Texture.class);
+        healthFill = Assets.manager.get("data/textures/healthFill.png", Texture.class);
 
         livesGroup = new HorizontalGroup();
         livesIcons = new Image[manager.getPlayer().getMaxLives()];
@@ -86,7 +83,6 @@ public class HUD
         attIcon.setVisible(false);
 
         table = new Table();
-        stack = new Stack();
         deathTable = new Table();
         deathHUDTable = new Table();
 
@@ -129,10 +125,7 @@ public class HUD
         iconGroup.addActor(attIcon);
         table.add(iconGroup).expandY().left().bottom();
         table.row();
-        stack.add(healthFill);
-        stack.add(healthBar);
-        table.add(stack).height(40).expandX().fillX().padLeft(5);
-        table.add(btnPause).height(40).width(120).padRight(5);
+        table.add(btnPause).colspan(2).right().height(54).width(60);
 
         lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
@@ -155,8 +148,6 @@ public class HUD
         {
             livesGroup.removeActor(livesIcons[livesGroup.getChildren().size-1]);
         }
-
-        healthFill.setWidth((manager.getPlayer().getHealth() + 0.0f)/manager.getPlayer().getMaxHealth()*healthBar.getWidth());
 
         if(manager.getPlayer().getMissileTask().isScheduled())
         {
@@ -191,7 +182,10 @@ public class HUD
     {
         batch.end();
         stage.draw();
+        float healthWidth = (manager.getPlayer().getHealth() + 0.0f)/manager.getPlayer().getMaxHealth()*healthFill.getWidth();
         batch.begin();
+        batch.draw(healthBar, 5, 5, healthBar.getWidth(), healthBar.getHeight());
+        batch.draw(healthFill, 15, 10, healthWidth, healthFill.getHeight());
     }
 
     public void dispose()

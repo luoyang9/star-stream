@@ -23,7 +23,7 @@ public class RedDragon extends Player
         shootDelay = 500;
 
         //read player stats
-        health = maxHealth = 3;
+        health = maxHealth = 10;
         damage = 3;
     }
 

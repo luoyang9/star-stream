@@ -23,7 +23,7 @@ public class BlueFury extends Player
         shootDelay = 100;
 
         //read player stats
-        health = maxHealth = 3;
+        health = maxHealth = 10;
         damage = 1;
     }
 
