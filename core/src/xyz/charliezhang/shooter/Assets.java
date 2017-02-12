@@ -52,13 +52,8 @@ public class Assets
         manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
         manager.load("data/textures/shieldpowerup.atlas", TextureAtlas.class);
         //enemies
-        manager.load("data/textures/ufoB.atlas", TextureAtlas.class);
-        manager.load("data/textures/ufoG.atlas", TextureAtlas.class);
-        manager.load("data/textures/ufoR.atlas", TextureAtlas.class);
-        manager.load("data/textures/ufoY.atlas", TextureAtlas.class);
-        manager.load("data/textures/icarusB.atlas", TextureAtlas.class);
-        manager.load("data/textures/icarusG.atlas", TextureAtlas.class);
-        manager.load("data/textures/icarusR.atlas", TextureAtlas.class);
+        manager.load("data/textures/ufo.atlas", TextureAtlas.class);
+        manager.load("data/textures/icarus.atlas", TextureAtlas.class);
         manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
         manager.load("data/textures/striker.atlas", TextureAtlas.class);
         manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);

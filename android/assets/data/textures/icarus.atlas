@@ -1,20 +1,19 @@
-striker.png
-size: 28, 9
+icarus.png
+size: 26, 13
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-0001
+01
   rotate: false
   xy: 0, 0
-  size: 14, 9
-  orig: 14, 9
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
-0002
+01
   rotate: false
-  xy: 14, 0
-  size: 14, 9
-  orig: 14, 9
+  xy: 13, 0
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
-

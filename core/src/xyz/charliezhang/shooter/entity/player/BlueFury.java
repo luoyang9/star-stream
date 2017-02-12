@@ -14,10 +14,10 @@ public class BlueFury extends Player
 
         //set texture atlas and animation to player
         textureAtlas = Assets.manager.get("data/textures/playerblue.atlas", TextureAtlas.class);
-        animation = new Animation(1/15f, textureAtlas.getRegions());
+        animation = new Animation(1/10f, textureAtlas.getRegions());
 
         //set sprite size
-        sprite.setSize(75, 50);
+        sprite.setSize(50, 50);
 
         //set player starting data
         shootDelay = 100;

@@ -3,6 +3,24 @@
     {
       enemies: [
         {
+          class: xyz.charliezhang.shooter.entity.enemies.Kamikaze,
+          x: 240,
+          y: 1100,
+          dx: 0,
+          dy: -4,
+          stop: 150,
+          delay: 0
+        },
+        {
+          class: xyz.charliezhang.shooter.entity.enemies.Icarus,
+          x: 240,
+          y: 1100,
+          dx: 0,
+          dy: -4,
+          stop: 150,
+          delay: 0
+        }
+        {
           class: xyz.charliezhang.shooter.entity.enemies.UFO,
           x: 240,
           y: 1100,

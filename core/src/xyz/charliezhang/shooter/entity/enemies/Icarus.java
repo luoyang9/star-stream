@@ -18,25 +18,10 @@ public class Icarus extends Enemy
 	public Icarus() {
 		super();
 
-		switch(MathUtils.random(1, 4))
-		{
-			case 1:
-				textureAtlas = Assets.manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
-				break;
-			case 2:
-				textureAtlas = Assets.manager.get("data/textures/icarusG.atlas", TextureAtlas.class);
-				break;
-			case 3:
-				textureAtlas = Assets.manager.get("data/textures/icarusR.atlas", TextureAtlas.class);
-				break;
-			case 4:
-				textureAtlas = Assets.manager.get("data/textures/icarusB.atlas", TextureAtlas.class);
-				break;
-			default:
-		}
+		textureAtlas = Assets.manager.get("data/textures/icarus.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
-		sprite.setSize(93, 84);
+		sprite.setSize(50, 50);
 		
 		health = maxHealth = 60;
 		damage = 2;

@@ -15,32 +15,21 @@ import xyz.charliezhang.shooter.entity.EntityManager;
 public class UFO extends Enemy
 {
 	private int stop;
+	private float rotation;
 
 	public UFO() {
 		super();
 
-		switch(MathUtils.random(1, 4))
-		{
-			case 1:
-				textureAtlas = Assets.manager.get("data/textures/ufoB.atlas", TextureAtlas.class);
-				break;
-			case 2:
-				textureAtlas = Assets.manager.get("data/textures/ufoG.atlas", TextureAtlas.class);
-				break;
-			case 3:
-				textureAtlas = Assets.manager.get("data/textures/ufoR.atlas", TextureAtlas.class);
-				break;
-			case 4:
-				textureAtlas = Assets.manager.get("data/textures/ufoY.atlas", TextureAtlas.class);
-				break;
-			default:
-		}
-		animation = new Animation(1/30f, textureAtlas.getRegions());
+		textureAtlas = Assets.manager.get("data/textures/ufo.atlas", TextureAtlas.class);
+		animation = new Animation(1/5f, textureAtlas.getRegions());
 		
-		sprite.setSize(75, 75);
+		sprite.setSize(40, 40);
+		sprite.setRotation(0);
+		sprite.setOrigin(20, 20);
 		
 		//set enemy data
 		health = maxHealth = 30;
+		rotation = 0;
 		damage = 1;
 		score = 100;
 	}
@@ -62,26 +51,35 @@ public class UFO extends Enemy
 
 		if(sprite.getY() < manager.getViewport().getWorldHeight() - stop)
 		{
-			if(System.currentTimeMillis() - lastFire >= 2000)
+			if(System.currentTimeMillis() - lastFire >= 1000)
 			{
 				EnemyLaser l = manager.getEnemyLaserPool().obtain();
 				l.init(manager, this, 1);
-				l.setDirection(0, -8);
-				l.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
+				l.setDirection(-MathUtils.sinDeg(rotation) * 8, MathUtils.cosDeg(rotation) * 8);
+				l.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l);
 				EnemyLaser l2 = manager.getEnemyLaserPool().obtain();
 				l2.init(manager, this, 1);
-				l2.setDirection(1.5f, -8);
-				l2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
+				l2.setDirection(-MathUtils.sinDeg(rotation + 90) * 8, MathUtils.cosDeg(rotation + 90) * 8);
+				l2.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l2);
 				EnemyLaser l3 = manager.getEnemyLaserPool().obtain();
 				l3.init(manager, this, 1);
-				l3.setDirection(-1.5f, -8);
-				l3.setPosition(sprite.getX() + sprite.getWidth() / 2 - 5, sprite.getY() + 5);
+				l3.setDirection(-MathUtils.sinDeg(rotation + 180) * 8, MathUtils.cosDeg(rotation + 180) * 8);
+				l3.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l3);
+				EnemyLaser l4 = manager.getEnemyLaserPool().obtain();
+				l4.init(manager, this, 1);
+				l4.setDirection(-MathUtils.sinDeg(rotation + 270) * 8, MathUtils.cosDeg(rotation + 270) * 8);
+				l4.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
+				manager.spawnEnemyLaser(l4);
 				lastFire = System.currentTimeMillis();
 			}
 		}
+
+		rotation++;
+		if(rotation > 360) rotation = 0;
+		sprite.setRotation(rotation - 50);
 
 		super.update();
 	}

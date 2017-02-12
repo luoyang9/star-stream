@@ -19,9 +19,9 @@ public class Striker extends Enemy
 		super();
 
 		textureAtlas = Assets.manager.get("data/textures/striker.atlas", TextureAtlas.class);
-		animation = new Animation(1/20f, textureAtlas.getRegions());
+		animation = new Animation(1/10f, textureAtlas.getRegions());
 		
-		sprite.setSize(50, 58);
+		sprite.setSize(56, 36);
 		
 		health = maxHealth = 25;
 		damage = 2;
