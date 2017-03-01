@@ -4,6 +4,8 @@ import xyz.charliezhang.shooter.entity.Entity;
 
 public class PowerUp extends Entity
 {
+    public enum PowerUps { SHIELD, ATTACK, MISSILE }
+
     protected float delay;
     float interval;
     int numRepeats;
@@ -30,4 +32,5 @@ public class PowerUp extends Entity
     public float getDelay() {return delay;}
     public float getInterval(){return interval;}
     public int getNumRepeats(){return numRepeats;}
+    public PowerUps getType() {return null;}
 }

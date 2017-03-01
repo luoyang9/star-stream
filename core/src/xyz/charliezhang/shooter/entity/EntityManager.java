@@ -400,6 +400,8 @@ public class EntityManager
 	public void spawnEnemyLaser(Projectile p) {enemyProjectiles.add(p);}
 	private void spawnPowerUp(PowerUp p) {powerups.add(p);}
 	public void spawnExplosion(Explosion e) {explosions.add(e);}
+	public void activatePowerUp(PowerUp.PowerUps p) { hud.activatePowerUp(p); }
+	public void deactivatePowerUp(PowerUp.PowerUps p) { hud.deactivatePowerUp(p); }
 	
 	public Array<Enemy> getEnemies() {
 		return enemies;

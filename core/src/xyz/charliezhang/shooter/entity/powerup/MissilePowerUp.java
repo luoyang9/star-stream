@@ -7,13 +7,16 @@ import xyz.charliezhang.shooter.Assets;
 
 public class MissilePowerUp extends PowerUp
 {
+    @Override
+    public PowerUps getType() {return PowerUps.MISSILE;}
+
     public MissilePowerUp() {
         super();
 
         textureAtlas = Assets.manager.get("data/textures/mispowerup.atlas", TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
-        sprite.setSize(20, 20);
+        sprite.setSize(28, 28);
 
         delay = 0;
         interval = 1f;

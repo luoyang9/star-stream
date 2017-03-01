@@ -15,9 +15,15 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
+import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
+import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
+import xyz.charliezhang.shooter.entity.powerup.PowerUp;
+import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuTable;
 import xyz.charliezhang.shooter.screen.UIContainerScreen;
+
+import static xyz.charliezhang.shooter.entity.powerup.PowerUp.PowerUps.*;
 
 public class HUD
 {
@@ -27,7 +33,7 @@ public class HUD
     private Table table;
     private Table deathTable;
     private Table deathHUDTable;
-    private HorizontalGroup iconGroup;
+    private Table iconTable;
     private HorizontalGroup livesGroup;
     private Stack masterStack;
     private Texture healthBar;
@@ -68,19 +74,13 @@ public class HUD
             livesGroup.addActor(livesIcons[i]);
         }
 
-        iconGroup = new HorizontalGroup();
+        iconTable = new Table();
         missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
-        missileIcon.setWidth(50);
-        missileIcon.setHeight(50);
-        missileIcon.setVisible(false);
+        missileIcon.setSize(50, 50);
         shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
-        shieldIcon.setWidth(50);
-        missileIcon.setHeight(50);
-        shieldIcon.setVisible(false);
+        shieldIcon.setSize(50, 50);
         attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
-        attIcon.setWidth(50);
-        missileIcon.setHeight(50);
-        attIcon.setVisible(false);
+        attIcon.setSize(50, 50);
 
         table = new Table();
         deathTable = new Table();
@@ -120,10 +120,7 @@ public class HUD
         table.add(lblScore).expandX().fillX().height(40).padLeft(5).left();
         table.add(livesGroup).right().width(120).height(40);
         table.row();
-        iconGroup.addActor(missileIcon);
-        iconGroup.addActor(shieldIcon);
-        iconGroup.addActor(attIcon);
-        table.add(iconGroup).expandY().left().bottom();
+        table.add(iconTable).expandY().left().bottom().padLeft(5).height(50).width(150);
         table.row();
         table.add(btnPause).colspan(2).right().height(54).width(60);
 
@@ -137,7 +134,7 @@ public class HUD
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        //table.debug();
+        table.debug();
         //deathTable.debug();
     }
 
@@ -147,33 +144,6 @@ public class HUD
         if(manager.getPlayer().getLives() != livesGroup.getChildren().size)
         {
             livesGroup.removeActor(livesIcons[livesGroup.getChildren().size-1]);
-        }
-
-        if(manager.getPlayer().getMissileTask().isScheduled())
-        {
-            missileIcon.setVisible(true);
-        }
-        else
-        {
-            missileIcon.setVisible(false);
-        }
-
-        if(manager.getPlayer().isShieldOn())
-        {
-            shieldIcon.setVisible(true);
-        }
-        else
-        {
-            shieldIcon.setVisible(false);
-        }
-
-        if(manager.getPlayer().isSuperAttOn())
-        {
-            attIcon.setVisible(true);
-        }
-        else
-        {
-            attIcon.setVisible(false);
         }
         stage.act(delta);
     }
@@ -204,6 +174,27 @@ public class HUD
         {
             deathTable.addAction(Actions.fadeOut(0.1f));
             btnMenu.setTouchable(Touchable.disabled);
+        }
+    }
+
+    public void activatePowerUp(PowerUp.PowerUps p) {
+        if(p == ATTACK) {
+            iconTable.add(attIcon).width(50).height(50).left();
+        } else if(p == MISSILE) {
+            iconTable.add(missileIcon).width(50).height(50).left();
+        } else if(p == SHIELD) {
+            iconTable.add(shieldIcon).width(50).height(50).left();
+        }
+    }
+
+    public void deactivatePowerUp(PowerUp.PowerUps p) {
+        System.out.println(p);
+        if(p == ATTACK) {
+            iconTable.removeActor(attIcon);
+        } else if(p == MISSILE) {
+            iconTable.removeActor(missileIcon);
+        } else if(p == SHIELD) {
+            iconTable.removeActor(shieldIcon);
         }
     }
 

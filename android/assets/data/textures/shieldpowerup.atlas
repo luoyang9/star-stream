@@ -1,13 +1,13 @@
 
 shieldpowerup.png
-size: 30, 30
+size: 13, 13
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 30, 30
-  orig: 30, 30
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1

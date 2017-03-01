@@ -7,6 +7,8 @@ import xyz.charliezhang.shooter.Assets;
 
 public class AttackPowerUp extends PowerUp
 {
+	@Override
+	public PowerUps getType() {return PowerUps.ATTACK;}
 	
 	public AttackPowerUp() {
 		super();
@@ -14,6 +16,6 @@ public class AttackPowerUp extends PowerUp
 		textureAtlas = Assets.manager.get("data/textures/attpowerup.atlas", TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 
-		sprite.setSize(16, 24);
+		sprite.setSize(22, 30);
 	}
 }

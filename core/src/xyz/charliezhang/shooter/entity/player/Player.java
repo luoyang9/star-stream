@@ -23,6 +23,8 @@ import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.entity.powerup.PowerUp.PowerUps.*;
+
 public class Player extends Entity
 {
 	//initial touch
@@ -52,6 +54,7 @@ public class Player extends Entity
 
 	//powerup tasks
 	private Task missileTask;
+	private boolean missileOn;
 	private boolean shieldOn;
 	private boolean invincibleOn;
 	private long invincibleDuration;
@@ -113,6 +116,7 @@ public class Player extends Entity
 				manager.spawnLaser(m2);
 			}
 		};
+		missileOn = false;
 
 		invincibleOn = false;
 		invincibleDuration = 3000;
@@ -164,10 +168,17 @@ public class Player extends Entity
 	private void checkPowerUps()
 	{
 		long elapsed;
+		if(!missileTask.isScheduled() && missileOn) {
+			missileOn = false;
+			manager.deactivatePowerUp(MISSILE);
+		}
 		if(superAttOn)
 		{
 			elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-			if(elapsed > superAttDuration) superAttOn = false;
+			if(elapsed > superAttDuration) {
+				superAttOn = false;
+				manager.deactivatePowerUp(ATTACK);
+			}
 		}
 		if(invincibleOn)
 		{
@@ -286,6 +297,7 @@ public class Player extends Entity
 	public void setDamage(int d){damage = d;} //set damage
 	public void activatePowerUp(PowerUp powerUp)
 	{
+		manager.activatePowerUp(powerUp.getType());
 		if(powerUp instanceof AttackPowerUp) activateAttackPowerUp();
 		if(powerUp instanceof MissilePowerUp) activateMissilePowerUp((MissilePowerUp)powerUp);
 		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp();
@@ -309,6 +321,7 @@ public class Player extends Entity
 
 	private void activateMissilePowerUp(MissilePowerUp powerUp)
 	{
+		missileOn = true;
 		missileTask.cancel();
 		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
 	}
@@ -334,10 +347,9 @@ public class Player extends Entity
 	public boolean isFlinching() {return flinching; } //is flinching?
 	public boolean isControllable() {return controllable;} //is controllable?
 	public boolean isDead() {return dead;} //is dead?
-	public Timer.Task getMissileTask() {return missileTask;}
 	public boolean isShieldOn() {return shieldOn;}
-	public boolean isSuperAttOn() {return superAttOn;}
 	public void removeShield() {
+		manager.deactivatePowerUp(SHIELD);
 		shieldOn = false;
 		shieldDownSound.play(MusicPlayer.VOLUME);
 	}
