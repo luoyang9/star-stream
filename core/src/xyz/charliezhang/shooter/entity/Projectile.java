@@ -31,6 +31,6 @@ public class Projectile extends Entity {
 
     boolean checkEnd()
     {
-        return sprite.getY() >= manager.getViewport().getWorldHeight() || sprite.getY() < 0;
+        return sprite.getY() >= manager.getViewport().getWorldHeight() || sprite.getY() < 0 || sprite.getX() < 0 || sprite.getX() > manager.getViewport().getWorldWidth();
     }
 }
