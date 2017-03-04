@@ -77,10 +77,13 @@ public class HUD
         iconTable = new Table();
         missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
         missileIcon.setSize(50, 50);
+        missileIcon.setVisible(false);
         shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
         shieldIcon.setSize(50, 50);
+        shieldIcon.setVisible(false);
         attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
         attIcon.setSize(50, 50);
+        attIcon.setVisible(false);
 
         table = new Table();
         deathTable = new Table();
@@ -120,6 +123,10 @@ public class HUD
         table.add(lblScore).expandX().fillX().height(40).padLeft(5).left();
         table.add(livesGroup).right().width(120).height(40);
         table.row();
+        iconTable.left();
+        iconTable.add(shieldIcon).width(50).height(50);;
+        iconTable.add(missileIcon).width(50).height(50);;
+        iconTable.add(attIcon).width(50).height(50);;
         table.add(iconTable).expandY().left().bottom().padLeft(5).height(50).width(150);
         table.row();
         table.add(btnPause).colspan(2).right().height(54).width(60);
@@ -134,7 +141,7 @@ public class HUD
         masterStack.add(table);
         masterStack.add(deathTable);
 
-        table.debug();
+        //table.debug();
         //deathTable.debug();
     }
 
@@ -179,22 +186,22 @@ public class HUD
 
     public void activatePowerUp(PowerUp.PowerUps p) {
         if(p == ATTACK) {
-            iconTable.add(attIcon).width(50).height(50).left();
+            attIcon.setVisible(true);
         } else if(p == MISSILE) {
-            iconTable.add(missileIcon).width(50).height(50).left();
+            missileIcon.setVisible(true);
         } else if(p == SHIELD) {
-            iconTable.add(shieldIcon).width(50).height(50).left();
+            shieldIcon.setVisible(true);
         }
     }
 
     public void deactivatePowerUp(PowerUp.PowerUps p) {
         System.out.println(p);
         if(p == ATTACK) {
-            iconTable.removeActor(attIcon);
+            attIcon.setVisible(false);
         } else if(p == MISSILE) {
-            iconTable.removeActor(missileIcon);
+            missileIcon.setVisible(false);
         } else if(p == SHIELD) {
-            iconTable.removeActor(shieldIcon);
+            shieldIcon.setVisible(false);
         }
     }
 

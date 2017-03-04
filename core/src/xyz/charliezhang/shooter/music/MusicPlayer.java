@@ -21,8 +21,8 @@ public class MusicPlayer {
     }
 
     public static void load() {
-        musicMap.put("menu", Assets.manager.get("data/music/menu.ogg", Music.class));
-        musicMap.put("game", Assets.manager.get("data/music/background.ogg", Music.class));
+        musicMap.put("menu", Assets.manager.get("data/music/menu.mp3", Music.class));
+        musicMap.put("game", Assets.manager.get("data/music/background.mp3", Music.class));
         musicMap.put("win", Assets.manager.get("data/music/win.mp3", Music.class));
     }
 

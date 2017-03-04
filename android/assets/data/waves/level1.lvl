@@ -9,7 +9,7 @@
           dx: 0,
           dy: -4,
           stop: 150,
-          delay: 0
+          delay: 5000
         },
         {
           class: xyz.charliezhang.shooter.entity.enemies.Icarus,

@@ -89,8 +89,8 @@ public class Player extends Entity
 		justControllable = false;
 		justSpawned = true;
 		justTouched = false;
-		setDirection(0, 8);
-		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -500);
+		setDirection(0, 6);
+		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -2000);
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
 

@@ -17,7 +17,7 @@ public class BlueFury extends Player
         animation = new Animation(1/10f, textureAtlas.getRegions());
 
         //set sprite size
-        sprite.setSize(50, 50);
+        sprite.setSize(64.5f, 62);
 
         //set player starting data
         shootDelay = 100;

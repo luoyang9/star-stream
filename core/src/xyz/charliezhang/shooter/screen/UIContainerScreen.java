@@ -39,7 +39,7 @@ public class UIContainerScreen implements Screen {
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         canDispose = false;
 
-        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.25f)));
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1)));
 
         menu = new MenuTable(this);
         options = new OptionsTable(this);
@@ -71,7 +71,7 @@ public class UIContainerScreen implements Screen {
     }
 
     void play(final int level) {
-        stage.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.run(new Runnable() {
+        stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
             @Override
             public void run() {
             game.setScreen(new GameScreen(game, level + 1));

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import xyz.charliezhang.shooter.MainGame;
 
 public abstract class Entity 
 {
@@ -43,7 +44,9 @@ public abstract class Entity
 			animationTime += Gdx.graphics.getDeltaTime();
 		}
 
-		sprite.draw(sb);
+		if(sprite.getX() > -sprite.getWidth() && sprite.getX() < MainGame.WIDTH && sprite.getY() > -sprite.getHeight() && sprite.getY() < MainGame.HEIGHT) {
+			sprite.draw(sb);
+		}
 	}
 
 	public Rectangle getBounds()
