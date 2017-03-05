@@ -1,20 +1,36 @@
 striker.png
-size: 28, 9
+size: 72, 12
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 14, 9
-  orig: 14, 9
+  size: 18, 12
+  orig: 18, 12
   offset: 0, 0
   index: -1
 0002
   rotate: false
-  xy: 14, 0
-  size: 14, 9
-  orig: 14, 9
+  xy: 18, 0
+  size: 18, 12
+  orig: 18, 12
   offset: 0, 0
   index: -1
+0003
+  rotate: false
+  xy: 36, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 54, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+
+
 
