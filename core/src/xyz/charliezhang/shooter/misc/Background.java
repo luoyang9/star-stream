@@ -31,13 +31,13 @@ public class Background
 	public void setVector(float dx, float dy)
 	{
 		this.dx = dx;
-		this.dy = -4;
+		this.dy = -2;
 	}
 
 	public void translate(float xdir)
 	{
 		if(xdir > 10) xdir = 10;
-		if(xdir < -10) xdir = -10;
+		if(xdir < -10) xdir = -10;m
 		if(xdir < 0 && sprite1.getX() >= -100) sprite1.translateX(xdir / 10);
 		if(xdir > 0 && sprite1.getX() <= 0) sprite1.translateX(xdir / 10);
 		if(xdir < 0 && sprite2.getX() >= -100) sprite2.translateX(xdir / 10);
