@@ -1,76 +1,48 @@
 
 explosion.png
-size: 169, 16
+size: 78, 12
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 16, 16
-  orig: 16, 16
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1
 0002
   rotate: false
-  xy: 17, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 13, 0
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1
 0003
   rotate: false
-  xy: 34, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 26, 0
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1
 0004
   rotate: false
-  xy: 51, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 39, 0
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1
 0005
   rotate: false
-  xy: 68, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 52, 0
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1
 0006
   rotate: false
-  xy: 85, 0
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-0007
-  rotate: false
-  xy: 102, 0
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-0008
-  rotate: false
-  xy: 119, 0
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-0009
-  rotate: false
-  xy: 136, 0
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-0010
-  rotate: false
-  xy: 155, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 65, 0
+  size: 13, 12
+  orig: 13, 12
   offset: 0, 0
   index: -1

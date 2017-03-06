@@ -19,14 +19,14 @@ public class Explosion extends Entity implements Pool.Poolable
             case 1:textureAtlas = Assets.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
                 sprite.setSize(15, 15);
                 break;
-            case 2:textureAtlas = Assets.manager.get("data/textures/bigExplosion.atlas", TextureAtlas.class);
-                sprite.setSize(60, 60);
+            case 2:textureAtlas = Assets.manager.get("data/textures/explosion.atlas", TextureAtlas.class);
+                sprite.setSize(45, 45);
                 break;
             case 3:textureAtlas = Assets.manager.get("data/textures/playerExplosionR.atlas", TextureAtlas.class);
                 sprite.setSize(15, 15);
             default:
         }
-        animation = new Animation(1/20f, textureAtlas.getRegions()) ;
+        animation = new Animation(1/15f, textureAtlas.getRegions()) ;
     }
 
     @Override

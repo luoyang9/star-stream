@@ -66,7 +66,7 @@ public class Assets
         //explosions
         manager.load("data/textures/playerExplosion.atlas", TextureAtlas.class);
         manager.load("data/textures/playerExplosionR.atlas", TextureAtlas.class);
-        manager.load("data/textures/bigExplosion.atlas", TextureAtlas.class);
+        manager.load("data/textures/explosion.atlas", TextureAtlas.class);
         //lasers
         manager.load("data/textures/laserB.atlas", TextureAtlas.class);
         manager.load("data/textures/laserF.atlas", TextureAtlas.class);
