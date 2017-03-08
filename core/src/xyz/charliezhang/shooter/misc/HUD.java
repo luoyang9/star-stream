@@ -59,7 +59,7 @@ public class HUD
         stage = new Stage(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f)));
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2f)));
 
         skin = Assets.skin;
 

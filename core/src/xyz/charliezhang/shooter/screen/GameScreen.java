@@ -26,10 +26,11 @@ class GameScreen implements Screen
 
 	private boolean canDispose;
 
-	GameScreen(MainGame game, int level)
+	GameScreen(MainGame game, int level, Background background)
 	{
 		this.game = game;
 		this.level = level;
+		this.background = background;
 	}
 
 	@Override
@@ -39,9 +40,6 @@ class GameScreen implements Screen
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		camera.update();
-
-		background = new Background();
-		background.setVector(0, -2f);
 
 		manager = new EntityManager(viewport, game, background);
 		waveManager = new WaveManager(level, manager);
@@ -106,7 +104,6 @@ class GameScreen implements Screen
 	public void resize(int width, int height)
 	{
 		viewport.update(width, height, true);
-		background.setSize(viewport.getWorldWidth());
 		manager.updateViewport(viewport);
 	}
 

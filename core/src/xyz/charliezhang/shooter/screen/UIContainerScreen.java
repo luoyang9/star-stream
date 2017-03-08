@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.misc.Background;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 public class UIContainerScreen implements Screen {
@@ -19,6 +20,7 @@ public class UIContainerScreen implements Screen {
 
     private Stage stage;
     private boolean canDispose;
+    private Background background;
 
     private MenuTable menu;
     private OptionsTable options;
@@ -26,8 +28,6 @@ public class UIContainerScreen implements Screen {
     private LevelSelectTable levelSelect;
 
     enum UITable { MENU, OPTIONS, SHOP, LEVELSELECT };
-
-    private Texture background;
 
     public UIContainerScreen(MainGame game){this.game = game;}
 
@@ -53,7 +53,9 @@ public class UIContainerScreen implements Screen {
         stage.addActor(menu);
 
 
-        background = Assets.manager.get("data/ui/background.png");
+        background = new Background();
+        background.setSize(stage.getViewport().getWorldWidth());
+        background.setVector(0, -2f);
 
         if(!MusicPlayer.isPlaying("menu")) {
             MusicPlayer.loop("menu");
@@ -71,13 +73,8 @@ public class UIContainerScreen implements Screen {
     }
 
     void play(final int level) {
-        stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-            game.setScreen(new GameScreen(game, level + 1));
-            canDispose = true;
-            }
-        })));
+        game.setScreen(new GameScreen(game, level + 1, background));
+        canDispose = true;
     }
 
     void changeTable(UITable table) {
@@ -106,9 +103,10 @@ public class UIContainerScreen implements Screen {
         stage.act(delta);
 
         //background
-        stage.getBatch().begin();
-        stage.getBatch().draw(background, -(background.getWidth() - MainGame.WIDTH) / 2, -(background.getHeight() - MainGame.HEIGHT) / 2, background.getWidth(), background.getHeight());
-        stage.getBatch().end();
+        game.batch.begin();
+        background.update();
+        background.render(game.batch);
+        game.batch.end();
 
         stage.draw();
 
