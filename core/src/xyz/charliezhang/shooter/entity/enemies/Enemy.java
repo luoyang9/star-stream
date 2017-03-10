@@ -5,6 +5,9 @@ import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Entity;
 
+import static xyz.charliezhang.shooter.Config.ENEMY_INITIAL_DEAD;
+import static xyz.charliezhang.shooter.Config.ENEMY_INITIAL_SUICIDE;
+
 public abstract class Enemy extends Entity implements Json.Serializable
 {
 	//entity data
@@ -20,8 +23,8 @@ public abstract class Enemy extends Entity implements Json.Serializable
 
 	protected Enemy() {
 		super();
-		dead = false;
-		suicide = false;
+		dead = ENEMY_INITIAL_DEAD;
+		suicide = ENEMY_INITIAL_SUICIDE;
 	}
 
 	@Override

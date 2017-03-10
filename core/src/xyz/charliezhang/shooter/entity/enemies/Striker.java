@@ -10,6 +10,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
+import static xyz.charliezhang.shooter.Config.*;
+
 public class Striker extends Enemy
 {
 	private boolean intro;
@@ -18,16 +20,16 @@ public class Striker extends Enemy
 	public Striker() {
 		super();
 
-		textureAtlas = Assets.manager.get("data/textures/striker.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get(STRIKER_PATH, TextureAtlas.class);
 		animation = new Animation(1/10f, textureAtlas.getRegions());
 		
 		sprite.setSize(56, 36);
 		
-		health = maxHealth = 25;
-		damage = 2;
-		score = 75;
+		health = maxHealth = STRIKER_HEALTH;
+		damage = STRIKER_DAMAGE;
+		score = STRIKER_SCORE;
 
-		intro = true;
+		intro = STRIKER_INITIAL_INTRO;
 	}
 
 	//json read method
@@ -73,8 +75,8 @@ public class Striker extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

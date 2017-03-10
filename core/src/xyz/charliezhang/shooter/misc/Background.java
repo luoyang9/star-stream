@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import xyz.charliezhang.shooter.Assets;
 
+import static xyz.charliezhang.shooter.Config.GAME_BACKGROUND_PATH;
+
 public class Background 
 {
 	private Texture image;
@@ -15,7 +17,7 @@ public class Background
 	
 	public Background()
 	{
-		image = Assets.manager.get("data/textures/background.png", Texture.class);
+		image = Assets.manager.get(GAME_BACKGROUND_PATH, Texture.class);
 		sprite1 = new Sprite(image);
 		sprite2 = new Sprite(image);
 		sprite1.setPosition(-50, 0);

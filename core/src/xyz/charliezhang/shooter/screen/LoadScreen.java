@@ -21,6 +21,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.UI_SKIN_PATH;
+
 public class LoadScreen implements Screen
 {
     private MainGame game;
@@ -83,7 +85,7 @@ public class LoadScreen implements Screen
             Assets.skin.add("big-font",  Assets.manager.get("big.ttf", BitmapFont.class));
             Assets.skin.add("medium-font",  Assets.manager.get("medium.ttf", BitmapFont.class));
             Assets.skin.add("small-font",  Assets.manager.get("small.ttf", BitmapFont.class));
-            Assets.skin.addRegions( Assets.manager.get("data/ui/uiskin.atlas", TextureAtlas.class));
+            Assets.skin.addRegions( Assets.manager.get(UI_SKIN_PATH, TextureAtlas.class));
             Assets.skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 
             //music player

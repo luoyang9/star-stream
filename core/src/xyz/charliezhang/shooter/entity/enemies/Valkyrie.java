@@ -8,7 +8,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.entity.EntityManager;
+
+import static xyz.charliezhang.shooter.Config.*;
 
 public class Valkyrie extends Enemy
 {
@@ -19,16 +20,16 @@ public class Valkyrie extends Enemy
     public Valkyrie() {
         super();
 
-        textureAtlas = Assets.manager.get("data/textures/valkyrie.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(VALKYRIE_PATH, TextureAtlas.class);
         animation = new Animation(1/20f, textureAtlas.getRegions());
 
         sprite.setSize(91, 66);
 
-        health = maxHealth = 40;
-        damage = 1;
-        score = 100;
+        health = maxHealth = VALKYRIE_HEALTH;
+        damage = VALKYRIE_DAMAGE;
+        score = VALKYRIE_SCORE;
 
-        intro = true;
+        intro = VALKYRIE_INITIAL_INTRO;
     }
 
     //json read method
@@ -92,8 +93,8 @@ public class Valkyrie extends Enemy
     public void render(SpriteBatch sb)
     {
         sprite.setRegion(animation.getKeyFrame(animationTime, true));
-        sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-        sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+        sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+        sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
         super.render(sb);
     }
 

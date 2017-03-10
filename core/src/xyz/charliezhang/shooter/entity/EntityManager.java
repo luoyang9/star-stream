@@ -20,6 +20,8 @@ import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.EXPLOSION_SOUND_PATH;
+
 public class EntityManager 
 {
 	private Array<Enemy> enemies;
@@ -161,7 +163,7 @@ public class EntityManager
 		player.update();
 		if(player.isDead() && !deathProcedure)
 		{
-			MusicPlayer.stop("game");
+			MusicPlayer.stop(MusicPlayer.GAME);
 			deathProcedure = true;
 			hud.death();
 		}
@@ -215,7 +217,7 @@ public class EntityManager
 				spawnExplosion(exp);
 
 				enemies.removeValue(e, false);
-				Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
+				Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
 
 				currATT++;
 				currSHD++;
@@ -377,12 +379,12 @@ public class EntityManager
 		if(pause) {
 			pause = false;
 			hud.pause(false);
-			MusicPlayer.resume("game");
+			MusicPlayer.resume(MusicPlayer.GAME);
 		}
 		else {
 			hud.pause(true);
 			pause = true;
-			MusicPlayer.pause("game");
+			MusicPlayer.pause(MusicPlayer.GAME);
 		}
 	}
 

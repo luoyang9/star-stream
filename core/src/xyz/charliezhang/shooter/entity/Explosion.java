@@ -1,11 +1,13 @@
 package xyz.charliezhang.shooter.entity;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.MainGame;
+
+import static xyz.charliezhang.shooter.Config.EXPLOSION_PATH;
+import static xyz.charliezhang.shooter.Config.PLAYER_EXPLOSION_PATH;
+import static xyz.charliezhang.shooter.Config.PLAYER_EXPLOSION_R_PATH;
 
 public class Explosion extends Entity implements Pool.Poolable
 {
@@ -16,13 +18,13 @@ public class Explosion extends Entity implements Pool.Poolable
     public void init(int type)
     {
         switch(type){
-            case 1:textureAtlas = Assets.manager.get("data/textures/playerExplosion.atlas", TextureAtlas.class);
+            case 1:textureAtlas = Assets.manager.get(PLAYER_EXPLOSION_PATH, TextureAtlas.class);
                 sprite.setSize(15, 15);
                 break;
-            case 2:textureAtlas = Assets.manager.get("data/textures/explosion.atlas", TextureAtlas.class);
+            case 2:textureAtlas = Assets.manager.get(EXPLOSION_PATH, TextureAtlas.class);
                 sprite.setSize(45, 45);
                 break;
-            case 3:textureAtlas = Assets.manager.get("data/textures/playerExplosionR.atlas", TextureAtlas.class);
+            case 3:textureAtlas = Assets.manager.get(PLAYER_EXPLOSION_R_PATH, TextureAtlas.class);
                 sprite.setSize(15, 15);
             default:
         }

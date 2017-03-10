@@ -48,7 +48,7 @@ class GameScreen implements Screen
 		canDispose = false;
 		win = false;
 
-		MusicPlayer.loop("game");
+		MusicPlayer.loop(MusicPlayer.GAME);
 	}
 
 	public void update(float delta) {
@@ -77,7 +77,7 @@ class GameScreen implements Screen
 			if(!waveManager.spawnNextWave()) //spawn next wave
 			{
 				//there is no more waves, you win
-				MusicPlayer.loop("win");
+				MusicPlayer.loop(MusicPlayer.WIN);
 				manager.win();
 				win = true;
 			}

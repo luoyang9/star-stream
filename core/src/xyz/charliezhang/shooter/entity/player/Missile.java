@@ -7,6 +7,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Projectile;
 
+import static xyz.charliezhang.shooter.Config.MISSILE_PATH;
+
 public class Missile extends Projectile implements Pool.Poolable
 {
     private float acceleration;
@@ -14,7 +16,7 @@ public class Missile extends Projectile implements Pool.Poolable
     public Missile() {
         super();
 
-        textureAtlas = Assets.manager.get("data/textures/missile.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(MISSILE_PATH, TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(9, 38);

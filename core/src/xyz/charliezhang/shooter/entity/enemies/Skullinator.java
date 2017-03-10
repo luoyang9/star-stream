@@ -7,7 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.entity.EntityManager;
+
+import static xyz.charliezhang.shooter.Config.*;
 
 public class Skullinator extends Enemy
 {
@@ -18,15 +19,15 @@ public class Skullinator extends Enemy
 	public Skullinator() {
 		super();
 
-		textureAtlas = Assets.manager.get("data/textures/skullinator.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get(SKULLINATOR_PATH, TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(120, 120);
 		
-		health = maxHealth = 600;
-		damage = 2;
-		score = 300;
-		entered = false;
+		health = maxHealth = SKULLINATOR_HEALTH;
+		damage = SKULLINATOR_DAMAGE;
+		score = SKULLINATOR_SCORE;
+		entered = SKULLINATOR_INITIAL_ENTERED;
 		lastSpecial1 = lastSpecial2 = System.currentTimeMillis();
 	}
 
@@ -171,8 +172,8 @@ public class Skullinator extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

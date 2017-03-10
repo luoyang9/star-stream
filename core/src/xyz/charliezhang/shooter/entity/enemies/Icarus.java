@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.entity.EntityManager;
+
+import static xyz.charliezhang.shooter.Config.*;
 
 public class Icarus extends Enemy
 {
@@ -18,16 +18,16 @@ public class Icarus extends Enemy
 	public Icarus() {
 		super();
 
-		textureAtlas = Assets.manager.get("data/textures/icarus.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get(ICARUS_PATH, TextureAtlas.class);
 		animation = new Animation(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(50, 50);
 		
-		health = maxHealth = 60;
-		damage = 2;
-		score = 150;
+		health = maxHealth = ICARUS_HEALTH;
+		damage = ICARUS_DAMAGE;
+		score = ICARUS_SCORE;
 
-		intro = true;
+		intro = ICARUS_INITIAL_INTRO;
 	}
 
 	//json read method
@@ -95,8 +95,8 @@ public class Icarus extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

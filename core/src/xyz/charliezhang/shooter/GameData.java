@@ -29,6 +29,7 @@ public class GameData {
             prefs.putBoolean("type-" + (i+1), false);
         }
         prefs.putInteger("playerType", EntityManager.PLAYER_BLUE);
+        prefs.putLong("money", 0);
 
         //dev stuff, delete for live
         prefs.putBoolean("type-" + EntityManager.PLAYER_BLUE, true);

@@ -23,6 +23,7 @@ import xyz.charliezhang.shooter.music.MusicPlayer;
 import xyz.charliezhang.shooter.screen.MenuTable;
 import xyz.charliezhang.shooter.screen.UIContainerScreen;
 
+import static xyz.charliezhang.shooter.Config.*;
 import static xyz.charliezhang.shooter.entity.powerup.PowerUp.PowerUps.*;
 
 public class HUD
@@ -63,25 +64,25 @@ public class HUD
 
         skin = Assets.skin;
 
-        healthBar = Assets.manager.get("data/textures/health.png", Texture.class);
-        healthFill = Assets.manager.get("data/textures/healthFill.png", Texture.class);
+        healthBar = Assets.manager.get(HEALTH_PATH, Texture.class);
+        healthFill = Assets.manager.get(HEALTH_FILL_PATH, Texture.class);
 
         livesGroup = new HorizontalGroup();
         livesIcons = new Image[manager.getPlayer().getMaxLives()];
         for(int i = 0; i < livesIcons.length; i++)
         {
-            livesIcons[i] = new Image(Assets.manager.get("data/textures/livesIcon.png", Texture.class));
+            livesIcons[i] = new Image(Assets.manager.get(LIVES_PATH, Texture.class));
             livesGroup.addActor(livesIcons[i]);
         }
 
         iconTable = new Table();
-        missileIcon = new Image(Assets.manager.get("data/textures/misicon.png", Texture.class));
+        missileIcon = new Image(Assets.manager.get(MIS_ICON_PATH, Texture.class));
         missileIcon.setSize(50, 50);
         missileIcon.setVisible(false);
-        shieldIcon = new Image(Assets.manager.get("data/textures/shieldicon.png", Texture.class));
+        shieldIcon = new Image(Assets.manager.get(SHIELD_ICON_PATH, Texture.class));
         shieldIcon.setSize(50, 50);
         shieldIcon.setVisible(false);
-        attIcon = new Image(Assets.manager.get("data/textures/atticon.png", Texture.class));
+        attIcon = new Image(Assets.manager.get(ATT_ICON_PATH, Texture.class));
         attIcon.setSize(50, 50);
         attIcon.setVisible(false);
 
@@ -101,7 +102,7 @@ public class HUD
         btnMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
+                Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
                 manager.getGame().setScreen(new UIContainerScreen(manager.getGame()));
                 manager.canDispose(true);
                 event.stop();
@@ -109,12 +110,12 @@ public class HUD
         });
         btnMenu.setTouchable(Touchable.disabled);
 
-        pauseIcon = new Image(Assets.manager.get("data/textures/pause.png", Texture.class));
+        pauseIcon = new Image(Assets.manager.get(PAUSE_PATH, Texture.class));
         btnPause = new ImageButton(pauseIcon.getDrawable());
         btnPause.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
+                Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
                 manager.pause();
                 event.stop();
             }

@@ -14,7 +14,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import xyz.charliezhang.shooter.music.MusicPlayer;
+
+import static xyz.charliezhang.shooter.Config.*;
+
 
 public class Assets
 {
@@ -25,67 +27,66 @@ public class Assets
     {
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
-        manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
     }
 
     public static void load() {
         //game background
-        manager.load("data/textures/background.png", Texture.class);
+        manager.load(GAME_BACKGROUND_PATH, Texture.class);
         //menu background
-        manager.load("data/ui/background.png", Texture.class);
+        manager.load(MENU_BACKGROUND_PATH, Texture.class);
         //ui
-        manager.load("data/ui/uiskin.atlas", TextureAtlas.class);
-        manager.load("data/textures/pause.png", Texture.class);
+        manager.load(UI_SKIN_PATH, TextureAtlas.class);
+        manager.load(PAUSE_PATH, Texture.class);
         //health
-        manager.load("data/textures/health.png", Texture.class);
-        manager.load("data/textures/healthFill.png", Texture.class);
-        manager.load("data/textures/livesIcon.png", Texture.class);
+        manager.load(HEALTH_PATH, Texture.class);
+        manager.load(HEALTH_FILL_PATH, Texture.class);
+        manager.load(LIVES_PATH, Texture.class);
         //powerup icons
-        manager.load("data/textures/misicon.png", Texture.class);
-        manager.load("data/textures/shieldicon.png", Texture.class);
-        manager.load("data/textures/atticon.png", Texture.class);
+        manager.load(MIS_ICON_PATH, Texture.class);
+        manager.load(SHIELD_ICON_PATH, Texture.class);
+        manager.load(ATT_ICON_PATH, Texture.class);
         //powerup effects
-        manager.load("data/textures/shield.png", Texture.class);
-        manager.load("data/textures/missile.atlas", TextureAtlas.class);
+        manager.load(SHIELD_PATH, Texture.class);
+        manager.load(MISSILE_PATH, TextureAtlas.class);
         //powerup drops
-        manager.load("data/textures/attpowerup.atlas", TextureAtlas.class);
-        manager.load("data/textures/mispowerup.atlas", TextureAtlas.class);
-        manager.load("data/textures/shieldpowerup.atlas", TextureAtlas.class);
+        manager.load(ATT_POWERUP_PATH, TextureAtlas.class);
+        manager.load(MIS_POWERUP_PATH, TextureAtlas.class);
+        manager.load(SHIELD_POWERUP_PATH, TextureAtlas.class);
         //enemies
-        manager.load("data/textures/ufo.atlas", TextureAtlas.class);
-        manager.load("data/textures/icarus.atlas", TextureAtlas.class);
-        manager.load("data/textures/skullinator.atlas", TextureAtlas.class);
-        manager.load("data/textures/striker.atlas", TextureAtlas.class);
-        manager.load("data/textures/kamikaze.atlas", TextureAtlas.class);
-        manager.load("data/textures/valkyrie.atlas", TextureAtlas.class);
-        manager.load("data/textures/falcon.atlas", TextureAtlas.class);
-        manager.load("data/textures/asteroid1.png", Texture.class);
-        manager.load("data/textures/asteroid2.png", Texture.class);
-        manager.load("data/textures/asteroid3.png", Texture.class);
-        manager.load("data/textures/asteroid4.png", Texture.class);
+        manager.load(UFO_PATH, TextureAtlas.class);
+        manager.load(ICARUS_PATH, TextureAtlas.class);
+        manager.load(SKULLINATOR_PATH, TextureAtlas.class);
+        manager.load(STRIKER_PATH, TextureAtlas.class);
+        manager.load(KAMIKAZE_PATH, TextureAtlas.class);
+        manager.load(VALKYRIE_PATH, TextureAtlas.class);
+        manager.load(FALCON_PATH, TextureAtlas.class);
+        manager.load(ASTEROID_1_PATH, Texture.class);
+        manager.load(ASTEROID_2_PATH, Texture.class);
+        manager.load(ASTEROID_3_PATH, Texture.class);
+        manager.load(ASTEROID_4_PATH, Texture.class);
         //explosions
-        manager.load("data/textures/playerExplosion.atlas", TextureAtlas.class);
-        manager.load("data/textures/playerExplosionR.atlas", TextureAtlas.class);
-        manager.load("data/textures/explosion.atlas", TextureAtlas.class);
+        manager.load(PLAYER_EXPLOSION_PATH, TextureAtlas.class);
+        manager.load(PLAYER_EXPLOSION_R_PATH, TextureAtlas.class);
+        manager.load(EXPLOSION_PATH, TextureAtlas.class);
         //lasers
-        manager.load("data/textures/laserB.atlas", TextureAtlas.class);
-        manager.load("data/textures/laserF.atlas", TextureAtlas.class);
-        manager.load("data/textures/laserG.atlas", TextureAtlas.class);
-        manager.load("data/textures/laserR.atlas", TextureAtlas.class);
-        manager.load("data/textures/laserO.atlas", TextureAtlas.class);
+        manager.load(LASER_B_PATH, TextureAtlas.class);
+        manager.load(LASER_F_PATH, TextureAtlas.class);
+        manager.load(LASER_G_PATH, TextureAtlas.class);
+        manager.load(LASER_R_PATH, TextureAtlas.class);
+        manager.load(LASER_O_PATH, TextureAtlas.class);
         //player
-        manager.load("data/textures/playerblue.atlas", TextureAtlas.class);
-        manager.load("data/textures/playerred.atlas", TextureAtlas.class);
+        manager.load(PLAYER_BLUE_PATH, TextureAtlas.class);
+        manager.load(PLAYER_RED_PATH, TextureAtlas.class);
         //music
-        manager.load("data/music/background.mp3", Music.class);
-        manager.load("data/music/menu.mp3", Music.class);
-        manager.load("data/music/win.mp3", Music.class);
+        manager.load(GAME_MUSIC_PATH, Music.class);
+        manager.load(MENU_MUSIC_PATH, Music.class);
+        manager.load(WIN_MUSIC_PATH, Music.class);
         //sound effects
-        manager.load("data/sounds/playershoot.ogg", Sound.class);
-        manager.load("data/sounds/shieldDown.ogg", Sound.class);
-        manager.load("data/sounds/shieldUp.ogg", Sound.class);
-        manager.load("data/sounds/button.mp3", Sound.class);
-        manager.load("data/sounds/explosion.wav", Sound.class);
+        manager.load(SHOOT_SOUND_PATH, Sound.class);
+        manager.load(SHIELD_DOWN_SOUND_PATH, Sound.class);
+        manager.load(SHIELD_UP_SOUND_PATH, Sound.class);
+        manager.load(BUTTON_SOUND_PATH, Sound.class);
+        manager.load(EXPLOSION_SOUND_PATH, Sound.class);
 
         //game fonts
         FreeTypeFontLoaderParameter params = new FreeTypeFontLoaderParameter();
@@ -108,7 +109,7 @@ public class Assets
     }
 
 
-    public static void dispose()
+    static void dispose()
     {
         manager.dispose();
     }

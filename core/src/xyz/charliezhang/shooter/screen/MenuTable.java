@@ -17,8 +17,8 @@ public class MenuTable extends Table {
 
     public MenuTable(final UIContainerScreen container){
 
-        if(!MusicPlayer.isPlaying("menu")) {
-            MusicPlayer.loop("menu");
+        if(!MusicPlayer.isPlaying(MusicPlayer.MENU)) {
+            MusicPlayer.loop(MusicPlayer.MENU);
         }
 
         btnPlay = new TextButton("Play", Assets.skin);

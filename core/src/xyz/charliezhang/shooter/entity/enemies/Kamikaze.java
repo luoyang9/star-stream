@@ -11,6 +11,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
+import static xyz.charliezhang.shooter.Config.*;
+
 public class Kamikaze extends Enemy
 {
     private int stop;
@@ -18,14 +20,14 @@ public class Kamikaze extends Enemy
     public Kamikaze() {
         super();
 
-        textureAtlas = Assets.manager.get("data/textures/kamikaze.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(KAMIKAZE_PATH, TextureAtlas.class);
         animation = new Animation(1/10f, textureAtlas.getRegions());
 
         sprite.setSize(48, 45);
 
-        health = maxHealth = 10;
-        damage = 1;
-        score = 15;
+        health = maxHealth = KAMIKAZE_HEALTH;
+        damage = KAMIKAZE_DAMAGE;
+        score = KAMIKAZE_SCORE;
     }
 
     //json read method
@@ -57,8 +59,8 @@ public class Kamikaze extends Enemy
     public void render(SpriteBatch sb)
     {
         sprite.setRegion(animation.getKeyFrame(animationTime, true));
-        sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-        sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+        sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+        sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
         super.render(sb);
     }
 

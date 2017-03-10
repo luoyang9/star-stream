@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.entity.EntityManager;
+
+import static xyz.charliezhang.shooter.Config.*;
 
 public class UFO extends Enemy
 {
@@ -20,18 +20,18 @@ public class UFO extends Enemy
 	public UFO() {
 		super();
 
-		textureAtlas = Assets.manager.get("data/textures/ufo.atlas", TextureAtlas.class);
+		textureAtlas = Assets.manager.get(UFO_PATH, TextureAtlas.class);
 		animation = new Animation(1/5f, textureAtlas.getRegions());
-		
-		sprite.setSize(40, 40);
-		sprite.setRotation(0);
-		sprite.setOrigin(20, 20);
-		
+
 		//set enemy data
-		health = maxHealth = 30;
-		rotation = 0;
-		damage = 1;
-		score = 100;
+		health = maxHealth = UFO_HEALTH;
+		rotation = UFO_INITIAL_ROTATION;
+		damage = UFO_DAMAGE;
+		score = UFO_SCORE;
+
+		sprite.setSize(40, 40);
+		sprite.setOrigin(20, 20);
+		sprite.setRotation(rotation);
 	}
 
 	//json read method
@@ -88,8 +88,8 @@ public class UFO extends Enemy
 	public void render(SpriteBatch sb)
 	{
 		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-		sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+		sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+		sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
 		super.render(sb);
 	}
 	

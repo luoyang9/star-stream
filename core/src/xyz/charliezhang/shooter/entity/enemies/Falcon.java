@@ -9,7 +9,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.entity.EntityManager;
+
+import static xyz.charliezhang.shooter.Config.*;
 
 public class Falcon extends Enemy
 {
@@ -18,14 +19,14 @@ public class Falcon extends Enemy
     public Falcon() {
         super();
 
-        textureAtlas = Assets.manager.get("data/textures/falcon.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(FALCON_PATH, TextureAtlas.class);
         animation = new Animation(1/20f, textureAtlas.getRegions());
 
         sprite.setSize(51, 37);
 
-        health = maxHealth = 10;
-        damage = 1;
-        score = 15;
+        health = maxHealth = FALCON_HEALTH;
+        damage = FALCON_DAMAGE;
+        score = FALCON_SCORE;
     }
 
     //json read method
@@ -63,8 +64,8 @@ public class Falcon extends Enemy
     public void render(SpriteBatch sb)
     {
         sprite.setRegion(animation.getKeyFrame(animationTime, true));
-        sb.draw(Assets.manager.get("data/textures/health.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-        sb.draw(Assets.manager.get("data/textures/healthFill.png", Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+        sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
+        sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
         super.render(sb);
     }
 

@@ -30,7 +30,7 @@ class OptionsTable extends Table {
                 }
                 else
                 {
-                    MusicPlayer.unmute("menu");
+                    MusicPlayer.unmute(MusicPlayer.MENU);
                     GameData.prefs.putBoolean("soundOn", true).flush();
                 }
                 event.stop();

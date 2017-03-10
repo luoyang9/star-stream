@@ -6,6 +6,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.*;
+
 public class RedDragon extends Player
 {
     public RedDragon(EntityManager manager)
@@ -13,18 +15,18 @@ public class RedDragon extends Player
         super(manager);
 
         //set texture atlas and animation to player
-        textureAtlas = Assets.manager.get("data/textures/playerred.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(PLAYER_RED_PATH, TextureAtlas.class);
         animation = new Animation(1/15f, textureAtlas.getRegions());
 
         //set sprite size
         sprite.setSize(72, 62);
 
         //set player starting data
-        shootDelay = 500;
+        shootDelay = RED_DRAGON_SHOOT_DELAY;
 
         //read player stats
-        health = maxHealth = 10;
-        damage = 3;
+        health = maxHealth = RED_DRAGON_MAX_HEALTH;
+        damage = RED_DRAGON_DAMAGE;
     }
 
     protected void shoot()
@@ -33,12 +35,12 @@ public class RedDragon extends Player
         {
             if(superAttOn)
             {
-                shootDelay = 200;
+                shootDelay = RED_DRAGON_SUPER_SHOOT_DELAY;
                 long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
                 if(elapsed > superAttDuration)
                 {
                     superAttOn = false;
-                    shootDelay = 500;
+                    shootDelay = RED_DRAGON_SHOOT_DELAY;
                 }
             }
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot

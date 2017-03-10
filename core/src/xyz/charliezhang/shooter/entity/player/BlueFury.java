@@ -6,6 +6,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.*;
+
 public class BlueFury extends Player
 {
     public BlueFury(EntityManager manager)
@@ -13,18 +15,18 @@ public class BlueFury extends Player
         super(manager);
 
         //set texture atlas and animation to player
-        textureAtlas = Assets.manager.get("data/textures/playerblue.atlas", TextureAtlas.class);
+        textureAtlas = Assets.manager.get(PLAYER_BLUE_PATH, TextureAtlas.class);
         animation = new Animation(1/10f, textureAtlas.getRegions());
 
         //set sprite size
         sprite.setSize(64.5f, 62);
 
         //set player starting data
-        shootDelay = 100;
+        shootDelay = BLUE_FURY_SHOOT_DELAY;
 
         //read player stats
-        health = maxHealth = 10;
-        damage = 1;
+        health = maxHealth = BLUE_FURY_MAX_HEALTH;
+        damage = BLUE_FURY_DAMAGE;
     }
 
     @Override

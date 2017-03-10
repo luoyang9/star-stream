@@ -4,14 +4,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.Assets;
@@ -23,6 +20,7 @@ import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.*;
 import static xyz.charliezhang.shooter.entity.powerup.PowerUp.PowerUps.*;
 
 public class Player extends Entity
@@ -78,19 +76,19 @@ public class Player extends Entity
 		this.manager = manager;
 		this.camera = (OrthographicCamera)manager.getViewport().getCamera();
 
-		shootSound = Assets.manager.get("data/sounds/playershoot.ogg", Sound.class);
-		shieldUpSound = Assets.manager.get("data/sounds/shieldUp.ogg", Sound.class);
-		shieldDownSound = Assets.manager.get("data/sounds/shieldDown.ogg", Sound.class);
+		shootSound = Assets.manager.get(SHOOT_SOUND_PATH, Sound.class);
+		shieldUpSound = Assets.manager.get(SHIELD_UP_SOUND_PATH, Sound.class);
+		shieldDownSound = Assets.manager.get(SHIELD_DOWN_SOUND_PATH, Sound.class);
 
-		attLevel = 4;
-		numLives = maxLives = 3;
-		flinching = false;
-		controllable = false;
-		justControllable = false;
-		justSpawned = true;
-		justTouched = false;
-		setDirection(0, 6);
-		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, -2000);
+		attLevel = PLAYER_ATT_LEVEL;
+		numLives = maxLives = PLAYER_MAX_LIVES;
+		flinching = PLAYER_INITIAL_FLINCHING;
+		controllable = PLAYER_INITIAL_CONTROLLABLE;
+		justControllable = PLAYER_INITIAL_JUST_CONTROLLABLE;
+		justSpawned = PLAYER_INITIAL_JUST_SPAWNED;
+		justTouched = PLAYER_INITIAL_JUST_TOUCHED;
+		setDirection(PLAYER_INITIAL_DIRECTION.x, PLAYER_INITIAL_DIRECTION.y);
+		setPosition(manager.getViewport().getWorldWidth()/2 - sprite.getWidth() / 2, PLAYER_INITIAL_Y);
 		syncPos.x = getPosition().x;
 		syncPos.y = getPosition().y;
 
@@ -106,27 +104,27 @@ public class Player extends Entity
 			public void run() {
 				Missile m1 = manager.getMissilePool().obtain();
 				Missile m2 = manager.getMissilePool().obtain();
-				m1.init(manager, 5);
-				m1.setDirection(0, 10);
+				m1.init(manager, MIS_INITIAL_ACCEL);
+				m1.setDirection(MIS_INITIAL_DIRECTION.x, MIS_INITIAL_DIRECTION.y);
 				m1.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
-				m2.init(manager, 5);
-				m2.setDirection(0, 10);
+				m2.init(manager, MIS_INITIAL_ACCEL);
+				m2.setDirection(MIS_INITIAL_DIRECTION.x, MIS_INITIAL_DIRECTION.y);
 				m2.setPosition(sprite.getX() + sprite.getWidth(), sprite.getY() + sprite.getHeight());
 				manager.spawnLaser(m1);
 				manager.spawnLaser(m2);
 			}
 		};
-		missileOn = false;
+		missileOn = MIS_INITIAL_ON;
 
-		invincibleOn = false;
-		invincibleDuration = 3000;
+		invincibleOn = INVINCIBLE_INITIAL_ON;
+		invincibleDuration = INVINCIBLE_DURATION;
 
-		shieldOn = false;
-		shield = new Sprite(Assets.manager.get("data/textures/shield.png", Texture.class));
+		shieldOn = SHIELD_INITIAL_ON;
+		shield = new Sprite(Assets.manager.get(SHIELD_PATH, Texture.class));
 		shield.setSize(100, 100);
 
-		superAttOn = false;
-		superAttDuration = 3000;
+		superAttOn = ATT_INITIAL_ON;
+		superAttDuration = ATT_DURATION;
 	}
 
 	@Override
@@ -197,7 +195,7 @@ public class Player extends Entity
 			explosion.init(2);
 			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
 			manager.spawnExplosion(explosion);
-			Assets.manager.get("data/sounds/explosion.wav", Sound.class).play(MusicPlayer.VOLUME); //explosion
+			Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
 			if(numLives <= 0)
 			{
 				dead = true;

@@ -8,6 +8,7 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.entity.EntityManager;
 
+import static xyz.charliezhang.shooter.Config.MENU_BACKGROUND_PATH;
 import static xyz.charliezhang.shooter.screen.UIContainerScreen.UITable.MENU;
 
 class ShopTable extends Table {
@@ -68,7 +69,7 @@ class ShopTable extends Table {
             }
         });
 
-        background = Assets.manager.get("data/ui/background.png");
+        background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
 
         add(btnBack).width(450).height(200);

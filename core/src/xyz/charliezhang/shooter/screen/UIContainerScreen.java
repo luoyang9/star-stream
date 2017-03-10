@@ -15,6 +15,8 @@ import xyz.charliezhang.shooter.MainGame;
 import xyz.charliezhang.shooter.misc.Background;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
+import static xyz.charliezhang.shooter.Config.BUTTON_SOUND_PATH;
+
 public class UIContainerScreen implements Screen {
     private MainGame game;
 
@@ -57,14 +59,14 @@ public class UIContainerScreen implements Screen {
         background.setSize(stage.getViewport().getWorldWidth());
         background.setVector(0, -2f);
 
-        if(!MusicPlayer.isPlaying("menu")) {
-            MusicPlayer.loop("menu");
+        if(!MusicPlayer.isPlaying(MusicPlayer.MENU)) {
+            MusicPlayer.loop(MusicPlayer.MENU);
         }
 
         stage.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Assets.manager.get("data/sounds/button.mp3", Sound.class).play(MusicPlayer.VOLUME);
+                Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
                 event.stop();
             }
         });

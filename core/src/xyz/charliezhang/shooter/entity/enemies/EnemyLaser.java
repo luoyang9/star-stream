@@ -10,6 +10,8 @@ import xyz.charliezhang.shooter.entity.Entity;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Projectile;
 
+import static xyz.charliezhang.shooter.Config.*;
+
 public class EnemyLaser extends Projectile implements Pool.Poolable
 {
 	private Enemy enemy;
@@ -22,19 +24,19 @@ public class EnemyLaser extends Projectile implements Pool.Poolable
 		super.init(manager);
 		this.enemy = enemy;
 		switch(colour) {
-			case 1: textureAtlas = Assets.manager.get("data/textures/laserO.atlas", TextureAtlas.class);
+			case 1: textureAtlas = Assets.manager.get(LASER_O_PATH, TextureAtlas.class);
 				sprite.setSize(10, 10);
 				sprite.setOrigin(5, 5);
 				break;
-			case 2: textureAtlas = Assets.manager.get("data/textures/laserF.atlas", TextureAtlas.class);
+			case 2: textureAtlas = Assets.manager.get(LASER_F_PATH, TextureAtlas.class);
 				sprite.setSize(7, 38);
 				sprite.setOrigin(3.5f, 19);
 				break;
-			case 3: textureAtlas = Assets.manager.get("data/textures/laserR.atlas", TextureAtlas.class);
+			case 3: textureAtlas = Assets.manager.get(LASER_R_PATH, TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 				break;
-			default: textureAtlas = Assets.manager.get("data/textures/laserG.atlas", TextureAtlas.class);
+			default: textureAtlas = Assets.manager.get(LASER_G_PATH, TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 		}

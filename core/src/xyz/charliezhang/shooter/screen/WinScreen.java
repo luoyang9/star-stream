@@ -17,6 +17,8 @@ import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
 
+import static xyz.charliezhang.shooter.Config.MENU_BACKGROUND_PATH;
+
 class WinScreen implements Screen {
 
     private MainGame game;
@@ -77,7 +79,7 @@ class WinScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        background = Assets.manager.get("data/ui/background.png");
+        background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
         skin = Assets.skin;
 

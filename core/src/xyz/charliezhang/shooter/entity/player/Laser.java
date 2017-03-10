@@ -2,11 +2,13 @@ package xyz.charliezhang.shooter.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Projectile;
+
+import static xyz.charliezhang.shooter.Config.LASER_B_PATH;
+import static xyz.charliezhang.shooter.Config.LASER_O_PATH;
 
 public class Laser extends Projectile implements Pool.Poolable
 {
@@ -22,19 +24,19 @@ public class Laser extends Projectile implements Pool.Poolable
 
 		switch(color) {
 			case Laser.BLUE:
-				textureAtlas = Assets.manager.get("data/textures/laserB.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get(LASER_B_PATH, TextureAtlas.class);
 				animation = new Animation(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(10.5f, 22.5f);
 				sprite.setOrigin(5.25f, 11.25f);
 				break;
 			case Laser.ORANGE:
-				textureAtlas = Assets.manager.get("data/textures/laserO.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get(LASER_O_PATH, TextureAtlas.class);
 				animation = new Animation(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(10, 10);
 				sprite.setOrigin(5, 5);
 				break;
 			default:
-				textureAtlas = Assets.manager.get("data/textures/laserB.atlas", TextureAtlas.class);
+				textureAtlas = Assets.manager.get(LASER_B_PATH, TextureAtlas.class);
 				animation = new Animation(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(6, 28);
 				sprite.setOrigin(3, 14);

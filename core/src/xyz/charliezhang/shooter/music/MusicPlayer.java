@@ -6,9 +6,16 @@ import xyz.charliezhang.shooter.GameData;
 
 import java.util.HashMap;
 
+import static xyz.charliezhang.shooter.Config.GAME_MUSIC_PATH;
+import static xyz.charliezhang.shooter.Config.MENU_MUSIC_PATH;
+import static xyz.charliezhang.shooter.Config.WIN_MUSIC_PATH;
+
 public class MusicPlayer {
 
     public static float VOLUME = 1.0f;
+    public static String MENU = "menu";
+    public static String GAME = "game";
+    public static String WIN = "win";
 
     private static HashMap<String, Music> musicMap;
     private static String currentMusic;
@@ -21,9 +28,9 @@ public class MusicPlayer {
     }
 
     public static void load() {
-        musicMap.put("menu", Assets.manager.get("data/music/menu.mp3", Music.class));
-        musicMap.put("game", Assets.manager.get("data/music/background.mp3", Music.class));
-        musicMap.put("win", Assets.manager.get("data/music/win.mp3", Music.class));
+        musicMap.put(MENU, Assets.manager.get(MENU_MUSIC_PATH, Music.class));
+        musicMap.put(GAME, Assets.manager.get(GAME_MUSIC_PATH, Music.class));
+        musicMap.put(WIN, Assets.manager.get(WIN_MUSIC_PATH, Music.class));
     }
 
     private static void loadMusic(String name, Music music)
@@ -38,7 +45,7 @@ public class MusicPlayer {
 
     public static void loop(String name)
     {
-        if(currentMusic != null && !currentMusic.isEmpty()) {
+        if(currentMusic != null && currentMusic.length() != 0) {
             stop(currentMusic);
         }
         currentMusic = name;
@@ -67,7 +74,7 @@ public class MusicPlayer {
     public static void mute()
     {
         VOLUME = 0f;
-        if(currentMusic != null && !currentMusic.isEmpty()) {
+        if(currentMusic != null && currentMusic.length() != 0) {
             stop(currentMusic);
         }
     }
