@@ -13,6 +13,7 @@ public class MenuTable extends Table {
 
     private TextButton btnPlay;
     private TextButton btnShop;
+    private TextButton btnProfile;
     private TextButton btnOptions;
 
     public MenuTable(final UIContainerScreen container){
@@ -21,9 +22,10 @@ public class MenuTable extends Table {
             MusicPlayer.loop(MusicPlayer.MENU);
         }
 
-        btnPlay = new TextButton("Play", Assets.skin);
+        btnPlay = new TextButton("Story", Assets.skin);
         btnShop = new TextButton("Shop", Assets.skin);
-        btnOptions = new TextButton("Options", Assets.skin);
+        btnProfile = new TextButton("Profile", Assets.skin);
+        btnOptions = new TextButton("", Assets.skin, "options");
 
         btnPlay.addListener(new ClickListener() {
             @Override
@@ -46,11 +48,14 @@ public class MenuTable extends Table {
             }
         });
 
-        add(btnPlay).pad(20).width(384).height(160);
         row();
-        add(btnShop).pad(20).width(384).height(160);
+        add(btnPlay).pad(20).width(336).height(120);
         row();
-        add(btnOptions).pad(20).width(384).height(160);
+        add(btnShop).pad(20).width(336).height(120);
+        row();
+        add(btnProfile).pad(20).width(336).height(120);
+        row();
+        add(btnOptions).left().padLeft(20).width(30).height(30);
 
         //setDebug(true);
     }

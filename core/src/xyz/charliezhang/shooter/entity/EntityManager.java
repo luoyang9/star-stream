@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.misc.*;
 import xyz.charliezhang.shooter.entity.enemies.Enemy;
 import xyz.charliezhang.shooter.entity.enemies.EnemyLaser;
 import xyz.charliezhang.shooter.entity.player.*;
@@ -18,6 +17,7 @@ import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
 import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
+import xyz.charliezhang.shooter.misc.Background;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
 import static xyz.charliezhang.shooter.Config.EXPLOSION_SOUND_PATH;
@@ -126,6 +126,7 @@ public class EntityManager
 			default:
 				player = new BlueFury(this);
 		}
+		player.applyUpgrades();
 
 		hud = new xyz.charliezhang.shooter.misc.HUD(this);
 

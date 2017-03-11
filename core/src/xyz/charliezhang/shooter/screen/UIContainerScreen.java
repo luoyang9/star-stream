@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -75,8 +74,13 @@ public class UIContainerScreen implements Screen {
     }
 
     void play(final int level) {
-        game.setScreen(new GameScreen(game, level + 1, background));
-        canDispose = true;
+        stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(new GameScreen(game, level + 1, background));
+                canDispose = true;
+            }
+        })));
     }
 
     void changeTable(UITable table) {

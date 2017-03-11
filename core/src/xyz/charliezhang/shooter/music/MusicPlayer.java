@@ -6,9 +6,7 @@ import xyz.charliezhang.shooter.GameData;
 
 import java.util.HashMap;
 
-import static xyz.charliezhang.shooter.Config.GAME_MUSIC_PATH;
-import static xyz.charliezhang.shooter.Config.MENU_MUSIC_PATH;
-import static xyz.charliezhang.shooter.Config.WIN_MUSIC_PATH;
+import static xyz.charliezhang.shooter.Config.*;
 
 public class MusicPlayer {
 

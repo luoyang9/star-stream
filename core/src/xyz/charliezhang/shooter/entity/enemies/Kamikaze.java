@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.entity.EntityManager;
 
 import static xyz.charliezhang.shooter.Config.*;
 

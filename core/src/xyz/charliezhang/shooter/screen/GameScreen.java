@@ -1,16 +1,16 @@
 package xyz.charliezhang.shooter.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.Screen;
 import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.misc.Background;
-import xyz.charliezhang.shooter.entity.*;
-import xyz.charliezhang.shooter.wave.WaveManager;
 import xyz.charliezhang.shooter.music.MusicPlayer;
+import xyz.charliezhang.shooter.wave.WaveManager;
 
 class GameScreen implements Screen
 {

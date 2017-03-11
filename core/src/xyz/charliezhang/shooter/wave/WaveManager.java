@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import xyz.charliezhang.shooter.entity.EntityManager;
-import xyz.charliezhang.shooter.entity.enemies.*;
+import xyz.charliezhang.shooter.entity.enemies.Enemy;
 
 public class WaveManager
 {
