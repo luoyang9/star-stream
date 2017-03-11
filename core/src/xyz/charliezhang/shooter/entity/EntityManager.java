@@ -126,6 +126,7 @@ public class EntityManager
 			default:
 				player = new BlueFury(this);
 		}
+		player.applyUpgrades();
 
 		hud = new xyz.charliezhang.shooter.misc.HUD(this);
 

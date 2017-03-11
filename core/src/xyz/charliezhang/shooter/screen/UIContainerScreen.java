@@ -75,8 +75,13 @@ public class UIContainerScreen implements Screen {
     }
 
     void play(final int level) {
-        game.setScreen(new GameScreen(game, level + 1, background));
-        canDispose = true;
+        stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(new GameScreen(game, level + 1, background));
+                canDispose = true;
+            }
+        })));
     }
 
     void changeTable(UITable table) {

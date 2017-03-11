@@ -1,19 +1,11 @@
 package xyz.charliezhang.shooter.screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.MainGame;
-import xyz.charliezhang.shooter.music.MusicPlayer;
 
 import static xyz.charliezhang.shooter.screen.UIContainerScreen.UITable.MENU;
 

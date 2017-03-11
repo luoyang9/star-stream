@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.shooter.Assets;
+import xyz.charliezhang.shooter.GameData;
 import xyz.charliezhang.shooter.GameInput;
 import xyz.charliezhang.shooter.entity.*;
 import xyz.charliezhang.shooter.entity.powerup.AttackPowerUp;
@@ -19,6 +21,7 @@ import xyz.charliezhang.shooter.entity.powerup.MissilePowerUp;
 import xyz.charliezhang.shooter.entity.powerup.PowerUp;
 import xyz.charliezhang.shooter.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.shooter.music.MusicPlayer;
+import xyz.charliezhang.shooter.shop.Upgrade;
 
 import static xyz.charliezhang.shooter.Config.*;
 import static xyz.charliezhang.shooter.entity.powerup.PowerUp.PowerUps.*;
@@ -125,6 +128,16 @@ public class Player extends Entity
 
 		superAttOn = ATT_INITIAL_ON;
 		superAttDuration = ATT_DURATION;
+	}
+
+	public void applyUpgrades() {
+		Array<Upgrade> upgrades = GameData.getPlayerUpgrades();
+		for(Upgrade u : upgrades) {
+			switch(u.getName()) {
+				case "upgrade-health": this.health += u.getValue(); this.maxHealth += u.getValue(); break;
+				case "upgrade-damage": this.damage += u.getValue(); break;
+			}
+		}
 	}
 
 	@Override

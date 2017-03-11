@@ -14,7 +14,8 @@ public class Config {
     public static String MENU_BACKGROUND_PATH = "data/ui/background.png";
     // ui
     public static String UI_SKIN_PATH = "data/ui/uiskin.atlas";
-    public static String PAUSE_PATH = "data/textures/pause.png";
+    public static String PAUSE_PATH = "data/ui/pause.png";
+    public static String OPTIONS_PATH = "data/ui/options.png";
     // health
     public static String HEALTH_PATH = "data/textures/health.png";
     public static String HEALTH_FILL_PATH = "data/textures/healthFill.png";
@@ -70,7 +71,7 @@ public class Config {
     public static int PLAYER_ATT_LEVEL = 4;
     public static int PLAYER_MAX_LIVES = 3;
     public static boolean PLAYER_INITIAL_FLINCHING = false;
-    public static boolean PLAYER_INITIAL_CONTROLLABLE = true;
+    public static boolean PLAYER_INITIAL_CONTROLLABLE = false;
     public static boolean PLAYER_INITIAL_JUST_CONTROLLABLE = false;
     public static boolean PLAYER_INITIAL_JUST_SPAWNED = true;
     public static boolean PLAYER_INITIAL_JUST_TOUCHED = false;

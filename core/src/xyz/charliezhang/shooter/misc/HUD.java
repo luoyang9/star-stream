@@ -43,11 +43,12 @@ public class HUD
     private Image shieldIcon;
     private Image attIcon;
     private Image[] livesIcons;
-    private Image pauseIcon;
 
 
     private TextButton btnMenu;
-    private ImageButton btnPause;
+    private Stack pauseStack;
+    private TextButton btnPause;
+    private TextButton btnPlay;
     private Skin skin;
     private Label lblGameOver;
     private Label lblScore;
@@ -110,9 +111,19 @@ public class HUD
         });
         btnMenu.setTouchable(Touchable.disabled);
 
-        pauseIcon = new Image(Assets.manager.get(PAUSE_PATH, Texture.class));
-        btnPause = new ImageButton(pauseIcon.getDrawable());
+        pauseStack = new Stack();
+        btnPause = new TextButton("", Assets.skin, "pause");
         btnPause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
+                manager.pause();
+                event.stop();
+            }
+        });
+        btnPlay = new TextButton("", Assets.skin, "play");
+        btnPlay.setVisible(false);
+        btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
@@ -130,7 +141,9 @@ public class HUD
         iconTable.add(attIcon).width(50).height(50);;
         table.add(iconTable).expandY().left().bottom().padLeft(5).height(50).width(150);
         table.row();
-        table.add(btnPause).colspan(2).right().height(54).width(60);
+        pauseStack.add(btnPause);
+        pauseStack.add(btnPlay);
+        table.add(pauseStack).colspan(2).right().height(40).width(40).padRight(10).padBottom(10);
 
         lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
@@ -177,11 +190,15 @@ public class HUD
         {
             deathTable.addAction(Actions.fadeIn(0.1f));
             btnMenu.setTouchable(Touchable.enabled);
+            btnPause.setVisible(false);
+            btnPlay.setVisible(true);
         }
         else
         {
             deathTable.addAction(Actions.fadeOut(0.1f));
             btnMenu.setTouchable(Touchable.disabled);
+            btnPause.setVisible(true);
+            btnPlay.setVisible(false);
         }
     }
 
