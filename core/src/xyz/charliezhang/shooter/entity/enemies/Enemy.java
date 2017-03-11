@@ -2,8 +2,8 @@ package xyz.charliezhang.shooter.entity.enemies;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Entity;
+import xyz.charliezhang.shooter.entity.EntityManager;
 
 import static xyz.charliezhang.shooter.Config.ENEMY_INITIAL_DEAD;
 import static xyz.charliezhang.shooter.Config.ENEMY_INITIAL_SUICIDE;

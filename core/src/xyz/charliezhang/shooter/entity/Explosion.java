@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
 
-import static xyz.charliezhang.shooter.Config.EXPLOSION_PATH;
-import static xyz.charliezhang.shooter.Config.PLAYER_EXPLOSION_PATH;
-import static xyz.charliezhang.shooter.Config.PLAYER_EXPLOSION_R_PATH;
+import static xyz.charliezhang.shooter.Config.*;
 
 public class Explosion extends Entity implements Pool.Poolable
 {

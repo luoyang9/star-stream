@@ -3,10 +3,8 @@ package xyz.charliezhang.shooter.entity.enemies;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.shooter.Assets;
-import xyz.charliezhang.shooter.entity.Entity;
 import xyz.charliezhang.shooter.entity.EntityManager;
 import xyz.charliezhang.shooter.entity.Projectile;
 

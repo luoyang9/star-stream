@@ -1,16 +1,12 @@
 package xyz.charliezhang.shooter.screen;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import xyz.charliezhang.shooter.Assets;
 import xyz.charliezhang.shooter.music.MusicPlayer;
 
-import static xyz.charliezhang.shooter.Config.OPTIONS_PATH;
 import static xyz.charliezhang.shooter.screen.UIContainerScreen.UITable.*;
 
 public class MenuTable extends Table {

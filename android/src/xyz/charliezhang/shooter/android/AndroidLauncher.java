@@ -1,7 +1,6 @@
 package xyz.charliezhang.shooter.android;
 
 import android.os.Bundle;
-
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import xyz.charliezhang.shooter.MainGame;
