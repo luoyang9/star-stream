@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.starstream.Assets;
@@ -20,7 +21,7 @@ public class Skullinator extends Enemy
 		super();
 
 		textureAtlas = Assets.manager.get(SKULLINATOR_PATH, TextureAtlas.class);
-		animation = new Animation(1/15f, textureAtlas.getRegions());
+		animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 		
 		sprite.setSize(120, 120);
 		

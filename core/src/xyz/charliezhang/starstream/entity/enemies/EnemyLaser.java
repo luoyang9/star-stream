@@ -3,6 +3,7 @@ package xyz.charliezhang.starstream.entity.enemies;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.entity.EntityManager;
@@ -38,7 +39,7 @@ public class EnemyLaser extends Projectile implements Pool.Poolable
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 		}
-		animation = new Animation(1/20f, textureAtlas.getRegions());
+		animation = new Animation<TextureRegion>(1/20f, textureAtlas.getRegions());
 	}
 
 	@Override

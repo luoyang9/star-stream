@@ -2,6 +2,7 @@ package xyz.charliezhang.starstream.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.entity.EntityManager;
@@ -17,7 +18,7 @@ public class Missile extends Projectile implements Pool.Poolable
         super();
 
         textureAtlas = Assets.manager.get(MISSILE_PATH, TextureAtlas.class);
-        animation = new Animation(1/15f, textureAtlas.getRegions());
+        animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(9, 38);
 

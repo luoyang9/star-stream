@@ -2,6 +2,7 @@ package xyz.charliezhang.starstream.entity;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.starstream.Assets;
 
@@ -26,7 +27,7 @@ public class Explosion extends Entity implements Pool.Poolable
                 sprite.setSize(15, 15);
             default:
         }
-        animation = new Animation(1/15f, textureAtlas.getRegions()) ;
+        animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions()) ;
     }
 
     @Override
