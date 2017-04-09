@@ -2,6 +2,7 @@ package xyz.charliezhang.starstream.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.entity.EntityManager;
@@ -25,19 +26,19 @@ public class Laser extends Projectile implements Pool.Poolable
 		switch(color) {
 			case Laser.BLUE:
 				textureAtlas = Assets.manager.get(LASER_B_PATH, TextureAtlas.class);
-				animation = new Animation(1 / 15f, textureAtlas.getRegions());
+				animation = new Animation<TextureRegion>(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(10.5f, 22.5f);
 				sprite.setOrigin(5.25f, 11.25f);
 				break;
 			case Laser.ORANGE:
 				textureAtlas = Assets.manager.get(LASER_O_PATH, TextureAtlas.class);
-				animation = new Animation(1 / 15f, textureAtlas.getRegions());
+				animation = new Animation<TextureRegion>(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(10, 10);
 				sprite.setOrigin(5, 5);
 				break;
 			default:
 				textureAtlas = Assets.manager.get(LASER_B_PATH, TextureAtlas.class);
-				animation = new Animation(1 / 15f, textureAtlas.getRegions());
+				animation = new Animation<TextureRegion>(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(6, 28);
 				sprite.setOrigin(3, 14);
 		}

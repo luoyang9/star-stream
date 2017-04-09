@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import xyz.charliezhang.starstream.Assets;
-import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 import xyz.charliezhang.starstream.screen.LoadScreen;
 

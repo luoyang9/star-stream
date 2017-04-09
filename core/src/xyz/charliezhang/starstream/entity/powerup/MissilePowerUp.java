@@ -2,6 +2,7 @@ package xyz.charliezhang.starstream.entity.powerup;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import xyz.charliezhang.starstream.Assets;
 
 import static xyz.charliezhang.starstream.Config.*;
@@ -15,7 +16,7 @@ public class MissilePowerUp extends PowerUp
         super();
 
         textureAtlas = Assets.manager.get(MIS_POWERUP_PATH, TextureAtlas.class);
-        animation = new Animation(1/15f, textureAtlas.getRegions());
+        animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 
         sprite.setSize(28, 28);
 

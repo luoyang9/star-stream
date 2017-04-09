@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
@@ -21,7 +22,7 @@ public class UFO extends Enemy
 		super();
 
 		textureAtlas = Assets.manager.get(UFO_PATH, TextureAtlas.class);
-		animation = new Animation(1/5f, textureAtlas.getRegions());
+		animation = new Animation<TextureRegion>(1/5f, textureAtlas.getRegions());
 
 		//set enemy data
 		health = maxHealth = UFO_HEALTH;
