@@ -3,7 +3,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Asteroid,
+          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 227.5,
           y: 800,
           dx: 0,
@@ -11,7 +11,7 @@
           delay: 2000
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Asteroid,
+          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 87.5,
           y: 800,
           dx: 0,
@@ -19,7 +19,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Asteroid,
+          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 367.5,
           y: 800,
           dx: 0,
@@ -31,7 +31,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Falcon,
+          class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
           y: 820,
           dx: -6,
@@ -40,7 +40,7 @@
           bound: 100
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Falcon,
+          class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
           y: 820,
           dx: -6,
@@ -49,7 +49,7 @@
           bound: 100
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.Falcon,
+          class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
           y: 820,
           dx: -6,
@@ -62,7 +62,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.shooter.entity.enemies.UFO,
+          class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 240,
           y: 820,
           dx: 0,
@@ -71,7 +71,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.UFO,
+          class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 300,
           y: 820,
           dx: 0,
@@ -80,7 +80,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.shooter.entity.enemies.UFO,
+          class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 180,
           y: 820,
           dx: 0,
