@@ -40,7 +40,7 @@ class ShopTable extends Table {
         lblShips.setAlignment(Align.center);
         lblUpgrades = new Label("Upgrades", Assets.skin, "medium");
         lblUpgrades.setAlignment(Align.center);
-        lblMoney = new Label(GameData.prefs.getInteger("money") + "", Assets.skin, "small");
+        lblMoney = new Label(GameData.prefs.getLong("money") + "", Assets.skin, "small");
         lblMoney.setAlignment(Align.center);
         btnPlayerTypes = new CheckBox[EntityManager.NUM_TYPES];
         btnPlayerTypesGroup = new ButtonGroup<CheckBox>();
@@ -50,7 +50,7 @@ class ShopTable extends Table {
         {
             final int currType = i + 1;
             btnPlayerTypes[i] = new CheckBox(EntityManager.getShipName(currType), skin, "player" + i);
-            btnPlayerTypes[i].getCells().get(0).size(50, 50).padRight(15);
+            btnPlayerTypes[i].getCells().get(0).size(75, 75).padRight(15);
             if(GameData.prefs.getBoolean("type-" + currType)) {
                 if (GameData.prefs.getInteger("playerType") == currType) btnPlayerTypes[i].setChecked(true);
                 else btnPlayerTypes[i].setChecked(false);
@@ -69,11 +69,11 @@ class ShopTable extends Table {
             });
 
             btnPlayerTypesGroup.add(btnPlayerTypes[i]);
-            playerTypesTable.add(btnPlayerTypes[i]).width(200).height(200);
+            playerTypesTable.add(btnPlayerTypes[i]).width(200).height(100);
             playerTypesTable.row();
         }
 
-        btnBack = new TextButton("Back", skin);
+        btnBack = new TextButton("Back", skin, "small");
         btnBack.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -83,11 +83,6 @@ class ShopTable extends Table {
 
         background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
-
-        add(btnBack).width(450).height(200);
-        row();
-        add(playerTypesTable);
-        row();
         add(btnBack).left().width(100).height(65).padLeft(20).padTop(20);
         add(lblMoney).padTop(20);
         add(btnProfile).right().width(100).height(65).padRight(20).padTop(20);
@@ -97,7 +92,7 @@ class ShopTable extends Table {
         add(playerTypesTable).expandX().colspan(3).padLeft(20).padRight(20);
         row();
         add(lblUpgrades).colspan(3).padTop(20);
-        //setDebug(true);
+        setDebug(true);
     }
 
 }
