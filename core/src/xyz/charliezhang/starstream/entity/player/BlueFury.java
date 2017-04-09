@@ -2,6 +2,7 @@ package xyz.charliezhang.starstream.entity.player;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.music.MusicPlayer;
@@ -16,7 +17,7 @@ public class BlueFury extends Player
 
         //set texture atlas and animation to player
         textureAtlas = Assets.manager.get(PLAYER_BLUE_PATH, TextureAtlas.class);
-        animation = new Animation(1/10f, textureAtlas.getRegions());
+        animation = new Animation<TextureRegion>(1/10f, textureAtlas.getRegions());
 
         //set sprite size
         sprite.setSize(64.5f, 62);

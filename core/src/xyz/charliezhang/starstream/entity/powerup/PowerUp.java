@@ -1,5 +1,5 @@
 package xyz.charliezhang.starstream.entity.powerup;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.starstream.MainGame;
 import xyz.charliezhang.starstream.entity.Entity;
 
 public class PowerUp extends Entity

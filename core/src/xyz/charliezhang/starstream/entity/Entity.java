@@ -1,18 +1,15 @@
 package xyz.charliezhang.starstream.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.starstream.MainGame;
 
 public abstract class Entity 
 {
 	protected TextureAtlas textureAtlas;
-	protected Animation animation;
+	protected Animation<TextureRegion> animation;
 	protected float animationTime;
 	protected Sprite sprite;
 	protected Vector2 direction;

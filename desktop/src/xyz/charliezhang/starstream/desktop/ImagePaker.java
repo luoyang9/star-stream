@@ -1,4 +1,4 @@
-package xyz.charliezhang.shooter.desktop;
+package xyz.charliezhang.starstream.desktop;
 
 /**
  * Created by Charlie on 2015-12-03.

@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.starstream.Assets;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.starstream.MainGame;
 import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.entity.powerup.PowerUp;
 import xyz.charliezhang.starstream.music.MusicPlayer;

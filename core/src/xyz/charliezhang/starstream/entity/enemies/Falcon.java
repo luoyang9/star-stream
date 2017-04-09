@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.starstream.Assets;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.starstream.MainGame;
 
 import static xyz.charliezhang.starstream.Config.*;
 
@@ -20,7 +21,7 @@ public class Falcon extends Enemy
         super();
 
         textureAtlas = Assets.manager.get(FALCON_PATH, TextureAtlas.class);
-        animation = new Animation(1/20f, textureAtlas.getRegions());
+        animation = new Animation<TextureRegion>(1/20f, textureAtlas.getRegions());
 
         sprite.setSize(51, 37);
 

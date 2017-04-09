@@ -135,9 +135,11 @@ public class Player extends Entity
 	public void applyUpgrades() {
 		Array<Upgrade> upgrades = GameData.getPlayerUpgrades();
 		for(Upgrade u : upgrades) {
-			switch(u.getName()) {
-				case "upgrade-health": this.health += u.getValue(); this.maxHealth += u.getValue(); break;
-				case "upgrade-damage": this.damage += u.getValue(); break;
+			if(u.getName().equals("upgrade-health")) {
+				this.health += u.getValue();
+				this.maxHealth += u.getValue();
+			} else if(u.getName().equals("upgrade-damage")) {
+				this.damage += u.getValue();
 			}
 		}
 	}

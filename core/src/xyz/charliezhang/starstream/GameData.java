@@ -24,7 +24,7 @@ public class GameData {
         prefs.putBoolean("soundOn", true);
 
         // high scores
-        for(int i = 0; i < xyz.charliezhang.shooter.MainGame.NUM_LEVELS; i++) {
+        for(int i = 0; i < xyz.charliezhang.starstream.MainGame.NUM_LEVELS; i++) {
             prefs.putInteger("level-" + (i+1), 0);
         }
 

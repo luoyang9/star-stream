@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
-import xyz.charliezhang.shooter.MainGame;
+import xyz.charliezhang.starstream.MainGame;
 
 import static xyz.charliezhang.starstream.screen.UIContainerScreen.UITable.MENU;
 
