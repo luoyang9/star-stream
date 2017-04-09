@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.entity.EntityManager;
@@ -16,8 +17,13 @@ class ShopTable extends Table {
     private Table playerTypesTable;
 
     private TextButton btnBack;
+    private TextButton btnProfile;
     private CheckBox[] btnPlayerTypes;
     private ButtonGroup<CheckBox> btnPlayerTypesGroup;
+
+    private Label lblShips;
+    private Label lblUpgrades;
+    private Label lblMoney;
 
     private Texture background;
 
@@ -30,6 +36,12 @@ class ShopTable extends Table {
 
         skin = Assets.skin;
 
+        lblShips = new Label("Ships", Assets.skin, "medium");
+        lblShips.setAlignment(Align.center);
+        lblUpgrades = new Label("Upgrades", Assets.skin, "medium");
+        lblUpgrades.setAlignment(Align.center);
+        lblMoney = new Label(GameData.prefs.getInteger("money") + "", Assets.skin, "small");
+        lblMoney.setAlignment(Align.center);
         btnPlayerTypes = new CheckBox[EntityManager.NUM_TYPES];
         btnPlayerTypesGroup = new ButtonGroup<CheckBox>();
         btnPlayerTypesGroup.setMaxCheckCount(1);
@@ -76,6 +88,15 @@ class ShopTable extends Table {
         row();
         add(playerTypesTable);
         row();
+        add(btnBack).left().width(100).height(65).padLeft(20).padTop(20);
+        add(lblMoney).padTop(20);
+        add(btnProfile).right().width(100).height(65).padRight(20).padTop(20);
+        row();
+        add(lblShips).expandX().colspan(3).padTop(20);
+        row();
+        add(playerTypesTable).expandX().colspan(3).padLeft(20).padRight(20);
+        row();
+        add(lblUpgrades).colspan(3).padTop(20);
         //setDebug(true);
     }
 
