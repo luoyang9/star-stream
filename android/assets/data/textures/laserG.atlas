@@ -1,0 +1,12 @@
+laserG.png
+size: 7, 9
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+laserR
+  rotate: false
+  xy: 0, 0
+  size: 7, 9
+  orig: 7, 9
+  offset: 0, 0
+  index: -1

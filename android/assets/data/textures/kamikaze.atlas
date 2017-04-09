@@ -1,0 +1,33 @@
+kamikaze.png
+size: 48, 11
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 12, 0
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 24, 0
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 36, 0
+  size: 12, 11
+  orig: 12, 11
+  offset: 0, 0
+  index: -1

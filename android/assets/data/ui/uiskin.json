@@ -1,0 +1,62 @@
+{
+	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+		default: { 
+			down: default-button, 
+			up: default-button, 
+			font: big-font
+		},
+		small: { 
+			down: default-button, 
+			up: default-button, 
+			font: small-font
+		},
+		medium: { 
+			down: default-button, 
+			up: default-button, 
+			font: medium-font
+		},
+		options: {
+			down: options,
+			up: options,
+			font: small-font
+		},
+		pause: {
+			down: pause,
+			up: pause,
+			font: small-font
+		},
+		play: {
+			down: play,
+			up: play,
+			font: small-font
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+		default: { 
+			font: big-font
+		},
+		small: {
+			font: small-font
+		},
+		medium: {
+			font: medium-font
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+		default: {
+			checkboxOn: check-on, 
+			checkboxOff: check-off,
+			font: medium-font
+		},
+		player0: {
+			checkboxOn: player0-on, 
+			checkboxOff: player0-off,
+			font: medium-font
+		},
+		player1: {
+			checkboxOn: player1-on, 
+			checkboxOff: player1-off,
+			font: medium-font
+		}
+	}
+}

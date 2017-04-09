@@ -1,0 +1,36 @@
+striker.png
+size: 72, 12
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 18, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 36, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 54, 0
+  size: 18, 12
+  orig: 18, 12
+  offset: 0, 0
+  index: -1
+
+
+

@@ -1,0 +1,13 @@
+
+mispowerup.png
+size: 14, 14
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 0, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
