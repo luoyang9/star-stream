@@ -1,5 +1,7 @@
 package xyz.charliezhang.starstream.entity.enemies;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import xyz.charliezhang.starstream.entity.Entity;
@@ -48,6 +50,24 @@ public abstract class Enemy extends Entity implements Json.Serializable
 	}
 
 	public void setEntityManager(EntityManager manager) {this.manager = manager;}
+
+	@Override
+	public void render(SpriteBatch sb) {
+		//set sprite to current animation region
+		if(animation != null && !manager.isPaused()) {
+			sprite.setRegion(animation.getKeyFrame(animationTime, true));
+
+			//add animation time
+			animationTime += Gdx.graphics.getDeltaTime();
+		}
+
+		if(sprite.getX() > -sprite.getWidth() &&
+				sprite.getX() < manager.getViewport().getWorldWidth() &&
+				sprite.getY() > -sprite.getHeight() &&
+				sprite.getY() < manager.getViewport().getWorldHeight()) {
+			sprite.draw(sb);
+		}
+	}
 	
 	public void modifyHealth(int h) {health += h;}
 

@@ -40,10 +40,4 @@ public class Asteroid extends Enemy
         super.update();
     }
 
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        super.render(sb);
-    }
-
 }
