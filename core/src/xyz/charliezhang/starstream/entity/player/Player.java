@@ -1,5 +1,6 @@
 package xyz.charliezhang.starstream.entity.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -209,7 +210,7 @@ public class Player extends Entity
 		{
 			numLives--;
 			Explosion explosion = manager.getExplosionPool().obtain();
-			explosion.init(2);
+			explosion.init(2, manager);
 			explosion.setPosition(getPosition().x + getSprite().getWidth()/2, getPosition().y + getSprite().getHeight()/2);
 			manager.spawnExplosion(explosion);
 			Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
@@ -298,7 +299,20 @@ public class Player extends Entity
 		}
 		
 		//render player
-		super.render(sb);
+		//set sprite to current animation region
+		if(animation != null && !manager.isPaused()) {
+			sprite.setRegion(animation.getKeyFrame(animationTime, true));
+
+			//add animation time
+			animationTime += Gdx.graphics.getDeltaTime();
+		}
+
+		if(sprite.getX() > -sprite.getWidth() &&
+				sprite.getX() < manager.getViewport().getWorldWidth() &&
+				sprite.getY() > -sprite.getHeight() &&
+				sprite.getY() < manager.getViewport().getWorldHeight()) {
+			sprite.draw(sb);
+		}
 
 		if(shieldOn) shield.draw(sb);
 	}
