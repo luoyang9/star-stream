@@ -60,8 +60,8 @@ public class EntityManager
 	private MainGame game;
 
 	public static final int NUM_TYPES = 2;
-	public static final int PLAYER_BLUE = 1;
-	public static final int PLAYER_RED = 2;
+	public static final int PLAYER_BLUE = 0;
+	public static final int PLAYER_RED = 1;
 
 	public static String getShipName(int type)
 	{

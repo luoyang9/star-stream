@@ -28,8 +28,6 @@ public class Background
 		sprite1.setSize(worldWidth + 100, (worldWidth + 100)/(float)image.getWidth()*image.getHeight());
 		sprite2.setSize(worldWidth + 100, (worldWidth + 100)/(float)image.getWidth()*image.getHeight());
 		sprite2.setPosition(-50, sprite1.getHeight());
-		System.out.println(sprite1.getX() + " " + sprite1.getY());
-		System.out.println(sprite2.getX() + " " + sprite2.getY());
 	}
 	
 	public void setVector(float dx, float dy)

@@ -31,6 +31,16 @@
 			font: small-font
 		}
 	},
+	com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+		shipLeft: {
+			down: shipLeft,
+			up: shipLeft
+		},
+		shipRight: {
+			down: shipRight,
+			up: shipRight
+		}
+	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		default: { 
 			font: big-font
@@ -51,12 +61,12 @@
 		player0: {
 			checkboxOn: player0-on, 
 			checkboxOff: player0-off,
-			font: medium-font
+			font: small-font
 		},
 		player1: {
 			checkboxOn: player1-on, 
 			checkboxOff: player1-off,
-			font: medium-font
+			font: small-font
 		}
 	}
 }

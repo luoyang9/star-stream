@@ -54,8 +54,8 @@ public class Config {
     public static String LASER_R_PATH = "data/textures/laserR.atlas";
     public static String LASER_O_PATH = "data/textures/laserO.atlas";
     // player
-    public static String PLAYER_BLUE_PATH = "data/textures/playerblue.atlas";
-    public static String PLAYER_RED_PATH = "data/textures/playerred.atlas";
+    public static String PLAYER_BLUE_PATH = "data/textures/player0.atlas";
+    public static String PLAYER_RED_PATH = "data/textures/player1.atlas";
     // music
     public static String GAME_MUSIC_PATH = "data/music/background.mp3";
     public static String MENU_MUSIC_PATH = "data/music/menu.mp3";
