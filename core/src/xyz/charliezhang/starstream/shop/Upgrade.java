@@ -1,13 +1,12 @@
 package xyz.charliezhang.starstream.shop;
 
+import com.badlogic.gdx.utils.Array;
+import xyz.charliezhang.starstream.GameData;
+
 /**
  * Created by Charlie Zhang on 3/11/2017.
  */
 public class Upgrade {
-    public static String[] UpgradeTypes = {
-            "upgrade-health" ,
-            "upgrade-damage"
-    };
 
     private String name;
     private int value;
@@ -17,6 +16,12 @@ public class Upgrade {
         this.value = value;
     }
 
+    public Upgrade(String name) {
+        this.name = name;
+        this.value = 0;
+    }
+
     public String getName() { return name; }
     public int getValue() { return value; }
+
 }

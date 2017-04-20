@@ -40,20 +40,10 @@ public class GameData {
         prefs.putLong("money", 0);
 
         //dev stuff, delete for live
-        prefs.putInteger("upgrade-health", 5);
-        prefs.putInteger("upgrade-damage", 2);
+        prefs.putInteger("health", 5);
+        prefs.putInteger("damage", 2);
         prefs.putBoolean("type-" + EntityManager.PLAYER_BLUE, true);
         prefs.putBoolean("type-" + EntityManager.PLAYER_RED, true);
-    }
-
-    public static Array<Upgrade> getPlayerUpgrades() {
-        Array<Upgrade> upgrades = new Array<Upgrade>();
-        for(String u : Upgrade.UpgradeTypes) {
-            if(prefs.contains(u)) {
-                upgrades.add(new Upgrade(u, prefs.getInteger(u)));
-            }
-        }
-        return upgrades;
     }
 
 }

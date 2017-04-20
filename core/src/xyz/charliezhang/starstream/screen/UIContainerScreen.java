@@ -70,7 +70,7 @@ public class UIContainerScreen implements Screen {
                 event.stop();
             }
         });
-        stage.setDebugAll(true);
+//        stage.setDebugAll(true);
 
         Gdx.input.setInputProcessor(stage);
     }

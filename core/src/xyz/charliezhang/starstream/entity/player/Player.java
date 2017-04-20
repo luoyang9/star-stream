@@ -24,6 +24,7 @@ import xyz.charliezhang.starstream.entity.powerup.PowerUp;
 import xyz.charliezhang.starstream.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 import xyz.charliezhang.starstream.shop.Upgrade;
+import xyz.charliezhang.starstream.shop.UpgradeManager;
 
 import static xyz.charliezhang.starstream.Config.*;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.*;
@@ -133,12 +134,12 @@ public class Player extends Entity
 	}
 
 	public void applyUpgrades() {
-		Array<Upgrade> upgrades = GameData.getPlayerUpgrades();
+		Array<Upgrade> upgrades = UpgradeManager.getPlayerUpgrades();
 		for(Upgrade u : upgrades) {
-			if(u.getName().equals("upgrade-health")) {
+			if(u.getName().equals("health")) {
 				this.health += u.getValue();
 				this.maxHealth += u.getValue();
-			} else if(u.getName().equals("upgrade-damage")) {
+			} else if(u.getName().equals("damage")) {
 				this.damage += u.getValue();
 			}
 		}

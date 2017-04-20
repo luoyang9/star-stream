@@ -88,3 +88,24 @@ shipRight
   orig: 25, 25
   offset: 0, 0
   index: -1
+upgrade
+  rotate: false
+  xy: 50, 65
+  size: 75, 25
+  orig: 75, 25
+  offset: 0, 0
+  index: -1
+progress-background
+  rotate: false
+  xy: 125, 65
+  size: 37, 25
+  orig: 37, 25
+  offset: 0, 0
+  index: -1
+progress-knob
+  rotate: false
+  xy: 162, 65
+  size: 30, 25
+  orig: 30, 25
+  offset: 0, 0
+  index: -1

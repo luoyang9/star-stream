@@ -29,6 +29,11 @@
 			down: play,
 			up: play,
 			font: small-font
+		},
+		upgrade: {
+			down: upgrade,
+			up: upgrade,
+			font: small-font
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
@@ -67,6 +72,13 @@
 			checkboxOn: player1-on, 
 			checkboxOff: player1-off,
 			font: small-font
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+		default-horizontal: {
+			background: progress-background,
+			knob: progress-knob,
+			knobBefore: progress-knob
 		}
 	}
 }
