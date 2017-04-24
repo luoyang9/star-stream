@@ -1,8 +1,10 @@
 package xyz.charliezhang.starstream.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -128,24 +130,48 @@ class ShopTable extends Table {
 
         //upgrades
         upgradesContainer = new Table();
-        Array<Upgrade> upgrades = UpgradeManager.getAllUpgrades();
+        final Array<Upgrade> upgrades = UpgradeManager.getAllUpgrades();
         lblUpgrade = new Label[UpgradeManager.UpgradeTypes.length];
         lblUpgradeVal = new Label[UpgradeManager.UpgradeTypes.length];
         btnUpgrade = new TextButton[UpgradeManager.UpgradeTypes.length];
         upgradeBar = new ProgressBar[UpgradeManager.UpgradeMax.length];
         for(int i = 0; i < UpgradeManager.UpgradeTypes.length; i++) {
-            String upgradeName = UpgradeManager.UpgradeTypes[i];
-            long upgradeCost = UpgradeManager.getUpgradeCost(upgrades.get(i));
-            int value = upgrades.get(i).getValue();
+            final String upgradeName = UpgradeManager.UpgradeTypes[i];
+            final long upgradeCost = UpgradeManager.getUpgradeCost(upgrades.get(i));
+            final int value = upgrades.get(i).getValue();
+            final int index = i;
 
             lblUpgrade[i] = new Label(upgradeName, skin, "small");
             upgradeBar[i] = new ProgressBar(0, UpgradeManager.UpgradeMax[i], 1, false, skin);
             upgradeBar[i].setValue(value);
             lblUpgradeVal[i] = new Label(value + "", skin, "small");
             btnUpgrade[i] = new TextButton("  " + upgradeCost, skin, "upgrade");
-            if(upgradeCost > money) {
+            if(upgradeCost > money || value >= UpgradeManager.UpgradeMax[i])  {
                 btnUpgrade[i].setDisabled(true);
+                btnUpgrade[i].setTouchable(Touchable.disabled);
             }
+            btnUpgrade[i].addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    int newVal = UpgradeManager.upgrade(upgradeName);
+                    long newMoney = GameData.prefs.getLong("money");
+                    upgradeBar[index].setValue(newVal);
+                    lblUpgradeVal[index].setText(newVal + "");
+                    lblMoney.setText(newMoney + "");
+                    btnUpgrade[index].setText("  " + UpgradeManager.getUpgradeCost(new Upgrade(upgradeName, newVal)));
+                    if(newVal >= UpgradeManager.UpgradeMax[index]) {
+                        btnUpgrade[index].setDisabled(true);
+                        btnUpgrade[index].setTouchable(Touchable.disabled);
+                    }
+                    for(int i = 0; i < upgrades.size; i++) {
+                        if(UpgradeManager.getUpgradeCost(upgrades.get(i)) > newMoney) {
+                            btnUpgrade[i].setDisabled(true);
+                            btnUpgrade[i].setTouchable(Touchable.disabled);
+                        }
+                    }
+                    event.stop();
+                }
+            });
 
             upgradesContainer.add(lblUpgrade[i]).expandX().fillX().padTop(10);
             upgradesContainer.row();

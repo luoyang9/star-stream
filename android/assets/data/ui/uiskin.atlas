@@ -102,6 +102,13 @@ back
   orig: 11, 8
   offset: 0, 0
   index: -1
+upgrade-disable
+  rotate: false
+  xy: 70, 65
+  size: 33, 13
+  orig: 33, 13
+  offset: 0, 0
+  index: -1
 progress-background
   rotate: false
   xy: 125, 65

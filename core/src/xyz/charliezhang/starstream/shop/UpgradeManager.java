@@ -1,5 +1,6 @@
 package xyz.charliezhang.starstream.shop;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Array;
 import xyz.charliezhang.starstream.GameData;
 
@@ -18,12 +19,29 @@ public class UpgradeManager {
             5
     };
 
+    public static int upgrade(String upgrade) {
+        int oldVal = 0;
+        if(GameData.prefs.contains(upgrade)) {
+            oldVal = GameData.prefs.getInteger(upgrade);
+        }
+        long newMoney = GameData.prefs.getLong("money") - getUpgradeCost(new Upgrade(upgrade, oldVal));
+        for(int i = 0; i < UpgradeTypes.length; i++) {
+            if(upgrade.equals(UpgradeTypes[i]) && oldVal < UpgradeMax[i]) {
+                int newVal = oldVal + 1;
+                GameData.prefs.putInteger(upgrade, newVal);
+                GameData.prefs.putLong("money", newMoney).flush();
+                return newVal;
+            }
+        }
+        return oldVal;
+    }
+
     public static long getUpgradeCost(Upgrade u) {
         int v = u.getValue();
         if(u.getName().equals("health")) {
-            return v * 50;
+            return (10 + v) * 10;
         } else if(u.getName().equals("damage")) {
-            return v * 100;
+            return (1 + v) * 100;
         }
         System.out.println("Unknown upgrade was encountered: " + u.getName());
         return 0;
