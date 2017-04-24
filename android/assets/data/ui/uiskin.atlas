@@ -77,22 +77,29 @@ options
 shipLeft
   rotate: false
   xy: 0, 65
-  size: 25, 25
-  orig: 25, 25
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 shipRight
   rotate: false
-  xy: 25, 65
-  size: 25, 25
-  orig: 25, 25
+  xy: 13, 65
+  size: 13, 13
+  orig: 13, 13
   offset: 0, 0
   index: -1
 upgrade
   rotate: false
-  xy: 50, 65
-  size: 75, 25
-  orig: 75, 25
+  xy: 26, 65
+  size: 33, 13
+  orig: 33, 13
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 59, 65
+  size: 11, 8
+  orig: 11, 8
   offset: 0, 0
   index: -1
 progress-background

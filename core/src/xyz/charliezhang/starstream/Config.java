@@ -12,10 +12,14 @@ public class Config {
     public static String GAME_BACKGROUND_PATH = "data/textures/background.png";
     // menu background
     public static String MENU_BACKGROUND_PATH = "data/ui/background.png";
+    //color
+    public static String WHITE_PATH = "data/ui/divider.png";
     // ui
     public static String UI_SKIN_PATH = "data/ui/uiskin.atlas";
     public static String PAUSE_PATH = "data/ui/pause.png";
-    public static String OPTIONS_PATH = "data/ui/options.png";
+    public static String PLAYER_BLUE_UI_PATH = "data/ui/player0.png";
+    public static String PLAYER_RED_UI_PATH = "data/ui/player1.png";
+    public static String UI_COIN_PATH = "data/ui/coin.png";
     // health
     public static String HEALTH_PATH = "data/textures/health.png";
     public static String HEALTH_FILL_PATH = "data/textures/healthFill.png";

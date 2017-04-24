@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -23,6 +24,7 @@ public class UIContainerScreen implements Screen {
     private Stage stage;
     private boolean canDispose;
     private Background background;
+    private boolean debug;
 
     private MenuTable menu;
     private OptionsTable options;
@@ -40,6 +42,7 @@ public class UIContainerScreen implements Screen {
         stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         canDispose = false;
+        debug = false;
 
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1)));
 
@@ -70,7 +73,16 @@ public class UIContainerScreen implements Screen {
                 event.stop();
             }
         });
-//        stage.setDebugAll(true);
+
+
+        stage.addListener(new InputListener(){
+            @Override
+            public boolean keyDown(InputEvent event, int keyCode) {
+                debug = !debug;
+                stage.setDebugAll(debug);
+                return true;
+            }
+        });
 
         Gdx.input.setInputProcessor(stage);
     }

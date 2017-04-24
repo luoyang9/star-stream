@@ -3,7 +3,7 @@
 		default: { 
 			down: default-button, 
 			up: default-button, 
-			font: big-font
+			font: large-font
 		},
 		small: { 
 			down: default-button, 
@@ -44,11 +44,15 @@
 		shipRight: {
 			down: shipRight,
 			up: shipRight
+		},
+		back: {
+			down: back,
+			up: back
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		default: { 
-			font: big-font
+			font: large-font
 		},
 		small: {
 			font: small-font

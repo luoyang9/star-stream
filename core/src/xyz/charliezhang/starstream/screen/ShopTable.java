@@ -1,6 +1,5 @@
 package xyz.charliezhang.starstream.screen;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,24 +10,26 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
-import xyz.charliezhang.starstream.entity.Entity;
 import xyz.charliezhang.starstream.entity.EntityManager;
-import xyz.charliezhang.starstream.music.MusicPlayer;
 import xyz.charliezhang.starstream.shop.Upgrade;
 import xyz.charliezhang.starstream.shop.UpgradeManager;
 
-import static xyz.charliezhang.starstream.Config.BUTTON_SOUND_PATH;
 import static xyz.charliezhang.starstream.Config.MENU_BACKGROUND_PATH;
+import static xyz.charliezhang.starstream.Config.UI_COIN_PATH;
+import static xyz.charliezhang.starstream.Config.WHITE_PATH;
 import static xyz.charliezhang.starstream.screen.UIContainerScreen.UITable.MENU;
 
 class ShopTable extends Table {
 
-    private TextButton btnBack;
-    private TextButton btnProfile;
+    private Button btnBack;
     private Label lblShips;
     private Label lblUpgrades;
     private Label lblMoney;
+    private Label filler;
+    private Image coinImg;
+    private Table moneyTable;
     private long money;
+    private Image divider;
 
     private Table playerShipsContainer;
     private int[] playerShips;
@@ -56,36 +57,40 @@ class ShopTable extends Table {
         money = GameData.prefs.getLong("money");
 
         //header
-        lblShips = new Label("Ships", Assets.skin, "medium");
+        lblShips = new Label("Ships", skin, "medium");
         lblShips.setAlignment(Align.center);
-        lblUpgrades = new Label("Upgrades", Assets.skin, "medium");
+        lblUpgrades = new Label("Upgrades", skin, "medium");
         lblUpgrades.setAlignment(Align.center);
-        lblMoney = new Label(money + "", Assets.skin, "small");
-        lblMoney.setAlignment(Align.center);
+        lblMoney = new Label(money + "", skin, "small");
+        lblMoney.setAlignment(Align.left);
+        coinImg = new Image(Assets.manager.get(UI_COIN_PATH, Texture.class));
+        coinImg.setAlign(Align.right);
+        moneyTable = new Table();
+        filler = new Label("", skin);
+        divider = new Image(Assets.manager.get(WHITE_PATH, Texture.class));
 
-        btnBack = new TextButton("Back", skin, "small");
+        btnBack = new Button(skin, "back");
         btnBack.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 container.changeTable(MENU);
             }
         });
-        btnProfile = new TextButton("Profile", skin, "small");
 
         //player ships container
         currPlayerShip = GameData.prefs.getInteger("playerType");
         playerShipsContainer = new Table();
-        btnLeftShip = new Button(Assets.skin, "shipLeft");
-        btnRightShip = new Button(Assets.skin, "shipRight");
+        btnLeftShip = new Button(skin, "shipLeft");
+        btnRightShip = new Button(skin, "shipRight");
         playerShipTextures = new Texture[EntityManager.NUM_TYPES];
         playerShips = new int[EntityManager.NUM_TYPES];
         for(int i = 0; i < EntityManager.NUM_TYPES; i++) {
             playerShips[i] = i;
-            playerShipTextures[i] = Assets.manager.get("data/textures/player" + i + ".png", Texture.class);
+            playerShipTextures[i] = Assets.manager.get("data/ui/player" + i + ".png", Texture.class);
         }
         playerShipImg = new Image(playerShipTextures[currPlayerShip]);
         playerShipImg.setSize(150, 150);
-        lblPlayerShip = new Label(EntityManager.getShipName(currPlayerShip), Assets.skin, "small");
+        lblPlayerShip = new Label(EntityManager.getShipName(currPlayerShip), skin, "small");
 
         btnLeftShip.addListener(new ClickListener(){
             @Override
@@ -133,19 +138,20 @@ class ShopTable extends Table {
             long upgradeCost = UpgradeManager.getUpgradeCost(upgrades.get(i));
             int value = upgrades.get(i).getValue();
 
-            lblUpgrade[i] = new Label(upgradeName.substring(0, 1).toUpperCase() + upgradeName.substring(1), Assets.skin, "small");
-            upgradeBar[i] = new ProgressBar(0, UpgradeManager.UpgradeMax[i], 1, false, Assets.skin);
+            lblUpgrade[i] = new Label(upgradeName, skin, "small");
+            upgradeBar[i] = new ProgressBar(0, UpgradeManager.UpgradeMax[i], 1, false, skin);
             upgradeBar[i].setValue(value);
-            lblUpgradeVal[i] = new Label(value + "", Assets.skin, "small");
-            btnUpgrade[i] = new TextButton("     " + upgradeCost, Assets.skin, "upgrade");
+            lblUpgradeVal[i] = new Label(value + "", skin, "small");
+            btnUpgrade[i] = new TextButton("  " + upgradeCost, skin, "upgrade");
             if(upgradeCost > money) {
                 btnUpgrade[i].setDisabled(true);
             }
 
-            upgradesContainer.add(lblUpgrade[i]).width(130).padRight(5);
+            upgradesContainer.add(lblUpgrade[i]).expandX().fillX().padTop(10);
+            upgradesContainer.row();
             upgradesContainer.add(upgradeBar[i]).expandX().fillX();
             upgradesContainer.add(lblUpgradeVal[i]).width(40).padLeft(5);
-            upgradesContainer.add(btnUpgrade[i]).width(90).height(30).padLeft(5);
+            upgradesContainer.add(btnUpgrade[i]).width(76).height(30).padLeft(5);
             if(i != UpgradeManager.UpgradeTypes.length - 1) {
                 upgradesContainer.row();
             }
@@ -155,22 +161,26 @@ class ShopTable extends Table {
         background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
         //add to table
-        playerShipsContainer.add(btnLeftShip).expandX().left();
+        playerShipsContainer.add(btnLeftShip).expandX().left().height(30).width(30);
         playerShipsContainer.add(playerShipImg).size(150, 150);
-        playerShipsContainer.add(btnRightShip).expandX().right();
+        playerShipsContainer.add(btnRightShip).expandX().right().height(30).width(30);
         playerShipsContainer.row();
         playerShipsContainer.add(lblPlayerShip).colspan(3).padTop(10);
-        add(btnBack).left().width(100).height(65).pad(20);
-        add(lblMoney).padTop(20);
-        add(btnProfile).right().width(100).height(65).pad(20);
+        moneyTable.add(coinImg).width(15).height(15).right().padRight(5);
+        moneyTable.add(lblMoney).height(30).width(lblMoney.getText().length * 20).right();
+        add(btnBack).left().width(33).height(24).pad(15);
+        add(filler).expandX().fillX();
+        add(moneyTable).right().width(lblMoney.getText().length * 20 + 15).height(40).pad(10);
         row();
-        add(lblShips).expandX().colspan(3).pad(20);
+        add(divider).colspan(3).expandX().fillX().height(3);
         row();
-        add(playerShipsContainer).expandX().fillX().colspan(3).padLeft(20).padRight(20);
-        row();
-        add(lblUpgrades).colspan(3).padTop(60).padBottom(20);
+        add(lblUpgrades).colspan(3).pad(20);
         row();
         add(upgradesContainer).expandX().fill().colspan(3).padLeft(20).padRight(20);
+        row();
+        add(lblShips).expandX().colspan(3).padTop(60).padBottom(20);
+        row();
+        add(playerShipsContainer).expandX().fillX().colspan(3).padLeft(20).padRight(20);
     }
 
 }
