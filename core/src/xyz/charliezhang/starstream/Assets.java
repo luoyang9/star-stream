@@ -118,7 +118,7 @@ public class Assets
 
         FreeTypeFontLoaderParameter params5 = new FreeTypeFontLoaderParameter();
         params5.fontFileName = "data/pixel.ttf";
-        params5.fontParameters.size = 10;
+        params5.fontParameters.size = 14;
         params5.fontParameters.color = Color.WHITE;
         manager.load("xsmall.ttf", BitmapFont.class, params5);
     }

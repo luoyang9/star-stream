@@ -16,9 +16,7 @@ import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.shop.Upgrade;
 import xyz.charliezhang.starstream.shop.UpgradeManager;
 
-import static xyz.charliezhang.starstream.Config.MENU_BACKGROUND_PATH;
-import static xyz.charliezhang.starstream.Config.UI_COIN_PATH;
-import static xyz.charliezhang.starstream.Config.WHITE_PATH;
+import static xyz.charliezhang.starstream.Config.*;
 import static xyz.charliezhang.starstream.screen.UIContainerScreen.UITable.MENU;
 
 class ShopTable extends Table {
@@ -41,6 +39,7 @@ class ShopTable extends Table {
     private Image playerShipImg;
     private Button btnLeftShip;
     private Button btnRightShip;
+    private Label lblShipDescription;
 
     private Table upgradesContainer;
     private Label[] lblUpgrade;
@@ -84,21 +83,24 @@ class ShopTable extends Table {
         playerShipsContainer = new Table();
         btnLeftShip = new Button(skin, "shipLeft");
         btnRightShip = new Button(skin, "shipRight");
-        playerShipTextures = new Texture[EntityManager.NUM_TYPES];
-        playerShips = new int[EntityManager.NUM_TYPES];
-        for(int i = 0; i < EntityManager.NUM_TYPES; i++) {
+        playerShipTextures = new Texture[NUM_TYPES];
+        playerShips = new int[NUM_TYPES];
+        for(int i = 0; i < NUM_TYPES; i++) {
             playerShips[i] = i;
             playerShipTextures[i] = Assets.manager.get("data/ui/player" + i + ".png", Texture.class);
         }
         playerShipImg = new Image(playerShipTextures[currPlayerShip]);
         playerShipImg.setSize(150, 150);
-        lblPlayerShip = new Label(EntityManager.getShipName(currPlayerShip), skin, "small");
+        lblPlayerShip = new Label(SHIP_NAME[currPlayerShip], skin, "small");
+        lblShipDescription = new Label(SHIP_DESCRIPTION[currPlayerShip], skin, "xsmall");
+        lblShipDescription.setWrap(true);
+        lblShipDescription.setAlignment(Align.center);
 
         btnLeftShip.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
                 if(currPlayerShip == 0) {
-                    currPlayerShip = EntityManager.NUM_TYPES - 1;
+                    currPlayerShip = NUM_TYPES - 1;
                 } else {
                     currPlayerShip--;
                 }
@@ -106,7 +108,8 @@ class ShopTable extends Table {
                     GameData.prefs.putInteger("playerType", currPlayerShip).flush();
                 }
                 playerShipImg.setDrawable(new SpriteDrawable(new Sprite(playerShipTextures[currPlayerShip])));
-                lblPlayerShip.setText(EntityManager.getShipName(currPlayerShip));
+                lblPlayerShip.setText(SHIP_NAME[currPlayerShip]);
+                lblShipDescription.setText(SHIP_DESCRIPTION[currPlayerShip]);
                 event.stop();
             }
         });
@@ -114,7 +117,7 @@ class ShopTable extends Table {
         btnRightShip.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                if(currPlayerShip == EntityManager.NUM_TYPES - 1) {
+                if(currPlayerShip == NUM_TYPES - 1) {
                     currPlayerShip = 0;
                 } else {
                     currPlayerShip++;
@@ -123,7 +126,8 @@ class ShopTable extends Table {
                     GameData.prefs.putInteger("playerType", currPlayerShip).flush();
                 }
                 playerShipImg.setDrawable(new SpriteDrawable(new Sprite(playerShipTextures[currPlayerShip])));
-                lblPlayerShip.setText(EntityManager.getShipName(currPlayerShip));
+                lblPlayerShip.setText(SHIP_NAME[currPlayerShip]);
+                lblShipDescription.setText(SHIP_DESCRIPTION[currPlayerShip]);
                 event.stop();
             }
         });
@@ -192,6 +196,8 @@ class ShopTable extends Table {
         playerShipsContainer.add(btnRightShip).expandX().right().height(30).width(30);
         playerShipsContainer.row();
         playerShipsContainer.add(lblPlayerShip).colspan(3).padTop(10);
+        playerShipsContainer.row();
+        playerShipsContainer.add(lblShipDescription).expandX().fillX().colspan(3);
         moneyTable.add(coinImg).width(15).height(15).right().padRight(5);
         moneyTable.add(lblMoney).height(30).width(lblMoney.getText().length * 20).right();
         add(btnBack).left().width(33).height(24).pad(15);

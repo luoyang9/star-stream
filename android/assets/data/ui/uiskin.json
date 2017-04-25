@@ -67,6 +67,9 @@
 		},
 		medium: {
 			font: medium-font
+		},
+		xsmall: {
+			font: xsmall-font
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {

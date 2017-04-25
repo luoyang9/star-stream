@@ -81,6 +81,17 @@ public class Config {
     public static boolean PLAYER_INITIAL_JUST_TOUCHED = false;
     public static Vector2 PLAYER_INITIAL_DIRECTION = new Vector2(0, 6);
     public static float PLAYER_INITIAL_Y = -2000;
+    public static final int NUM_TYPES = 2;
+    public static final int PLAYER_BLUE = 0;
+    public static final int PLAYER_RED = 1;
+    public static String[] SHIP_NAME = new String[]{
+            "Blue Fury",
+            "Red Dragon"
+    };
+    public static String[] SHIP_DESCRIPTION = new String[]{
+            "Your trusty fighter, Blue Fury. With its high speed laser cannon and sleek form, this beauty will shred through enemies.",
+            "Used widely during the Battle of Mars, the Red Dragon is a formidable ship equipped with powerful cannons that shoot armor penetrating blasts."
+    };
 
     // BLUE FURY DATA
     public static long BLUE_FURY_SHOOT_DELAY = 100;

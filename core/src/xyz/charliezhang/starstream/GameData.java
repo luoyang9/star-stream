@@ -6,6 +6,10 @@ import com.badlogic.gdx.utils.Array;
 import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.shop.Upgrade;
 
+import static xyz.charliezhang.starstream.Config.NUM_TYPES;
+import static xyz.charliezhang.starstream.Config.PLAYER_BLUE;
+import static xyz.charliezhang.starstream.Config.PLAYER_RED;
+
 public class GameData {
 
     public static Preferences prefs = Gdx.app.getPreferences("My Preferences");
@@ -29,12 +33,12 @@ public class GameData {
         }
 
         // unlocked ships
-        for(int i = 0; i < EntityManager.NUM_TYPES; i++) {
+        for(int i = 0; i < NUM_TYPES; i++) {
             prefs.putBoolean("type-" + (i+1), false);
         }
 
         // current ship
-        prefs.putInteger("playerType", EntityManager.PLAYER_BLUE);
+        prefs.putInteger("playerType", PLAYER_BLUE);
 
         // money
         prefs.putLong("money", 0);
@@ -42,8 +46,8 @@ public class GameData {
         //dev stuff, delete for live
         prefs.putInteger("health", 5);
         prefs.putInteger("damage", 2);
-        prefs.putBoolean("type-" + EntityManager.PLAYER_BLUE, true);
-        prefs.putBoolean("type-" + EntityManager.PLAYER_RED, true);
+        prefs.putBoolean("type-" + PLAYER_BLUE, true);
+        prefs.putBoolean("type-" + PLAYER_RED, true);
     }
 
 }

@@ -21,6 +21,8 @@ import xyz.charliezhang.starstream.misc.Background;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
 import static xyz.charliezhang.starstream.Config.EXPLOSION_SOUND_PATH;
+import static xyz.charliezhang.starstream.Config.PLAYER_BLUE;
+import static xyz.charliezhang.starstream.Config.PLAYER_RED;
 
 public class EntityManager 
 {
@@ -59,20 +61,6 @@ public class EntityManager
 
 	private MainGame game;
 
-	public static final int NUM_TYPES = 2;
-	public static final int PLAYER_BLUE = 0;
-	public static final int PLAYER_RED = 1;
-
-	public static String getShipName(int type)
-	{
-		switch(type)
-		{
-			case PLAYER_BLUE: return "Blue Fury";
-			case PLAYER_RED: return "Red Dragon";
-			default: return "Something went wrong...";
-		}
-	}
-	
 	public EntityManager(Viewport viewport, MainGame game, Background background)
 	{
 		this.game = game;
