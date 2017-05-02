@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import xyz.charliezhang.starstream.Assets;
-import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.GameInput;
 import xyz.charliezhang.starstream.entity.Entity;
 import xyz.charliezhang.starstream.entity.EntityManager;
@@ -49,6 +48,9 @@ public class Player extends Entity
 	protected int health, maxHealth;
 	private int numLives, maxLives;
 	protected int damage;
+	protected int missileDamage;
+	private float missileInterval;
+	private int missileRepeats;
 	int attLevel;
 	private boolean flinching;
 	private boolean controllable;
@@ -87,6 +89,8 @@ public class Player extends Entity
 		shieldDownSound = Assets.manager.get(SHIELD_DOWN_SOUND_PATH, Sound.class);
 
 		attLevel = PLAYER_ATT_LEVEL;
+		missileInterval = MIS_INTERVAL;
+		missileRepeats = MIS_NUM_REPEATS;
 		numLives = maxLives = PLAYER_MAX_LIVES;
 		flinching = PLAYER_INITIAL_FLINCHING;
 		controllable = PLAYER_INITIAL_CONTROLLABLE;
@@ -141,6 +145,12 @@ public class Player extends Entity
 				this.maxHealth += u.getValue();
 			} else if(u.getName().equals("damage")) {
 				this.damage += u.getValue();
+			} else if(u.getName().equals("missile")) {
+				this.missileDamage += Math.min(u.getValue(), 3);
+				if(u.getValue() > 3) {
+					this.missileInterval -= Math.max(0, 0.3 * (u.getValue() - 3));
+					this.missileRepeats += 3 * (u.getValue() - 3);
+				}
 			}
 		}
 	}
@@ -339,7 +349,7 @@ public class Player extends Entity
 	{
 		missileOn = true;
 		missileTask.cancel();
-		Timer.schedule(missileTask, powerUp.getDelay(), powerUp.getInterval(), powerUp.getNumRepeats());
+		Timer.schedule(missileTask,powerUp.getDelay(), Math.min(powerUp.getInterval(), this.missileInterval), Math.max(powerUp.getNumRepeats(), this.missileRepeats));
 	}
 
 	private void activateShieldPowerUp() {
@@ -356,6 +366,7 @@ public class Player extends Entity
 	public int getHealth() { return health; } //get health
 	public int getMaxHealth() { return maxHealth; } //get max health
 	public int getDamage() {return damage;} //get damage
+	public int getMissileDamage() {return missileDamage;} //get missile damage
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
 	public InputProcessor getInputProcessor() {return playerInput;}

@@ -28,6 +28,7 @@ public class RedDragon extends Player
         //read player stats
         health = maxHealth = RED_DRAGON_MAX_HEALTH;
         damage = RED_DRAGON_DAMAGE;
+        missileDamage = damage * 2;
     }
 
     protected void shoot()

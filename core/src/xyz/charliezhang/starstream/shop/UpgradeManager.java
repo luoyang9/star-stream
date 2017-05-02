@@ -11,11 +11,15 @@ public class UpgradeManager {
 
     public static String[] UpgradeTypes = {
             "health" ,
-            "damage"
+            "damage",
+            "missile",
+            "super att"
     };
 
     public static int[] UpgradeMax = {
             10,
+            5,
+            5,
             5
     };
 
@@ -40,7 +44,7 @@ public class UpgradeManager {
         int v = u.getValue();
         if(u.getName().equals("health")) {
             return (10 + v) * 10;
-        } else if(u.getName().equals("damage")) {
+        } else if(u.getName().equals("damage") || u.getName().equals("missile") || u.getName().equals("super att")) {
             return (1 + v) * 100;
         }
         System.out.println("Unknown upgrade was encountered: " + u.getName());

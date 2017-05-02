@@ -28,6 +28,7 @@ public class BlueFury extends Player
         //read player stats
         health = maxHealth = BLUE_FURY_MAX_HEALTH;
         damage = BLUE_FURY_DAMAGE;
+        missileDamage = damage * 2;
     }
 
     @Override

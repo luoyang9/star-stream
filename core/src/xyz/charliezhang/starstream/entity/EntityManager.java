@@ -299,8 +299,11 @@ public class EntityManager
 					spawnExplosion(exp);
 
 					//do damage
-					if(p instanceof Missile) e.modifyHealth(-player.getDamage()*4);
-					else e.modifyHealth(-player.getDamage());
+					if(p instanceof Missile) {
+						e.modifyHealth(-player.getMissileDamage());
+					} else{
+						e.modifyHealth(-player.getDamage());
+					}
 
 					playerProjectiles.removeValue(p, false);
 				}
