@@ -8,6 +8,7 @@ import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
 import static xyz.charliezhang.starstream.Config.*;
+import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.ATTACK;
 
 public class RedDragon extends Player
 {
@@ -31,20 +32,26 @@ public class RedDragon extends Player
         missileDamage = damage * 2;
     }
 
+    private void checkPowerups() {
+        super.checkPowerUps();
+
+        if(superAttOn)
+        {
+            shootDelay = RED_DRAGON_SUPER_SHOOT_DELAY;
+            long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
+            if(elapsed > superAttDuration)
+            {
+                superAttOn = false;
+                shootDelay = RED_DRAGON_SHOOT_DELAY;
+                manager.deactivatePowerUp(ATTACK);
+            }
+        }
+    }
+
     protected void shoot()
     {
         if(playerInput.isTouching()) //if touching
         {
-            if(superAttOn)
-            {
-                shootDelay = RED_DRAGON_SUPER_SHOOT_DELAY;
-                long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-                if(elapsed > superAttDuration)
-                {
-                    superAttOn = false;
-                    shootDelay = RED_DRAGON_SHOOT_DELAY;
-                }
-            }
             if(System.currentTimeMillis() - lastFire >= shootDelay) //if its time to shoot
             {
                 shootSound.play(MusicPlayer.VOLUME); //play pew
@@ -95,5 +102,12 @@ public class RedDragon extends Player
                 lastFire = System.currentTimeMillis(); //set new last fire
             }
         }
+    }
+
+    public void update() {
+        super.update();
+
+        //check powerups
+        checkPowerups();
     }
 }

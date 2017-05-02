@@ -8,6 +8,7 @@ import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
 import static xyz.charliezhang.starstream.Config.*;
+import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.ATTACK;
 
 public class BlueFury extends Player
 {
@@ -29,6 +30,19 @@ public class BlueFury extends Player
         health = maxHealth = BLUE_FURY_MAX_HEALTH;
         damage = BLUE_FURY_DAMAGE;
         missileDamage = damage * 2;
+    }
+
+    private void checkPowerups() {
+        super.checkPowerUps();
+
+        if(superAttOn)
+        {
+            long elapsed = (System.nanoTime() - superAttTimer) / 1000000;
+            if(elapsed > superAttDuration) {
+                superAttOn = false;
+                manager.deactivatePowerUp(ATTACK);
+            }
+        }
     }
 
     @Override
@@ -103,5 +117,12 @@ public class BlueFury extends Player
                 lastFire = System.currentTimeMillis(); //set new last fire
             }
         }
+    }
+
+    public void update() {
+        super.update();
+
+        //check powerups
+        checkPowerups();
     }
 }

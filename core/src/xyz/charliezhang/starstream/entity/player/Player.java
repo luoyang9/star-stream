@@ -151,6 +151,8 @@ public class Player extends Entity
 					this.missileInterval -= Math.max(0, 0.3 * (u.getValue() - 3));
 					this.missileRepeats += 3 * (u.getValue() - 3);
 				}
+			} else if(u.getName().equals("super att")) {
+				this.superAttDuration += 1000 * u.getValue();
 			}
 		}
 	}
@@ -177,9 +179,6 @@ public class Player extends Entity
 			//fire lasers
 			shoot();
 
-			//check powerups
-			checkPowerUps();
-
 			//check death
 			checkDeath();
 		}
@@ -191,20 +190,12 @@ public class Player extends Entity
 		shield.setPosition(sprite.getX()-(shield.getWidth()-sprite.getWidth())/2, sprite.getY()-(shield.getHeight()-sprite.getHeight())/2);
 	}
 
-	private void checkPowerUps()
+	protected void checkPowerUps()
 	{
 		long elapsed;
 		if(!missileTask.isScheduled() && missileOn) {
 			missileOn = false;
 			manager.deactivatePowerUp(MISSILE);
-		}
-		if(superAttOn)
-		{
-			elapsed = (System.nanoTime() - superAttTimer) / 1000000;
-			if(elapsed > superAttDuration) {
-				superAttOn = false;
-				manager.deactivatePowerUp(ATTACK);
-			}
 		}
 		if(invincibleOn)
 		{

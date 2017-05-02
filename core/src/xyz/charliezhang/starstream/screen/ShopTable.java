@@ -191,11 +191,12 @@ class ShopTable extends Table {
         background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
         //add to table
+        top();
         playerShipsContainer.add(btnLeftShip).expandX().left().height(30).width(30);
         playerShipsContainer.add(playerShipImg).size(150, 150);
         playerShipsContainer.add(btnRightShip).expandX().right().height(30).width(30);
         playerShipsContainer.row();
-        playerShipsContainer.add(lblPlayerShip).colspan(3).padTop(10);
+        playerShipsContainer.add(lblPlayerShip).colspan(3).pad(10);
         playerShipsContainer.row();
         playerShipsContainer.add(lblShipDescription).expandX().fillX().colspan(3);
         moneyTable.add(coinImg).width(15).height(15).right().padRight(5);
@@ -206,7 +207,7 @@ class ShopTable extends Table {
         row();
         add(divider).colspan(3).expandX().fillX().height(3);
         row();
-        add(lblUpgrades).colspan(3).pad(20);
+        add(lblUpgrades).colspan(3).padTop(60).padBottom(20);
         row();
         add(upgradesContainer).expandX().fill().colspan(3).padLeft(20).padRight(20);
         row();

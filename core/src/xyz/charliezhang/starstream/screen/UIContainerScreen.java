@@ -28,7 +28,7 @@ public class UIContainerScreen implements Screen {
 
     private MenuTable menu;
     private OptionsTable options;
-    private ScrollPane shop;
+    private ShopTable shop;
     private LevelSelectTable levelSelect;
 
     enum UITable { MENU, OPTIONS, SHOP, LEVELSELECT };
@@ -48,7 +48,7 @@ public class UIContainerScreen implements Screen {
 
         menu = new MenuTable(this);
         options = new OptionsTable(this);
-        shop = new ScrollPane(new ShopTable(this));
+        shop = new ShopTable(this);
         levelSelect = new LevelSelectTable(this);
         menu.setFillParent(true);
         options.setFillParent(true);
