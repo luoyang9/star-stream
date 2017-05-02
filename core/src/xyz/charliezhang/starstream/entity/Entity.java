@@ -40,8 +40,11 @@ public abstract class Entity
 			animationTime += Gdx.graphics.getDeltaTime();
 		}
 
-		if(sprite.getX() > -sprite.getWidth() && sprite.getX() < MainGame.WIDTH && sprite.getY() > -sprite.getHeight() && sprite.getY() < MainGame.HEIGHT) {
-			sprite.draw(sb);
+		if(sprite.getX() > -sprite.getWidth() &&
+			sprite.getX() < MainGame.WIDTH &&
+			sprite.getY() > -sprite.getHeight() &&
+			sprite.getY() < MainGame.HEIGHT) {
+				sprite.draw(sb);
 		}
 	}
 

@@ -15,10 +15,6 @@ public class EnemyLaser extends Projectile implements Pool.Poolable
 {
 	private Enemy enemy;
 
-	public EnemyLaser() {
-		super();
-	}
-
 	public void init(EntityManager manager, Enemy enemy, int colour) {
 		super.init(manager);
 		this.enemy = enemy;
@@ -40,13 +36,6 @@ public class EnemyLaser extends Projectile implements Pool.Poolable
 				sprite.setOrigin(3, 9);
 		}
 		animation = new Animation<TextureRegion>(1/20f, textureAtlas.getRegions());
-	}
-
-	@Override
-	public void render(SpriteBatch sb)
-	{
-		sprite.setRegion(animation.getKeyFrame(animationTime, true));
-		super.render(sb);
 	}
 
 	public Enemy getEnemy(){return enemy;}

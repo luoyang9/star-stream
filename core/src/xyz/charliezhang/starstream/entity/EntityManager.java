@@ -195,7 +195,7 @@ public class EntityManager
 				score += e.getScore();
 
 				Explosion exp = explosionPool.obtain();
-				exp.init(2);
+				exp.init(2, this);
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
 
@@ -206,13 +206,13 @@ public class EntityManager
 				if(currPowerupWait <= 0) {
 					PowerUp a;
 					if(nextPowerup == MISSILE) {
-						a = new MissilePowerUp();
+						a = new MissilePowerUp(this);
 						a.setDirection(-2, -2);
 					} else if(nextPowerup == SHIELD) {
-						a = new ShieldPowerUp();
+						a = new ShieldPowerUp(this);
 						a.setDirection(-2, 2);
 					} else {
-						a = new AttackPowerUp();
+						a = new AttackPowerUp(this);
 						a.setDirection(2, 2);
 					}
 					a.setPosition(e.getPosition().x, e.getPosition().y);
@@ -278,8 +278,8 @@ public class EntityManager
 				{
 					//explosion
 					Explosion exp = explosionPool.obtain();
-					if(player instanceof BlueFury) exp.init(1);
-					else exp.init(3);
+					if(player instanceof BlueFury) exp.init(1, this);
+					else exp.init(3, this);
 					exp.setPosition(p.getPosition().x + p.getSprite().getWidth()/2, p.getPosition().y + p.getSprite().getHeight()/2);
 					spawnExplosion(exp);
 
