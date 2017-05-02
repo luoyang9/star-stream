@@ -12,10 +12,14 @@ public class Config {
     public static String GAME_BACKGROUND_PATH = "data/textures/background.png";
     // menu background
     public static String MENU_BACKGROUND_PATH = "data/ui/background.png";
+    //color
+    public static String WHITE_PATH = "data/ui/divider.png";
     // ui
     public static String UI_SKIN_PATH = "data/ui/uiskin.atlas";
     public static String PAUSE_PATH = "data/ui/pause.png";
-    public static String OPTIONS_PATH = "data/ui/options.png";
+    public static String PLAYER_BLUE_UI_PATH = "data/ui/player0.png";
+    public static String PLAYER_RED_UI_PATH = "data/ui/player1.png";
+    public static String UI_COIN_PATH = "data/ui/coin.png";
     // health
     public static String HEALTH_PATH = "data/textures/health.png";
     public static String HEALTH_FILL_PATH = "data/textures/healthFill.png";
@@ -54,8 +58,8 @@ public class Config {
     public static String LASER_R_PATH = "data/textures/laserR.atlas";
     public static String LASER_O_PATH = "data/textures/laserO.atlas";
     // player
-    public static String PLAYER_BLUE_PATH = "data/textures/playerblue.atlas";
-    public static String PLAYER_RED_PATH = "data/textures/playerred.atlas";
+    public static String PLAYER_BLUE_PATH = "data/textures/player0.atlas";
+    public static String PLAYER_RED_PATH = "data/textures/player1.atlas";
     // music
     public static String GAME_MUSIC_PATH = "data/music/background.mp3";
     public static String MENU_MUSIC_PATH = "data/music/menu.mp3";
@@ -77,6 +81,17 @@ public class Config {
     public static boolean PLAYER_INITIAL_JUST_TOUCHED = false;
     public static Vector2 PLAYER_INITIAL_DIRECTION = new Vector2(0, 6);
     public static float PLAYER_INITIAL_Y = -2000;
+    public static final int NUM_TYPES = 2;
+    public static final int PLAYER_BLUE = 0;
+    public static final int PLAYER_RED = 1;
+    public static String[] SHIP_NAME = new String[]{
+            "Blue Fury",
+            "Red Dragon"
+    };
+    public static String[] SHIP_DESCRIPTION = new String[]{
+            "Your trusty fighter, Blue Fury. With its high speed laser cannon and sleek form, this beauty will shred through enemies.",
+            "Used widely during the Battle of Mars, the Red Dragon is a formidable ship equipped with powerful cannons that shoot armor penetrating blasts."
+    };
 
     // BLUE FURY DATA
     public static long BLUE_FURY_SHOOT_DELAY = 100;

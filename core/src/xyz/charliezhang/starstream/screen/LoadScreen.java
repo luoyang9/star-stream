@@ -77,9 +77,11 @@ public class LoadScreen implements Screen
         if(Assets.manager.update())
         {
             Assets.skin = new Skin();
-            Assets.skin.add("big-font",  Assets.manager.get("big.ttf", BitmapFont.class));
+            Assets.skin.add("xlarge-font",  Assets.manager.get("xlarge.ttf", BitmapFont.class));
+            Assets.skin.add("large-font",  Assets.manager.get("large.ttf", BitmapFont.class));
             Assets.skin.add("medium-font",  Assets.manager.get("medium.ttf", BitmapFont.class));
             Assets.skin.add("small-font",  Assets.manager.get("small.ttf", BitmapFont.class));
+            Assets.skin.add("xsmall-font",  Assets.manager.get("xsmall.ttf", BitmapFont.class));
             Assets.skin.addRegions( Assets.manager.get(UI_SKIN_PATH, TextureAtlas.class));
             Assets.skin.load(Gdx.files.internal("data/ui/uiskin.json"));
 

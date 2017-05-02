@@ -36,6 +36,10 @@ public class Assets
         //ui
         manager.load(Config.UI_SKIN_PATH, TextureAtlas.class);
         manager.load(Config.PAUSE_PATH, Texture.class);
+        manager.load(Config.PLAYER_BLUE_UI_PATH, Texture.class);
+        manager.load(Config.PLAYER_RED_UI_PATH, Texture.class);
+        manager.load(Config.UI_COIN_PATH, Texture.class);
+        manager.load(Config.WHITE_PATH, Texture.class);
         //health
         manager.load(Config.HEALTH_PATH, Texture.class);
         manager.load(Config.HEALTH_FILL_PATH, Texture.class);
@@ -89,22 +93,34 @@ public class Assets
 
         //game fonts
         FreeTypeFontLoaderParameter params = new FreeTypeFontLoaderParameter();
-        params.fontFileName = "data/goodtimes.ttf";
+        params.fontFileName = "data/pixel.ttf";
         params.fontParameters.size = 50;
         params.fontParameters.color = Color.WHITE;
-        manager.load("big.ttf", BitmapFont.class, params);
+        manager.load("xlarge.ttf", BitmapFont.class, params);
 
         FreeTypeFontLoaderParameter params2 = new FreeTypeFontLoaderParameter();
-        params2.fontFileName = "data/goodtimes.ttf";
-        params2.fontParameters.size = 30;
+        params2.fontFileName = "data/pixel.ttf";
+        params2.fontParameters.size = 40;
         params2.fontParameters.color = Color.WHITE;
-        manager.load("medium.ttf", BitmapFont.class, params2);
+        manager.load("large.ttf", BitmapFont.class, params2);
 
         FreeTypeFontLoaderParameter params3 = new FreeTypeFontLoaderParameter();
-        params3.fontFileName = "data/goodtimes.ttf";
-        params3.fontParameters.size = 20;
+        params3.fontFileName = "data/pixel.ttf";
+        params3.fontParameters.size = 30;
         params3.fontParameters.color = Color.WHITE;
-        manager.load("small.ttf", BitmapFont.class, params3);
+        manager.load("medium.ttf", BitmapFont.class, params3);
+
+        FreeTypeFontLoaderParameter params4 = new FreeTypeFontLoaderParameter();
+        params4.fontFileName = "data/pixel.ttf";
+        params4.fontParameters.size = 20;
+        params4.fontParameters.color = Color.WHITE;
+        manager.load("small.ttf", BitmapFont.class, params4);
+
+        FreeTypeFontLoaderParameter params5 = new FreeTypeFontLoaderParameter();
+        params5.fontFileName = "data/pixel.ttf";
+        params5.fontParameters.size = 14;
+        params5.fontParameters.color = Color.WHITE;
+        manager.load("xsmall.ttf", BitmapFont.class, params5);
     }
 
 

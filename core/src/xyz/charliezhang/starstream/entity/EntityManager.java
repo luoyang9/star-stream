@@ -21,6 +21,10 @@ import xyz.charliezhang.starstream.misc.Background;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
 import static xyz.charliezhang.starstream.Config.EXPLOSION_SOUND_PATH;
+import static xyz.charliezhang.starstream.Config.PLAYER_BLUE;
+import static xyz.charliezhang.starstream.Config.PLAYER_RED;
+import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.MISSILE;
+import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.SHIELD;
 
 public class EntityManager 
 {
@@ -42,12 +46,8 @@ public class EntityManager
 	private xyz.charliezhang.starstream.misc.HUD hud;
 	private Viewport viewport;
 
-	private int nextATT;
-	private int currATT;
-	private int nextMIS;
-	private int currMIS;
-	private int nextSHD;
-	private int currSHD;
+	private int currPowerupWait;
+	private PowerUp.PowerUps nextPowerup;
 
 	private boolean deathProcedure;
 
@@ -59,20 +59,6 @@ public class EntityManager
 
 	private MainGame game;
 
-	public static final int NUM_TYPES = 2;
-	public static final int PLAYER_BLUE = 1;
-	public static final int PLAYER_RED = 2;
-
-	public static String getShipName(int type)
-	{
-		switch(type)
-		{
-			case PLAYER_BLUE: return "Blue Fury";
-			case PLAYER_RED: return "Red Dragon";
-			default: return "Something went wrong...";
-		}
-	}
-	
 	public EntityManager(Viewport viewport, MainGame game, Background background)
 	{
 		this.game = game;
@@ -134,12 +120,8 @@ public class EntityManager
 		startTime = System.nanoTime();
 		deathProcedure = false;
 
-		nextATT = (int) (Math.random()*2) + 3;
-		nextMIS = (int) (Math.random()*2) + 4;
-		nextSHD = (int) (Math.random()*2) + 2;
-		currATT = 0;
-		currMIS = 0;
-		currSHD = 0;
+		currPowerupWait = 2;
+		nextPowerup = SHIELD;
 
 		pause = false;
 
@@ -220,33 +202,24 @@ public class EntityManager
 				enemies.removeValue(e, false);
 				Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
 
-				currATT++;
-				currSHD++;
-				currMIS++;
-				if(currMIS >= nextMIS) {
-					MissilePowerUp a = new MissilePowerUp(this);
+				currPowerupWait--;
+				if(currPowerupWait <= 0) {
+					PowerUp a;
+					if(nextPowerup == MISSILE) {
+						a = new MissilePowerUp(this);
+						a.setDirection(-2, -2);
+					} else if(nextPowerup == SHIELD) {
+						a = new ShieldPowerUp(this);
+						a.setDirection(-2, 2);
+					} else {
+						a = new AttackPowerUp(this);
+						a.setDirection(2, 2);
+					}
 					a.setPosition(e.getPosition().x, e.getPosition().y);
-					a.setDirection(-2, -2);
 					spawnPowerUp(a);
-					currMIS = 0;
-					nextMIS = (int)(Math.random()*3 + 6);
-				}
-				if (currATT >= nextATT) {
-					AttackPowerUp a = new AttackPowerUp(this);
-					a.setPosition(e.getPosition().x, e.getPosition().y);
-					a.setDirection(2, 2);
-					spawnPowerUp(a);
-					currATT = 0;
-					nextATT = (int)(Math.random()*5 + 8);
-
-				}
-				if (currSHD >= nextSHD) {
-					ShieldPowerUp a = new ShieldPowerUp(this);
-					a.setPosition(e.getPosition().x, e.getPosition().y);
-					a.setDirection(-2, 2);
-					spawnPowerUp(a);
-					currSHD = 0;
-					nextSHD = (int)(Math.random()*6 + 8);
+					currPowerupWait = (int) (Math.random()*5 + 8);
+					int nextPowerupRand = (int) (Math.random() * PowerUp.PowerUps.values().length);
+					nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
 				}
 			}
 			else if(e.isSuicide())
@@ -311,8 +284,11 @@ public class EntityManager
 					spawnExplosion(exp);
 
 					//do damage
-					if(p instanceof Missile) e.modifyHealth(-player.getDamage()*4);
-					else e.modifyHealth(-player.getDamage());
+					if(p instanceof Missile) {
+						e.modifyHealth(-player.getMissileDamage());
+					} else{
+						e.modifyHealth(-player.getDamage());
+					}
 
 					playerProjectiles.removeValue(p, false);
 				}

@@ -5,8 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.starstream.Assets;
@@ -22,6 +24,7 @@ public class UIContainerScreen implements Screen {
     private Stage stage;
     private boolean canDispose;
     private Background background;
+    private boolean debug;
 
     private MenuTable menu;
     private OptionsTable options;
@@ -39,6 +42,7 @@ public class UIContainerScreen implements Screen {
         stage.setViewport(new ExtendViewport(MainGame.WIDTH, MainGame.HEIGHT));
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         canDispose = false;
+        debug = false;
 
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1)));
 
@@ -67,6 +71,16 @@ public class UIContainerScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
                 event.stop();
+            }
+        });
+
+
+        stage.addListener(new InputListener(){
+            @Override
+            public boolean keyDown(InputEvent event, int keyCode) {
+                debug = !debug;
+                stage.setDebugAll(debug);
+                return true;
             }
         });
 

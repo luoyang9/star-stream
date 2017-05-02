@@ -1,9 +1,15 @@
 {
+	com.badlogic.gdx.graphics.Color: {
+		white: { r: 1, g: 1, b: 1, a: 1 },
+		red: { r: 1, g: 0, b: 0, a: 1 },
+		yellow: { r: 0.5, g: 0.5, b: 0, a: 1 },
+		lightgray: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+	},
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		default: { 
 			down: default-button, 
 			up: default-button, 
-			font: big-font
+			font: large-font
 		},
 		small: { 
 			down: default-button, 
@@ -29,17 +35,41 @@
 			down: play,
 			up: play,
 			font: small-font
+		},
+		upgrade: {
+			down: upgrade,
+			up: upgrade,
+			font: small-font,
+			disabled: upgrade-disable,
+			disabledFontColor: lightgray
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+		shipLeft: {
+			down: shipLeft,
+			up: shipLeft
+		},
+		shipRight: {
+			down: shipRight,
+			up: shipRight
+		},
+		back: {
+			down: back,
+			up: back
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		default: { 
-			font: big-font
+			font: large-font
 		},
 		small: {
 			font: small-font
 		},
 		medium: {
 			font: medium-font
+		},
+		xsmall: {
+			font: xsmall-font
 		}
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
@@ -51,12 +81,19 @@
 		player0: {
 			checkboxOn: player0-on, 
 			checkboxOff: player0-off,
-			font: medium-font
+			font: small-font
 		},
 		player1: {
 			checkboxOn: player1-on, 
 			checkboxOff: player1-off,
-			font: medium-font
+			font: small-font
+		}
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+		default-horizontal: {
+			background: progress-background,
+			knob: progress-knob,
+			knobBefore: progress-knob
 		}
 	}
 }
