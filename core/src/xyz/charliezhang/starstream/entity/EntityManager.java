@@ -120,8 +120,10 @@ public class EntityManager
 		startTime = System.nanoTime();
 		deathProcedure = false;
 
-		currPowerupWait = 2;
-		nextPowerup = SHIELD;
+		currPowerupWait = (int) (Math.random()*2 + 8);
+		int nextPowerupRand = (int) (Math.random() * PowerUp.PowerUps.values().length);
+//		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
+		nextPowerup = MISSILE;
 
 		pause = false;
 
@@ -345,8 +347,7 @@ public class EntityManager
 		}
 	}
 
-	public void dispose()
-	{
+	public void dispose() {
 		//dispose stage in hud
 		hud.dispose();
 	}

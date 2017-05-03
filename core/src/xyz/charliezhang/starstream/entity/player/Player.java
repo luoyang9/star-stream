@@ -62,6 +62,8 @@ public class Player extends Entity
 	//powerup tasks
 	private Task missileTask;
 	private boolean missileOn;
+	private int currMissileCount;
+	private long lastMissileTime;
 	private boolean shieldOn;
 	private boolean invincibleOn;
 	private long invincibleDuration;
@@ -196,8 +198,15 @@ public class Player extends Entity
 		long elapsed;
 		if(!missileTask.isScheduled() && missileOn) {
 			missileOn = false;
+			currMissileCount = 0;
 			manager.deactivatePowerUp(MISSILE);
+		} else if(lastMissileTime == 0) {
+			lastMissileTime = missileTask.getExecuteTimeMillis();
+		} else if(missileTask.getExecuteTimeMillis() - lastMissileTime > 0) {
+			lastMissileTime = missileTask.getExecuteTimeMillis();
+			currMissileCount--;
 		}
+
 		if(invincibleOn)
 		{
 			System.out.println("invincible");
@@ -353,6 +362,8 @@ public class Player extends Entity
 	private void activateMissilePowerUp(MissilePowerUp powerUp)
 	{
 		missileOn = true;
+		currMissileCount = missileRepeats;
+		lastMissileTime = 0;
 		missileTask.cancel();
 		Timer.schedule(missileTask,powerUp.getDelay(), Math.min(powerUp.getInterval(), this.missileInterval), Math.max(powerUp.getNumRepeats(), this.missileRepeats));
 	}
@@ -372,6 +383,7 @@ public class Player extends Entity
 	public int getMaxHealth() { return maxHealth; } //get max health
 	public int getDamage() {return damage;} //get damage
 	public int getMissileDamage() {return missileDamage;} //get missile damage
+	public int getCurrMissileCount() {return currMissileCount;} //get missile count
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
 	public InputProcessor getInputProcessor() {return playerInput;}

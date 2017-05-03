@@ -35,6 +35,10 @@ public class HUD
     private Stack masterStack;
     private Texture healthBar;
     private Texture healthFill;
+    private Stack missileStack;
+    private Stack attStack;
+    private Label missileCount;
+    private Label attTimer;
     private Image missileIcon;
     private Image shieldIcon;
     private Image attIcon;
@@ -75,13 +79,24 @@ public class HUD
         iconTable = new Table();
         missileIcon = new Image(Assets.manager.get(MIS_ICON_PATH, Texture.class));
         missileIcon.setSize(50, 50);
-        missileIcon.setVisible(false);
         shieldIcon = new Image(Assets.manager.get(SHIELD_ICON_PATH, Texture.class));
         shieldIcon.setSize(50, 50);
         shieldIcon.setVisible(false);
         attIcon = new Image(Assets.manager.get(ATT_ICON_PATH, Texture.class));
         attIcon.setSize(50, 50);
-        attIcon.setVisible(false);
+        missileCount = new Label("0", skin, "powerup-icon");
+        missileCount.setSize(50, 50);
+        attTimer = new Label("0", skin, "powerup-icon");
+
+        Table missileTable = new Table();
+        missileTable.bottom().right().add(missileCount).padRight(2);
+        missileStack = new Stack(missileIcon, missileTable);
+        missileStack.setVisible(false);
+
+        Table attTable = new Table();
+        attTable.bottom().right().add(attTimer).padRight(2);
+        attStack = new Stack(attIcon, attTable);
+        attStack.setVisible(false);
 
         table = new Table();
         deathTable = new Table();
@@ -132,9 +147,9 @@ public class HUD
         table.add(livesGroup).right().width(120).height(40);
         table.row();
         iconTable.left();
-        iconTable.add(shieldIcon).width(50).height(50);;
-        iconTable.add(missileIcon).width(50).height(50);;
-        iconTable.add(attIcon).width(50).height(50);;
+        iconTable.add(shieldIcon).width(50).height(50);
+        iconTable.add(missileStack).width(50).height(50);
+        iconTable.add(attStack).width(50).height(50);
         table.add(iconTable).expandY().left().bottom().padLeft(5).height(50).width(150);
         table.row();
         pauseStack.add(btnPause);
@@ -150,17 +165,16 @@ public class HUD
 
         masterStack.add(table);
         masterStack.add(deathTable);
-
-        //table.debug();
-        //deathTable.debug();
     }
 
     public void update(float delta)
     {
         lblScore.setText("" + manager.getScore());
-        if(manager.getPlayer().getLives() != livesGroup.getChildren().size)
-        {
+        if(manager.getPlayer().getLives() != livesGroup.getChildren().size) {
             livesGroup.removeActor(livesIcons[livesGroup.getChildren().size-1]);
+        }
+        if(missileStack.isVisible()) {
+            missileCount.setText(manager.getPlayer().getCurrMissileCount() + "");
         }
         stage.act(delta);
     }
@@ -200,9 +214,9 @@ public class HUD
 
     public void activatePowerUp(PowerUp.PowerUps p) {
         if(p == ATTACK) {
-            attIcon.setVisible(true);
+            attStack.setVisible(true);
         } else if(p == MISSILE) {
-            missileIcon.setVisible(true);
+            missileStack.setVisible(true);
         } else if(p == SHIELD) {
             shieldIcon.setVisible(true);
         }
@@ -211,9 +225,9 @@ public class HUD
     public void deactivatePowerUp(PowerUp.PowerUps p) {
         System.out.println(p);
         if(p == ATTACK) {
-            attIcon.setVisible(false);
+            attStack.setVisible(false);
         } else if(p == MISSILE) {
-            missileIcon.setVisible(false);
+            missileStack.setVisible(false);
         } else if(p == SHIELD) {
             shieldIcon.setVisible(false);
         }
