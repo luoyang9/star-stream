@@ -44,6 +44,8 @@ public class Assets
         manager.load(Config.HEALTH_PATH, Texture.class);
         manager.load(Config.HEALTH_FILL_PATH, Texture.class);
         manager.load(Config.LIVES_PATH, Texture.class);
+        //coin
+        manager.load(Config.COIN_PATH, TextureAtlas.class);
         //powerup icons
         manager.load(Config.MIS_ICON_PATH, Texture.class);
         manager.load(Config.SHIELD_ICON_PATH, Texture.class);

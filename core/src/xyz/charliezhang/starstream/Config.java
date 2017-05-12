@@ -31,6 +31,8 @@ public class Config {
     // powerup effects
     public static String SHIELD_PATH = "data/textures/shield.png";
     public static String MISSILE_PATH = "data/textures/missile.atlas";
+    //coin
+    public static String COIN_PATH = "data/textures/coin.atlas";
     // powerup drops
     public static String ATT_POWERUP_PATH = "data/textures/attpowerup.atlas";
     public static String MIS_POWERUP_PATH = "data/textures/mispowerup.atlas";

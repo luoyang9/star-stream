@@ -34,12 +34,14 @@ public class EntityManager
 	private Array<Projectile> enemyProjectiles;
 	private Array<PowerUp> powerups;
 	private Array<Explosion> explosions;
+	private Array<Coin> coins;
 
 	//pools
 	private Pool<EnemyLaser> enemyLaserPool;
 	private Pool<Missile> missilePool;
 	private Pool<Laser> laserPool;
 	private Pool<Explosion> explosionPool;
+	private Pool<Coin> coinPool;
 
 	private Player player;
 
@@ -73,6 +75,7 @@ public class EntityManager
 		enemyProjectiles = new Array<Projectile>();
 		powerups = new Array<PowerUp>();
 		explosions = new Array<Explosion>();
+		coins = new Array<Coin>();
 
 		enemyLaserPool = new Pool<EnemyLaser>() {
 			@Override
@@ -99,6 +102,13 @@ public class EntityManager
 			@Override
 			protected Explosion newObject() {
 				return new Explosion();
+			}
+		};
+
+		coinPool = new Pool<Coin>() {
+			@Override
+			protected Coin newObject() {
+				return new Coin();
 			}
 		};
 
@@ -201,6 +211,13 @@ public class EntityManager
 				exp.init(2, this);
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
+
+				for(int i = 0; i < 5; i ++) {
+					Coin coin = coinPool.obtain();
+					coin.init(this);
+					coin.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
+					spawnCoin(coin);
+				}
 
 				enemies.removeValue(e, false);
 				Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
@@ -381,6 +398,7 @@ public class EntityManager
 	public void spawnEnemyLaser(Projectile p) {enemyProjectiles.add(p);}
 	private void spawnPowerUp(PowerUp p) {powerups.add(p);}
 	public void spawnExplosion(Explosion e) {explosions.add(e);}
+	private void spawnCoin(Coin c) {coins.add(c);}
 	public void activatePowerUp(PowerUp.PowerUps p) { hud.activatePowerUp(p); }
 	public void deactivatePowerUp(PowerUp.PowerUps p) { hud.deactivatePowerUp(p); }
 	
