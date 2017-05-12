@@ -148,7 +148,7 @@ class ShopTable extends Table {
             lblUpgrade[i] = new Label(upgradeName, skin, "small");
             upgradeBar[i] = new ProgressBar(0, UpgradeManager.UpgradeMax[i], 1, false, skin);
             upgradeBar[i].setValue(value);
-            lblUpgradeVal[i] = new Label(value + "", skin, "small");
+            lblUpgradeVal[i] = new Label(value + UpgradeManager.getInitialValue(upgrades.get(i)) + "", skin, "small");
             btnUpgrade[i] = new TextButton("  " + upgradeCost, skin, "upgrade");
             if(upgradeCost > money || value >= UpgradeManager.UpgradeMax[i])  {
                 btnUpgrade[i].setDisabled(true);

@@ -23,6 +23,7 @@ import xyz.charliezhang.starstream.music.MusicPlayer;
 import static xyz.charliezhang.starstream.Config.EXPLOSION_SOUND_PATH;
 import static xyz.charliezhang.starstream.Config.PLAYER_BLUE;
 import static xyz.charliezhang.starstream.Config.PLAYER_RED;
+import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.ATTACK;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.MISSILE;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.SHIELD;
 
@@ -123,7 +124,7 @@ public class EntityManager
 		currPowerupWait = (int) (Math.random()*2 + 8);
 		int nextPowerupRand = (int) (Math.random() * PowerUp.PowerUps.values().length);
 //		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
-		nextPowerup = MISSILE;
+		nextPowerup = ATTACK;
 
 		pause = false;
 

@@ -176,6 +176,9 @@ public class HUD
         if(missileStack.isVisible()) {
             missileCount.setText(manager.getPlayer().getCurrMissileCount() + "");
         }
+        if(attStack.isVisible()) {
+            attTimer.setText(manager.getPlayer().getAttackTimeLeft() + "");
+        }
         stage.act(delta);
     }
 

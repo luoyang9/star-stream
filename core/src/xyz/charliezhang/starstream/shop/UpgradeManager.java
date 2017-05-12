@@ -4,6 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Array;
 import xyz.charliezhang.starstream.GameData;
 
+import static xyz.charliezhang.starstream.Config.ATT_DURATION;
+import static xyz.charliezhang.starstream.Config.BLUE_FURY_MAX_HEALTH;
+import static xyz.charliezhang.starstream.Config.MIS_NUM_REPEATS;
+
 /**
  * Created by Charlie Zhang on 4/19/2017.
  */
@@ -71,5 +75,16 @@ public class UpgradeManager {
             }
         }
         return upgrades;
+    }
+
+    public static int getInitialValue(Upgrade u) {
+        if(u.getName().equals("missile")) {
+            return MIS_NUM_REPEATS;
+        } else if(u.getName().equals("super att")) {
+            return (int)(ATT_DURATION / 1000);
+        } else if(u.getName().equals("health")) {
+            return BLUE_FURY_MAX_HEALTH;
+        }
+        return 0;
     }
 }

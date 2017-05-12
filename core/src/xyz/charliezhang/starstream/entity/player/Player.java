@@ -384,6 +384,7 @@ public class Player extends Entity
 	public int getDamage() {return damage;} //get damage
 	public int getMissileDamage() {return missileDamage;} //get missile damage
 	public int getCurrMissileCount() {return currMissileCount;} //get missile count
+	public long getAttackTimeLeft() {return (superAttDuration - (System.nanoTime() - superAttTimer) / 1000000) / 1000 + 1; } //get attack time left
 	public int getMaxLives() {return maxLives;} //get max lives
 	public int getLives() {return numLives;} //get lives
 	public InputProcessor getInputProcessor() {return playerInput;}
