@@ -184,6 +184,10 @@ public class EntityManager
 			e.update();
 			if(e.isDone()) explosions.removeValue(e, false);
 		}
+		for(Coin c : coins) {
+			c.update();
+			if(c.isDone()) coins.removeValue(c, false);
+		}
 
 
 		//remove lasers
@@ -282,6 +286,10 @@ public class EntityManager
 		for(Explosion e : explosions)
 		{
 			e.render(sb);
+		}
+		System.out.println(coins.size);
+		for(Coin c : coins) {
+			c.render(sb);
 		}
 
 		hud.render(sb);
