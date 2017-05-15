@@ -186,7 +186,6 @@ public class EntityManager
 		}
 		for(Coin c : coins) {
 			c.update();
-			if(c.isDone()) coins.removeValue(c, false);
 		}
 
 
@@ -368,6 +367,11 @@ public class EntityManager
 				{
 					player.activatePowerUp(ap);
 					powerups.removeValue(ap, false);
+				}
+			}
+			for(Coin c : coins) { //check player-coin collisions
+				if(player.getBounds().overlaps(c.getBounds())) {
+					coins.removeValue(c, false);
 				}
 			}
 		}
