@@ -27,6 +27,7 @@ public class Icarus extends Enemy
 		health = maxHealth = ICARUS_HEALTH;
 		damage = ICARUS_DAMAGE;
 		score = ICARUS_SCORE;
+		coin = ICARUS_COIN;
 
 		intro = ICARUS_INITIAL_INTRO;
 	}

@@ -19,6 +19,7 @@ public class Coin extends Entity implements Pool.Poolable {
 
     private EntityManager manager;
     private long timer;
+    private boolean win;
 
     public void init(EntityManager manager) {
         this.manager = manager;
@@ -27,6 +28,7 @@ public class Coin extends Entity implements Pool.Poolable {
         animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
         setDirection(MathUtils.randomSign() * MathUtils.random(1f, 2f), MathUtils.randomSign() * MathUtils.random(1f, 2f));
         timer = System.currentTimeMillis();
+        win = false;
     }
 
     @Override
@@ -34,17 +36,36 @@ public class Coin extends Entity implements Pool.Poolable {
         long elapsed = System.currentTimeMillis() - timer;
         System.out.println(elapsed);
         if(elapsed > 400) {
-            //coin moves towards player
-            Vector2 playerPos = manager.getPlayer().getPosition();
-            playerPos.x += manager.getPlayer().getSprite().getWidth() / 2;
-            playerPos.y += manager.getPlayer().getSprite().getHeight() / 2;
-            float x = playerPos.x - sprite.getX();
-            float y = playerPos.y - sprite.getY();
-            float hyp = (float)Math.sqrt((double)(x*x + y*y));
-            x /= hyp;
-            y /= hyp;
+            if(!win) {
+                float x = 0;
+                float y = 0;
 
-            setDirection(x * 20, y * 20);
+                if (direction.x < 0) {
+                    x = 0.01f;
+                } else if (direction.x > 0) {
+                    x = -0.01f;
+                }
+                if (sprite.getX() <= 0) {
+                    x = 0.05f;
+                } else if (sprite.getX() >= manager.getViewport().getWorldWidth()) {
+                    x = -0.05f;
+                }
+                if (direction.y > -2.5f) {
+                    y = -0.05f;
+                }
+
+                setDirection(direction.x + x, direction.y + y);
+            } else {
+                //coin moves towards player
+                Vector2 winPos = new Vector2(manager.getViewport().getWorldWidth() / 2, manager.getViewport().getWorldHeight() + 20);
+                float x = winPos.x - sprite.getX();
+                float y = winPos.y - sprite.getY();
+                float hyp = (float)Math.sqrt((double)(x*x + y*y));
+                x /= hyp;
+                y /= hyp;
+
+                setDirection(x * 20, y * 20);
+            }
         }
         super.update();
     }
@@ -69,4 +90,8 @@ public class Coin extends Entity implements Pool.Poolable {
 
     @Override
     public void reset() { super.reset(); }
+
+    public void win() {
+        win = true;
+    }
 }

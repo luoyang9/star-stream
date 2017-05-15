@@ -55,6 +55,7 @@ public class EntityManager
 	private boolean deathProcedure;
 
 	private int score;
+	private int money;
 	private long startTime;
 
 	private boolean pause;
@@ -128,6 +129,7 @@ public class EntityManager
 		hud = new xyz.charliezhang.starstream.misc.HUD(this);
 
 		score = 0;
+		money = 0;
 		startTime = System.nanoTime();
 		deathProcedure = false;
 
@@ -215,7 +217,7 @@ public class EntityManager
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
 
-				for(int i = 0; i < 5; i ++) {
+				for(int i = 0; i < e.getCoin(); i ++) {
 					Coin coin = coinPool.obtain();
 					coin.init(this);
 					coin.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
@@ -286,7 +288,6 @@ public class EntityManager
 		{
 			e.render(sb);
 		}
-		System.out.println(coins.size);
 		for(Coin c : coins) {
 			c.render(sb);
 		}
@@ -371,6 +372,7 @@ public class EntityManager
 			}
 			for(Coin c : coins) { //check player-coin collisions
 				if(player.getBounds().overlaps(c.getBounds())) {
+					money++;
 					coins.removeValue(c, false);
 				}
 			}
@@ -400,6 +402,10 @@ public class EntityManager
 	{
 		player.setDirection(0, 4);
 		player.setControllable(false);
+		for(Coin c : coins) {
+			money++;
+			c.win();
+		}
 	}
 
 	public void spawnEnemy(Enemy enemy) {
@@ -434,6 +440,7 @@ public class EntityManager
 	public MainGame getGame() { return game; }
 	public Background getBackground() { return background; }
 	public int getScore() { return score; }
+	public int getMoney() { return money; }
 	public Viewport getViewport() { return viewport; }
 	public boolean isPaused() { return pause; }
 	public boolean canDispose() {return canDispose; }

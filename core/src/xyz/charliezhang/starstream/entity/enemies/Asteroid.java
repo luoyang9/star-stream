@@ -26,6 +26,7 @@ public class Asteroid extends Enemy
         health = maxHealth = ASTEROID_HEALTH;
         damage = ASTEROID_DAMAGE;
         score = ASTEROID_SCORE;
+        coin = ASTEROID_COIN;
     }
 
     @Override

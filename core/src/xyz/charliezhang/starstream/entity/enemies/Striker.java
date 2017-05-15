@@ -28,6 +28,7 @@ public class Striker extends Enemy
 		health = maxHealth = STRIKER_HEALTH;
 		damage = STRIKER_DAMAGE;
 		score = STRIKER_SCORE;
+		coin = STRIKER_COIN;
 
 		intro = STRIKER_INITIAL_INTRO;
 	}

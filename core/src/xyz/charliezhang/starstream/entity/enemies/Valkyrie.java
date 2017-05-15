@@ -29,6 +29,7 @@ public class Valkyrie extends Enemy
         health = maxHealth = VALKYRIE_HEALTH;
         damage = VALKYRIE_DAMAGE;
         score = VALKYRIE_SCORE;
+        coin = VALKYRIE_COIN;
 
         intro = VALKYRIE_INITIAL_INTRO;
     }

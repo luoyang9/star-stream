@@ -130,44 +130,52 @@ public class Config {
     public static int ASTEROID_HEALTH = 3;
     public static int ASTEROID_DAMAGE = 1;
     public static int ASTEROID_SCORE = 5;
+    public static int ASTEROID_COIN = 0;
 
     // FALCON DATA
     public static int FALCON_HEALTH = 10;
     public static int FALCON_DAMAGE = 1;
     public static int FALCON_SCORE = 15;
+    public static int FALCON_COIN = 3;
 
     // ICARUS DATA
     public static int ICARUS_HEALTH = 60;
     public static int ICARUS_DAMAGE = 2;
     public static int ICARUS_SCORE = 150;
     public static boolean ICARUS_INITIAL_INTRO = true;
+    public static int ICARUS_COIN = 3;
 
     // KAMIKAZE DATA
     public static int KAMIKAZE_HEALTH = 10;
     public static int KAMIKAZE_DAMAGE = 1;
     public static int KAMIKAZE_SCORE = 15;
+    public static int KAMIKAZE_COIN = 1;
 
     // STRIKER DATA
     public static int STRIKER_HEALTH = 25;
     public static int STRIKER_DAMAGE = 2;
     public static int STRIKER_SCORE = 75;
     public static boolean STRIKER_INITIAL_INTRO = true;
+    public static int STRIKER_COIN = 1;
 
     // UFO DATA
     public static int UFO_HEALTH = 30;
     public static int UFO_DAMAGE = 1;
     public static int UFO_SCORE = 100;
     public static int UFO_INITIAL_ROTATION = 0;
+    public static int UFO_COIN = 1;
 
     // VALKYRIE DATA
     public static int VALKYRIE_HEALTH = 40;
     public static int VALKYRIE_DAMAGE = 1;
     public static int VALKYRIE_SCORE = 100;
     public static boolean VALKYRIE_INITIAL_INTRO = true;
+    public static int VALKYRIE_COIN = 2;
 
     // SKULLINATOR DATA
     public static int SKULLINATOR_HEALTH = 600;
     public static int SKULLINATOR_DAMAGE = 2;
     public static int SKULLINATOR_SCORE = 300;
     public static boolean SKULLINATOR_INITIAL_ENTERED = false;
+    public static int SKULLINATOR_COIN = 15;
 }

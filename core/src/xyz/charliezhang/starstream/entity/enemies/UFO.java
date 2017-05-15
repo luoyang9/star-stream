@@ -29,6 +29,7 @@ public class UFO extends Enemy
 		rotation = UFO_INITIAL_ROTATION;
 		damage = UFO_DAMAGE;
 		score = UFO_SCORE;
+		coin = UFO_COIN;
 
 		sprite.setSize(40, 40);
 		sprite.setOrigin(20, 20);

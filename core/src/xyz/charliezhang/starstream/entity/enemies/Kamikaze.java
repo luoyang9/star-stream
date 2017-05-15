@@ -28,6 +28,7 @@ public class Kamikaze extends Enemy
         health = maxHealth = KAMIKAZE_HEALTH;
         damage = KAMIKAZE_DAMAGE;
         score = KAMIKAZE_SCORE;
+        coin = KAMIKAZE_COIN;
     }
 
     //json read method
