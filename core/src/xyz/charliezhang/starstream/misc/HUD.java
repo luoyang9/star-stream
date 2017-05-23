@@ -233,7 +233,6 @@ public class HUD
     }
 
     public void deactivatePowerUp(PowerUp.PowerUps p) {
-        System.out.println(p);
         if(p == ATTACK) {
             attStack.setVisible(false);
         } else if(p == MISSILE) {

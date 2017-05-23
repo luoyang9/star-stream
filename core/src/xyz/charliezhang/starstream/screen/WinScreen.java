@@ -123,8 +123,8 @@ class WinScreen implements Screen {
         lblLives = new Label("Lives (" + lives + "X500):", skin, "medium");
         lblLives.setWrap(true);
         lblTotal = new Label("Total:", skin, "medium");
-        lblScoreValue = new Label(" " +animScore + "p", skin, "medium");
-        lblMoneyValue = new Label(""+animMoney, skin, "medium");
+        lblScoreValue = new Label(" " + animScore + "p", skin, "medium");
+        lblMoneyValue = new Label(" " + animMoney, skin, "medium");
         lblTimeValue = new Label(timeMod + animTimeScore + "p", skin, "medium");
         lblLivesValue = new Label(" " + animLivesScore + "p", skin, "medium");
         lblTotalValue = new Label(" " + animTotal + "p", skin, "medium");

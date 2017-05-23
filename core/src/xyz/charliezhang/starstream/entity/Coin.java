@@ -20,6 +20,7 @@ public class Coin extends Entity implements Pool.Poolable {
     private EntityManager manager;
     private long timer;
     private boolean win;
+    private boolean expired;
 
     public void init(EntityManager manager) {
         this.manager = manager;
@@ -29,12 +30,13 @@ public class Coin extends Entity implements Pool.Poolable {
         setDirection(MathUtils.randomSign() * MathUtils.random(1f, 2f), MathUtils.randomSign() * MathUtils.random(1f, 2f));
         timer = System.currentTimeMillis();
         win = false;
+        expired = false;
     }
 
     @Override
     public void update() {
         long elapsed = System.currentTimeMillis() - timer;
-        System.out.println(elapsed);
+
         if(elapsed > 400) {
             if(!win) {
                 float x = 0;
@@ -45,13 +47,16 @@ public class Coin extends Entity implements Pool.Poolable {
                 } else if (direction.x > 0) {
                     x = -0.01f;
                 }
-                if (sprite.getX() <= 0) {
+                if (sprite.getX() <= 5) {
                     x = 0.05f;
-                } else if (sprite.getX() >= manager.getViewport().getWorldWidth()) {
+                } else if (sprite.getX() >= manager.getViewport().getWorldWidth() - 5) {
                     x = -0.05f;
                 }
                 if (direction.y > -2.5f) {
                     y = -0.05f;
+                }
+                if(sprite.getY() < 0) {
+                    expired = true;
                 }
 
                 setDirection(direction.x + x, direction.y + y);
@@ -94,4 +99,5 @@ public class Coin extends Entity implements Pool.Poolable {
     public void win() {
         win = true;
     }
+    public boolean expired() {return expired;}
 }
