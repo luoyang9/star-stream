@@ -74,7 +74,7 @@ public class Config {
     public static String EXPLOSION_SOUND_PATH = "data/sounds/explosion.wav";
 
     // PLAYER DATA
-    public static int PLAYER_ATT_LEVEL = 4;
+    public static int PLAYER_ATT_LEVEL = 1;
     public static int PLAYER_MAX_LIVES = 3;
     public static boolean PLAYER_INITIAL_FLINCHING = false;
     public static boolean PLAYER_INITIAL_CONTROLLABLE = false;
@@ -173,7 +173,7 @@ public class Config {
     public static int VALKYRIE_COIN = 2;
 
     // SKULLINATOR DATA
-    public static int SKULLINATOR_HEALTH = 600;
+    public static int SKULLINATOR_HEALTH = 750;
     public static int SKULLINATOR_DAMAGE = 2;
     public static int SKULLINATOR_SCORE = 300;
     public static boolean SKULLINATOR_INITIAL_ENTERED = false;

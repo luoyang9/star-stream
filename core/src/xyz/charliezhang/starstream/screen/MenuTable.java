@@ -22,9 +22,9 @@ public class MenuTable extends Table {
             MusicPlayer.loop(MusicPlayer.MENU);
         }
 
-        btnPlay = new TextButton("Story", Assets.skin);
+        btnPlay = new TextButton("Play", Assets.skin);
         btnShop = new TextButton("Shop", Assets.skin);
-        btnProfile = new TextButton("Profile", Assets.skin);
+        btnProfile = new TextButton("Settings", Assets.skin);
         btnOptions = new TextButton("", Assets.skin, "options");
 
         btnPlay.addListener(new ClickListener() {
@@ -41,7 +41,7 @@ public class MenuTable extends Table {
             }
         });
 
-        btnOptions.addListener(new ClickListener() {
+        btnProfile.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 container.changeTable(OPTIONS);
@@ -55,7 +55,7 @@ public class MenuTable extends Table {
         row();
         add(btnProfile).pad(20).width(336).height(120);
         row();
-        add(btnOptions).left().padLeft(20).width(30).height(30);
+//        add(btnOptions).left().padLeft(20).width(30).height(30);
 
         //setDebug(true);
     }

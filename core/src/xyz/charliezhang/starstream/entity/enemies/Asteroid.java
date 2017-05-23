@@ -30,6 +30,14 @@ public class Asteroid extends Enemy
     }
 
     @Override
+    public void applyUpgrades() {
+        this.health += manager.getEnemyModifier();
+        this.maxHealth += manager.getEnemyModifier();
+        this.damage += manager.getEnemyModifier() / 2;
+    }
+
+
+    @Override
     public void update() {
         sprite.rotate(1);
 

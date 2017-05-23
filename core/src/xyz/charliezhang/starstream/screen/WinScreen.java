@@ -105,7 +105,8 @@ class WinScreen implements Screen {
         if(total > GameData.prefs.getInteger("level-" + level)) {
             GameData.prefs.putInteger("level-" + level, total).flush();
         }
-        GameData.prefs.putInteger("money", GameData.prefs.getInteger("money") + money).flush();
+        long currMoney = GameData.prefs.getLong("money");
+        GameData.prefs.putLong("money",  currMoney + money).flush();
 
         //animation
         animLivesScore = 0;

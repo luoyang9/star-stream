@@ -5,7 +5,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 227.5,
-          y: 800,
+          y: 900,
           dx: 0,
           dy: -1,
           delay: 2000
@@ -13,7 +13,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 87.5,
-          y: 800,
+          y: 900,
           dx: 0,
           dy: -1,
           delay: 0
@@ -21,7 +21,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
           x: 367.5,
-          y: 800,
+          y: 900,
           dx: 0,
           dy: -1,
           delay: 0
@@ -33,7 +33,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
-          y: 820,
+          y: 920,
           dx: -6,
           dy: -1,
           delay: 500,
@@ -42,7 +42,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
-          y: 820,
+          y: 920,
           dx: -6,
           dy: -1,
           delay: 500,
@@ -51,7 +51,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Falcon,
           x: 400,
-          y: 820,
+          y: 920,
           dx: -6,
           dy: -1,
           delay: 500,
@@ -64,7 +64,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 240,
-          y: 820,
+          y: 920,
           dx: 0,
           dy: -1,
           delay: 500,
@@ -73,7 +73,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 300,
-          y: 820,
+          y: 920,
           dx: 0,
           dy: -1,
           delay: 500,
@@ -82,7 +82,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.UFO,
           x: 180,
-          y: 820,
+          y: 920,
           dx: 0,
           dy: -1,
           delay: 500,

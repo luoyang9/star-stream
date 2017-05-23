@@ -75,14 +75,14 @@ public class UIContainerScreen implements Screen {
         });
 
 
-        stage.addListener(new InputListener(){
-            @Override
-            public boolean keyDown(InputEvent event, int keyCode) {
-                debug = !debug;
-                stage.setDebugAll(debug);
-                return true;
-            }
-        });
+//        stage.addListener(new InputListener(){
+//            @Override
+//            public boolean keyDown(InputEvent event, int keyCode) {
+//                debug = !debug;
+//                stage.setDebugAll(debug);
+//                return true;
+//            }
+//        });
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -136,14 +136,17 @@ public class UIContainerScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+        background.setSize(stage.getViewport().getWorldWidth());
     }
 
     @Override
     public void pause() {
+        background.pause();
     }
 
     @Override
     public void resume() {
+        background.unpause();
     }
 
     @Override

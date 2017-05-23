@@ -337,14 +337,20 @@ public class Player extends Entity
 	public void setDamage(int d){damage = d;} //set damage
 	public void activatePowerUp(PowerUp powerUp)
 	{
-		manager.activatePowerUp(powerUp.getType());
+		if(powerUp instanceof AttackPowerUp) {
+			if(attLevel >= 3) {
+				manager.activatePowerUp(powerUp.getType());
+			}
+		} else {
+			manager.activatePowerUp(powerUp.getType());
+		}
 		if(powerUp instanceof AttackPowerUp) activateAttackPowerUp();
 		if(powerUp instanceof MissilePowerUp) activateMissilePowerUp((MissilePowerUp)powerUp);
 		if(powerUp instanceof ShieldPowerUp) activateShieldPowerUp();
 	}
 	private void activateAttackPowerUp()
 	{
-		if (attLevel < 4) //if att lvl < 3
+		if (attLevel < 4) //if att lvl < 4
 			attLevel++; //increase att lvl
 		else
 		{

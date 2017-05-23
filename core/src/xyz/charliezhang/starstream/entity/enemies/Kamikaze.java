@@ -31,6 +31,14 @@ public class Kamikaze extends Enemy
         coin = KAMIKAZE_COIN;
     }
 
+    @Override
+    public void applyUpgrades() {
+        this.health += manager.getEnemyModifier();
+        this.maxHealth += manager.getEnemyModifier();
+        this.damage += manager.getEnemyModifier() / 2;
+    }
+
+
     //json read method
     @Override
     public void read (Json json, JsonValue jsonMap) {

@@ -52,6 +52,7 @@ public abstract class Enemy extends Entity implements Json.Serializable
 
 	public void setEntityManager(EntityManager manager) {this.manager = manager;}
 	public void reposition() {setPosition(sprite.getX(), sprite.getY() - 800 + manager.getViewport().getWorldHeight());}
+	public void applyUpgrades() {}
 
 	@Override
 	public void render(SpriteBatch sb) {

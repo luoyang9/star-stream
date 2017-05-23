@@ -57,13 +57,14 @@ public class EntityManager
 	private int score;
 	private int money;
 	private long startTime;
+	private int enemyModifier;
 
 	private boolean pause;
 	private boolean canDispose;
 
 	private MainGame game;
 
-	public EntityManager(Viewport viewport, MainGame game, Background background)
+	public EntityManager(Viewport viewport, MainGame game, Background background, int level)
 	{
 		this.game = game;
 		this.background = background;
@@ -71,6 +72,7 @@ public class EntityManager
 
 		canDispose = false;
 
+		enemyModifier = (level - 1) * 3;
 		enemies = new Array<Enemy>();
 		playerProjectiles = new Array<Projectile>();
 		enemyProjectiles = new Array<Projectile>();
@@ -415,6 +417,7 @@ public class EntityManager
 	public void spawnEnemy(Enemy enemy) {
 		enemy.setEntityManager(this);
 		enemy.reposition();
+		enemy.applyUpgrades();
 		enemies.add(enemy);
 	}
 	public void spawnLaser(Projectile p) {playerProjectiles.add(p);}
@@ -444,6 +447,7 @@ public class EntityManager
 	public Player getPlayer() { return player; }
 	public MainGame getGame() { return game; }
 	public Background getBackground() { return background; }
+	public int getEnemyModifier() {return enemyModifier; }
 	public int getScore() { return score; }
 	public int getMoney() { return money; }
 	public Viewport getViewport() { return viewport; }

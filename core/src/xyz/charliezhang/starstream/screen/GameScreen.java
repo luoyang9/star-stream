@@ -41,7 +41,7 @@ class GameScreen implements Screen
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		camera.update();
 
-		manager = new EntityManager(viewport, game, background);
+		manager = new EntityManager(viewport, game, background, level);
 		waveManager = new WaveManager(level, manager);
 		waveManager.spawnNextWave();
 

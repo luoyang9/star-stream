@@ -1,6 +1,7 @@
 package xyz.charliezhang.starstream.screen;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -43,14 +44,20 @@ class LevelSelectTable extends Table {
         for(int i = 0; i < MainGame.NUM_LEVELS; i++)
         {
             final int level = i;
-            TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
-            btnTemp.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y){
-                    container.play(level);
-                }
-            });
-            scoreTables[i].add(btnTemp).width(140).height(100);
+            if(i < 3) {
+                TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
+                btnTemp.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        container.play(level);
+                    }
+                });
+                scoreTables[i].add(btnTemp).width(140).height(100);
+            } else {
+                TextButton btnTemp = new TextButton("Coming Soon", Assets.skin, "xsmall");
+                btnTemp.setTouchable(Touchable.disabled);
+                scoreTables[i].add(btnTemp).width(140).height(100);
+            }
             scoreTables[i].row();
             scoreTables[i].add(lblScore[i]).height(50);
             lvlTable.add(scoreTables[i]).height(150).width(140).pad(5);

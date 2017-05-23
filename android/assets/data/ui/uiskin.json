@@ -12,6 +12,11 @@
 			up: default-button, 
 			font: large-font
 		},
+		xsmall: {
+			down: default-button,
+			up: default-button,
+			font: xsmall-font
+		},
 		small: { 
 			down: default-button, 
 			up: default-button, 
