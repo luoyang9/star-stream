@@ -52,6 +52,7 @@ public class HUD
     private Skin skin;
     private Label lblGameOver;
     private Label lblScore;
+    private Label lblMoney;
 
 
     public HUD(final EntityManager manager)
@@ -106,7 +107,12 @@ public class HUD
         masterStack.setFillParent(true);
         stage.addActor(masterStack);
 
-        lblScore = new Label("" + manager.getScore(), skin, "medium");
+        lblScore = new Label("" + manager.getScore(), skin, "small");
+        lblMoney = new Label("" + manager.getMoney(), skin, "small");
+        Table valueTable = new Table();
+        valueTable.add(lblScore).expandX().fillX();
+        valueTable.add(lblMoney).expandX().fillX();
+
         lblGameOver = new Label("Game Over", skin);
 
 
@@ -143,7 +149,7 @@ public class HUD
             }
         });
 
-        table.add(lblScore).expandX().fillX().height(40).padLeft(5).left();
+        table.add(valueTable).expandX().fillX().height(40).padLeft(5).left();
         table.add(livesGroup).right().width(120).height(40);
         table.row();
         iconTable.left();
@@ -170,6 +176,7 @@ public class HUD
     public void update(float delta)
     {
         lblScore.setText("" + manager.getScore());
+        lblMoney.setText("" + manager.getMoney());
         if(manager.getPlayer().getLives() != livesGroup.getChildren().size) {
             livesGroup.removeActor(livesIcons[livesGroup.getChildren().size-1]);
         }
@@ -226,7 +233,6 @@ public class HUD
     }
 
     public void deactivatePowerUp(PowerUp.PowerUps p) {
-        System.out.println(p);
         if(p == ATTACK) {
             attStack.setVisible(false);
         } else if(p == MISSILE) {

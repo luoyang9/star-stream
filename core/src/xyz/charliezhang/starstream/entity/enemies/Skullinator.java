@@ -28,6 +28,7 @@ public class Skullinator extends Enemy
 		health = maxHealth = SKULLINATOR_HEALTH;
 		damage = SKULLINATOR_DAMAGE;
 		score = SKULLINATOR_SCORE;
+		coin = SKULLINATOR_COIN;
 		entered = SKULLINATOR_INITIAL_ENTERED;
 		lastSpecial1 = lastSpecial2 = System.currentTimeMillis();
 	}

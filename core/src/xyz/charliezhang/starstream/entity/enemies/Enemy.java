@@ -13,7 +13,7 @@ import static xyz.charliezhang.starstream.Config.ENEMY_INITIAL_SUICIDE;
 public abstract class Enemy extends Entity implements Json.Serializable
 {
 	//entity data
-	protected int health, maxHealth, damage, score;
+	protected int health, maxHealth, damage, score, coin;
 	long lastFire;
 	protected boolean dead, suicide;
 
@@ -74,6 +74,8 @@ public abstract class Enemy extends Entity implements Json.Serializable
 	public int getDamage() {return damage;}
 
 	public int getScore() {return score;}
+
+	public int getCoin() {return coin;}
 
 	public int getSpawnDelay() {return spawnDelay;}
 

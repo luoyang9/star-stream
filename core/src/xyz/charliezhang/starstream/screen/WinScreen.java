@@ -27,6 +27,7 @@ class WinScreen implements Screen {
     private boolean canDispose;
 
     private int score;
+    private int money;
     private int lives;
     private int time;
     private int timeScore;
@@ -34,6 +35,7 @@ class WinScreen implements Screen {
     private int total;
 
     private int animScore;
+    private int animMoney;
     private int animTimeScore;
     private int animLivesScore;
     private int animTotal;
@@ -41,10 +43,12 @@ class WinScreen implements Screen {
     private String timeMod;
 
     private Label lblScore;
+    private Label lblMoney;
     private Label lblLives;
     private Label lblTime;
     private Label lblTotal;
     private Label lblScoreValue;
+    private Label lblMoneyValue;
     private Label lblLivesValue;
     private Label lblTimeValue;
     private Label lblTotalValue;
@@ -57,10 +61,11 @@ class WinScreen implements Screen {
 
     private int level;
 
-    WinScreen(MainGame game, int score, int lives, int time, int level)
+    WinScreen(MainGame game, int score, int money, int lives, int time, int level)
     {
         this.game = game;
         this.score = score;
+        this.money = money;
         this.lives = lives;
         this.time = time;
         this.level = level;
@@ -99,14 +104,18 @@ class WinScreen implements Screen {
         if(total > GameData.prefs.getInteger("level-" + level)) {
             GameData.prefs.putInteger("level-" + level, total).flush();
         }
+        GameData.prefs.putInteger("money", GameData.prefs.getInteger("money") + money).flush();
 
         //animation
         animLivesScore = 0;
         animScore = 0;
+        animMoney = 0;
         animTimeScore = 0;
         animTotal = 0;
 
         //labels
+        lblMoney = new Label("Money:", skin, "medium");
+        lblMoney.setWrap(true);
         lblScore = new Label("Score:", skin, "medium");
         lblScore.setWrap(true);
         lblTime = new Label("Time (" + time/60 + ":" + time%60 + "):", skin, "medium");
@@ -114,12 +123,16 @@ class WinScreen implements Screen {
         lblLives = new Label("Lives (" + lives + "X500):", skin, "medium");
         lblLives.setWrap(true);
         lblTotal = new Label("Total:", skin, "medium");
-        lblScoreValue = new Label(" " +animScore + "p", skin, "medium");
+        lblScoreValue = new Label(" " + animScore + "p", skin, "medium");
+        lblMoneyValue = new Label(" " + animMoney, skin, "medium");
         lblTimeValue = new Label(timeMod + animTimeScore + "p", skin, "medium");
         lblLivesValue = new Label(" " + animLivesScore + "p", skin, "medium");
         lblTotalValue = new Label(" " + animTotal + "p", skin, "medium");
 
        // table.setDebug(true);
+        table.add(lblMoney).size(230, 100).uniform().right();
+        table.add(lblMoneyValue).uniform().left();
+        table.row();
         table.add(lblScore).size(230, 100).uniform().right();
         table.add(lblScoreValue).uniform().left();
         table.row();
@@ -141,28 +154,26 @@ class WinScreen implements Screen {
     public void render(float delta) {
 
         //animation
-        if(animScore < score)
-        {
+        if(animMoney < money) {
+            animMoney += 1;
+            lblMoneyValue.setText("" + animMoney);
+        } else if(animScore < score) {
             animScore+=10;
             lblScoreValue.setText(" " + animScore);
         }
-        else if(animLivesScore < livesScore)
-        {
+        else if(animLivesScore < livesScore) {
             animLivesScore+=10;
             lblLivesValue.setText(" " + animLivesScore);
         }
-        else if(animTimeScore < timeScore)
-        {
+        else if(animTimeScore < timeScore) {
             animTimeScore+=10;
             lblTimeValue.setText(timeMod + animTimeScore);
         }
-        else if(animTimeScore > timeScore)
-        {
+        else if(animTimeScore > timeScore) {
             animTimeScore-=10;
             lblTimeValue.setText(timeMod + animTimeScore);
         }
-        else if(animTotal < total)
-        {
+        else if(animTotal < total) {
             animTotal+=10;
             lblTotalValue.setText(" " + animTotal);
         }

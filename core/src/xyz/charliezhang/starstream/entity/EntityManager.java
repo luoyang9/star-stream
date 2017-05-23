@@ -34,12 +34,14 @@ public class EntityManager
 	private Array<Projectile> enemyProjectiles;
 	private Array<PowerUp> powerups;
 	private Array<Explosion> explosions;
+	private Array<Coin> coins;
 
 	//pools
 	private Pool<EnemyLaser> enemyLaserPool;
 	private Pool<Missile> missilePool;
 	private Pool<Laser> laserPool;
 	private Pool<Explosion> explosionPool;
+	private Pool<Coin> coinPool;
 
 	private Player player;
 
@@ -53,6 +55,7 @@ public class EntityManager
 	private boolean deathProcedure;
 
 	private int score;
+	private int money;
 	private long startTime;
 
 	private boolean pause;
@@ -73,6 +76,7 @@ public class EntityManager
 		enemyProjectiles = new Array<Projectile>();
 		powerups = new Array<PowerUp>();
 		explosions = new Array<Explosion>();
+		coins = new Array<Coin>();
 
 		enemyLaserPool = new Pool<EnemyLaser>() {
 			@Override
@@ -102,6 +106,13 @@ public class EntityManager
 			}
 		};
 
+		coinPool = new Pool<Coin>() {
+			@Override
+			protected Coin newObject() {
+				return new Coin();
+			}
+		};
+
 		switch (GameData.prefs.getInteger("playerType"))
 		{
 			case PLAYER_BLUE:
@@ -118,6 +129,7 @@ public class EntityManager
 		hud = new xyz.charliezhang.starstream.misc.HUD(this);
 
 		score = 0;
+		money = 0;
 		startTime = System.nanoTime();
 		deathProcedure = false;
 
@@ -174,6 +186,13 @@ public class EntityManager
 			e.update();
 			if(e.isDone()) explosions.removeValue(e, false);
 		}
+		for(Coin c : coins) {
+			c.update();
+			if(c.expired()) {
+				System.out.println("removed coin");
+				coins.removeValue(c, false);
+			}
+		}
 
 
 		//remove lasers
@@ -201,6 +220,13 @@ public class EntityManager
 				exp.init(2, this);
 				exp.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
 				spawnExplosion(exp);
+
+				for(int i = 0; i < e.getCoin(); i ++) {
+					Coin coin = coinPool.obtain();
+					coin.init(this);
+					coin.setPosition(e.getPosition().x+e.getSprite().getWidth()/2, e.getPosition().y+e.getSprite().getHeight()/2);
+					spawnCoin(coin);
+				}
 
 				enemies.removeValue(e, false);
 				Assets.manager.get(EXPLOSION_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME); //explosion
@@ -265,6 +291,9 @@ public class EntityManager
 		for(Explosion e : explosions)
 		{
 			e.render(sb);
+		}
+		for(Coin c : coins) {
+			c.render(sb);
 		}
 
 		hud.render(sb);
@@ -345,6 +374,12 @@ public class EntityManager
 					powerups.removeValue(ap, false);
 				}
 			}
+			for(Coin c : coins) { //check player-coin collisions
+				if(player.getBounds().overlaps(c.getBounds())) {
+					money++;
+					coins.removeValue(c, false);
+				}
+			}
 		}
 	}
 
@@ -371,6 +406,10 @@ public class EntityManager
 	{
 		player.setDirection(0, 4);
 		player.setControllable(false);
+		for(Coin c : coins) {
+			money++;
+			c.win();
+		}
 	}
 
 	public void spawnEnemy(Enemy enemy) {
@@ -381,6 +420,7 @@ public class EntityManager
 	public void spawnEnemyLaser(Projectile p) {enemyProjectiles.add(p);}
 	private void spawnPowerUp(PowerUp p) {powerups.add(p);}
 	public void spawnExplosion(Explosion e) {explosions.add(e);}
+	private void spawnCoin(Coin c) {coins.add(c);}
 	public void activatePowerUp(PowerUp.PowerUps p) { hud.activatePowerUp(p); }
 	public void deactivatePowerUp(PowerUp.PowerUps p) { hud.deactivatePowerUp(p); }
 	
@@ -404,6 +444,7 @@ public class EntityManager
 	public MainGame getGame() { return game; }
 	public Background getBackground() { return background; }
 	public int getScore() { return score; }
+	public int getMoney() { return money; }
 	public Viewport getViewport() { return viewport; }
 	public boolean isPaused() { return pause; }
 	public boolean canDispose() {return canDispose; }

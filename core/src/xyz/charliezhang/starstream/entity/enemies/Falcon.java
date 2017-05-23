@@ -28,6 +28,7 @@ public class Falcon extends Enemy
         health = maxHealth = FALCON_HEALTH;
         damage = FALCON_DAMAGE;
         score = FALCON_SCORE;
+        coin = FALCON_COIN;
     }
 
     //json read method

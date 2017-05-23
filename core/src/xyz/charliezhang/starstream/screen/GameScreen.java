@@ -66,7 +66,7 @@ class GameScreen implements Screen
 		{
 			if(manager.getPlayer().getPosition().y > viewport.getWorldHeight() + 500)
 			{
-				game.setScreen(new WinScreen(game, manager.getScore(), manager.getPlayer().getLives(), manager.getTime(), level));
+				game.setScreen(new WinScreen(game, manager.getScore(), manager.getMoney(), manager.getPlayer().getLives(), manager.getTime(), level));
 				canDispose = true;
 			}
 			return;
