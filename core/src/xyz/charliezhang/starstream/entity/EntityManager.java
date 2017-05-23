@@ -414,6 +414,7 @@ public class EntityManager
 
 	public void spawnEnemy(Enemy enemy) {
 		enemy.setEntityManager(this);
+		enemy.reposition();
 		enemies.add(enemy);
 	}
 	public void spawnLaser(Projectile p) {playerProjectiles.add(p);}

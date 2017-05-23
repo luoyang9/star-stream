@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import xyz.charliezhang.starstream.MainGame;
 import xyz.charliezhang.starstream.entity.Entity;
 import xyz.charliezhang.starstream.entity.EntityManager;
 
@@ -50,6 +51,7 @@ public abstract class Enemy extends Entity implements Json.Serializable
 	}
 
 	public void setEntityManager(EntityManager manager) {this.manager = manager;}
+	public void reposition() {setPosition(sprite.getX(), sprite.getY() - 800 + manager.getViewport().getWorldHeight());}
 
 	@Override
 	public void render(SpriteBatch sb) {

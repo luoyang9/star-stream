@@ -20,8 +20,8 @@ public class Asteroid extends Enemy
             case 3:  sprite.setRegion(Assets.manager.get(ASTEROID_3_PATH, Texture.class)); break;
             default:  sprite.setRegion(Assets.manager.get(ASTEROID_4_PATH, Texture.class));
         }
-        sprite.setSize(50, 45);
-        sprite.setOrigin(25, 22.5f);
+        sprite.setSize(50, 50);
+        sprite.setOrigin(25, 25f);
 
         health = maxHealth = ASTEROID_HEALTH;
         damage = ASTEROID_DAMAGE;

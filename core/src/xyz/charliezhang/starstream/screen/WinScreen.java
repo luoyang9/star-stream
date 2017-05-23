@@ -60,6 +60,7 @@ class WinScreen implements Screen {
     private TextButton btnMenu;
 
     private int level;
+    private int[] levelPar = {90, 80, 80, 85, 80, 80, 80, 80, 80};
 
     WinScreen(MainGame game, int score, int money, int lives, int time, int level)
     {
@@ -96,8 +97,8 @@ class WinScreen implements Screen {
             }
         });
 
-        timeMod = (1-time > 0) ? "+" : "";
-        timeScore = (1-time)*10;
+        timeMod = (levelPar[level-1]-time > 0) ? "+" : "";
+        timeScore = (levelPar[level-1]-time)*10;
         livesScore = lives*500;
         total = score + timeScore + livesScore;
 

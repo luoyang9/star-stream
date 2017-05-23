@@ -179,7 +179,7 @@
         },
         {
           class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
-          x: 0,
+          x: -50,
           y: 900,
           dx: 0.5,
           dy: -2,

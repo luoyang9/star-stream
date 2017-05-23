@@ -9,7 +9,7 @@
           dx: 0,
           dy: -4,
           stop: 150,
-          delay: 5000
+          delay: 6200
         },
         {
           class: xyz.charliezhang.starstream.entity.enemies.Icarus,
