@@ -9,7 +9,7 @@ public class Config {
 
     // ASSET PATHS
     // game background
-    public static String GAME_BACKGROUND_PATH = "data/textures/background.png";
+    public static String GAME_BACKGROUND_PATH = "data/textures/background.jpg";
     // menu background
     public static String MENU_BACKGROUND_PATH = "data/ui/background.png";
     //color

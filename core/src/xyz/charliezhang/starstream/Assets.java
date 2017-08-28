@@ -16,13 +16,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoa
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
-public class Assets
-{
+public class Assets {
     public static final AssetManager manager = new AssetManager();
     public static Skin skin;
 
-    public static void init()
-    {
+    public static void init() {
         FileHandleResolver resolver = new InternalFileHandleResolver();
         manager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));

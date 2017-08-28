@@ -121,7 +121,7 @@ public class HUD
             @Override
             public void clicked(InputEvent event, float x, float y){
                 Assets.manager.get(BUTTON_SOUND_PATH, Sound.class).play(MusicPlayer.VOLUME);
-                manager.getGame().setScreen(new UIContainerScreen(manager.getGame()));
+                manager.getGame().setScreen(new UIContainerScreen(manager.getGame(), manager.getBackground()));
                 manager.canDispose(true);
                 event.stop();
             }

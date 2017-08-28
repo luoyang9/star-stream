@@ -35,6 +35,11 @@ public class UIContainerScreen implements Screen {
 
     public UIContainerScreen(MainGame game){this.game = game;}
 
+    public UIContainerScreen(MainGame game, Background background) {
+        this.game = game;
+        this.background = background;
+    }
+
     @Override
     public void show() {
 
@@ -57,10 +62,11 @@ public class UIContainerScreen implements Screen {
 
         stage.addActor(menu);
 
-
-        background = new Background();
+        if(background == null) {
+            background = new Background();
+        }
         background.setSize(stage.getViewport().getWorldWidth());
-        background.setVector(0, -2f);
+        background.setVector(0, -0.2f);
 
         if(!MusicPlayer.isPlaying(MusicPlayer.MENU)) {
             MusicPlayer.loop(MusicPlayer.MENU);
@@ -75,14 +81,14 @@ public class UIContainerScreen implements Screen {
         });
 
 
-//        stage.addListener(new InputListener(){
-//            @Override
-//            public boolean keyDown(InputEvent event, int keyCode) {
-//                debug = !debug;
-//                stage.setDebugAll(debug);
-//                return true;
-//            }
-//        });
+        stage.addListener(new InputListener(){
+            @Override
+            public boolean keyDown(InputEvent event, int keyCode) {
+                debug = !debug;
+                stage.setDebugAll(debug);
+                return true;
+            }
+        });
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -124,6 +130,7 @@ public class UIContainerScreen implements Screen {
 
         //background
         game.batch.begin();
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
         background.update();
         background.render(game.batch);
         game.batch.end();
