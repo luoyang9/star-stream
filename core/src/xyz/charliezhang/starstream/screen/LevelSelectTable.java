@@ -45,11 +45,12 @@ class LevelSelectTable extends Table {
         {
             final int level = i;
             if(i < 3) {
-                TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
+                final TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
                 btnTemp.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y){
                         container.play(level);
+                        btnTemp.setTouchable(Touchable.disabled);
                     }
                 });
                 scoreTables[i].add(btnTemp).width(140).height(100);

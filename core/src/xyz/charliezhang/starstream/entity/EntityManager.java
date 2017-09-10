@@ -191,7 +191,6 @@ public class EntityManager
 		for(Coin c : coins) {
 			c.update();
 			if(c.expired()) {
-				System.out.println("removed coin");
 				coins.removeValue(c, false);
 			}
 		}

@@ -1,13 +1,33 @@
-
 player1.png
-size: 98, 75
+size: 104, 24
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 98, 75
-  orig: 98, 75
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 26, 0
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 52, 0
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 78, 0
+  size: 26, 24
+  orig: 26, 24
   offset: 0, 0
   index: -1

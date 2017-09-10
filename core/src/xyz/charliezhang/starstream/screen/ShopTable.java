@@ -47,8 +47,6 @@ class ShopTable extends Table {
     private TextButton[] btnUpgrade;
     private ProgressBar[] upgradeBar;
 
-    private Texture background;
-
     private Skin skin;
 
     ShopTable(final UIContainerScreen container) {
@@ -186,9 +184,6 @@ class ShopTable extends Table {
                 upgradesContainer.row();
             }
         }
-
-        //background
-        background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
         //add to table
         top();

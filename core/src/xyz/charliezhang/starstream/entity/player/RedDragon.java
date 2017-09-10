@@ -21,7 +21,7 @@ public class RedDragon extends Player
         animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 
         //set sprite size
-        sprite.setSize(72, 62);
+        sprite.setSize(68, 63);
 
         //set player starting data
         shootDelay = RED_DRAGON_SHOOT_DELAY;

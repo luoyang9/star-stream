@@ -3,9 +3,10 @@ package xyz.charliezhang.starstream.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -15,12 +16,12 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.MainGame;
-
-import static xyz.charliezhang.starstream.Config.MENU_BACKGROUND_PATH;
+import xyz.charliezhang.starstream.misc.Background;
 
 class WinScreen implements Screen {
 
     private MainGame game;
+    private Background background;
 
     private Stage stage;
     private Table table;
@@ -53,16 +54,13 @@ class WinScreen implements Screen {
     private Label lblTimeValue;
     private Label lblTotalValue;
 
-
-    private Texture background;
-
     private Skin skin;
     private TextButton btnMenu;
 
     private int level;
     private int[] levelPar = {90, 80, 80, 85, 80, 80, 80, 80, 80};
 
-    WinScreen(MainGame game, int score, int money, int lives, int time, int level)
+    WinScreen(MainGame game, Background background, int score, int money, int lives, int time, int level)
     {
         this.game = game;
         this.score = score;
@@ -70,6 +68,7 @@ class WinScreen implements Screen {
         this.lives = lives;
         this.time = time;
         this.level = level;
+        this.background = background;
     }
 
     @Override
@@ -80,11 +79,11 @@ class WinScreen implements Screen {
 
         canDispose = false;
 
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f)));
+
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-
-        background = Assets.manager.get(MENU_BACKGROUND_PATH);
 
         skin = Assets.skin;
 
@@ -92,12 +91,18 @@ class WinScreen implements Screen {
         btnMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new UIContainerScreen(game));
-                canDispose = true;
+            stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    game.setScreen(new UIContainerScreen(game));
+                    canDispose = true;
+                }
+            })));
+            btnMenu.setTouchable(Touchable.disabled);
             }
         });
 
-        timeMod = (levelPar[level-1]-time > 0) ? "+" : "";
+        timeMod = (levelPar[level-1]-time > 0) ? " " : "-";
         timeScore = (levelPar[level-1]-time)*10;
         livesScore = lives*500;
         total = score + timeScore + livesScore;
@@ -184,9 +189,11 @@ class WinScreen implements Screen {
         stage.act(delta);
 
         //background
-        stage.getBatch().begin();
-        stage.getBatch().draw(background, 0, 0, stage.getHeight()/background.getHeight()*background.getWidth(), stage.getHeight());
-        stage.getBatch().end();
+        game.batch.begin();
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
+        background.update();
+        background.render(game.batch);
+        game.batch.end();
 
         stage.draw();
 

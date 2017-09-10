@@ -29,11 +29,8 @@ public class Assets {
     public static void load() {
         //game background
         manager.load(Config.GAME_BACKGROUND_PATH, Texture.class);
-        //menu background
-        manager.load(Config.MENU_BACKGROUND_PATH, Texture.class);
         //ui
         manager.load(Config.UI_SKIN_PATH, TextureAtlas.class);
-        manager.load(Config.PAUSE_PATH, Texture.class);
         manager.load(Config.PLAYER_BLUE_UI_PATH, Texture.class);
         manager.load(Config.PLAYER_RED_UI_PATH, Texture.class);
         manager.load(Config.UI_COIN_PATH, Texture.class);
