@@ -44,21 +44,15 @@ class LevelSelectTable extends Table {
         for(int i = 0; i < MainGame.NUM_LEVELS; i++)
         {
             final int level = i;
-            if(i < 3) {
-                final TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
-                btnTemp.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y){
-                        container.play(level);
-                        btnTemp.setTouchable(Touchable.disabled);
-                    }
-                });
-                scoreTables[i].add(btnTemp).width(140).height(100);
-            } else {
-                TextButton btnTemp = new TextButton("Coming Soon", Assets.skin, "xsmall");
-                btnTemp.setTouchable(Touchable.disabled);
-                scoreTables[i].add(btnTemp).width(140).height(100);
-            }
+            final TextButton btnTemp = new TextButton("" + (i + 1), Assets.skin);
+            btnTemp.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y){
+                    container.play(level);
+                    btnTemp.setTouchable(Touchable.disabled);
+                }
+            });
+            scoreTables[i].add(btnTemp).width(140).height(100);
             scoreTables[i].row();
             scoreTables[i].add(lblScore[i]).height(50);
             lvlTable.add(scoreTables[i]).height(150).width(140).pad(5);

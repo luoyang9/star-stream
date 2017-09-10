@@ -242,6 +242,10 @@ public class HUD
         }
     }
 
+    public void win() {
+        btnPause.setTouchable(Touchable.disabled);
+    }
+
     public void death()
     {
         lblGameOver.setVisible(true);

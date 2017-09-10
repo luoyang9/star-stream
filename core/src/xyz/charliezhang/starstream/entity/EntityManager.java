@@ -137,8 +137,7 @@ public class EntityManager
 
 		currPowerupWait = (int) (Math.random()*2 + 8);
 		int nextPowerupRand = (int) (Math.random() * PowerUp.PowerUps.values().length);
-//		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
-		nextPowerup = ATTACK;
+		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
 
 		pause = false;
 
@@ -407,6 +406,7 @@ public class EntityManager
 	{
 		player.setDirection(0, 4);
 		player.setControllable(false);
+		hud.win();
 		for(Coin c : coins) {
 			money++;
 			c.win();
