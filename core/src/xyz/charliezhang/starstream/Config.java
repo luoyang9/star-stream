@@ -61,6 +61,7 @@ public class Config {
     public static String PLAYER_RED_PATH = "data/textures/player1.atlas";
     // music
     public static String GAME_MUSIC_PATH = "data/music/background.mp3";
+    public static String BOSS_MUSIC_PATH = "data/music/boss.mp3";
     public static String MENU_MUSIC_PATH = "data/music/menu.mp3";
     public static String WIN_MUSIC_PATH = "data/music/win.mp3";
     // sound effects
@@ -69,6 +70,7 @@ public class Config {
     public static String SHIELD_UP_SOUND_PATH = "data/sounds/shieldUp.ogg";
     public static String BUTTON_SOUND_PATH = "data/sounds/button.mp3";
     public static String EXPLOSION_SOUND_PATH = "data/sounds/explosion.wav";
+    public static String BOSS_WARNING_PATH = "data/sounds/warning.wav";
 
     // PLAYER DATA
     public static int PLAYER_ATT_LEVEL = 1;

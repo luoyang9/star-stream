@@ -21,9 +21,9 @@ public class Falcon extends Enemy
         super();
 
         textureAtlas = Assets.manager.get(FALCON_PATH, TextureAtlas.class);
-        animation = new Animation<TextureRegion>(1/20f, textureAtlas.getRegions());
+        animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 
-        sprite.setSize(51, 37);
+        sprite.setSize(51, 67);
 
         health = maxHealth = FALCON_HEALTH;
         damage = FALCON_DAMAGE;

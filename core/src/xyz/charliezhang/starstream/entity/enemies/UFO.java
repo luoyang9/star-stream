@@ -58,7 +58,7 @@ public class UFO extends Enemy
 		}
 
 
-		if(sprite.getY() < manager.getViewport().getWorldHeight() - stop)
+		if(sprite.getY() < manager.getViewport().getWorldHeight())
 		{
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{

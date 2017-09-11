@@ -79,6 +79,7 @@ public class Assets {
         manager.load(Config.PLAYER_RED_PATH, TextureAtlas.class);
         //music
         manager.load(Config.GAME_MUSIC_PATH, Music.class);
+        manager.load(Config.BOSS_MUSIC_PATH, Music.class);
         manager.load(Config.MENU_MUSIC_PATH, Music.class);
         manager.load(Config.WIN_MUSIC_PATH, Music.class);
         //sound effects
@@ -87,6 +88,7 @@ public class Assets {
         manager.load(Config.SHIELD_UP_SOUND_PATH, Sound.class);
         manager.load(Config.BUTTON_SOUND_PATH, Sound.class);
         manager.load(Config.EXPLOSION_SOUND_PATH, Sound.class);
+        manager.load(Config.BOSS_WARNING_PATH, Sound.class);
 
         //game fonts
         FreeTypeFontLoaderParameter params = new FreeTypeFontLoaderParameter();

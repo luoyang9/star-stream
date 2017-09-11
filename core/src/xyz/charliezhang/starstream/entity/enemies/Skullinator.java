@@ -30,6 +30,7 @@ public class Skullinator extends Enemy
 		score = SKULLINATOR_SCORE;
 		coin = SKULLINATOR_COIN;
 		entered = SKULLINATOR_INITIAL_ENTERED;
+		isBoss = true;
 		lastSpecial1 = lastSpecial2 = System.currentTimeMillis();
 	}
 

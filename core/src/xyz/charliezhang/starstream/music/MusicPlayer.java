@@ -14,6 +14,7 @@ public class MusicPlayer {
     public static String MENU = "menu";
     public static String GAME = "game";
     public static String WIN = "win";
+    public static String BOSS = "boss";
 
     private static HashMap<String, Music> musicMap;
     private static String currentMusic;
@@ -29,11 +30,7 @@ public class MusicPlayer {
         musicMap.put(MENU, Assets.manager.get(MENU_MUSIC_PATH, Music.class));
         musicMap.put(GAME, Assets.manager.get(GAME_MUSIC_PATH, Music.class));
         musicMap.put(WIN, Assets.manager.get(WIN_MUSIC_PATH, Music.class));
-    }
-
-    private static void loadMusic(String name, Music music)
-    {
-        musicMap.put(name, music);
+        musicMap.put(BOSS, Assets.manager.get(BOSS_MUSIC_PATH, Music.class));
     }
 
     public static boolean isPlaying(String name)

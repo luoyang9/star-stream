@@ -16,7 +16,7 @@ public abstract class Enemy extends Entity implements Json.Serializable
 	//entity data
 	protected int health, maxHealth, damage, score, coin;
 	long lastFire;
-	protected boolean dead, suicide;
+	protected boolean dead, suicide, isBoss;
 
 	//spawning data
 	private int spawnDelay;
@@ -28,6 +28,7 @@ public abstract class Enemy extends Entity implements Json.Serializable
 		super();
 		dead = ENEMY_INITIAL_DEAD;
 		suicide = ENEMY_INITIAL_SUICIDE;
+		isBoss = false;
 	}
 
 	@Override
@@ -85,6 +86,8 @@ public abstract class Enemy extends Entity implements Json.Serializable
 	public boolean isDead() {return dead;}
 
 	public boolean isSuicide() {return suicide;}
+
+	public boolean isBoss() {return isBoss;}
 
 	public EntityManager getManager() {return manager;}
 

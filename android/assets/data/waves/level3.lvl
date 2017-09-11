@@ -501,7 +501,7 @@
         {
           class: xyz.charliezhang.starstream.entity.enemies.Skullinator,
           x: 240,
-          y: 1100,
+          y: 1500,
           dx: 0,
           dy: -2,
           stop: 150,

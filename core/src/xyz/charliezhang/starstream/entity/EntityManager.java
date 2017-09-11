@@ -20,9 +20,7 @@ import xyz.charliezhang.starstream.entity.powerup.ShieldPowerUp;
 import xyz.charliezhang.starstream.misc.Background;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
-import static xyz.charliezhang.starstream.Config.EXPLOSION_SOUND_PATH;
-import static xyz.charliezhang.starstream.Config.PLAYER_BLUE;
-import static xyz.charliezhang.starstream.Config.PLAYER_RED;
+import static xyz.charliezhang.starstream.Config.*;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.ATTACK;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.MISSILE;
 import static xyz.charliezhang.starstream.entity.powerup.PowerUp.PowerUps.SHIELD;
@@ -53,11 +51,13 @@ public class EntityManager
 	private PowerUp.PowerUps nextPowerup;
 
 	private boolean deathProcedure;
+	private boolean spawningBoss;
 
 	private int score;
 	private int money;
 	private long startTime;
 	private int enemyModifier;
+	private long bossMusicTimer;
 
 	private boolean pause;
 	private boolean canDispose;
@@ -259,6 +259,12 @@ public class EntityManager
 		
 		//check collisions
 		checkCollisions();
+
+		//play boss music
+		if(spawningBoss && System.currentTimeMillis() - bossMusicTimer > 3000) {
+			spawningBoss = false;
+			MusicPlayer.loop(MusicPlayer.BOSS);
+		}
 	}
 	
 	public void render(SpriteBatch sb)
@@ -414,6 +420,12 @@ public class EntityManager
 	}
 
 	public void spawnEnemy(Enemy enemy) {
+		if(enemy.isBoss()) {
+			MusicPlayer.stop(MusicPlayer.GAME);
+			Assets.manager.get(BOSS_WARNING_PATH, Sound.class).play(MusicPlayer.VOLUME);
+			spawningBoss = true;
+			bossMusicTimer = System.currentTimeMillis();
+		}
 		enemy.setEntityManager(this);
 		enemy.reposition();
 		enemy.applyUpgrades();
