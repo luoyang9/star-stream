@@ -1,23 +1,25 @@
 package xyz.charliezhang.starstream.screen;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.MainGame;
 
+import static xyz.charliezhang.starstream.Config.WHITE_PATH;
 import static xyz.charliezhang.starstream.screen.UIContainerScreen.UITable.MENU;
 
 class LevelSelectTable extends Table {
 
     private Table lvlTable;
     private Table[] scoreTables;
+    private Image divider;
 
-    private TextButton btnBack;
+    private Button btnBack;
     private Label[] lblScore;
 
     LevelSelectTable(final UIContainerScreen container) {
@@ -32,8 +34,9 @@ class LevelSelectTable extends Table {
             lblScore[i] = new Label("BEST: " + GameData.prefs.getInteger("level-" + (i+1)), Assets.skin, "small");
         }
 
-        btnBack = new TextButton("BACK", Assets.skin);
-        btnBack.addListener(new ClickListener() {
+        divider = new Image(Assets.manager.get(WHITE_PATH, Texture.class));
+        btnBack = new Button(Assets.skin, "back");
+        btnBack.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 container.changeTable(MENU);
@@ -60,9 +63,12 @@ class LevelSelectTable extends Table {
             if(count % 3 == 0) lvlTable.row();
         }
 
-        add(btnBack).width(450).height(200);
+        top();
+        add(btnBack).left().width(33).height(24).pad(15);
         row();
-        add(lvlTable);
+        add(divider).colspan(3).expandX().fillX().height(3);
+        row();
+        add(lvlTable).pad(10).expand().fill().align(Align.center);
 
         //setDebug(true);
     }

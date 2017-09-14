@@ -156,17 +156,18 @@ class ShopTable extends Table {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     int newVal = UpgradeManager.upgrade(upgradeName);
+                    long newCost = UpgradeManager.getUpgradeCost(new Upgrade(upgradeName, newVal));
                     long newMoney = GameData.prefs.getLong("money");
                     upgradeBar[index].setValue(newVal);
                     lblUpgradeVal[index].setText(newVal + "");
                     lblMoney.setText(newMoney + "");
-                    btnUpgrade[index].setText("  " + UpgradeManager.getUpgradeCost(new Upgrade(upgradeName, newVal)));
+                    btnUpgrade[index].setText("  " + newCost);
                     if(newVal >= UpgradeManager.UpgradeMax[index]) {
                         btnUpgrade[index].setDisabled(true);
                         btnUpgrade[index].setTouchable(Touchable.disabled);
                     }
                     for(int i = 0; i < upgrades.size; i++) {
-                        if(UpgradeManager.getUpgradeCost(upgrades.get(i)) > newMoney) {
+                        if(newCost > newMoney) {
                             btnUpgrade[i].setDisabled(true);
                             btnUpgrade[i].setTouchable(Touchable.disabled);
                         }

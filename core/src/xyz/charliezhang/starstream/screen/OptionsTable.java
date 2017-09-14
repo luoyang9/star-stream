@@ -1,20 +1,22 @@
 package xyz.charliezhang.starstream.screen;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
 import xyz.charliezhang.starstream.music.MusicPlayer;
 
+import static xyz.charliezhang.starstream.Config.WHITE_PATH;
 import static xyz.charliezhang.starstream.screen.UIContainerScreen.UITable.MENU;
 
 class OptionsTable extends Table {
 
     private CheckBox soundOn;
-    private TextButton btnBack;
+    private Button btnBack;
+    private Image divider;
 
     OptionsTable(final UIContainerScreen container) {
 
@@ -39,18 +41,20 @@ class OptionsTable extends Table {
             }
         });
 
-        btnBack = new TextButton("Back", Assets.skin);
-        btnBack.addListener(new ClickListener() {
+        divider = new Image(Assets.manager.get(WHITE_PATH, Texture.class));
+        btnBack = new Button(Assets.skin, "back");
+        btnBack.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 container.changeTable(MENU);
             }
         });
 
-        add(btnBack).width(450).height(200);
+        top();
+        add(btnBack).left().width(33).height(24).pad(15);
         row();
-        add(soundOn);
+        add(divider).colspan(3).expandX().fillX().height(3);
         row();
-        //setDebug(true);
+        add(soundOn).pad(10).expand().fill().align(Align.center);
     }
 }
