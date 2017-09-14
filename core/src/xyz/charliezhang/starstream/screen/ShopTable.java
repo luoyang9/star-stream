@@ -102,9 +102,12 @@ class ShopTable extends Table {
                 } else {
                     currPlayerShip--;
                 }
-                if(GameData.prefs.getBoolean("type-" + currPlayerShip)) {
+
+                //no buying ships for now
+//                if(GameData.prefs.getBoolean("type-" + currPlayerShip)) {
                     GameData.prefs.putInteger("playerType", currPlayerShip).flush();
-                }
+//                }
+
                 playerShipImg.setDrawable(new SpriteDrawable(new Sprite(playerShipTextures[currPlayerShip])));
                 lblPlayerShip.setText(SHIP_NAME[currPlayerShip]);
                 lblShipDescription.setText(SHIP_DESCRIPTION[currPlayerShip]);
@@ -120,9 +123,12 @@ class ShopTable extends Table {
                 } else {
                     currPlayerShip++;
                 }
-                if(GameData.prefs.getBoolean("type-" + currPlayerShip)) {
+
+                //no buying ships for now
+//                if(GameData.prefs.getBoolean("type-" + currPlayerShip)) {
                     GameData.prefs.putInteger("playerType", currPlayerShip).flush();
-                }
+//                }
+
                 playerShipImg.setDrawable(new SpriteDrawable(new Sprite(playerShipTextures[currPlayerShip])));
                 lblPlayerShip.setText(SHIP_NAME[currPlayerShip]);
                 lblShipDescription.setText(SHIP_DESCRIPTION[currPlayerShip]);

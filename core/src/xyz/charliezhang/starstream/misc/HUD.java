@@ -193,10 +193,10 @@ public class HUD
     {
         batch.end();
         stage.draw();
-        float healthWidth = (manager.getPlayer().getHealth() + 0.0f)/manager.getPlayer().getMaxHealth()*healthFill.getWidth();
+        float healthWidth = (manager.getPlayer().getHealth() + 0.0f)/manager.getPlayer().getMaxHealth()*(healthBar.getWidth()*3 - 12);
         batch.begin();
-        batch.draw(healthBar, 5, 5, healthBar.getWidth(), healthBar.getHeight());
-        batch.draw(healthFill, 15, 10, healthWidth, healthFill.getHeight());
+        batch.draw(healthBar, 5, 5, healthBar.getWidth()*3, healthBar.getHeight()*3);
+        batch.draw(healthFill, 11, 11, healthWidth, healthFill.getHeight()*3);
     }
 
     public void dispose()
