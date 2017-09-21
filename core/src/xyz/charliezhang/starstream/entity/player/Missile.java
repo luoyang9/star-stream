@@ -20,7 +20,7 @@ public class Missile extends Projectile implements Pool.Poolable
         textureAtlas = Assets.manager.get(MISSILE_PATH, TextureAtlas.class);
         animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions());
 
-        sprite.setSize(9, 38);
+        sprite.setSize(14f,38);
 
         acceleration = 0;
     }

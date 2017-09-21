@@ -104,7 +104,9 @@ public class Valkyrie extends Enemy
     {
         sprite.setRegion(animation.getKeyFrame(animationTime, true));
         sb.draw(Assets.manager.get(HEALTH_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), sprite.getWidth(), 5);
-        sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * ((double)health / maxHealth)), 5);
+        double healthRatio = (double)health / maxHealth;
+        if(healthRatio < 0 || healthRatio > 1) healthRatio = 0;
+        sb.draw(Assets.manager.get(HEALTH_FILL_PATH, Texture.class), sprite.getX(), sprite.getY() + sprite.getHeight(), (int)(sprite.getWidth() * healthRatio), 5);
         super.render(sb);
     }
 

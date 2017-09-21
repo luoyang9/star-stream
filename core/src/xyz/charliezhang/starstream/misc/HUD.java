@@ -160,7 +160,7 @@ public class HUD
         table.row();
         pauseStack.add(btnPause);
         pauseStack.add(btnPlay);
-        table.add(pauseStack).colspan(2).right().height(40).width(40).padRight(10).padBottom(10);
+        table.add(pauseStack).colspan(2).right().height(40).width(40).padRight(5).padBottom(5);
 
         lblGameOver.setVisible(false);
         deathHUDTable.add(lblGameOver).padBottom(30);
