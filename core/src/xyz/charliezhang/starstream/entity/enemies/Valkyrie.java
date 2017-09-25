@@ -24,7 +24,7 @@ public class Valkyrie extends Enemy
         textureAtlas = Assets.manager.get(VALKYRIE_PATH, TextureAtlas.class);
         animation = new Animation<TextureRegion>(1/20f, textureAtlas.getRegions());
 
-        sprite.setSize(91, 66);
+        sprite.setSize(91, 80.6f);
 
         health = maxHealth = VALKYRIE_HEALTH;
         damage = VALKYRIE_DAMAGE;
@@ -87,10 +87,10 @@ public class Valkyrie extends Enemy
                 EnemyLaser g2 = manager.getEnemyLaserPool().obtain();
                 g1.init(manager, this, 3);
                 g1.setDirection(0.1f, -8);
-                g1.setPosition(sprite.getX() + sprite.getWidth() / 2 + 20, sprite.getY());
+                g1.setPosition(sprite.getX() + sprite.getWidth() / 2 + 30, sprite.getY());
                 g2.init(manager, this, 3);
                 g2.setDirection(-0.1f, -8);
-                g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 20, sprite.getY());
+                g2.setPosition(sprite.getX() + sprite.getWidth() / 2 - 30, sprite.getY());
                 manager.spawnEnemyLaser(g1);
                 manager.spawnEnemyLaser(g2);
                 lastFire = System.currentTimeMillis();

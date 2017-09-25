@@ -56,6 +56,15 @@
           dy: -1,
           delay: 500,
           bound: 100
+        },
+        {
+          class: xyz.charliezhang.starstream.entity.enemies.Valkyrie,
+          x: 400,
+          y: 920,
+          dx: 0,
+          dy: -2,
+          delay: 500,
+          stop: 250
         }
       ]
     },

@@ -1,12 +1,33 @@
 valkyrie.png
-size: 114, 82
+size: 140, 31
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 114, 82
-  orig: 114, 82
+  size: 35, 31
+  orig: 35, 31
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 35, 0
+  size: 35, 31
+  orig: 35, 31
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 70, 0
+  size: 35, 31
+  orig: 35, 31
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 105, 0
+  size: 35, 31
+  orig: 35, 31
   offset: 0, 0
   index: -1
