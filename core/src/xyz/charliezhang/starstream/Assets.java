@@ -73,6 +73,7 @@ public class Assets {
         manager.load(Config.LASER_F_PATH, TextureAtlas.class);
         manager.load(Config.LASER_G_PATH, TextureAtlas.class);
         manager.load(Config.LASER_R_PATH, TextureAtlas.class);
+        manager.load(Config.LASER_RR_PATH, TextureAtlas.class);
         manager.load(Config.LASER_O_PATH, TextureAtlas.class);
         //player
         manager.load(Config.PLAYER_BLUE_PATH, TextureAtlas.class);

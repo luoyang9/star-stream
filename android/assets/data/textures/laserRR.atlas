@@ -1,0 +1,13 @@
+
+laserRR.png
+size: 11, 8
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+laserR
+  rotate: false
+  xy: 0, 0
+  size: 11, 8
+  orig: 11, 8
+  offset: 0, 0
+  index: -1

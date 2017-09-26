@@ -1,34 +1,69 @@
 
 playerExplosionR.png
-size: 149, 37
+size: 144, 16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 0001
   rotate: false
   xy: 0, 0
-  size: 37, 37
-  orig: 37, 37
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 0002
   rotate: false
-  xy: 37, 0
-  size: 37, 37
-  orig: 37, 37
+  xy: 16, 0
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 0003
   rotate: false
-  xy: 74, 0
-  size: 37, 37
-  orig: 37, 37
+  xy: 32, 0
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 0004
   rotate: false
-  xy: 111, 0
-  size: 37, 37
-  orig: 37, 37
+  xy: 48, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+0005
+  rotate: false
+  xy: 64, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+0006
+  rotate: false
+  xy: 80, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+0007
+  rotate: false
+  xy: 96, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+0008
+  rotate: false
+  xy: 112, 0
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+0009
+  rotate: false
+  xy: 128, 0
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1

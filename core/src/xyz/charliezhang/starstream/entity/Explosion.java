@@ -21,18 +21,23 @@ public class Explosion extends Entity implements Pool.Poolable
     public void init(int type, EntityManager manager)
     {
         this.manager = manager;
+
+        float frameDuration = 1/15f;
         switch(type){
             case 1:textureAtlas = Assets.manager.get(PLAYER_EXPLOSION_PATH, TextureAtlas.class);
-                sprite.setSize(15, 15);
+                sprite.setSize(20, 20);
+                frameDuration = 1/30f;
                 break;
             case 2:textureAtlas = Assets.manager.get(EXPLOSION_PATH, TextureAtlas.class);
                 sprite.setSize(45, 45);
+                frameDuration = 1/15f;
                 break;
             case 3:textureAtlas = Assets.manager.get(PLAYER_EXPLOSION_R_PATH, TextureAtlas.class);
-                sprite.setSize(15, 15);
+                sprite.setSize(20, 20);
+                frameDuration = 1/30f;
             default:
         }
-        animation = new Animation<TextureRegion>(1/15f, textureAtlas.getRegions()) ;
+        animation = new Animation<TextureRegion>(frameDuration, textureAtlas.getRegions()) ;
     }
 
     @Override

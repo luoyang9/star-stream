@@ -9,12 +9,12 @@ import xyz.charliezhang.starstream.entity.EntityManager;
 import xyz.charliezhang.starstream.entity.Projectile;
 
 import static xyz.charliezhang.starstream.Config.LASER_B_PATH;
-import static xyz.charliezhang.starstream.Config.LASER_O_PATH;
+import static xyz.charliezhang.starstream.Config.LASER_RR_PATH;
 
 public class Laser extends Projectile implements Pool.Poolable
 {
 	static final int BLUE = 0;
-	static final int ORANGE = 1;
+	static final int RED = 1;
 
 	public Laser() {
 		super();
@@ -30,8 +30,8 @@ public class Laser extends Projectile implements Pool.Poolable
 				sprite.setSize(10.5f, 22.5f);
 				sprite.setOrigin(5.25f, 11.25f);
 				break;
-			case Laser.ORANGE:
-				textureAtlas = Assets.manager.get(LASER_O_PATH, TextureAtlas.class);
+			case Laser.RED:
+				textureAtlas = Assets.manager.get(LASER_RR_PATH, TextureAtlas.class);
 				animation = new Animation<TextureRegion>(1 / 15f, textureAtlas.getRegions());
 				sprite.setSize(10, 10);
 				sprite.setOrigin(5, 5);
