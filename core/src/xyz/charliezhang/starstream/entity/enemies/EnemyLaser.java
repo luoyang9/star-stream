@@ -31,6 +31,10 @@ public class EnemyLaser extends Projectile implements Pool.Poolable
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);
 				break;
+			case 4: textureAtlas = Assets.manager.get(LASER_G_PATH, TextureAtlas.class);
+				sprite.setSize(6, 18);
+				sprite.setOrigin(3, 9);
+				break;
 			default: textureAtlas = Assets.manager.get(LASER_G_PATH, TextureAtlas.class);
 				sprite.setSize(6, 18);
 				sprite.setOrigin(3, 9);

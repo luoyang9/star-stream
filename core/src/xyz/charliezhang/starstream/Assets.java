@@ -60,6 +60,7 @@ public class Assets {
         manager.load(Config.KAMIKAZE_PATH, TextureAtlas.class);
         manager.load(Config.VALKYRIE_PATH, TextureAtlas.class);
         manager.load(Config.FALCON_PATH, TextureAtlas.class);
+        manager.load(Config.SEEKER_PATH, TextureAtlas.class);
         manager.load(Config.ASTEROID_1_PATH, Texture.class);
         manager.load(Config.ASTEROID_2_PATH, Texture.class);
         manager.load(Config.ASTEROID_3_PATH, Texture.class);

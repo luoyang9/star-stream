@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import xyz.charliezhang.starstream.Assets;
 import xyz.charliezhang.starstream.GameData;
@@ -123,20 +124,24 @@ class WinScreen implements Screen {
         //labels
         lblMoney = new Label("Money:", skin, "medium");
         lblMoney.setWrap(true);
+        lblMoney.setAlignment(Align.right);
         lblScore = new Label("Score:", skin, "medium");
         lblScore.setWrap(true);
+        lblScore.setAlignment(Align.right);
         lblTime = new Label("Time (" + time/60 + ":" + time%60 + "):", skin, "medium");
         lblTime.setWrap(true);
+        lblTime.setAlignment(Align.right);
         lblLives = new Label("Lives (" + lives + "X500):", skin, "medium");
         lblLives.setWrap(true);
+        lblLives.setAlignment(Align.right);
         lblTotal = new Label("Total:", skin, "medium");
+        lblTotal.setAlignment(Align.right);
         lblScoreValue = new Label(" " + animScore + "p", skin, "medium");
         lblMoneyValue = new Label(" " + animMoney, skin, "medium");
         lblTimeValue = new Label(timeMod + animTimeScore + "p", skin, "medium");
         lblLivesValue = new Label(" " + animLivesScore + "p", skin, "medium");
         lblTotalValue = new Label(" " + animTotal + "p", skin, "medium");
 
-       // table.setDebug(true);
         table.add(lblMoney).size(230, 100).uniform().right();
         table.add(lblMoneyValue).uniform().left();
         table.row();

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -42,6 +43,7 @@ public class HUD
     private Image missileIcon;
     private Image shieldIcon;
     private Image attIcon;
+    private Image coinIcon;
     private Image[] livesIcons;
 
 
@@ -107,10 +109,13 @@ public class HUD
         masterStack.setFillParent(true);
         stage.addActor(masterStack);
 
+        coinIcon = new Image(Assets.manager.get(COIN_PATH, TextureAtlas.class).getTextures().first());
+        coinIcon.setSize(15, 15);
         lblScore = new Label("" + manager.getScore(), skin, "small");
         lblMoney = new Label("" + manager.getMoney(), skin, "small");
         Table valueTable = new Table();
         valueTable.add(lblScore).expandX().fillX();
+        valueTable.add(coinIcon).width(15).height(15).padRight(5);
         valueTable.add(lblMoney).expandX().fillX();
 
         lblGameOver = new Label("Game Over", skin);
@@ -150,7 +155,7 @@ public class HUD
         });
 
         table.add(valueTable).expandX().fillX().height(40).padLeft(5).left();
-        table.add(livesGroup).right().width(120).height(40);
+        table.add(livesGroup).right().height(40).padRight(5);
         table.row();
         iconTable.left();
         iconTable.add(shieldIcon).width(50).height(50);

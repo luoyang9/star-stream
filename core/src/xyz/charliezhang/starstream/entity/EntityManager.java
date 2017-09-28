@@ -137,8 +137,7 @@ public class EntityManager
 
 		currPowerupWait = (int) (Math.random()*2 + 8);
 		int nextPowerupRand = (int) (Math.random() * PowerUp.PowerUps.values().length);
-//		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
-		nextPowerup = PowerUp.PowerUps.MISSILE;
+		nextPowerup = PowerUp.PowerUps.values()[nextPowerupRand];
 
 		pause = false;
 

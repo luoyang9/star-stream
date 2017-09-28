@@ -63,22 +63,22 @@ public class UFO extends Enemy
 			if(System.currentTimeMillis() - lastFire >= 1000)
 			{
 				EnemyLaser l = manager.getEnemyLaserPool().obtain();
-				l.init(manager, this, 1);
+				l.init(manager, this, 4);
 				l.setDirection(-MathUtils.sinDeg(rotation) * 8, MathUtils.cosDeg(rotation) * 8);
 				l.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l);
 				EnemyLaser l2 = manager.getEnemyLaserPool().obtain();
-				l2.init(manager, this, 1);
+				l2.init(manager, this, 4);
 				l2.setDirection(-MathUtils.sinDeg(rotation + 90) * 8, MathUtils.cosDeg(rotation + 90) * 8);
 				l2.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l2);
 				EnemyLaser l3 = manager.getEnemyLaserPool().obtain();
-				l3.init(manager, this, 1);
+				l3.init(manager, this, 4);
 				l3.setDirection(-MathUtils.sinDeg(rotation + 180) * 8, MathUtils.cosDeg(rotation + 180) * 8);
 				l3.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l3);
 				EnemyLaser l4 = manager.getEnemyLaserPool().obtain();
-				l4.init(manager, this, 1);
+				l4.init(manager, this, 4);
 				l4.setDirection(-MathUtils.sinDeg(rotation + 270) * 8, MathUtils.cosDeg(rotation + 270) * 8);
 				l4.setPosition(sprite.getX() + sprite.getOriginX() - l.getSprite().getOriginX(), sprite.getY() + sprite.getOriginY() - l.getSprite().getOriginY());
 				manager.spawnEnemyLaser(l4);

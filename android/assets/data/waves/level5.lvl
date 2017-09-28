@@ -12,7 +12,7 @@
 			        delay: 500
 			    },
 			    {
-			        class: xyz.charliezhang.starstream.entity.enemies.Striker,
+			        class: xyz.charliezhang.starstream.entity.enemies.Seeker,
 			        x: 0.5,
 			        y: 400,
 			        dx: 0,

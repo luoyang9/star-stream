@@ -42,6 +42,7 @@ public class Config {
     public static String KAMIKAZE_PATH = "data/textures/kamikaze.atlas";
     public static String VALKYRIE_PATH = "data/textures/valkyrie.atlas";
     public static String FALCON_PATH = "data/textures/falcon.atlas";
+    public static String SEEKER_PATH = "data/textures/seeker.atlas";
     public static String ASTEROID_1_PATH = "data/textures/asteroid1.png";
     public static String ASTEROID_2_PATH = "data/textures/asteroid2.png";
     public static String ASTEROID_3_PATH = "data/textures/asteroid3.png";
@@ -171,6 +172,13 @@ public class Config {
     public static int VALKYRIE_SCORE = 100;
     public static boolean VALKYRIE_INITIAL_INTRO = true;
     public static int VALKYRIE_COIN = 2;
+
+    // SEEKER DATA
+    public static int SEEKER_HEALTH = 30;
+    public static int SEEKER_DAMAGE = 2;
+    public static int SEEKER_SCORE = 100;
+    public static boolean SEEKER_INITIAL_INTRO = true;
+    public static int SEEKER_COIN = 2;
 
     // SKULLINATOR DATA
     public static int SKULLINATOR_HEALTH = 750;
