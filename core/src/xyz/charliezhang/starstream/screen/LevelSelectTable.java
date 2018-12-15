@@ -55,6 +55,10 @@ class LevelSelectTable extends Table {
                     btnTemp.setTouchable(Touchable.disabled);
                 }
             });
+            if(i >= 3) {
+                btnTemp.setTouchable(Touchable.disabled);
+                lblScore[i].setText("Upcoming");
+            }
             scoreTables[i].add(btnTemp).width(140).height(100);
             scoreTables[i].row();
             scoreTables[i].add(lblScore[i]).height(50);
