@@ -3,4 +3,4 @@ Android space shooter game made with LibGDX. Uses AssetManager, Scene2D ui, and 
 
 Development in progress.
 
-PLAY HERE: https://play.google.com/store/apps/details?id=xyz.charliezhang.starstream
+PLAY HERE: https://play.google.com/store/apps/details?id=me.charliezhang.starstream

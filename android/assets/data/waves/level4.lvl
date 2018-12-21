@@ -3,7 +3,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
+          class: me.charliezhang.starstream.entity.enemies.Asteroid,
           x: 227.5,
           y: 900,
           dx: 0,
@@ -11,7 +11,7 @@
           delay: 2000
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
+          class: me.charliezhang.starstream.entity.enemies.Asteroid,
           x: 87.5,
           y: 900,
           dx: 0,
@@ -19,7 +19,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
+          class: me.charliezhang.starstream.entity.enemies.Asteroid,
           x: 367.5,
           y: 900,
           dx: 0,
@@ -31,7 +31,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Seeker,
+          class: me.charliezhang.starstream.entity.enemies.Seeker,
           x: 100,
           y: 920,
           dx: 0,
@@ -40,7 +40,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Seeker,
+          class: me.charliezhang.starstream.entity.enemies.Seeker,
           x: 200,
           y: 920,
           dx: 0,
@@ -49,7 +49,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Seeker,
+          class: me.charliezhang.starstream.entity.enemies.Seeker,
           x: 300,
           y: 920,
           dx: 0,
@@ -58,7 +58,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Seeker,
+          class: me.charliezhang.starstream.entity.enemies.Seeker,
           x: 400,
           y: 920,
           dx: 0,
@@ -71,7 +71,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Valkyrie,
+          class: me.charliezhang.starstream.entity.enemies.Valkyrie,
           x: 240,
           y: 920,
           dx: 0,
@@ -80,7 +80,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 300,
           y: 920,
           dx: 0,
@@ -89,7 +89,7 @@
           stop: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 180,
           y: 920,
           dx: 0,

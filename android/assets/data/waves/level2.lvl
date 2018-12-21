@@ -3,7 +3,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 360,
           y: 980,
           dx: -2,
@@ -12,7 +12,7 @@
           delay: 7000
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 384,
           y: 1020,
           dx: -2,
@@ -21,7 +21,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 408,
           y: 1060,
           dx: -2,
@@ -30,7 +30,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 432,
           y: 1100,
           dx: -2,
@@ -39,7 +39,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 120,
           y: 980,
           dx: 2,
@@ -48,7 +48,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 96,
           y: 1020,
           dx: 2,
@@ -57,7 +57,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 72,
           y: 1060,
           dx: 2,
@@ -66,7 +66,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 48,
           y: 1100,
           dx: 2,
@@ -75,7 +75,7 @@
           delay: 500
         },
          {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 360,
           y: 980,
           dx: -2,
@@ -84,7 +84,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 384,
           y: 1020,
           dx: -2,
@@ -93,7 +93,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 408,
           y: 1060,
           dx: -2,
@@ -102,7 +102,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 432,
           y: 1100,
           dx: -2,
@@ -111,7 +111,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 120,
           y: 980,
           dx: 2,
@@ -120,7 +120,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 96,
           y: 1020,
           dx: 2,
@@ -129,7 +129,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 72,
           y: 1060,
           dx: 2,
@@ -138,7 +138,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 48,
           y: 1100,
           dx: 2,
@@ -151,7 +151,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 144,
           y: 1100,
           dx: 0,
@@ -160,7 +160,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 240,
           y: 1000,
           dx: 0,
@@ -169,7 +169,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 336,
           y: 1100,
           dx: 0,
@@ -178,7 +178,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
+          class: me.charliezhang.starstream.entity.enemies.Asteroid,
           x: -50,
           y: 900,
           dx: 0.5,
@@ -191,7 +191,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 144,
           y: 950,
           dx: 0,
@@ -200,7 +200,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 336,
           y: 950,
           dx: 0,
@@ -209,7 +209,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 432,
           y: 980,
           dx: -2,
@@ -218,7 +218,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 408,
           y: 1020,
           dx: -2,
@@ -227,7 +227,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 384,
           y: 1060,
           dx: -2,
@@ -236,7 +236,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 360,
           y: 1100,
           dx: -2,
@@ -249,7 +249,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 144,
           y: 950,
           dx: 0,
@@ -258,7 +258,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 288,
           y: 950,
           dx: 0,
@@ -267,7 +267,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 48,
           y: 980,
           dx: 2,
@@ -276,7 +276,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 72,
           y: 1020,
           dx: 2,
@@ -285,7 +285,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 96,
           y: 1060,
           dx: 2,
@@ -294,7 +294,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Kamikaze,
+          class: me.charliezhang.starstream.entity.enemies.Kamikaze,
           x: 120,
           y: 1100,
           dx: 2,
@@ -307,7 +307,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 120,
           y: 1100,
           dx: 0,
@@ -316,7 +316,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 240,
           y: 1100,
           dx: 0,
@@ -325,7 +325,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 360,
           y: 1100,
           dx: 0,
@@ -334,7 +334,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 240,
           y: 1250,
           dx: 0,
@@ -343,7 +343,7 @@
           delay: 100
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Asteroid,
+          class: me.charliezhang.starstream.entity.enemies.Asteroid,
           x: 480,
           y: 900,
           dx: -0.5,
@@ -356,7 +356,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 168,
           y: 1100,
           dx: 0,
@@ -365,7 +365,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 216,
           y: 1100,
           dx: 0,
@@ -374,7 +374,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 264,
           y: 1100,
           dx: 0,
@@ -383,7 +383,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Striker,
+          class: me.charliezhang.starstream.entity.enemies.Striker,
           x: 312,
           y: 1100,
           dx: 0,
@@ -396,7 +396,7 @@
     {
       enemies: [
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 158,
           y: 1100,
           dx: 0,
@@ -405,7 +405,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 317,
           y: 1100,
           dx: 0,
@@ -414,7 +414,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 192,
           y: 1100,
           dx: 0,
@@ -423,7 +423,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.Icarus,
+          class: me.charliezhang.starstream.entity.enemies.Icarus,
           x: 288,
           y: 1100,
           dx: 0,
@@ -432,7 +432,7 @@
           delay: 0
         },
         {
-          class: xyz.charliezhang.starstream.entity.enemies.UFO,
+          class: me.charliezhang.starstream.entity.enemies.UFO,
           x: 240,
           y: 1100,
           dx: 0,
